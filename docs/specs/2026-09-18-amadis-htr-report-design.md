@@ -127,15 +127,23 @@ amadis-htr/
     *.py                     one script per figure, reads eval/results/*.csv
     *.pdf                    generated, never hand-made
 
-  report/                    Quarto source, PDF output
-  slides/                    Quarto reveal.js, same _quarto.yml project
+  report/
+    main.tex                 the report
+    generated/               macros and tables written from eval/results, never edited
+    refs.bib
+  slides/
+    main.tex                 the defence deck, Beamer, same generated/ by symlink
   docs/specs/                this file and its successors
 ```
 
 Two rules the layout enforces:
 
-1. **No number in the report is typed by hand.** Prose reads from `eval/results/*.csv`
-   through Quarto inline code, or it does not appear. Figures read the same CSVs.
+1. **No number in the report is typed by hand.** Every figure in the prose is a LaTeX
+   macro from `report/generated/macros.tex`, and every table is an `\input` of a file in
+   the same directory. Both are written from `eval/results/*.csv` by
+   `src/amadis_htr/report_macros.py`. `report/generated/` is regenerated, never edited, and
+   a stale macro is a build error rather than a wrong number, because an undefined control
+   sequence stops the build.
 2. **`data/runs/` is frozen.** Evaluation reruns from stored outputs on any machine
    with Python. Regenerating `data/runs/` needs the big PC and an Ollama instance, and
    the README says so instead of pretending otherwise.
@@ -522,11 +530,41 @@ rather than estimated. The plan carries a named fallback for each.
 
 ## 11. Toolchain
 
-One Quarto project produces both deliverables from shared content: `report/` renders to
-PDF, `slides/` renders to reveal.js, and both read the same `eval/results/*.csv` through
-inline code so a re-run of the evaluation updates the report and the defence together.
+**The report is LaTeX.** `report/main.tex` produces the PDF and `slides/main.tex` is a
+Beamer deck for the defence. Both read the same generated macros and tables, so one
+evaluation re-run updates the report and the deck together.
 
-Python 3.12, `uv` for the environment, matching the pipelines. `jiwer` for CER and WER,
+**Engine: LuaLaTeX or XeLaTeX, never pdfLaTeX.** The report quotes 16th-century French
+verbatim and reproduces the correction pass's own markup, so the source carries long `ſ`
+(U+017F) and the `⟦ ⟧` markers (U+27E6, U+27E7). pdfLaTeX cannot set those without
+per-character workarounds. The document loads `fontspec` with a Unicode font that has the
+coverage, and the font choice is recorded in `report/main.tex` rather than left to a
+default.
+
+**No LaTeX distribution is installed on this machine.** Two ways forward, and the choice
+is recorded here rather than assumed:
+
+- **Tectonic** (recommended): one binary into `~/.local/bin`, no `sudo`, fetches the
+  packages a document actually uses and caches them. It is XeTeX-derived, so `fontspec`
+  and Beamer work. A first build needs the network.
+- **TeX Live** via the distribution's package manager. More complete, but `apt install`
+  needs `sudo`, which this environment cannot supply, so the user runs it.
+
+**Figures are matplotlib, saved as PDF** by one script per figure under `figures/`, each
+reading only `eval/results/*.csv`, and included with `\includegraphics`. No figure is
+drawn by hand and none is a screenshot.
+
+**The numbers pipeline.** `src/amadis_htr/report_macros.py` reads `eval/results/*.csv` and
+writes `report/generated/macros.tex` (one `\newcommand` per reported figure, with the
+rounding fixed in one place) and one `.tex` table per result set, using `booktabs`. The
+report `\input`s them. A figure that has not been measured therefore has no macro, and
+citing it fails the build instead of reaching the page.
+
+**Bibliography:** `biblatex` with `biber`, `report/refs.bib`. The related-work section
+cites CATMuS, kraken, Transkribus and the LLM post-correction literature, so a real
+bibliography is needed rather than a hand-written list.
+
+Python 3.12, `uv` for the environment, matching the pipelines. `matplotlib` for figures. `jiwer` for CER and WER,
 version pinned in the lockfile. **Whitespace counts as a character**, and reference and
 hypothesis are compared as single strings with line breaks normalised to one space.
 Line-break and word-boundary errors are real errors on this material, and discarding

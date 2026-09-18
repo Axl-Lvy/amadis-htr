@@ -14,7 +14,7 @@
 
 - Repository: `/home/axel/IdeaProjects/amadis-htr`, currently a local git repo on branch `master` with two commits. Nothing has been pushed. Do not create a GitHub repository in this plan.
 - The user's global gitignore at `/home/axel/.gitignore_global` excludes `**/docs/superpowers/`. This repository therefore uses `docs/specs/` and `docs/plans/`. Never create `docs/superpowers/` here.
-- Python 3.12. `uv` is at `/home/axel/.local/bin/uv`. `quarto` is **not installed** and is not needed by this plan.
+- Python 3.12. `uv` is at `/home/axel/.local/bin/uv`. **No LaTeX distribution is installed** (no `pdflatex`, `xelatex`, `lualatex`, `latexmk`, `biber` or `tectonic`), and none is needed by this plan: the report is typeset in a later one. When it is, the engine must be LuaLaTeX or XeLaTeX, because the report quotes long `ſ` and the `⟦ ⟧` correction markers verbatim.
 - No network access is required by any task. `uv` will download wheels on first sync, which is expected.
 - **No number produced by this harness is ever typed into prose.** Every module writes CSV to `eval/results/`.
 - The one declared fold (`amadis_htr.fold.fold`) is the only normalisation applied to a folded figure. The matcher's `foldWord` from amadis is a different thing and must never be imported or reimplemented here.
@@ -37,6 +37,7 @@
 | `src/amadis_htr/sanitise.py` | strips secrets and run residue from vendored pipeline files |
 | `src/amadis_htr/sampling.py` | seeded stratified gold-page sampler |
 | `eval/results/` | every CSV the report reads |
+| `report/generated/` | LaTeX macros and tables written from those CSVs, committed, never edited |
 | `tests/` | one test module per source module |
 | `data/localisation/ground-truth.csv` | the real extracted reference, committed |
 | `data/gold/GUIDELINES.md` | the annotation convention, written before annotating |
@@ -47,7 +48,7 @@
 
 **Files:**
 - Create: `pyproject.toml`, `.gitignore`, `README.md`, `PROVENANCE.md`, `LICENSE`, `LICENSE-DATA`, `src/amadis_htr/__init__.py`, `tests/test_smoke.py`
-- Create (empty, with `.gitkeep`): `data/gold/pages/`, `data/gold/text/`, `data/gold/lines/`, `data/gold/splits/`, `data/localisation/`, `data/runs/`, `data/val48/`, `eval/results/`, `figures/`, `pipeline/`, `report/`, `slides/`
+- Create (empty, with `.gitkeep`): `data/gold/pages/`, `data/gold/text/`, `data/gold/lines/`, `data/gold/splits/`, `data/localisation/`, `data/runs/`, `data/val48/`, `eval/results/`, `figures/`, `pipeline/`, `report/generated/`, `slides/`
 - Modify: `docs/specs/2026-09-18-amadis-htr-report-design.md` (the repository tree in section 4)
 
 **Interfaces:**
@@ -86,6 +87,7 @@ requires-python = ">=3.12"
 dependencies = [
     "jiwer>=4.0",
     "numpy>=1.26",
+    "matplotlib>=3.8",
     "openpyxl>=3.1",
 ]
 
@@ -149,10 +151,14 @@ Note: `eval/results/*.csv` is deliberately **not** ignored. Those files are the 
 cd /home/axel/IdeaProjects/amadis-htr
 for d in data/gold/pages data/gold/text data/gold/lines data/gold/splits \
          data/localisation data/runs data/val48 eval/results figures \
-         pipeline report slides; do
+         pipeline report/generated slides; do
   mkdir -p "$d" && touch "$d/.gitkeep"
 done
 ```
+
+`report/generated/` holds macros and tables written from `eval/results/*.csv`. It is
+regenerated rather than edited, and it is committed, so the report builds from a clean
+checkout.
 
 - [ ] **Step 7: Write the licences**
 
@@ -2134,7 +2140,9 @@ successor task in the next plan.
 | `data/gold/splits/training-pages.csv` | the recovered `train.lst` |
 | gate G1, the Juxtalinéaire docx checked against the training pages | the recovered `train.lst`, and the docx piece numbering map (docx numbers run +3 ahead of the xlsx rows from piece 120 onward) |
 | gate G2, every gold page confirmed absent from training | the gold set existing, which needs G3 first |
-| the Quarto report and slides | `quarto` is not installed, and there are no results to render |
+| the LaTeX report and the Beamer deck | no LaTeX engine is installed, and there are no results to typeset |
+| `src/amadis_htr/report_macros.py`, turning `eval/results/*.csv` into `\newcommand` macros and `booktabs` tables | the result CSVs existing |
+| the matplotlib figure scripts under `figures/` | the result CSVs existing |
 | the Hugging Face model card | confirmation of which checkpoint shipped |
 | the GitHub repository | the user's go-ahead to publish |
 
