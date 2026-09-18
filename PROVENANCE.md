@@ -18,6 +18,9 @@ the subset the report describes, sanitised by `src/amadis_htr/sanitise.py`.
 
 | source | destination | commit | sanitised |
 |---|---|---|---|
+| `n8n/workflows/Q9jEMd6zCv9stSvV.json` | `pipeline/n8n/amadis-ocr.json` | `4672c91` | yes, 488,639 bytes in and 62,442 out |
+
+See `pipeline/SANITISATION.md` for what the sanitiser removes and why.
 
 ## Figures that are not reproduced here
 
