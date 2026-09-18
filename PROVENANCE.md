@@ -22,6 +22,18 @@ the subset the report describes, sanitised by `src/amadis_htr/sanitise.py`.
 
 See `pipeline/SANITISATION.md` for what the sanitiser removes and why.
 
+## Derived from files that are not committed
+
+| source file | held where | destination | derived by |
+|---|---|---|---|
+| `Pièces des thresors.xlsx` | the editor's own copy | `data/localisation/ground-truth.csv` | `src/amadis_htr/ground_truth.py` |
+| `Pièces des thresors.xlsx` and `Juxtalinéaire pièces. Corrigé.docx` | as above, and a corrector's copy | `data/localisation/juxtalineaire-map.csv` | `eval/derive_juxtalineaire_map.py`, read 2026-09-18 |
+
+Neither source file is in this repository. The workbook is the editor's catalogue
+and the docx is a corrector's unpublished transcription, so what is committed is
+the derivation and its numeric output, never the text. Both derivations are
+reproducible by anyone holding the sources.
+
 ## Figures that are not reproduced here
 
 Numbers stated in prose in the source repositories, with no code, log or

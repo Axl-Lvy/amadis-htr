@@ -30,7 +30,8 @@ outputs exist so that the evaluation is reproducible without it.
 | `src/amadis_htr/` | the scoring code |
 | `tests/` | one test module per source module |
 | `data/gold/` | the out-of-domain gold set and its annotation guidelines |
-| `data/localisation/` | the human-assigned reference for passage localisation |
+| `data/localisation/` | the human-assigned reference for passage localisation, and the map between the two piece catalogues |
+| `eval/` | the scripts that derive a committed artefact from a source file held elsewhere |
 | `data/runs/` | every system's frozen output, one file per system per page |
 | `eval/results/` | the CSVs every figure and every reported number reads |
 | `report/generated/` | LaTeX macros and tables written from those CSVs |

@@ -97,6 +97,28 @@ def read_workbook(path: str | Path) -> list[Reference]:
     return references
 
 
+def read_titles(path: str | Path) -> dict[int, str]:
+    """Read column A as piece number to title, with the number stripped off.
+
+    Gate G1 matches these titles against the Juxtalinéaire docx. They stay in
+    this module because the workbook's sheet name and row shape are declared
+    here and nowhere else.
+    """
+    sheet = openpyxl.load_workbook(path, data_only=True)[_SHEET]
+    titles: dict[int, str] = {}
+    for row in range(1, sheet.max_row + 1):
+        cell = str(sheet.cell(row, 1).value or "")
+        match = _PIECE.match(cell)
+        if match is None:
+            if not cell.strip():
+                break
+            raise ValueError(
+                f"row {row}: column A does not start with a number: {cell!r}"
+            )
+        titles[int(match.group(1))] = " ".join(cell[match.end() :].split())
+    return titles
+
+
 def write_csv(references: Iterable[Reference], path: str | Path) -> None:
     """Write the reference table, one row per piece."""
     rows: Sequence[Reference] = list(references)

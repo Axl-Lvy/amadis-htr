@@ -450,9 +450,26 @@ Blocking tasks in the plan. Each produces an output file, not an assertion.
 **G1. Juxtalinéaire against the training set.** `Juxtalinéaire pièces. Corrigé.docx`
 holds 460 line-diplomatic pieces transcribing *Trésor* material, and the training corpus
 is *Trésor* T.1. Cross-check the docx pieces against the 439 training pages. Any overlap
-makes the docx usable for C3 only, never as OCR gold. Note the known numbering offset:
-docx piece numbers run +3 ahead of the xlsx rows from piece 120 onward, and that mapping
-must be code in the repo rather than something remembered.
+makes the docx usable for C3 only, never as OCR gold.
+
+The numbering offset is derived, not remembered. `src/amadis_htr/juxtalineaire.py`
+aligns the two catalogues on their titles and emits
+`data/localisation/juxtalineaire-map.csv`. **The offset that had been remembered, +3
+from piece 120 onward, is wrong.** It is a staircase, and it was measured on
+2026-09-18 over all 457 workbook pieces at a mean title containment of 0.986:
+
+| workbook pieces | docx pieces | offset |
+|---|---|---|
+| 1 to 38 | 1 to 38 | 0 |
+| 39 to 67 | 40 to 68 | +1 |
+| 68 to 82 | 70 to 84 | +2 |
+| 83 to 457 | 86 to 460 | +3 |
+
+Docx pieces 39, 69 and 85 have no workbook counterpart. Two are continuations the
+docx prints as pieces of their own and the workbook folds into their predecessor, and
+one is a second prophecy of Urgande the workbook does not list at all. Workbook piece
+68 is the one genuine one-to-two pairing, and its low similarity in the map is the
+signal that it is a merge rather than a match.
 
 **G2. Gold set against training.** Confirm every `ood` page is from a Livre and appears
 in no training or validation list. Emit the check's output.

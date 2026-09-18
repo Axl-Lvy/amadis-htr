@@ -62,3 +62,13 @@ def test_write_csv_round_trips(tmp_path):
     text = out.read_text(encoding="utf-8")
     assert text.splitlines()[0] == "piece,livre,chapter,confidence,raw"
     assert "1,4,12,certain,\"Livre 4, chap 12\"" in text
+
+
+@pytest.mark.skipif(not XLSX, reason="the reference workbook is not on this machine")
+def test_titles_are_read_with_the_same_piece_numbering_as_the_references():
+    from amadis_htr.ground_truth import read_titles
+
+    titles = read_titles(XLSX[0])
+    references = read_workbook(XLSX[0])
+    assert sorted(titles) == [r.piece for r in references]
+    assert all(t and not t[0].isdigit() for t in titles.values())
