@@ -1,0 +1,1193 @@
+{
+  "name": "amadis-ocr",
+  "description": "Per-page OCR pipeline for amadis: webhook trigger, page count, batched OCR loop, progress/page/done callbacks, ntfy notifications, error handling.",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const b = $json.body || {};\nconst dpi = b.dpi || 300;\nconst model = b.model || \"catmus-print\";\nif (!b.jobId || !b.callbackUrl || !b.pdfUrl || !b.runId) {\n  throw new Error(\"invalid OCR payload: missing jobId/callbackUrl/pdfUrl/runId\");\n}\nlet fromPage = 1;\nif (b.fromPage !== undefined && b.fromPage !== null) {\n  const n = Number(b.fromPage);\n  if (!Number.isInteger(n) || n < 1) {\n    throw new Error(\"invalid OCR payload: fromPage must be a positive integer, got \" + JSON.stringify(b.fromPage));\n  }\n  fromPage = n;\n}\n\n// SECURITY: every callback below (error/done/page/progress) carries the\n// \"OCR callback\" bearer token. Only ever send it to the amadis app. Require\n// https and match the host against an exact allowlist of hosts WE control\n// (both under example.invalid, DNS we own). Failing fast HERE means no downstream\n// Callback node runs, so the bearer is never sent to an attacker-controlled\n// host (SSRF / token exfil). The host is parsed with a regex, NOT `new URL()`:\n// the external JS task runner sandbox does not expose the `URL` global, so\n// `new URL()` throws there and the catch masks the real reason.\nconst ALLOWED_CALLBACK_HOSTS = [\"example.invalid\", \"example.invalid\"];\n\nconst cbUrl = String(b.callbackUrl);\nconst m = /^https:\\/\\/([^/:?#]+)/i.exec(cbUrl);\nif (!m) {\n  throw new Error(\"refused callbackUrl: must be an https:// URL, got \" + cbUrl);\n}\nconst host = m[1].toLowerCase();\nif (!ALLOWED_CALLBACK_HOSTS.includes(host)) {\n  throw new Error(\"refused callbackUrl host '\" + host + \"': not in the amadis allowlist\");\n}\n\nreturn [{ json: { jobId: b.jobId, pdfUrl: b.pdfUrl, callbackUrl: b.callbackUrl, fromPage, pagesTotal: b.pagesTotal ?? null, seed: b.seed || null, runId: b.runId, dpi, model } }];"
+      },
+      "name": "Validate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://ocr:8000/pdf/info",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"pdfUrl\": $json.pdfUrl } }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "name": "Page count",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        208
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const v = $('Validate').first().json;\nreturn [{ json: { jobId: v?.jobId, callbackUrl: v?.callbackUrl, runId: v?.runId, message: String(($json.error && ($json.error.message||$json.error)) || 'OCR pipeline error') } }];"
+      },
+      "name": "Build error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1456,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.callbackUrl }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-vercel-protection-bypass",
+              "value": "={{ $env.OCR_VERCEL_BYPASS_TOKEN || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { jobId: $json.jobId, event: \"error\", runId: $json.runId, message: $json.message } }}",
+        "options": {}
+      },
+      "name": "Callback: error",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1760,
+        768
+      ],
+      "credentials": {
+        "httpBearerAuth": {
+          "name": "OCR callback"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const pages = $json.pages;\nconst v = $('Validate').first().json;\nif (v.pagesTotal != null && v.pagesTotal !== pages) {\n  throw new Error(`page count mismatch: OCR service reports ${pages} pages, amadis expected ${v.pagesTotal}`);\n}\nconst out = [];\nfor (let page = v.fromPage; page <= pages; page++) {\n  out.push({ json: { page, pdfUrl: v.pdfUrl, dpi: v.dpi, model: v.model, jobId: v.jobId, callbackUrl: v.callbackUrl, pagesTotal: pages, runId: v.runId } });\n}\nreturn out;"
+      },
+      "name": "Build pages",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $(\"Validate\").first().json.callbackUrl }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-vercel-protection-bypass",
+              "value": "={{ $env.OCR_VERCEL_BYPASS_TOKEN || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { jobId: $(\"Validate\").first().json.jobId, event: \"done\", runId: $(\"Validate\").first().json.runId } }}",
+        "options": {}
+      },
+      "name": "Callback: done",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4128,
+        320
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "httpBearerAuth": {
+          "name": "OCR callback"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://ocr:8000/ocr/pdf-page",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"pdfUrl\": $json.pdfUrl, \"page\": $json.page, \"dpi\": $json.dpi, \"model\": $json.model } }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "name": "OCR page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1216,
+        320
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// A delivered \"page\" that carries seeded: true is a resume seam's\n// reconstructed lookback context (see src/coherence.js), not a real OCR\n// result — it must never be re-uploaded as a page callback.\nfunction shouldSuppressDelivery(deliver) {\n  return !deliver || deliver.seeded === true;\n}\n\nconst d = $json.deliver;\nconst corrections = $json.corrections || [];\nconst isLast = $json.isLast === true;\nconst base = { jobId: $json.jobId, callbackUrl: $json.callbackUrl, pagesTotal: $json.pagesTotal, runId: $json.runId, isLast };\nif (shouldSuppressDelivery(d)) return [{ json: { ...base, pagesDone: $json.pagesDone, pages: [] } }];\nconst bodyText = (d.lines || []).filter(l => (l.role || 'body') === 'body').map(l => l.text).join('\\n');\nreturn [{ json: { ...base, pagesDone: d.page, pages: [{ page: d.page, width: d.width, height: d.height, hocr: d.hocr, lines: d.lines, pageMeta: d.pageMeta, text: bodyText, corrections }] } }];"
+      },
+      "name": "Shape batch",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3856,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.callbackUrl }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-vercel-protection-bypass",
+              "value": "={{ $env.OCR_VERCEL_BYPASS_TOKEN || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { jobId: $json.jobId, event: \"page\", runId: $json.runId, pages: $json.pages } }}",
+        "options": {}
+      },
+      "name": "Callback: page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3648,
+        320
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "credentials": {
+        "httpBearerAuth": {
+          "name": "OCR callback"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Shape batch').item.json.callbackUrl }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-vercel-protection-bypass",
+              "value": "={{ $env.OCR_VERCEL_BYPASS_TOKEN || '' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { jobId: $('Shape batch').item.json.jobId, event: \"progress\", runId: $('Shape batch').item.json.runId, pagesDone: $('Shape batch').item.json.pagesDone, pagesTotal: $('Shape batch').item.json.pagesTotal } }}",
+        "options": {}
+      },
+      "name": "Callback: progress",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4128,
+        624
+      ],
+      "credentials": {
+        "httpBearerAuth": {
+          "name": "OCR callback"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        960,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ocr",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -304,
+        208
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "OCR Webhook"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "S9F1BbRUDUebNNE9",
+          "mode": "list",
+          "cachedResultName": "Send notification",
+          "cachedResultUrl": "/workflow/S9F1BbRUDUebNNE9"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "body": "=OCR job {{ $json.jobId }} failed: {{ $json.message }}",
+            "topic": "ocr",
+            "title": "amadis-ocr FAILED",
+            "priority": "high",
+            "tags": "warning"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "topic",
+              "displayName": "topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "tags",
+              "displayName": "tags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "click",
+              "displayName": "click",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "actions",
+              "displayName": "actions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "name": "Notify Ntfy (fail)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1760,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "S9F1BbRUDUebNNE9",
+          "mode": "list",
+          "cachedResultName": "Send notification",
+          "cachedResultUrl": "/workflow/S9F1BbRUDUebNNE9"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "body": "=OCR job {{ $(\"Validate\").first().json.jobId }} finished.",
+            "topic": "ocr",
+            "title": "amadis-ocr done",
+            "tags": "white_check_mark"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "topic",
+              "displayName": "topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "tags",
+              "displayName": "tags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "click",
+              "displayName": "click",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "actions",
+              "displayName": "actions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "name": "Notify Ntfy (done)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        4368,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sd = $getWorkflowStaticData('global');\nconst d = sd.amadisPrev || null;\nsd.amadisPrev = null;\nconst v = $('Validate').first().json;\nconst m = sd.amadisMeta || {};\nreturn [{ json: { jobId: v.jobId, callbackUrl: v.callbackUrl, pagesTotal: (m.pagesTotal != null ? m.pagesTotal : null), pagesDone: (d ? d.page : (m.pagesDone || 0)), deliver: d, isLast: true } }];"
+      },
+      "name": "Flush last page",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2048,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Coherence-based header/footer resolution. Pure, no imports — paste-able into n8n Code nodes.\n\nfunction _bodyLines(page) {\n  return ((page && page.lines) || []).filter(l => (l.role || 'body') === 'body' && l.text && l.text.trim());\n}\nfunction firstBody(page) {\n  const b = _bodyLines(page);\n  return b.length ? b[0].text.trim() : '';\n}\nfunction lastBody(page) {\n  const b = _bodyLines(page);\n  return b.length ? b[b.length - 1].text.trim() : '';\n}\nfunction lineById(page, id) {\n  return ((page && page.lines) || []).find(l => l.id === id) || null;\n}\n// Like firstBody, but skips a given line id — used so a header candidate that is\n// still tagged role:'body' at resolution time doesn't count as its own NEXT.\nfunction _firstBodyExcluding(page, excludeId) {\n  const b = _bodyLines(page).filter(l => l.id !== excludeId);\n  return b.length ? b[0].text.trim() : '';\n}\n// Like lastBody, but skips a given line id — used so a footer candidate that is\n// still tagged role:'body' at resolution time doesn't count as its own PREV.\nfunction _lastBodyExcluding(page, excludeId) {\n  const b = _bodyLines(page).filter(l => l.id !== excludeId);\n  return b.length ? b[b.length - 1].text.trim() : '';\n}\n\nconst SYSTEM = [\n  'Classify the CANDIDATE line from a scanned 16th-century French book. You are given three',\n  'consecutive lines in reading order: PREV, CANDIDATE, NEXT (PREV or NEXT may be on the',\n  'adjacent page). Body text flows continuously: lines break mid-word (often with a hyphen)',\n  'or mid-sentence and continue on the following line.',\n  '',\n  'Decisive test: if removing CANDIDATE lets PREV and NEXT read as one continuous passage,',\n  'then CANDIDATE is the interrupting header/footer. If CANDIDATE is itself part of that flow,',\n  'it is body.',\n  '',\n  'Rules:',\n  '- \"body\" is the default. If CANDIDATE continues the sentence or word begun in PREV, or if',\n  '  NEXT continues the sentence or word begun in CANDIDATE, then CANDIDATE is ALWAYS body,',\n  '  no matter how short and no matter its position on the page.',\n  '- \"header\": a self-contained running head or section title at the top of a page (e.g. a',\n  '  book/part title such as \"DU SECOND LIVRE\", or a page number). It does NOT continue PREV.',\n  '- \"footer\": a self-contained catchword, printer signature, or page number at the foot of a',\n  '  page. NEXT does NOT continue from it.',\n  'A footer/catchword/signature/page-number is SHORT (a single word, a signature like \"A ij\", or a number); a full line of running prose is never a footer.',\n  'Ignore OCR noise: a meaningless one/two-character fragment that breaks the flow is body.',\n  'When unsure, answer \"body\".',\n  'Respond with ONLY a JSON object:',\n  '{\"role\":\"header\"|\"footer\"|\"body\",\"kind\":\"runningHead\"|\"pageNumber\"|\"catchword\"|null}',\n].join('\\n');\n\nfunction buildCoherencePrompt(candidate, prev, next, position) {\n  const user = JSON.stringify({ position, PREV: prev || '', CANDIDATE: candidate || '', NEXT: next || '' }, null, 2);\n  return { system: SYSTEM, user };\n}\n\n// DEFAULT 'body' when unparseable — safety bias: keep the line in the transcription.\nfunction parseVerdict(text) {\n  const fallback = { role: 'body', kind: null };\n  if (!text) return fallback;\n  const m = String(text).match(/\\{[\\s\\S]*\\}/);\n  if (!m) return fallback;\n  let obj;\n  try { obj = JSON.parse(m[0]); } catch (e) { return fallback; }\n  if (obj.role === 'header' || obj.role === 'footer' || obj.role === 'body') {\n    const kind = ['runningHead', 'pageNumber', 'catchword'].includes(obj.kind) ? obj.kind : null;\n    return { role: obj.role, kind };\n  }\n  return fallback;\n}\n\nfunction resolveRequests(prevPage, curPage, isFirst) {\n  const reqs = [];\n  // Header of the CURRENT page: needs prev page's last body line + this page's first body line.\n  const topId = curPage && curPage.pageMeta && curPage.pageMeta.ambiguous && curPage.pageMeta.ambiguous.top;\n  if (topId && !isFirst && prevPage) {\n    const cand = lineById(curPage, topId);\n    const p = buildCoherencePrompt(cand ? cand.text : '', lastBody(prevPage), _firstBodyExcluding(curPage, topId), 'top');\n    reqs.push({ target: 'cur-header', pageRef: 'cur', candidateId: topId, position: 'top', system: p.system, user: p.user });\n  }\n  // Footer of the PREVIOUS page: needs prev page's last body line (excluding the\n  // candidate itself) + this page's first body line.\n  const botId = prevPage && prevPage.pageMeta && prevPage.pageMeta.ambiguous && prevPage.pageMeta.ambiguous.bottom;\n  if (botId && curPage) {\n    const cand = lineById(prevPage, botId);\n    const p = buildCoherencePrompt(cand ? cand.text : '', _lastBodyExcluding(prevPage, botId), firstBody(curPage), 'bottom');\n    reqs.push({ target: 'prev-footer', pageRef: 'prev', candidateId: botId, position: 'bottom', system: p.system, user: p.user });\n  }\n  return reqs;\n}\n\nfunction applyVerdict(page, candidateId, verdict, position) {\n  const line = lineById(page, candidateId);\n  if (!line) return;\n  const v = verdict || { role: 'body', kind: null };\n  let role = v.role;\n  if (position === 'top' && role === 'footer') role = 'body';      // a top line is never a footer\n  if (position === 'bottom' && role === 'header') role = 'body';   // a bottom line is never a header\n  if (role === 'header') {\n    line.role = 'header';\n    page.pageMeta.header = { text: line.text };\n  } else if (role === 'footer') {\n    line.role = 'footer';\n    const kind = v.kind === 'pageNumber' || v.kind === 'catchword' ? v.kind : 'signature';\n    line.footerKind = kind;\n    page.pageMeta.footer = { text: line.text, kind };\n  } else {\n    line.role = 'body';\n  }\n  // Clear whichever ambiguous slot this candidate occupied, keyed by id (not by the\n  // verdict role) so a cross-role verdict can't clear a different candidate's slot.\n  if (page.pageMeta.ambiguous) {\n    if (page.pageMeta.ambiguous.top === candidateId) page.pageMeta.ambiguous.top = null;\n    if (page.pageMeta.ambiguous.bottom === candidateId) page.pageMeta.ambiguous.bottom = null;\n  }\n}\n\n// ---- Prep: compute cur/prev, lag-1 buffer (global static data), emit 0-2 LLM requests ----\nconst sd=$getWorkflowStaticData('global');\nconst meta=$('Loop Over Items').item.json;\nconst ocr=$json;\nconst cur={page:meta.page,width:ocr.width,height:ocr.height,hocr:ocr.hocr,lines:ocr.lines||[],pageMeta:ocr.page||{header:null,footer:null,dropcap:null,ambiguous:{top:null,bottom:null}}};\nif(cur.page===1)sd.amadisPrev=null;\nconst prev=sd.amadisPrev||null;\nconst reqs=resolveRequests(prev,cur,cur.page===1);\nsd.amadisDeliver=prev;\nsd.amadisReqs=reqs.map(r=>({pageRef:r.pageRef,candidateId:r.candidateId,position:r.position}));\nsd.amadisPrev=cur;\nsd.amadisMeta={jobId:meta.jobId,callbackUrl:meta.callbackUrl,pagesTotal:meta.pagesTotal,pagesDone:cur.page,runId:meta.runId};\nreturn {json:{reqs:reqs.map(r=>({system_prompt:r.system,user_prompt:r.user}))}};\n"
+      },
+      "name": "Prep coherence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Coherence-based header/footer resolution. Pure, no imports — paste-able into n8n Code nodes.\n\nfunction _bodyLines(page) {\n  return ((page && page.lines) || []).filter(l => (l.role || 'body') === 'body' && l.text && l.text.trim());\n}\nfunction firstBody(page) {\n  const b = _bodyLines(page);\n  return b.length ? b[0].text.trim() : '';\n}\nfunction lastBody(page) {\n  const b = _bodyLines(page);\n  return b.length ? b[b.length - 1].text.trim() : '';\n}\nfunction lineById(page, id) {\n  return ((page && page.lines) || []).find(l => l.id === id) || null;\n}\n// Like firstBody, but skips a given line id — used so a header candidate that is\n// still tagged role:'body' at resolution time doesn't count as its own NEXT.\nfunction _firstBodyExcluding(page, excludeId) {\n  const b = _bodyLines(page).filter(l => l.id !== excludeId);\n  return b.length ? b[0].text.trim() : '';\n}\n// Like lastBody, but skips a given line id — used so a footer candidate that is\n// still tagged role:'body' at resolution time doesn't count as its own PREV.\nfunction _lastBodyExcluding(page, excludeId) {\n  const b = _bodyLines(page).filter(l => l.id !== excludeId);\n  return b.length ? b[b.length - 1].text.trim() : '';\n}\n\nconst SYSTEM = [\n  'Classify the CANDIDATE line from a scanned 16th-century French book. You are given three',\n  'consecutive lines in reading order: PREV, CANDIDATE, NEXT (PREV or NEXT may be on the',\n  'adjacent page). Body text flows continuously: lines break mid-word (often with a hyphen)',\n  'or mid-sentence and continue on the following line.',\n  '',\n  'Decisive test: if removing CANDIDATE lets PREV and NEXT read as one continuous passage,',\n  'then CANDIDATE is the interrupting header/footer. If CANDIDATE is itself part of that flow,',\n  'it is body.',\n  '',\n  'Rules:',\n  '- \"body\" is the default. If CANDIDATE continues the sentence or word begun in PREV, or if',\n  '  NEXT continues the sentence or word begun in CANDIDATE, then CANDIDATE is ALWAYS body,',\n  '  no matter how short and no matter its position on the page.',\n  '- \"header\": a self-contained running head or section title at the top of a page (e.g. a',\n  '  book/part title such as \"DU SECOND LIVRE\", or a page number). It does NOT continue PREV.',\n  '- \"footer\": a self-contained catchword, printer signature, or page number at the foot of a',\n  '  page. NEXT does NOT continue from it.',\n  'A footer/catchword/signature/page-number is SHORT (a single word, a signature like \"A ij\", or a number); a full line of running prose is never a footer.',\n  'Ignore OCR noise: a meaningless one/two-character fragment that breaks the flow is body.',\n  'When unsure, answer \"body\".',\n  'Respond with ONLY a JSON object:',\n  '{\"role\":\"header\"|\"footer\"|\"body\",\"kind\":\"runningHead\"|\"pageNumber\"|\"catchword\"|null}',\n].join('\\n');\n\nfunction buildCoherencePrompt(candidate, prev, next, position) {\n  const user = JSON.stringify({ position, PREV: prev || '', CANDIDATE: candidate || '', NEXT: next || '' }, null, 2);\n  return { system: SYSTEM, user };\n}\n\n// DEFAULT 'body' when unparseable — safety bias: keep the line in the transcription.\nfunction parseVerdict(text) {\n  const fallback = { role: 'body', kind: null };\n  if (!text) return fallback;\n  const m = String(text).match(/\\{[\\s\\S]*\\}/);\n  if (!m) return fallback;\n  let obj;\n  try { obj = JSON.parse(m[0]); } catch (e) { return fallback; }\n  if (obj.role === 'header' || obj.role === 'footer' || obj.role === 'body') {\n    const kind = ['runningHead', 'pageNumber', 'catchword'].includes(obj.kind) ? obj.kind : null;\n    return { role: obj.role, kind };\n  }\n  return fallback;\n}\n\nfunction resolveRequests(prevPage, curPage, isFirst) {\n  const reqs = [];\n  // Header of the CURRENT page: needs prev page's last body line + this page's first body line.\n  const topId = curPage && curPage.pageMeta && curPage.pageMeta.ambiguous && curPage.pageMeta.ambiguous.top;\n  if (topId && !isFirst && prevPage) {\n    const cand = lineById(curPage, topId);\n    const p = buildCoherencePrompt(cand ? cand.text : '', lastBody(prevPage), _firstBodyExcluding(curPage, topId), 'top');\n    reqs.push({ target: 'cur-header', pageRef: 'cur', candidateId: topId, position: 'top', system: p.system, user: p.user });\n  }\n  // Footer of the PREVIOUS page: needs prev page's last body line (excluding the\n  // candidate itself) + this page's first body line.\n  const botId = prevPage && prevPage.pageMeta && prevPage.pageMeta.ambiguous && prevPage.pageMeta.ambiguous.bottom;\n  if (botId && curPage) {\n    const cand = lineById(prevPage, botId);\n    const p = buildCoherencePrompt(cand ? cand.text : '', _lastBodyExcluding(prevPage, botId), firstBody(curPage), 'bottom');\n    reqs.push({ target: 'prev-footer', pageRef: 'prev', candidateId: botId, position: 'bottom', system: p.system, user: p.user });\n  }\n  return reqs;\n}\n\nfunction applyVerdict(page, candidateId, verdict, position) {\n  const line = lineById(page, candidateId);\n  if (!line) return;\n  const v = verdict || { role: 'body', kind: null };\n  let role = v.role;\n  if (position === 'top' && role === 'footer') role = 'body';      // a top line is never a footer\n  if (position === 'bottom' && role === 'header') role = 'body';   // a bottom line is never a header\n  if (role === 'header') {\n    line.role = 'header';\n    page.pageMeta.header = { text: line.text };\n  } else if (role === 'footer') {\n    line.role = 'footer';\n    const kind = v.kind === 'pageNumber' || v.kind === 'catchword' ? v.kind : 'signature';\n    line.footerKind = kind;\n    page.pageMeta.footer = { text: line.text, kind };\n  } else {\n    line.role = 'body';\n  }\n  // Clear whichever ambiguous slot this candidate occupied, keyed by id (not by the\n  // verdict role) so a cross-role verdict can't clear a different candidate's slot.\n  if (page.pageMeta.ambiguous) {\n    if (page.pageMeta.ambiguous.top === candidateId) page.pageMeta.ambiguous.top = null;\n    if (page.pageMeta.ambiguous.bottom === candidateId) page.pageMeta.ambiguous.bottom = null;\n  }\n}\n\n// ---- Apply: zip LLM answers (in order) with stored reqs, mutate the buffered pages ----\nconst sd=$getWorkflowStaticData('global');\nconst outs=$input.all();\nconst reqs=sd.amadisReqs||[];\nfor(let i=0;i<reqs.length;i++){\n  const text=(outs[i]&&outs[i].json&&(outs[i].json.answer||outs[i].json.output||outs[i].json.text||''))||'';\n  const r=reqs[i];\n  const target=r.pageRef==='prev'?sd.amadisDeliver:sd.amadisPrev;\n  applyVerdict(target,r.candidateId,parseVerdict(text),r.position);\n}\nconst m=sd.amadisMeta||{};\nreturn [{json:{jobId:m.jobId,callbackUrl:m.callbackUrl,pagesTotal:m.pagesTotal,pagesDone:m.pagesDone,runId:m.runId,deliver:sd.amadisDeliver}}];\n"
+      },
+      "name": "Apply verdicts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2272,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sd=$getWorkflowStaticData('global');\nconst m=sd.amadisMeta||{};\nreturn [{json:{jobId:m.jobId,callbackUrl:m.callbackUrl,pagesTotal:m.pagesTotal,pagesDone:m.pagesDone,runId:m.runId,deliver:sd.amadisDeliver}}];"
+      },
+      "name": "Deliver page",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.reqs.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has candidates?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1696,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "reqs",
+        "options": {}
+      },
+      "name": "Split requests",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "wQdfEduNMzgBq6i5",
+          "mode": "list",
+          "cachedResultName": "Message to LLM",
+          "cachedResultUrl": "/workflow/wQdfEduNMzgBq6i5"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "system_prompt": "={{ $json.system_prompt }}",
+            "user_prompt": "={{ $json.user_prompt }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "system_prompt",
+              "displayName": "system_prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "user_prompt",
+              "displayName": "user_prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ]
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "name": "Ask Local LLM",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2080,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// LLM low-confidence correction. Pure, no imports — paste-able into n8n Code nodes.\n\nconst LOWCONF_THRESHOLD = 0.6;\nconst MARK_OPEN = '⟦';\nconst MARK_CLOSE = '⟧';\n\n// [{word,start,end}] for each maximal non-whitespace run in s.\nfunction _wordRanges(s) {\n  const out = [];\n  const re = /\\S+/g;\n  let m;\n  while ((m = re.exec(s)) !== null) out.push({ word: m[0], start: m.index, end: m.index + m[0].length });\n  return out;\n}\n\n// Body line → suspect word spans in line.text coordinates.\n// charConfidences is aligned to textRaw; line.text differs from textRaw only by a\n// prepended drop-cap letter on the first body line, so a constant length offset maps\n// raw indices into text. If that clean offset does not hold, fall back to locating the\n// word substring in text; if it cannot be located, the word is skipped.\nfunction suspectSpans(line, threshold) {\n  const t = (threshold == null) ? LOWCONF_THRESHOLD : threshold;\n  const text = line && typeof line.text === 'string' ? line.text : '';\n  const raw = line && typeof line.textRaw === 'string' ? line.textRaw : '';\n  const conf = line && Array.isArray(line.charConfidences) ? line.charConfidences : null;\n  if (!text || !raw || !conf || conf.length === 0) return [];\n  if (text.indexOf(MARK_OPEN) !== -1 || text.indexOf(MARK_CLOSE) !== -1) return [];\n  const offset = text.length - raw.length;\n  const cleanOffset = offset >= 0 && text.slice(offset) === raw;\n  const spans = [];\n  for (const w of _wordRanges(raw)) {\n    let minConf = Infinity, suspect = false;\n    for (let i = w.start; i < w.end; i++) {\n      const cf = i < conf.length ? conf[i] : 1;\n      if (cf < minConf) minConf = cf;\n      if (cf < t) suspect = true;\n    }\n    if (!suspect) continue;\n    let start, end;\n    if (cleanOffset) { start = w.start + offset; end = w.end + offset; }\n    else { const idx = text.indexOf(w.word); if (idx < 0) continue; start = idx; end = idx + w.word.length; }\n    spans.push({ word: text.slice(start, end), start, end, minConf });\n  }\n  spans.sort((a, b) => a.start - b.start);\n  return spans;\n}\n\nfunction markText(text, spans) {\n  if (!spans || spans.length === 0) return text;\n  const sorted = spans.slice().sort((a, b) => a.start - b.start);\n  let out = '', pos = 0;\n  for (const s of sorted) { out += text.slice(pos, s.start) + MARK_OPEN + text.slice(s.start, s.end) + MARK_CLOSE; pos = s.end; }\n  return out + text.slice(pos);\n}\n\nconst CORRECTION_SYSTEM = [\n  'You are correcting OCR output from a printed 16th-century French book.',\n  'You are given three consecutive lines: PREV, LINE, NEXT. Only LINE may be edited.',\n  'In LINE, suspect character spans are wrapped in ⟦ ⟧ markers. These, and ONLY these, may',\n  'contain OCR misreads to fix.',\n  'Rules — follow ALL of them exactly:',\n  '- Change characters ONLY inside the ⟦ ⟧ markers. Everything outside the markers must be',\n  '  returned byte-for-byte identical.',\n  '- Keep the ⟦ ⟧ markers in your answer, around the (possibly corrected) spans.',\n  '- Fix only genuine OCR misreads (letter shapes confused: long-s/f, u/n, c/e, etc.).',\n  '- Do NOT modernize or normalize spelling. 16th-century French spelling is CORRECT as-is;',\n  '  preserve archaic forms, accents, and abbreviations. When unsure, leave the span unchanged.',\n  'Respond with ONLY a JSON object: {\"corrected\":\"<the LINE with markers preserved>\"}',\n].join('\\n');\n\nfunction buildCorrectionPrompt(markedText, prevBody, nextBody) {\n  const user = JSON.stringify({ PREV: prevBody || '', LINE: markedText, NEXT: nextBody || '' }, null, 2);\n  return { system: CORRECTION_SYSTEM, user };\n}\n\n// Correctable lines are body prose AND rubric titles: role is only metadata, the\n// title text is OCR of the same 16th-c. print and benefits from the same low-conf\n// correction. Headers/footers (page numbers, catchwords, watermark) stay out.\nconst CORRECTABLE_ROLES = new Set(['body', 'title']);\n\nfunction correctionRequests(page, threshold) {\n  const lines = (page && page.lines) || [];\n  const corr = lines.filter(l => CORRECTABLE_ROLES.has(l.role || 'body') && typeof l.text === 'string' && l.text.trim());\n  const reqs = [];\n  for (let i = 0; i < corr.length; i++) {\n    const line = corr[i];\n    const spans = suspectSpans(line, threshold);\n    if (!spans.length) continue;\n    const p = buildCorrectionPrompt(markText(line.text, spans), i > 0 ? corr[i - 1].text : '', i < corr.length - 1 ? corr[i + 1].text : '');\n    reqs.push({ lineId: line.id, original: line.text, spans, system: p.system, user: p.user });\n  }\n  return reqs;\n}\n\nfunction parseCorrected(text) {\n  if (!text) return null;\n  const m = String(text).match(/\\{[\\s\\S]*\\}/);\n  if (!m) return null;\n  let obj;\n  try { obj = JSON.parse(m[0]); } catch (e) { return null; }\n  return typeof obj.corrected === 'string' ? obj.corrected : null;\n}\n\n// Split a marked string into {outside:[n+1], inside:[n]}, or null if unbalanced/nested.\nfunction _splitMarked(s) {\n  const outside = [], inside = [];\n  let i = 0, buf = '';\n  while (i < s.length) {\n    const ch = s[i];\n    if (ch === MARK_OPEN) {\n      outside.push(buf); buf = ''; i++;\n      let inner = '';\n      while (i < s.length && s[i] !== MARK_CLOSE) { if (s[i] === MARK_OPEN) return null; inner += s[i]; i++; }\n      if (i >= s.length) return null;\n      inside.push(inner); i++;\n    } else if (ch === MARK_CLOSE) { return null; }\n    else { buf += ch; i++; }\n  }\n  outside.push(buf);\n  return { outside, inside };\n}\n\n// Marker-anchored guard: only inside-marker characters may change; everything outside\n// must be byte-identical to the original's outside-marker text. Any violation → revert.\nfunction acceptMarkerAnchored(original, spans, correctedMarked) {\n  const revert = { text: original, accepted: false, insides: [] };\n  if (typeof correctedMarked !== 'string') return revert;\n  const got = _splitMarked(correctedMarked);\n  if (!got) return revert;\n  if (got.inside.length !== (spans ? spans.length : 0)) return revert;\n  const exp = _splitMarked(markText(original, spans));\n  if (!exp || exp.outside.length !== got.outside.length) return revert;\n  for (let k = 0; k < exp.outside.length; k++) if (exp.outside[k] !== got.outside[k]) return revert;\n  let text = '';\n  for (let k = 0; k < got.inside.length; k++) text += got.outside[k] + got.inside[k];\n  text += got.outside[got.outside.length - 1];\n  return { text, accepted: true, insides: got.inside };\n}\n\nfunction wordDiff(lineId, spans, insides) {\n  const out = [];\n  for (let i = 0; i < spans.length; i++) {\n    if (insides[i] !== spans[i].word) {\n      out.push({ lineId, original: spans[i].word, corrected: insides[i], kind: 'llm-lowconf', confidence: spans[i].minConf });\n    }\n  }\n  return out;\n}\n\n// Guard + apply for one line. spans MUST have been computed from the current line.text.\nfunction applyLineCorrection(line, correctedMarked, spans) {\n  const res = acceptMarkerAnchored(line.text, spans, correctedMarked);\n  if (!res.accepted) return [];\n  const entries = wordDiff(line.id, spans, res.insides);\n  line.text = res.text;\n  return entries;\n}\n\n// ---- Prep correction: compute per-line requests on the delivered page ----\nconst sd = $getWorkflowStaticData('global');\nconst meta = $json;\nconst deliver = meta.deliver || null;\nconst isLast = meta.isLast === true;\nconst reqs = deliver ? correctionRequests(deliver, LOWCONF_THRESHOLD) : [];\nsd.amadisCorr = reqs.map(r => ({ lineId: r.lineId, spans: r.spans }));\nsd.amadisCorrCtx = { jobId: meta.jobId, callbackUrl: meta.callbackUrl, pagesTotal: meta.pagesTotal, pagesDone: meta.pagesDone, deliver, isLast };\nreturn [{ json: {\n  reqs: reqs.map(r => ({ system_prompt: r.system, user_prompt: r.user })),\n  jobId: meta.jobId, callbackUrl: meta.callbackUrl, pagesTotal: meta.pagesTotal, pagesDone: meta.pagesDone,\n  deliver, isLast, corrections: []\n} }];\n"
+      },
+      "name": "Prep correction",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.reqs.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has corrections?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2896,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "reqs",
+        "options": {}
+      },
+      "name": "Split corrections",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        3136,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "wQdfEduNMzgBq6i5",
+          "mode": "list",
+          "cachedResultName": "Message to LLM",
+          "cachedResultUrl": "/workflow/wQdfEduNMzgBq6i5"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "system_prompt": "={{ $json.system_prompt }}",
+            "user_prompt": "={{ $json.user_prompt }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "system_prompt",
+              "displayName": "system_prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "user_prompt",
+              "displayName": "user_prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ]
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "name": "Ask Local LLM (correct)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        3376,
+        320
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// LLM low-confidence correction. Pure, no imports — paste-able into n8n Code nodes.\n\nconst LOWCONF_THRESHOLD = 0.6;\nconst MARK_OPEN = '⟦';\nconst MARK_CLOSE = '⟧';\n\n// [{word,start,end}] for each maximal non-whitespace run in s.\nfunction _wordRanges(s) {\n  const out = [];\n  const re = /\\S+/g;\n  let m;\n  while ((m = re.exec(s)) !== null) out.push({ word: m[0], start: m.index, end: m.index + m[0].length });\n  return out;\n}\n\n// Body line → suspect word spans in line.text coordinates.\n// charConfidences is aligned to textRaw; line.text differs from textRaw only by a\n// prepended drop-cap letter on the first body line, so a constant length offset maps\n// raw indices into text. If that clean offset does not hold, fall back to locating the\n// word substring in text; if it cannot be located, the word is skipped.\nfunction suspectSpans(line, threshold) {\n  const t = (threshold == null) ? LOWCONF_THRESHOLD : threshold;\n  const text = line && typeof line.text === 'string' ? line.text : '';\n  const raw = line && typeof line.textRaw === 'string' ? line.textRaw : '';\n  const conf = line && Array.isArray(line.charConfidences) ? line.charConfidences : null;\n  if (!text || !raw || !conf || conf.length === 0) return [];\n  if (text.indexOf(MARK_OPEN) !== -1 || text.indexOf(MARK_CLOSE) !== -1) return [];\n  const offset = text.length - raw.length;\n  const cleanOffset = offset >= 0 && text.slice(offset) === raw;\n  const spans = [];\n  for (const w of _wordRanges(raw)) {\n    let minConf = Infinity, suspect = false;\n    for (let i = w.start; i < w.end; i++) {\n      const cf = i < conf.length ? conf[i] : 1;\n      if (cf < minConf) minConf = cf;\n      if (cf < t) suspect = true;\n    }\n    if (!suspect) continue;\n    let start, end;\n    if (cleanOffset) { start = w.start + offset; end = w.end + offset; }\n    else { const idx = text.indexOf(w.word); if (idx < 0) continue; start = idx; end = idx + w.word.length; }\n    spans.push({ word: text.slice(start, end), start, end, minConf });\n  }\n  spans.sort((a, b) => a.start - b.start);\n  return spans;\n}\n\nfunction markText(text, spans) {\n  if (!spans || spans.length === 0) return text;\n  const sorted = spans.slice().sort((a, b) => a.start - b.start);\n  let out = '', pos = 0;\n  for (const s of sorted) { out += text.slice(pos, s.start) + MARK_OPEN + text.slice(s.start, s.end) + MARK_CLOSE; pos = s.end; }\n  return out + text.slice(pos);\n}\n\nconst CORRECTION_SYSTEM = [\n  'You are correcting OCR output from a printed 16th-century French book.',\n  'You are given three consecutive lines: PREV, LINE, NEXT. Only LINE may be edited.',\n  'In LINE, suspect character spans are wrapped in ⟦ ⟧ markers. These, and ONLY these, may',\n  'contain OCR misreads to fix.',\n  'Rules — follow ALL of them exactly:',\n  '- Change characters ONLY inside the ⟦ ⟧ markers. Everything outside the markers must be',\n  '  returned byte-for-byte identical.',\n  '- Keep the ⟦ ⟧ markers in your answer, around the (possibly corrected) spans.',\n  '- Fix only genuine OCR misreads (letter shapes confused: long-s/f, u/n, c/e, etc.).',\n  '- Do NOT modernize or normalize spelling. 16th-century French spelling is CORRECT as-is;',\n  '  preserve archaic forms, accents, and abbreviations. When unsure, leave the span unchanged.',\n  'Respond with ONLY a JSON object: {\"corrected\":\"<the LINE with markers preserved>\"}',\n].join('\\n');\n\nfunction buildCorrectionPrompt(markedText, prevBody, nextBody) {\n  const user = JSON.stringify({ PREV: prevBody || '', LINE: markedText, NEXT: nextBody || '' }, null, 2);\n  return { system: CORRECTION_SYSTEM, user };\n}\n\n// Correctable lines are body prose AND rubric titles: role is only metadata, the\n// title text is OCR of the same 16th-c. print and benefits from the same low-conf\n// correction. Headers/footers (page numbers, catchwords, watermark) stay out.\nconst CORRECTABLE_ROLES = new Set(['body', 'title']);\n\nfunction correctionRequests(page, threshold) {\n  const lines = (page && page.lines) || [];\n  const corr = lines.filter(l => CORRECTABLE_ROLES.has(l.role || 'body') && typeof l.text === 'string' && l.text.trim());\n  const reqs = [];\n  for (let i = 0; i < corr.length; i++) {\n    const line = corr[i];\n    const spans = suspectSpans(line, threshold);\n    if (!spans.length) continue;\n    const p = buildCorrectionPrompt(markText(line.text, spans), i > 0 ? corr[i - 1].text : '', i < corr.length - 1 ? corr[i + 1].text : '');\n    reqs.push({ lineId: line.id, original: line.text, spans, system: p.system, user: p.user });\n  }\n  return reqs;\n}\n\nfunction parseCorrected(text) {\n  if (!text) return null;\n  const m = String(text).match(/\\{[\\s\\S]*\\}/);\n  if (!m) return null;\n  let obj;\n  try { obj = JSON.parse(m[0]); } catch (e) { return null; }\n  return typeof obj.corrected === 'string' ? obj.corrected : null;\n}\n\n// Split a marked string into {outside:[n+1], inside:[n]}, or null if unbalanced/nested.\nfunction _splitMarked(s) {\n  const outside = [], inside = [];\n  let i = 0, buf = '';\n  while (i < s.length) {\n    const ch = s[i];\n    if (ch === MARK_OPEN) {\n      outside.push(buf); buf = ''; i++;\n      let inner = '';\n      while (i < s.length && s[i] !== MARK_CLOSE) { if (s[i] === MARK_OPEN) return null; inner += s[i]; i++; }\n      if (i >= s.length) return null;\n      inside.push(inner); i++;\n    } else if (ch === MARK_CLOSE) { return null; }\n    else { buf += ch; i++; }\n  }\n  outside.push(buf);\n  return { outside, inside };\n}\n\n// Marker-anchored guard: only inside-marker characters may change; everything outside\n// must be byte-identical to the original's outside-marker text. Any violation → revert.\nfunction acceptMarkerAnchored(original, spans, correctedMarked) {\n  const revert = { text: original, accepted: false, insides: [] };\n  if (typeof correctedMarked !== 'string') return revert;\n  const got = _splitMarked(correctedMarked);\n  if (!got) return revert;\n  if (got.inside.length !== (spans ? spans.length : 0)) return revert;\n  const exp = _splitMarked(markText(original, spans));\n  if (!exp || exp.outside.length !== got.outside.length) return revert;\n  for (let k = 0; k < exp.outside.length; k++) if (exp.outside[k] !== got.outside[k]) return revert;\n  let text = '';\n  for (let k = 0; k < got.inside.length; k++) text += got.outside[k] + got.inside[k];\n  text += got.outside[got.outside.length - 1];\n  return { text, accepted: true, insides: got.inside };\n}\n\nfunction wordDiff(lineId, spans, insides) {\n  const out = [];\n  for (let i = 0; i < spans.length; i++) {\n    if (insides[i] !== spans[i].word) {\n      out.push({ lineId, original: spans[i].word, corrected: insides[i], kind: 'llm-lowconf', confidence: spans[i].minConf });\n    }\n  }\n  return out;\n}\n\n// Guard + apply for one line. spans MUST have been computed from the current line.text.\nfunction applyLineCorrection(line, correctedMarked, spans) {\n  const res = acceptMarkerAnchored(line.text, spans, correctedMarked);\n  if (!res.accepted) return [];\n  const entries = wordDiff(line.id, spans, res.insides);\n  line.text = res.text;\n  return entries;\n}\n\n// ---- Apply corrections: zip LLM answers with stored requests, mutate deliver body lines ----\nconst sd = $getWorkflowStaticData('global');\nconst outs = $input.all();\nconst corr = sd.amadisCorr || [];\nconst ctx = sd.amadisCorrCtx || {};\nconst deliver = ctx.deliver || null;\nconst corrections = [];\nif (deliver) {\n  for (let i = 0; i < corr.length; i++) {\n    const text = (outs[i] && outs[i].json && (outs[i].json.answer || outs[i].json.output || outs[i].json.text || '')) || '';\n    const cRec = corr[i];\n    const line = (deliver.lines || []).find(l => l.id === cRec.lineId);\n    if (!line) continue;\n    const parsed = parseCorrected(text);\n    if (parsed === null) continue;\n    for (const e of applyLineCorrection(line, parsed, cRec.spans)) corrections.push(e);\n  }\n}\nreturn [{ json: { jobId: ctx.jobId, callbackUrl: ctx.callbackUrl, pagesTotal: ctx.pagesTotal, pagesDone: ctx.pagesDone, deliver, isLast: !!ctx.isLast, corrections } }];\n"
+      },
+      "name": "Apply corrections",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3616,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ ($json.pages || []).length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Has page?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3408,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $('Shape batch').item.json.isLast }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Route: Is last?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3888,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Resets the cross-page coherence lookback before every run (fresh or\n// resumed): a resumed run never passes through cur.page === 1, the only\n// place Prep coherence nulls this buffer itself, so without this it would\n// run with leftover state from whatever run touched this workflow last.\n// Must return the Validate item unchanged (Page count reads $json.pdfUrl\n// next) — this node only ever adds to workflow static data, never to $json.\nconst sd = $getWorkflowStaticData('global');\ndelete sd.amadisPrev;\ndelete sd.amadisDeliver;\ndelete sd.amadisReqs;\ndelete sd.amadisMeta;\nconst v = $json;\nif (v.seed) {\n  sd.amadisPrev = { page: v.seed.page, lines: v.seed.lines, pageMeta: v.seed.pageMeta, seeded: true };\n}\nreturn [{ json: v }];"
+      },
+      "name": "Reset run state",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Header/footer coherence (LLM pass 1)\nCoherence based on n-1 last line and n+1 first line",
+        "height": 92,
+        "width": 972,
+        "color": 6
+      },
+      "name": "Sticky: Header/footer coherence",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        -144
+      ]
+    }
+  ],
+  "connections": {
+    "Page count": {
+      "main": [
+        [
+          {
+            "node": "Build pages",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build error": {
+      "main": [
+        [
+          {
+            "node": "Callback: error",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Ntfy (fail)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build pages": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OCR page": {
+      "main": [
+        [
+          {
+            "node": "Prep coherence",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Callback: progress": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Flush last page",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OCR page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Callback: done": {
+      "main": [
+        [
+          {
+            "node": "Notify Ntfy (done)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep coherence": {
+      "main": [
+        [
+          {
+            "node": "Has candidates?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has candidates?": {
+      "main": [
+        [
+          {
+            "node": "Split requests",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Deliver page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split requests": {
+      "main": [
+        [
+          {
+            "node": "Ask Local LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Local LLM": {
+      "main": [
+        [
+          {
+            "node": "Apply verdicts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply verdicts": {
+      "main": [
+        [
+          {
+            "node": "Prep correction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deliver page": {
+      "main": [
+        [
+          {
+            "node": "Prep correction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flush last page": {
+      "main": [
+        [
+          {
+            "node": "Prep correction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep correction": {
+      "main": [
+        [
+          {
+            "node": "Has corrections?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has corrections?": {
+      "main": [
+        [
+          {
+            "node": "Split corrections",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Shape batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split corrections": {
+      "main": [
+        [
+          {
+            "node": "Ask Local LLM (correct)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Local LLM (correct)": {
+      "main": [
+        [
+          {
+            "node": "Apply corrections",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply corrections": {
+      "main": [
+        [
+          {
+            "node": "Shape batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shape batch": {
+      "main": [
+        [
+          {
+            "node": "Has page?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has page?": {
+      "main": [
+        [
+          {
+            "node": "Callback: page",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Route: Is last?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Callback: page": {
+      "main": [
+        [
+          {
+            "node": "Route: Is last?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route: Is last?": {
+      "main": [
+        [
+          {
+            "node": "Callback: done",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Callback: progress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate": {
+      "main": [
+        [
+          {
+            "node": "Reset run state",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reset run state": {
+      "main": [
+        [
+          {
+            "node": "Page count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed"
+  },
+  "nodeGroups": [
+    {
+      "name": "Error handling",
+      "description": "Send call back + notification"
+    },
+    {
+      "name": "Intake",
+      "description": "Validates the payload and resets cross-page state before counting pages."
+    },
+    {
+      "name": "Low-confidence word correction (LLM)",
+      "description": "Second LLM pass: rewrites OCR words below the confidence threshold, then shapes the page payload for delivery."
+    },
+    {
+      "name": "Deliver and control loop",
+      "description": "Skips resume-seam pages, routes the per-page vs. final callback, and loops back for the next page."
+    }
+  ]
+}

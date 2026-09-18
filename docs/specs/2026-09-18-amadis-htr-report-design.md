@@ -109,22 +109,28 @@ amadis-htr/
     source_ocr/              sanitised copy of the batch runner modules
     training/                prepare_data.py, train.py, the ketos invocation
     SANITISATION.md          what was stripped and by which script
-    sanitise.py              the script, so the diff is reproducible
 
-  eval/
+  src/amadis_htr/
+    fold.py                  the single declared normalisation fold, shared
     cer.py                   E1
+    resample.py              bootstrap confidence intervals
+    ground_truth.py          the reference workbook into a typed reference
+    localisation.py          E5
     correction.py            E2
     coherence.py             E3
     dropcap.py               E4
-    localisation.py          E5
     throughput.py            E6
-    fold.py                  the single declared normalisation fold, shared
-    bootstrap.py             confidence intervals
+    sanitise.py              strips secrets from vendored pipeline files
+    sampling.py              seeded stratified gold-page sampler
+    report_macros.py         eval/results into LaTeX macros and tables
+  tests/                     one module per source module
+
+  eval/
     run_all.sh
     results/*.csv            the only thing figures and prose may read
 
   figures/
-    *.py                     one script per figure, reads eval/results/*.csv
+    *.py                     one matplotlib script per figure, reads eval/results
     *.pdf                    generated, never hand-made
 
   report/
@@ -564,7 +570,10 @@ citing it fails the build instead of reaching the page.
 cites CATMuS, kraken, Transkribus and the LLM post-correction literature, so a real
 bibliography is needed rather than a hand-written list.
 
-Python 3.12, `uv` for the environment, matching the pipelines. `matplotlib` for figures. `jiwer` for CER and WER,
+Python 3.12 or later, `uv` for the environment. The two pipelines run 3.12 and the
+harness is developed on 3.13; nothing in the scoring code depends on the difference,
+and no `.python-version` pins it, so the lockfile records what was actually used.
+`matplotlib` for figures. `jiwer` for CER and WER,
 version pinned in the lockfile. **Whitespace counts as a character**, and reference and
 hypothesis are compared as single strings with line breaks normalised to one space.
 Line-break and word-boundary errors are real errors on this material, and discarding
