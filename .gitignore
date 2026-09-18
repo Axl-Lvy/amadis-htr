@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+uv.lock.bak
+
+# Page images are only committed once the holding institutions' reuse terms
+# are checked. See the spec, section 5.
+data/gold/pages/*
+!data/gold/pages/.gitkeep
+
+# Recovered artefacts land here and are vendored deliberately, never bulk-added.
+data/runs/**/*.raw

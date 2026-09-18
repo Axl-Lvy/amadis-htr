@@ -109,22 +109,28 @@ amadis-htr/
     source_ocr/              sanitised copy of the batch runner modules
     training/                prepare_data.py, train.py, the ketos invocation
     SANITISATION.md          what was stripped and by which script
-    sanitise.py              the script, so the diff is reproducible
 
-  eval/
+  src/amadis_htr/
+    fold.py                  the single declared normalisation fold, shared
     cer.py                   E1
+    resample.py              bootstrap confidence intervals
+    ground_truth.py          the reference workbook into a typed reference
+    localisation.py          E5
     correction.py            E2
     coherence.py             E3
     dropcap.py               E4
-    localisation.py          E5
     throughput.py            E6
-    fold.py                  the single declared normalisation fold, shared
-    bootstrap.py             confidence intervals
+    sanitise.py              strips secrets from vendored pipeline files
+    sampling.py              seeded stratified gold-page sampler
+    report_macros.py         eval/results into LaTeX macros and tables
+  tests/                     one module per source module
+
+  eval/
     run_all.sh
     results/*.csv            the only thing figures and prose may read
 
   figures/
-    *.py                     one script per figure, reads eval/results/*.csv
+    *.py                     one matplotlib script per figure, reads eval/results
     *.pdf                    generated, never hand-made
 
   report/
