@@ -84,7 +84,7 @@ version = "0.1.0"
 description = "Evaluation harness for a domain-adapted HTR pipeline on 16th-century French print"
 requires-python = ">=3.12"
 dependencies = [
-    "jiwer>=3.0",
+    "jiwer>=4.0",
     "numpy>=1.26",
     "openpyxl>=3.1",
 ]
@@ -550,6 +550,28 @@ def test_aggregate_of_nothing_is_zero():
 def test_substitution_counts_reports_the_confused_pair():
     counts = substitution_counts("fecourir", "secourir")
     assert counts[("f", "s")] == 1
+
+
+def test_empty_reference_and_hypothesis_score_zero():
+    s = score_page("p1", "", "")
+    assert (s.cer, s.wer, s.ref_chars, s.char_edits) == (0.0, 0.0, 0, 0)
+
+
+def test_an_empty_reference_with_text_yields_no_rate():
+    # Measured: jiwer counts 3 insertions and 0 hits, so ref_chars is 0 and no
+    # rate is definable. Recorded here because excluded lines produce empty
+    # reference segments and this must not raise or divide by zero.
+    s = score_page("p1", "", "abc")
+    assert s.ref_chars == 0
+    assert s.cer == 0.0
+    assert s.char_edits == 3
+
+
+def test_an_empty_hypothesis_scores_a_total_loss():
+    s = score_page("p1", "abc", "")
+    assert s.ref_chars == 3
+    assert s.char_edits == 3
+    assert s.cer == 1.0
 ```
 
 - [ ] **Step 2: Run the tests to verify they fail**
@@ -665,13 +687,16 @@ def substitution_counts(reference: str, hypothesis: str) -> Counter:
 cd /home/axel/IdeaProjects/amadis-htr && uv run --extra dev pytest tests/test_cer.py -v
 ```
 
-Expected: PASS, 10 tests.
+Expected: PASS, 13 tests.
 
-If `jiwer.process_characters` or `jiwer.process_words` does not exist, or the
-result object lacks `substitutions` / `deletions` / `insertions` / `hits` /
-`alignments`, the installed `jiwer` is older than 3.0. Check with
-`uv run python -c "import jiwer; print(jiwer.__version__)"` and raise the floor
-in `pyproject.toml` rather than working around it. Do not hand-roll an edit
+The API was verified against jiwer 4.0.0 before this plan was written:
+`process_characters` and `process_words` return objects carrying
+`substitutions`, `deletions`, `insertions`, `hits` and `alignments`, the
+alignment chunk type for a substitution is `"substitute"`, and empty input does
+not raise. If any of that has changed, check the installed version with
+`uv run python -c "import importlib.metadata as m; print(m.version('jiwer'))"`
+(the module has no `__version__` attribute) and raise the floor in
+`pyproject.toml` rather than working around it. Do not hand-roll an edit
 distance: the point of pinning a library is that the definition is citable.
 
 - [ ] **Step 5: Commit**
@@ -963,7 +988,6 @@ _LOCATION = re.compile(
 _QUESTION = re.compile(r"\(?\?+\)?")
 _PIECE = re.compile(r"^\s*([0-9]+)\s*\.")
 _SHEET = "Feuil1"
-_ROWS = 457
 
 
 @dataclass(frozen=True)
@@ -1009,10 +1033,15 @@ def read_workbook(path: str | Path) -> list[Reference]:
     """Read every row of the reference workbook, in piece order."""
     sheet = openpyxl.load_workbook(path, data_only=True)[_SHEET]
     references: list[Reference] = []
-    for row in range(1, _ROWS + 1):
+    for row in range(1, sheet.max_row + 1):
         title = str(sheet.cell(row, 1).value or "")
         piece_match = _PIECE.match(title)
         if piece_match is None:
+            # Trailing blank rows end the table. Anything else in column A is a
+            # row the editor added in a shape this parser does not understand,
+            # and silently skipping it would lose a reference.
+            if not title.strip():
+                break
             raise ValueError(f"row {row}: column A does not start with a number: {title!r}")
         cell = sheet.cell(row, 2).value
         confidence, livre, chapter = classify(cell)
@@ -1456,7 +1485,7 @@ Expected: PASS, 10 tests.
 cd /home/axel/IdeaProjects/amadis-htr && uv run --extra dev pytest -v
 ```
 
-Expected: PASS, 46 tests across 6 files.
+Expected: PASS, 49 tests across 6 files.
 
 - [ ] **Step 6: Commit**
 
@@ -1553,15 +1582,23 @@ def test_scrub_replaces_every_private_host_form():
         "https://amadis.axl-lvy.fr/api/ocr/callback\n"
         "https://ntfy.axl-lvy.fr/n8n-errors\n"
         "http://ollama:11434/api/chat/\n"
-        "192.168.1.66 and 100.94.250.14\n"
+        "192.168.1.66 and 100.94.250.14 and 10.0.0.5\n"
     )
     out = scrub_text(text)
     assert "axl-lvy.fr" not in out
     assert "192.168.1.66" not in out
     assert "100.94.250.14" not in out
+    assert "10.0.0.5" not in out
+    # Every branch must eat all four octets. A three-octet match would leave a
+    # stray ".5" behind and look like it had worked.
+    assert "0.0.0.0 and 0.0.0.0 and 0.0.0.0" in out
     # Container names on a private docker network are not secrets and stay,
     # because the report describes the service graph.
     assert "http://ollama:11434/api/chat/" in out
+
+
+def test_a_version_number_is_not_mistaken_for_an_address():
+    assert scrub_text("kraken 10.5 and torch 2.10.0") == "kraken 10.5 and torch 2.10.0"
 
 
 def test_scrubbing_is_idempotent():
@@ -1606,8 +1643,16 @@ PLACEHOLDER_IP = "0.0.0.0"
 # The private DNS zone used throughout the deployment, plus the two private
 # address ranges that appear in the host documentation.
 _PRIVATE_DOMAIN = re.compile(r"\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.axl-lvy\.fr\b", re.I)
-_PRIVATE_IPV4 = re.compile(r"\b(?:192\.168|10|100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7]))"
-                           r"\.\d{1,3}\.\d{1,3}\b")
+# Each branch must consume all four octets. Writing the shared tail once, as
+# `(?:192\.168|10|100\....)\.\d{1,3}\.\d{1,3}`, gives the 10/8 branch only
+# three octets, so `10.0.0.5` matches `10.0.0` and leaves a stray `.5` behind.
+_PRIVATE_IPV4 = re.compile(
+    r"\b(?:"
+    r"10(?:\.\d{1,3}){3}"
+    r"|192\.168(?:\.\d{1,3}){2}"
+    r"|100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])(?:\.\d{1,3}){2}"
+    r")\b"
+)
 
 _DROP_TOP_LEVEL = ("staticData", "pinData", "id", "versionId", "meta", "shared")
 _DROP_SETTINGS = ("errorWorkflow", "callerPolicy")
@@ -1669,7 +1714,7 @@ def sanitise_workflow(document: dict) -> dict:
 cd /home/axel/IdeaProjects/amadis-htr && uv run --extra dev pytest tests/test_sanitise.py -v
 ```
 
-Expected: PASS, 9 tests.
+Expected: PASS, 10 tests.
 
 - [ ] **Step 5: Vendor the workflow**
 
@@ -1735,6 +1780,15 @@ Container names on the private docker network (`ocr`, `ollama`, `n8n`) stay,
 because the report describes that service graph and the names are not secrets.
 
 Every prompt, threshold, model name and code node stays. Those are the method.
+
+## One thing the scrubbing loses
+
+The production and preview hostnames are two distinct values and both become
+`example.invalid`, so the callback allowlist in the `Validate` code node reads
+`["example.invalid", "example.invalid"]`. The report quotes that block, so it
+says in the caption that two distinct hosts collapsed to one placeholder. The
+mechanism being described is that an exact-match allowlist exists at all, not
+what is in it.
 
 ## How to re-check
 
@@ -2048,7 +2102,7 @@ figure.
 cd /home/axel/IdeaProjects/amadis-htr && uv run --extra dev pytest -v
 ```
 
-Expected: PASS, 65 tests across 7 files.
+Expected: PASS, 69 tests across 7 files.
 
 - [ ] **Step 7: Commit**
 
