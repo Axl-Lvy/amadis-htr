@@ -2212,3 +2212,18 @@ machine:
 |---|---|---|
 | `data/gold/splits/training-pages.csv` | `page_id,livre` | the sampler, gate G3, and therefore the whole gold set |
 | `data/runs/matcher/alignments.csv` | `piece,livre,chapter,start,end,score` | E5, the summary and the threshold sweep |
+
+## After the harness, still before Monday
+
+Three things the recovery does not gate, done on 2026-09-18 on
+`feat/juxtalineaire-map`:
+
+| what | where | note |
+|---|---|---|
+| the Juxtalinéaire piece map, gate G1's mapping-as-code | `src/amadis_htr/juxtalineaire.py`, `eval/derive_juxtalineaire_map.py`, `data/localisation/juxtalineaire-map.csv` | the spec's remembered `+3 from piece 120` was wrong and is corrected in section 8 |
+| `eval/results` CSVs into LaTeX macros and tables | `src/amadis_htr/report_macros.py` | only the localisation registry is declared, because it is the only schema that exists |
+| the LaTeX skeleton and a proved toolchain | `report/`, `slides/`, `Makefile` | Tectonic 0.17 in `~/.local/bin`, Libertinus, no missing character |
+
+Gate G1 is not closed by this. The map is the half that does not need the big
+PC. The other half, cross-checking the mapped pieces against the 439 training
+pages, still waits on `train.lst`.
