@@ -570,7 +570,10 @@ citing it fails the build instead of reaching the page.
 cites CATMuS, kraken, Transkribus and the LLM post-correction literature, so a real
 bibliography is needed rather than a hand-written list.
 
-Python 3.12, `uv` for the environment, matching the pipelines. `matplotlib` for figures. `jiwer` for CER and WER,
+Python 3.12 or later, `uv` for the environment. The two pipelines run 3.12 and the
+harness is developed on 3.13; nothing in the scoring code depends on the difference,
+and no `.python-version` pins it, so the lockfile records what was actually used.
+`matplotlib` for figures. `jiwer` for CER and WER,
 version pinned in the lockfile. **Whitespace counts as a character**, and reference and
 hypothesis are compared as single strings with line breaks normalised to one space.
 Line-break and word-boundary errors are real errors on this material, and discarding

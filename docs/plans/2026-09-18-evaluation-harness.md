@@ -2148,3 +2148,58 @@ successor task in the next plan.
 
 The harness is written first so that recovery day is spent recovering, not
 writing scorers.
+
+
+---
+
+## What changed during execution
+
+Executed inline on 2026-09-18, branch `feat/evaluation-harness`. All eight tasks
+landed. Three deltas between the plan and what shipped, recorded here because
+the spec and the plan are the public record of method and must not contradict
+the code.
+
+**1. Task 7's key handling became a whitelist.** The plan's `_DROP_TOP_LEVEL`
+list was derived from a description of an older n8n export. The real file at
+`home-lab@4672c91` carries a newer shape, and the first vendoring attempt
+leaked three things the plan's blacklist did not name:
+
+- the **bare private zone** in a source comment ("both under `<zone>`, DNS we
+  own"). The plan's domain pattern required a subdomain label, so it walked
+  past the zone on its own. The pattern now makes the subdomain optional.
+- **newer instance-state keys**: `activeVersionId` (which is the version UUID
+  the plan thought it had dropped as `versionId`), `sourceWorkflowId`,
+  `versionCounter`, `versionMetadata`, `createdAt`, `updatedAt`, `triggerCount`,
+  `isArchived`, `active`, `tags`. Top-level keys are now a whitelist of `name`,
+  `description`, `nodes`, `connections` and `settings`, so a future export
+  cannot leak whatever it adds next.
+- **`nodeGroups`**, which the plan did not know about. Each group carries its
+  own UUID and the UUIDs of its member nodes, alongside a `name` and
+  `description` that caption the pipeline usefully. The captions are kept and
+  the identifiers dropped.
+
+Four tests were added for these. The leak check in Step 6 found all three, which
+is the check working rather than failing.
+
+**2. The sanitised file is 62,442 bytes, not "well under 30,000".** The plan's
+estimate was wrong. 488,639 bytes in, and the 480 KB of `staticData` is indeed
+gone; what remains is 30 nodes of real Code node source, which is the method and
+is meant to be there.
+
+**3. Test count is 73, not 69**, the difference being those four sanitiser
+tests. The per-task expectations up to Task 6 (13, 6, 10, 10, and 49 cumulative)
+all matched exactly.
+
+Unchanged and worth restating: the reference workbook parsed to precisely the
+counts the plan predicted, 422 certain, 4 conjectures, 10 uncertain and 21 with
+no usable reference, over 457 pieces.
+
+## Where Monday's recovery lands
+
+Two files the code already reads, neither of which can be produced on this
+machine:
+
+| file | header | unblocks |
+|---|---|---|
+| `data/gold/splits/training-pages.csv` | `page_id,livre` | the sampler, gate G3, and therefore the whole gold set |
+| `data/runs/matcher/alignments.csv` | `piece,livre,chapter,start,end,score` | E5, the summary and the threshold sweep |
