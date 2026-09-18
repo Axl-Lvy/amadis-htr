@@ -72,8 +72,10 @@ and any write to the production database.
 
 ## 4. Repository architecture
 
-Name: `amadis-htr`. Public, under the `Axl-Lvy` account. Created public from the start,
-so nothing is ever rewritten out of a public history.
+Name: `amadis-htr`. Public, under the `Axl-Lvy` account. The local history is built and
+sanitised first, and the GitHub repository is created public and receives that history as
+its first push. Nothing is ever flipped from private to public, because a flip publishes
+whatever the history already contains.
 
 ```
 amadis-htr/
@@ -194,11 +196,22 @@ abbreviation or a spelled-out initial. That count bounds what the fold cannot re
 | `stock` | `catmus-print-fondue-large.mlmodel` | the fine-tune's own base, downloaded fresh from Zenodo |
 | `ft` | `amadis-ft.mlmodel` | the shipped model |
 | `transkribus` | the raw model output preserved from the annotation campaign | external baseline, not built here |
-| `kraken-default` | kraken 7.0.2's bundled recognition default | a floor, not a competitor |
+| `mccatmus` | McCATMuS, or another published early-modern print model from the kraken zoo | an independent comparator that is not the fine-tune's own base |
 
-Segmentation is held constant (kraken `blla`) across `stock`, `ft` and `kraken-default`,
-so E1 measures recognition and not segmentation. Transkribus segmented independently,
-which is stated as a confound rather than corrected for.
+kraken 7.0.2 ships `blla` for segmentation and no bundled recognition model, so there is
+no "kraken default" to compare against. The independent comparator has to be a published
+model chosen on purpose. McCATMuS is the natural pick, and the project's own notes record
+a McCATMuS A/B that was considered and never run.
+
+**Segmentation is held constant by construction, not by assumption.** Every gold page is
+rasterised once at the 2200 px working width, segmented once with `blla`, and that single
+line set is handed to `stock`, `ft` and `mccatmus`. This matters more than it looks: the
+two production pipelines rasterise differently (pipeline A at a caller-supplied dpi,
+pipeline B at a fixed 2200 px), and the training README's own risk note records that a
+drop cap only reaches the recognition line if segmentation includes it. Comparing models
+across different line sets would measure segmentation. Transkribus segmented
+independently and cannot be brought into this scheme, so it is reported as a confounded
+baseline rather than corrected for.
 
 **Test sets.**
 
@@ -207,8 +220,13 @@ which is stated as a confound rather than corrected for.
   `val_accuracy` drove checkpoint selection and early stopping. Page-level splitting of
   one printed volume also leaves the same formes, type case and wear on both sides, which
   the report states.
-- `ood`: the new out-of-domain gold set from *Amadis de Gaule* (section 7). This is the
-  headline test set, and it is the only one the model has never seen in any form.
+- `ood`: the new gold set from *Amadis de Gaule* (section 7), drawn only from Livres that
+  gate G3 confirms were absent from training. This is the headline test set. "Out of
+  domain" here means pages and volumes the model never saw, not the *Amadis de Gaule*
+  edition as a whole: the Transkribus export lists `TRAINING_VALIDATION_SET_Amadis_4`
+  (49 pages, 1,410 lines) and `_Amadis_3` (7 pages, 208 lines) among its collections, so
+  roughly 56 pages of Livre material may be in the training corpus. The report states
+  this plainly rather than claiming a cleaner separation than exists.
 
 **Metrics.** CER and WER, raw and folded, per page and aggregated. Aggregation is
 character-weighted (total errors over total reference characters), and the per-page
@@ -223,13 +241,20 @@ project's own notes get quantified instead of asserted.
 **Stratified reporting.** Every E1 figure is broken down by type family: books 1 to 12
 (large folio, bâtarde type, roman folio numbers) against books 13 to 24 (a later,
 smaller edition in clean roman type with italic rubrics and arabic page numbers). The
-training data is *Trésor* T.1 only, so both families are out of domain, and whether the
-fine-tune generalises evenly across them is a genuine finding either way it comes out.
+bulk of the training data is *Trésor* T.1, so both families are largely unseen, and
+whether the fine-tune generalises evenly across them is a genuine finding either way it
+comes out.
 
 ### 6.2 E2, low-confidence correction
 
 **The grid.** Pipeline B accepts `--model` and `--llm` as flags, so four cells come free
 on any page set: `{stock, ft} × {correction off, correction on}`.
+
+**Run the grid on both test sets.** `val48` is *Trésor* material, which is where the
+model is in domain and where the correction pass actually ran in production, so the
+suspect-span rate there is the operationally meaningful one. Running E2 only on `ood`
+would measure the pass on material whose suspect-span rate nothing has ever observed.
+Both sets get the four cells and the two-model ablation.
 
 **The model ablation.** The two pipelines run identical prompts against different
 backends: `qwen3:8b` at temperature 0.3, `num_ctx` 16384 on the mini PC iGPU, and
@@ -374,7 +399,8 @@ reading it. Each gold page is transcribed, role-labelled, drop-cap-labelled and
 region-marked in the same sitting. This is what makes the wide scope affordable: E3 and
 E4 ride on E1's annotation cost instead of each needing their own campaign.
 
-**Sampling frame.** Pages from *Amadis de Gaule*, which the model has never seen.
+**Sampling frame.** Pages from *Amadis de Gaule*, restricted to the Livres that gate G3
+shows contributed no page to training.
 Stratified over:
 
 - type family: books 1 to 12 against books 13 to 24
@@ -417,15 +443,23 @@ must be code in the repo rather than something remembered.
 **G2. Gold set against training.** Confirm every `ood` page is from a Livre and appears
 in no training or validation list. Emit the check's output.
 
-**G3. Which corpus actually trained the shipped model.** The two records disagree. The
-deleted home-lab training README reports 15,791 lines across roughly 549 pages spanning
-five Transkribus collections (T.1 at 487 pages / 13,997 lines, a
-`TRAINING_VALIDATION_SET_Amadis_4` at 49 pages / 1,410 lines, and three small collections
-of which two are deduplicated copies). The amadis `ocr-training/README.md` describes
-T.1 alone, roughly 487 pages and 14k lines, split 439 train / 48 val. If
-`TRAINING_VALIDATION_SET_Amadis_4` was in the training data, then *Amadis 4* material is
-in domain and the out-of-domain claim must exclude book 4. Resolve this against the
-recovered training artefacts before any E1 figure is written.
+**G3. Which pages actually trained the shipped model.** Two records describe different
+corpora and neither is authoritative. The deleted home-lab training README reports 15,791
+lines across roughly 549 pages spanning five Transkribus collections: T.1 at 487 pages /
+13,997 lines, `TRAINING_VALIDATION_SET_Amadis_4` at 49 pages / 1,410 lines, `_Amadis_3`
+at 7 pages / 208 lines, and two small collections that deduplicate against the others by
+image hash. The amadis `ocr-training/README.md` describes T.1 alone, roughly 487 pages
+and 14k lines, split 439 train / 48 val.
+
+The likeliest reading is that the two describe different things, the full export against
+what was shipped after the trainer moved repositories. That is a guess, and the report
+cannot rest on it.
+
+**The gate is the recovered `train.lst` and `val.lst`, not either README.** Read the page
+list, derive which Livres contributed pages, and exclude every such Livre from the `ood`
+sampling frame. Emit the derived list as `data/gold/splits/training-pages.csv`. Until
+that file exists, no page is annotated and no E1 figure is written, because the sampling
+frame depends on it.
 
 ## 9. Provenance and sanitisation
 
@@ -492,9 +526,13 @@ One Quarto project produces both deliverables from shared content: `report/` ren
 PDF, `slides/` renders to reveal.js, and both read the same `eval/results/*.csv` through
 inline code so a re-run of the evaluation updates the report and the defence together.
 
-Python 3.12, `uv` for the environment, matching the pipelines. `jiwer` or an equivalent
-for CER and WER, with the implementation pinned and the edit-distance definition stated,
-since CER varies with whitespace handling.
+Python 3.12, `uv` for the environment, matching the pipelines. `jiwer` for CER and WER,
+version pinned in the lockfile. **Whitespace counts as a character**, and reference and
+hypothesis are compared as single strings with line breaks normalised to one space.
+Line-break and word-boundary errors are real errors on this material, and discarding
+whitespace would hide exactly the failures the layout pass exists to prevent. The choice
+is stated in the report, because CER is not comparable across papers that make it
+differently.
 
 Everything in `eval/` runs on stored artefacts with no GPU, no Ollama and no network.
 
@@ -528,7 +566,7 @@ have expected.
 | E3 and E4 label counts too thin at 20 pages | If a cell falls below 30 instances, that analysis degrades from a measured accuracy to a descriptive breakdown, and the report says so. |
 | Scan reuse terms unclear | Images stay out of the repo until checked. Everything else ships. |
 | Recovery fails on Monday | Each dependent figure has a named fallback or is dropped. No figure is estimated. |
-| `TRAINING_VALIDATION_SET_Amadis_4` was in training | Book 4 is excluded from the `ood` set and the exclusion is reported. |
+| Some Livre pages were in training | The `ood` frame excludes every Livre that `train.lst` touches, and the report states how many Livre pages the fine-tune saw. |
 
 ## 14. Open questions
 
@@ -536,7 +574,7 @@ have expected.
    dataset. Affects section 5 only, not the evaluation.
 2. Whether the scan holders' reuse terms permit committing page images.
 3. Whether the raw Transkribus model output survives in an exportable form. If not, E1
-   loses its external baseline and falls back to `stock` and `kraken-default`.
+   loses that baseline and rests on `stock` and `mccatmus`.
 4. Deadline. The sample size in section 7 and the wide scope in section 6 both assume
    roughly 15 to 20 hours of manual work is available. If it is not, E3 and E4 are the
    first to drop, in that order.
