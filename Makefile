@@ -18,7 +18,7 @@ slides/main.pdf: slides/main.tex report/preamble.tex report/generated/macros.tex
 	cd slides && $(TECTONIC) $(FLAGS) main.tex
 
 clean:
-	rm -f report/main.pdf slides/main.pdf \
+	rm -f report/main.pdf slides/main.pdf report/*-blx.bib slides/*-blx.bib \
 	      report/*.aux report/*.bbl report/*.bcf report/*.blg report/*.log \
 	      report/*.run.xml report/*.synctex.gz \
 	      slides/*.aux slides/*.log slides/*.nav slides/*.out slides/*.snm \

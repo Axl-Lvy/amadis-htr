@@ -146,3 +146,33 @@ def test_no_docx_text_reaches_the_map(tmp_path):
 def test_alignment_refuses_a_workbook_longer_than_the_docx():
     with pytest.raises(ValueError, match="more workbook pieces"):
         align({1: "a", 2: "b", 3: "c"}, {1: "a"})
+
+
+def test_the_committed_map_still_says_what_the_spec_says_it_says():
+    """The staircase is stated in prose in three places. This is the source.
+
+    The spec, the README and the report all copy this table by hand, which is
+    exactly the thing rule 1 of the architecture forbids. Until those tables are
+    generated, this test is what keeps them honest.
+    """
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    with open(root / "data/localisation/juxtalineaire-map.csv", encoding="utf-8", newline="") as handle:
+        rows = [
+            (int(r["xlsx_piece"]), int(r["docx_piece"]), int(r["offset"]))
+            for r in csv.DictReader(handle)
+        ]
+
+    assert len(rows) == 457
+    assert [x for x, _, _ in rows] == list(range(1, 458))
+    assert [d for _, d, _ in rows] == sorted(d for _, d, _ in rows)
+    assert sorted(set(range(1, 461)) - {d for _, d, _ in rows}) == [39, 69, 85]
+
+    blocks: list[tuple[int, int, int]] = []
+    for xlsx, _, offset in rows:
+        if blocks and blocks[-1][2] == offset:
+            blocks[-1] = (blocks[-1][0], xlsx, offset)
+        else:
+            blocks.append((xlsx, xlsx, offset))
+    assert blocks == [(1, 38, 0), (39, 67, 1), (68, 82, 2), (83, 457, 3)]
