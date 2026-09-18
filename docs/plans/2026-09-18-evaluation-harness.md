@@ -2186,8 +2186,17 @@ estimate was wrong. 488,639 bytes in, and the 480 KB of `staticData` is indeed
 gone; what remains is 30 nodes of real Code node source, which is the method and
 is meant to be there.
 
-**3. Test count is 73, not 69**, the difference being those four sanitiser
-tests. The per-task expectations up to Task 6 (13, 6, 10, 10, and 49 cumulative)
+**3. No `.gitkeep` placeholders.** Task 1 step 6 created twelve empty files to
+hold the directory skeleton, because git tracks files rather than directories.
+They rendered as twelve "whitespace-only changes" entries in the bootstrap pull
+request, for no benefit: the reason the directories had to pre-exist was that
+the four CSV writers opened a path without creating its parent. The writers now
+call `Path(path).parent.mkdir(parents=True, exist_ok=True)`, which is the real
+fix, and the placeholders are gone. A directory that nothing writes to does not
+need to exist in a clean checkout.
+
+**4. Test count is 74, not 69**, the difference being four sanitiser tests and one
+asserting a writer creates its own output directory. The per-task expectations up to Task 6 (13, 6, 10, 10, and 49 cumulative)
 all matched exactly.
 
 Unchanged and worth restating: the reference workbook parsed to precisely the

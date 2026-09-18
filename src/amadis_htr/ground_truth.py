@@ -100,6 +100,7 @@ def read_workbook(path: str | Path) -> list[Reference]:
 def write_csv(references: Iterable[Reference], path: str | Path) -> None:
     """Write the reference table, one row per piece."""
     rows: Sequence[Reference] = list(references)
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(["piece", "livre", "chapter", "confidence", "raw"])

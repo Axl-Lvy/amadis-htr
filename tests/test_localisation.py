@@ -118,3 +118,11 @@ def test_write_sweep_has_a_header(tmp_path):
     assert out.read_text(encoding="utf-8").splitlines()[0] == (
         "threshold,accepted,correct,precision,coverage"
     )
+
+
+def test_writers_create_their_own_output_directory(tmp_path):
+    # No .gitkeep placeholder holds eval/results open, so a writer that assumed
+    # its directory existed would fail on a clean checkout.
+    out = tmp_path / "results" / "nested" / "sweep.csv"
+    write_sweep(sweep(_refs(), _preds(), [0.0]), out)
+    assert out.exists()

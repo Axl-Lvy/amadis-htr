@@ -154,6 +154,7 @@ def sweep(
 
 
 def write_summary(rows: Iterable[Summary], path: str | Path) -> None:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(
@@ -180,6 +181,7 @@ def write_summary(rows: Iterable[Summary], path: str | Path) -> None:
 
 
 def write_sweep(rows: Iterable[SweepRow], path: str | Path) -> None:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(["threshold", "accepted", "correct", "precision", "coverage"])

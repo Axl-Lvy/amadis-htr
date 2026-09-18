@@ -68,6 +68,7 @@ def sample(
 
 def write_manifest(selected: Iterable[Candidate], path: str | Path) -> None:
     """Write the gold-set manifest, one row per sampled page."""
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(
