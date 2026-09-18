@@ -1,0 +1,29 @@
+% Shared by report/main.tex and slides/main.tex, so one evaluation rerun
+% updates the report and the defence deck together.
+%
+% Paths stay out of this file. Each main document declares its own bibliography
+% resource and reads its own copy of the generated macros, because a path built
+% by concatenating a macro leaves a space TeX passes on to biber.
+
+% XeLaTeX or LuaLaTeX only. This document sets long s (U+017F) and the
+% correction pass's own markers (U+27E6, U+27E7) as literal characters, and
+% pdfLaTeX cannot without a workaround per character. Libertinus is the font
+% because it is the one candidate that covers both: DejaVu Serif and Noto Serif
+% were probed on 2026-09-18 and neither has U+27E6 or U+27E7.
+\usepackage{fontspec}
+\usepackage{libertinus-otf}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{french}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+
+% 16th-century quotation. Set in the source language and left unnormalised,
+% because the orthography is the object of study.
+\newcommand{\qtr}[1]{\textfrench{\emph{#1}}}
+
+% The correction pass's markers, quoted verbatim in the methods section.
+\newcommand{\lmark}{\char"27E6}
+\newcommand{\rmark}{\char"27E7}

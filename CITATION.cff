@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: amadis-htr
+message: >-
+  If you use this evaluation harness or the released model, please cite it.
+type: software
+authors:
+  - given-names: Axel
+    family-names: Levy
+    alias: Axl-Lvy
+repository-code: https://github.com/Axl-Lvy/amadis-htr
+license: MIT
+license-url: https://github.com/Axl-Lvy/amadis-htr/blob/master/LICENSE
+abstract: >-
+  Evaluation of an HTR pipeline for 16th-century French print: a fine-tuned
+  CATMuS-Print recogniser, two LLM post-processing passes under a conservative
+  accept rule, and passage localisation treated as retrieval.
