@@ -1,9 +1,10 @@
 """Seeded stratified sampling of the out-of-domain gold pages.
 
-The frame is gated on `data/gold/splits/training-pages.csv`, derived from the
-recovered `train.lst`. Some Amadis de Gaule pages are probably in the training
-corpus, so the sampler refuses to run without that file rather than quietly
-sampling a contaminated frame.
+The frame is gated on `data/gold/splits/training-pages.csv`, re-derived from
+the Transkribus exports on 2026-09-20. That file is what settles which Livres
+the model saw, and it records none: every training and validation page is a
+Trésor des Amadis T.1 page. The sampler still refuses to run without it, so
+that a frame is never sampled while contamination is merely assumed.
 """
 
 import csv
