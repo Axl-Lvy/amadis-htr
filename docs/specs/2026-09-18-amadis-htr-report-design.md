@@ -632,6 +632,11 @@ Everything in `eval/` runs on stored artefacts with no GPU, no Ollama and no net
 
 ## 12. Report structure
 
+Expanded section by section, with content, inputs and page budget, in
+`docs/specs/2026-09-20-report-outline.md`. That file adds an abstract, a
+references section and appendices to the nine below, and names section 7 as the
+home of the compare-to-literature move.
+
 1. Introduction: the corpus, the philological question, why off-the-shelf OCR is not
    enough for 16th-century French print
 2. Related work: CATMuS, kraken, Transkribus, LLM post-correction of OCR
