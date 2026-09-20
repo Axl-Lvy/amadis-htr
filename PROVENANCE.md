@@ -43,6 +43,51 @@ here so the omission is deliberate and visible:
 - stock CATMuS-Print at "approximately 1.5 to 2% CER" on this material
 - the Transkribus annotators' own model at "approximately 0.3% CER"
 - two disagreeing worker-scaling tables (8 workers at 1.75 against 1.92 s/page)
+- the fine-tune at "approximately 0.58% CER on a standalone test", stated in the
+  artefacts README with no test set, no log and no code behind it
 - a "759-page corpus" whose scope nothing records
 
 Each is either re-measured by this harness or dropped.
+
+## Artefacts recovered from bigpc, 2026-09-20
+
+Recovered over the tailnet from the host `bigpc`. None of it is committed here:
+it is mirrored to `~/amadis-artefacts/` on the laptop, whose `MANIFEST.sha256`
+hashes all 2,091 files. The training artefacts are 4,654,392,295 bytes over
+1,944 files, file count and byte count both equal to the source. What each
+artefact settles is recorded in
+`docs/notes/2026-09-20-artefact-recovery.md`.
+
+The two source repositories on bigpc are behind the clones this table records
+above: amadis at `e34eb4c` (2026-09-16) against `3d5439d`, home-lab at
+`f655ce4` (2026-09-16) against `4672c91`. Every artefact below is gitignored in
+its repository, so those commits date the code beside the artefacts, not the
+artefacts themselves.
+
+| source on bigpc | mtime | sha256 |
+|---|---|---|
+| `IdeaProjects/amadis/ocr-training/artifacts/source/export_job_28670809.zip` | 2026-07-06 23:26 | `ee16e96511ca67fae0db105159cfa9cfc9518b36524a821449dec6b696157de1` |
+| `IdeaProjects/amadis/ocr-training/artifacts/source/export_job_28670963.zip` | 2026-07-06 23:56 | `623f191a9035e773e8c8bed7f5f80f11346e6845291d59633e1fa3d3a7aea131` |
+| `.../artifacts/run1-constant-lr0.001/train.arrow` | 2026-07-07 00:09 | `1bf942097874d1b79c940f079c5480517c56c80317357b7253986f6181163938` |
+| `.../artifacts/run1-constant-lr0.001/val.arrow` | 2026-07-07 00:09 | `c638f3e167dfbcd5e2d70a34175b65868fcc1e9fb0b86d3870520e5389a4bcec` |
+| `.../artifacts/runs/rop0.5-lr3e-4-augment/model/checkpoint_55-0.9950.ckpt` | 2026-07-07 20:57 | `6bb990906d843928d4af1093956fe87d45785eb85b8d079f21cf62ef5f8adb20` |
+| `.../artifacts/runs/rop0.5-lr3e-4-augment/tblogs/.../events.out.tfevents.1783448827.AXL.98710.0` | 2026-07-07 | `eff84772b4a950e958a3ef9b401d116f1f116d9ce7093cd16e927eea3d764318` |
+| `IdeaProjects/home-lab/services/ocr/models/amadis-ft.mlmodel` | 2026-07-07 21:21 | `5bbf6972360f9677216adc000d59ea43c11d44c71e01b2fe606c3132f83e42b5` |
+| `Documents/Amadis de Gaule/ocr/book-{1..24}/run.json`, `calibration.json` | 2026-09-14, 2026-09-15 | in `MANIFEST.sha256` |
+
+The rest of `artifacts/` (run 1's eleven checkpoints, the base model, the
+drop-cap crops and candidates, the training logs) is mirrored and hashed in the
+same manifest.
+
+## Derived here, not copied
+
+`data/gold/splits/training-pages.csv` is derived, because `train.lst` and
+`val.lst` no longer exist. It is the output of `ocr-training/prepare_data.py`
+at amadis `b245a0c`, unchanged since 2026-07-07, run against the two export
+zips above with `--val-frac 0.1 --seed 13`, its own defaults. The seed is
+confirmed by a 100% line-text match against `train.arrow` and `val.arrow`
+where a seed-42 control matches 12.6%. The two re-derived lists are mirrored
+as `derived/prep/train.lst`
+(`a83d17034a78fda28a8aea3e7c9d5ce95f31a6e785bf099d176ffb38f1079085`) and
+`derived/prep/val.lst`
+(`fdb736f4e1eddb172bf4de38fb5f6a58d7f7fc516cd5312fa78a14b0a5d0e4e5`).

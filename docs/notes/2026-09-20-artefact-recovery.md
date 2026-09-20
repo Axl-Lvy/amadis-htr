@@ -68,6 +68,14 @@ pages in training. They are not: each is byte-identical, by MD5 over the image
 file, to a page already taken from T.1. `prepare_data.py` drops them as
 duplicates, so they reached neither `train.arrow` nor `val.arrow`.
 
+The two records G3 called irreconcilable turn out to describe the same
+export at two stages. The deleted home-lab README's "roughly 549 pages over five
+collections" is the export before deduplication: 487 + 49 + 7 + 3 + 3 = 549. Its
+13,997 lines for T.1 are the lines that survived: 12,600 in `train.arrow` plus
+1,397 in `val.arrow` is 13,997 exactly. The amadis README's "487 pages, split
+439 / 48" is the same corpus after dedup. Neither record was wrong and neither
+was authoritative on its own.
+
 `excluded_livres()` therefore returns the empty set, and the `ood` frame is
 unconstrained at page level.
 
@@ -121,7 +129,9 @@ day's.
 - **The n8n execution database**, on the mini PC. Not touched: the user pointed
   at bigpc only.
 - **The Transkribus baseline output** for E1. The two exports hold ground truth
-  and images, not the annotators' model output. Nothing on bigpc has it.
+  and images, not the annotators' model output. A search of bigpc's home for
+  `export_job*`, for anything named after Transkribus and for PAGE XML outside
+  those two zips returned the zips and nothing else.
 - **`data/runs/matcher/alignments.csv`**, which needs database access and an
   explicit go-ahead.
 - **"~0.58% on a standalone test"**, stated in the artefacts README with no
@@ -140,5 +150,19 @@ unzip -q artifacts/source/export_job_28670963.zip -d /tmp/amadis-recover/img
   --out /tmp/amadis-recover/prep --val-frac 0.1 --seed 13
 ```
 
-The work directory was deleted afterwards. It is 3 GB and rebuilds from the two
-zips in about ten minutes.
+The work directory was 2.6 GB, measured before deletion, and was deleted once
+the mirror verified. It rebuilds from the two zips, whose sha256 are in
+`PROVENANCE.md`.
+
+## The mirror
+
+`~/amadis-artefacts/` on the laptop, 4,654,392,295 bytes over 1,944 files for
+the training artefacts alone, byte count and file count both equal to the
+source. `MANIFEST.sha256` at its root hashes all 2,091 files, the mirrored ones
+and the derived ones together.
+
+Not mirrored: the scans. `~/Documents/Amadis de Gaule/` on bigpc holds the 24
+source PDFs, one zip and five repaired PDFs for books 13, 14, 15, 21 and 22,
+13 GB in all. The gold set will need pages out of them, so the sampling frame
+can be drawn here but the images stay on bigpc until their reuse terms are
+checked.

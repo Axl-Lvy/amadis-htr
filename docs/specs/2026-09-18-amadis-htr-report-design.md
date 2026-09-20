@@ -239,8 +239,10 @@ baseline rather than corrected for.
   domain" here means pages and volumes the model never saw, not the *Amadis de Gaule*
   edition as a whole: the Transkribus export lists `TRAINING_VALIDATION_SET_Amadis_4`
   (49 pages, 1,410 lines) and `_Amadis_3` (7 pages, 208 lines) among its collections, so
-  roughly 56 pages of Livre material may be in the training corpus. The report states
-  this plainly rather than claiming a cleaner separation than exists.
+  roughly 56 pages of Livre material may be in the training corpus. **Settled on
+  2026-09-20: those 56 pages are byte-identical duplicates of *Trésor* T.1 pages and
+  never reached the datasets. See the addendum in section 8.** The report states the
+  separation it has rather than claiming a cleaner one.
 
 **Metrics.** CER and WER, raw and folded, per page and aggregated. Aggregation is
 character-weighted (total errors over total reference characters), and the per-page
@@ -485,6 +487,21 @@ and 14k lines, split 439 train / 48 val.
 The likeliest reading is that the two describe different things, the full export against
 what was shipped after the trainer moved repositories. That is a guess, and the report
 cannot rest on it.
+
+**Addendum, 2026-09-20.** The gate is closed and the two records reconcile.
+`train.lst` and `val.lst` were gone, so the split was re-derived from the two
+export zips with `prepare_data.py` and verified against the compiled datasets
+(details and control in `docs/notes/2026-09-20-artefact-recovery.md`). The
+home-lab README's 549 pages over five collections is the export before
+deduplication, 487 + 49 + 7 + 3 + 3, and its 13,997 T.1 lines are the 12,600 in
+`train.arrow` plus the 1,397 in `val.arrow`. The amadis README describes the
+same corpus after deduplication. Every one of the 49 `_Amadis_4` and 7
+`_Amadis_3` pages is byte-identical, by MD5 over the image, to a T.1 page
+already kept, so none of them reached training. No *Amadis de Gaule* page
+trained the shipped model and `excluded_livres()` is empty. The *Trésor* is an
+anthology of extracts from *Amadis de Gaule*, so the model has read the text of
+whichever Livres T.1 excerpts even though it never saw a Livre page; whether
+that constrains the `ood` frame is open.
 
 **The gate is the recovered `train.lst` and `val.lst`, not either README.** Read the page
 list, derive which Livres contributed pages, and exclude every such Livre from the `ood`

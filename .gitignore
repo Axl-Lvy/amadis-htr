@@ -30,3 +30,6 @@ slides/*.toc
 slides/*.synctex.gz
 report/*-blx.bib
 slides/*-blx.bib
+
+# git worktrees created for parallel work
+.worktrees/
