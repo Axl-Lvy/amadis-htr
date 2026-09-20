@@ -91,3 +91,12 @@ as `derived/prep/train.lst`
 (`a83d17034a78fda28a8aea3e7c9d5ce95f31a6e785bf099d176ffb38f1079085`) and
 `derived/prep/val.lst`
 (`fdb736f4e1eddb172bf4de38fb5f6a58d7f7fc516cd5312fa78a14b0a5d0e4e5`).
+
+## Quoted, not copied wholesale
+
+| source | destination | mtime | sha256 of the source | tracked at source |
+|---|---|---|---|---|
+| amadis `docs/superpowers/plans/2026-09-15-tresor-amadis-alignment-phase-a.md` | `docs/pre-registration/2026-09-15-e5-alignment-gate.md` | 2026-09-15 17:57 | `e417abdb245e836e1373f20fb344708bb2ba442ff17a6ca90968fdfadb310d04` | no, `**/docs/superpowers/` is globally ignored |
+
+Only E5's pass and fail criteria are quoted. The rest of that plan is
+implementation detail for the private repository.

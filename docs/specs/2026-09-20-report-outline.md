@@ -1,7 +1,7 @@
 # amadis-htr: the report's outline, section by section
 
 Date: 2026-09-20
-Status: outline approved for drafting, not for writing results
+Status: drafted 2026-09-20 under the autonomy grant, awaiting review
 Extends: section 12 of `docs/specs/2026-09-18-amadis-htr-report-design.md`, which
 fixes the nine-section skeleton. This file keeps that skeleton and says what each
 section contains, what it reads, and what it may not say.
@@ -16,9 +16,9 @@ and section 7 depends on it. Each section below carries its status.
 | decision | default | why it is a default and not a fact |
 |---|---|---|
 | language | English | fixed by the design spec's deliverable line |
-| length | 25 pages of body, references and appendices on top | no page limit is recorded anywhere; a data science project report of this scope sits between 20 and 30 |
+| length | 25 to 26 pages of body, references and appendices on top | no page limit is recorded anywhere. A data science project report of this scope sits between 20 and 30 |
 | document class | `scrartcl` with `fontspec`, LuaLaTeX | the spec fixes the engine and the Unicode requirement, not the class |
-| citation style | `biblatex` numeric with `biber` | the spec fixes the tooling; numeric keeps a 25-page report's citations out of the way |
+| citation style | `biblatex` numeric with `biber` | the spec fixes the tooling. Numeric keeps a 25-page report's citations out of the way |
 | anonymity | none, the repository is public under the user's name | the spec plans a public repository and a Hugging Face card |
 
 ## IMRaD, mapped onto the nine sections
@@ -93,9 +93,10 @@ kraken as the engine, version 7.0.2, and what it ships and does not ship, which 
 E1's independent comparator has to be a chosen published model rather than a default.
 Transkribus as the annotation platform and as a commercial baseline, with its models
 opaque. LLM post-correction of OCR, where the literature's usual failure mode is
-fluent rewriting, which is exactly what C2's accept rule defends against. Close with
-what none of this settles: nobody has published an out-of-domain figure for a
-CATMuS-Print fine-tune on a second 16th-century edition.
+fluent rewriting, which is exactly what C2's accept rule defends against. Close with the question the search has to answer: has anyone published an
+out-of-domain figure for a CATMuS-Print fine-tune on a second 16th-century
+edition? The novelty claim is made only if the search comes back empty, and the
+search is recorded.
 
 **Inputs.** `report/refs.bib`, to be acquired. Nothing generated.
 
@@ -166,12 +167,15 @@ character-weighted aggregation, bootstrap intervals over pages at 10,000 resampl
 contamination gates as outputs rather than assertions, with G3's result stated here:
 the split was re-derived and verified, no *Amadis de Gaule* page trained the model, and
 the *Trésor*-excerpts-*Amadis* caveat is stated as an open judgement rather than
-resolved. The pre-registered E5 gate, quoted verbatim from the amadis plan that set it
-before the numbers were known.
+resolved. The pre-registered E5 gate, quoted verbatim in
+`docs/pre-registration/2026-09-15-e5-alignment-gate.md`, together with the fact
+that its source file is untracked and its only timestamp before this repository
+was a filesystem mtime.
 
 **Inputs.** `src/amadis_htr/fold.py`, `cer.py`, `resample.py`, `sampling.py`,
 `data/gold/GUIDELINES.md`, `data/gold/splits/training-pages.csv`,
-`docs/notes/2026-09-20-artefact-recovery.md`.
+`docs/notes/2026-09-20-artefact-recovery.md`,
+`docs/pre-registration/2026-09-15-e5-alignment-gate.md`.
 
 **Status.** Writable now, except the gold-set paragraph's final counts.
 
@@ -189,11 +193,11 @@ literature, no speculation about cause.
 
 | id | claim under test | unit | baseline | uncertainty | decision rule fixed in advance |
 |---|---|---|---|---|---|
-| E1 | the fine-tune recognises unseen 16th-century print better than its base | page | `mccatmus`, the strongest reasonable comparator, with `stock` as the ablation and `transkribus` reported as confounded | bootstrap over pages, 10,000 resamples, 95% | none; `ood` is the headline and `val48` is labelled validation |
-| E2 | the accept rule keeps a generative pass from rewriting the text | suspect span | correction off, same recognition output | bootstrap over pages for the CER delta | none; the rejection rate is descriptive and the threshold sweep is exploratory |
+| E1 | the fine-tune recognises unseen 16th-century print better than its base | page | all of `stock`, `mccatmus` and `transkribus` are run, `transkribus` reported as confounded. Which one the headline is stated against is decided on the `ood` scores and recorded when decided | bootstrap over pages, 10,000 resamples, 95% | a difference smaller than the annotator's self-agreement CER is not claimed. `ood` is the headline and `val48` is labelled validation |
+| E2 | the accept rule keeps a generative pass from rewriting the text | suspect span | correction off, same recognition output | bootstrap over pages for the CER delta | the rejection rate is descriptive and the threshold sweep is exploratory, so no cell passes or fails |
 | E3 | the LLM resolves ambiguous head and foot lines better than geometry alone | candidate line | always-`body`, and geometry without the LLM | bootstrap over pages | below 30 instances in a cell, the analysis degrades to a descriptive breakdown and says so |
 | E4 | escalation and the lexicon earn their cost | drop cap | gate only, and no lexicon | bootstrap over pages | same 30-instance rule |
-| E5 | a Trésor extract can be located in the baseline text | passage | none published; the pre-registered gate stands in | bootstrap over passages | above 90% Livre accuracy proceeds, below roughly 80% stops the work, quoted verbatim in section 5 |
+| E5 | a Trésor extract can be located in the baseline text | passage | none published, so the pre-registered gate stands in | bootstrap over passages | above 90% Livre accuracy proceeds, below roughly 80% stops the work, quoted verbatim in the pre-registration file |
 | E6 | descriptive only | book, page | none | none, these are counts | reported only where a log or stored artefact backs it |
 
 E6 has material today: 24 `run.json` files covering 14,111 pages with zero failures at

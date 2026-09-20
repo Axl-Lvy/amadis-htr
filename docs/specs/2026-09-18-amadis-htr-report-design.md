@@ -239,10 +239,10 @@ baseline rather than corrected for.
   domain" here means pages and volumes the model never saw, not the *Amadis de Gaule*
   edition as a whole: the Transkribus export lists `TRAINING_VALIDATION_SET_Amadis_4`
   (49 pages, 1,410 lines) and `_Amadis_3` (7 pages, 208 lines) among its collections, so
-  roughly 56 pages of Livre material may be in the training corpus. **Settled on
+  roughly 56 pages of Livre material may be in the training corpus. The report states
+  this plainly rather than claiming a cleaner separation than exists. **Settled on
   2026-09-20: those 56 pages are byte-identical duplicates of *Trésor* T.1 pages and
-  never reached the datasets. See the addendum in section 8.** The report states the
-  separation it has rather than claiming a cleaner one.
+  never reached the datasets. See the addendum in section 8.**
 
 **Metrics.** CER and WER, raw and folded, per page and aggregated. Aggregation is
 character-weighted (total errors over total reference characters), and the per-page
