@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from amadis_htr.report_macros import (
+    LOCALISATION_MACROS,
     Macro,
     MacroNameError,
     escape,
@@ -118,13 +119,52 @@ def test_generated_files_say_they_are_generated(tmp_path):
 
 def test_the_committed_macros_file_is_what_the_writer_emits(tmp_path):
     # report/generated/ is committed so the report builds from a fresh clone,
-    # and the README calls every file in it generated. It is empty until an
-    # evaluation feeds it, so it has to be exactly the header write_generated
-    # stamps and nothing more. Without this, editing the header leaves the
-    # committed copy behind and the first real run shows a diff nobody made.
+    # and the README calls every file in it generated. Rule 1 says no number in
+    # the report is typed by hand, which is only true while the committed file
+    # is exactly what the registry renders from the committed results. Editing
+    # either by hand fails here instead of reaching the page.
     reference = tmp_path / "macros.tex"
-    write_generated("", reference)
+    write_generated(render_macros(LOCALISATION_MACROS, REPO / "eval/results"), reference)
     committed = REPO / "report" / "generated" / "macros.tex"
     assert committed.read_text(encoding="utf-8") == reference.read_text(
         encoding="utf-8"
     )
+
+
+def test_every_figure_the_e5_note_states_comes_out_of_the_registry():
+    # The note's prose quotes 99.4% and 76.8% for the gated cohort and 99.0%
+    # and 73.1% for the other. Those four are the whole E5 result, and they are
+    # exactly the kind of number that drifts once it is written in two places.
+    rendered = render_macros(LOCALISATION_MACROS, REPO / "eval/results")
+    for name, value in [
+        ("locPiecesWorkbook", "317"),
+        ("locLivreCorrectWorkbook", "315"),
+        ("locLivreAccuracyWorkbook", "99.4\\%"),
+        ("locChapterCorrectWorkbook", "96"),
+        ("locChapterScoreableWorkbook", "125"),
+        ("locChapterAccuracyWorkbook", "76.8\\%"),
+        ("locPiecesCatalogue", "101"),
+        ("locLivreAccuracyCatalogue", "99.0\\%"),
+        ("locChapterAccuracyCatalogue", "73.1\\%"),
+    ]:
+        assert f"\\newcommand{{\\{name}}}{{{value}}}" in rendered
+
+
+def test_a_rate_over_an_empty_band_is_an_error_not_a_zero(tmp_path):
+    # The workbook cohort has no conjecture pieces at all. A rate there is 0/0,
+    # and rendering it as 0.0% would report a failure the evaluation never
+    # observed.
+    path = tmp_path / "localisation-summary-workbook.csv"
+    path.write_text(
+        "confidence,total,livre_correct\nconjecture,0,0\n", encoding="utf-8"
+    )
+    macro = Macro(
+        "locLivreAccuracyWorkbook",
+        "localisation-summary-workbook.csv",
+        {"confidence": "conjecture"},
+        "livre_correct",
+        "pct1",
+        over="total",
+    )
+    with pytest.raises(ValueError, match="does not exist"):
+        render_macros([macro], tmp_path)

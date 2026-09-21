@@ -55,13 +55,22 @@ class MacroNameError(ValueError):
 
 @dataclass(frozen=True)
 class Macro:
-    """One reported figure: where it is read from and how it is rounded."""
+    """One reported figure: where it is read from and how it is rounded.
+
+    `over` names a second column on the same row, and the figure becomes the
+    ratio of the two. The results CSVs hold counts, never rates, because a
+    count is what the evaluation observed and a rate is a reading of it that
+    depends on which denominator is meant. Declaring the denominator here
+    keeps both on the page from one measurement: the report says 315 of 317
+    and 99.4% without either being typed.
+    """
 
     name: str
     csv: str
     select: Mapping[str, str] = field(default_factory=dict)
     column: str = ""
     fmt: str = "text"
+    over: str = ""
 
 
 def escape(text: str) -> str:
@@ -132,7 +141,18 @@ def render_macros(macros: Iterable[Macro], results: str | Path) -> str:
             raise MacroNameError(f"{macro.name!r} is defined twice")
         seen.add(macro.name)
         row = _select(results / macro.csv, macro.select)
-        value = format_value(row[macro.column], macro.fmt)
+        if macro.over:
+            denominator = float(row[macro.over])
+            if denominator == 0:
+                raise ValueError(
+                    f"{macro.name}: {macro.over} is zero on the selected row, so "
+                    "the rate does not exist. A band with nothing in it has no "
+                    "accuracy, and reporting one would invent a denominator."
+                )
+            raw = str(float(row[macro.column]) / denominator)
+        else:
+            raw = row[macro.column]
+        value = format_value(raw, macro.fmt)
         lines.append(f"\\newcommand{{\\{macro.name}}}{{{value}}}")
     return "\n".join(lines) + "\n"
 
@@ -193,12 +213,54 @@ def write_generated(body: str, path: str | Path) -> None:
     path.write_text(_HEADER + body, encoding="utf-8")
 
 
-#: E5, passage localisation. The only evaluation whose CSV schema exists today,
-#: declared by `localisation.write_summary` and `localisation.write_sweep`.
-LOCALISATION_MACROS: tuple[Macro, ...] = (
-    Macro("locPiecesCertain", "localisation-summary.csv", {"confidence": "certain"}, "total", "int"),
-    Macro("locLocatedCertain", "localisation-summary.csv", {"confidence": "certain"}, "located", "int"),
-    Macro("locLivreCorrectCertain", "localisation-summary.csv", {"confidence": "certain"}, "livre_correct", "int"),
-    Macro("locChapterScoreableCertain", "localisation-summary.csv", {"confidence": "certain"}, "chapter_scoreable", "int"),
-    Macro("locChapterCorrectCertain", "localisation-summary.csv", {"confidence": "certain"}, "chapter_correct", "int"),
+#: E5, passage localisation. Still the only evaluation whose CSV schema exists;
+#: the recognition and correction registries are added when those evaluations
+#: produce their first CSV.
+#:
+#: Per cohort, never pooled. The gate was pre-registered on the workbook batch
+#: when it was all that existed, so scoring the two together would be moving the
+#: test set after seeing the numbers. `docs/notes/2026-09-21-e5-localisation.md`
+#: has the reasoning.
+COHORTS: tuple[str, ...] = ("catalogue", "workbook")
+
+
+def _localisation_macros(cohort: str) -> tuple[Macro, ...]:
+    """The certain-band figures for one cohort, counts and their rates.
+
+    Each rate names its own denominator, because the three the report needs are
+    different: pieces in the cohort, certain pieces for a Livre figure, and
+    pieces with a recoverable printed chapter number for a chapter figure.
+    """
+    summary = f"localisation-summary-{cohort}.csv"
+    certain = {"confidence": "certain"}
+    suffix = cohort.capitalize()
+    return (
+        Macro(f"locPieces{suffix}", summary, certain, "total", "int"),
+        Macro(f"locLocated{suffix}", summary, certain, "located", "int"),
+        Macro(f"locLivreCorrect{suffix}", summary, certain, "livre_correct", "int"),
+        Macro(
+            f"locLivreAccuracy{suffix}", summary, certain,
+            "livre_correct", "pct1", over="total",
+        ),
+        Macro(
+            f"locChapterScoreable{suffix}", summary, certain,
+            "chapter_scoreable", "int",
+        ),
+        Macro(
+            f"locChapterCorrect{suffix}", summary, certain,
+            "chapter_correct", "int",
+        ),
+        Macro(
+            f"locChapterAccuracy{suffix}", summary, certain,
+            "chapter_correct", "pct1", over="chapter_scoreable",
+        ),
+        Macro(
+            f"locChapterUnavailable{suffix}", summary, certain,
+            "chapter_unavailable", "int",
+        ),
+    )
+
+
+LOCALISATION_MACROS: tuple[Macro, ...] = tuple(
+    macro for cohort in COHORTS for macro in _localisation_macros(cohort)
 )
