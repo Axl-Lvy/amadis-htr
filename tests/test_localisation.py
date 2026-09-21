@@ -45,6 +45,15 @@ def test_certain_rows_score_livre_and_chapter_separately():
     assert certain.chapter_correct == 1        # only piece 1
 
 
+def test_a_prediction_with_no_printed_chapter_is_set_aside_not_failed():
+    preds = _preds()
+    preds[2] = Prediction(2, 4, None, 0.90)
+    certain = {s.confidence: s for s in summarise(_refs(), preds)}["certain"]
+    assert certain.chapter_scoreable == 1        # only piece 1 remains comparable
+    assert certain.chapter_correct == 1
+    assert certain.chapter_unavailable == 1      # piece 2 has no printed number
+
+
 def test_rows_with_no_reference_are_counted_but_never_scored():
     none = {s.confidence: s for s in summarise(_refs(), _preds())}["none"]
     assert none.total == 1

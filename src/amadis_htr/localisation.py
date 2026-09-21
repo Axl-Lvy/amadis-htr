@@ -34,6 +34,7 @@ class Summary:
     livre_correct: int
     chapter_scoreable: int
     chapter_correct: int
+    chapter_unavailable: int
 
 
 @dataclass(frozen=True)
@@ -89,6 +90,7 @@ def summarise(
     for confidence in CONFIDENCES:
         group = [r for r in references.values() if r.confidence == confidence]
         located = livre_correct = chapter_scoreable = chapter_correct = 0
+        chapter_unavailable = 0
         for ref in group:
             pred = predictions.get(ref.piece)
             if pred is None or pred.livre is None:
@@ -99,6 +101,13 @@ def summarise(
             if pred.livre == ref.livre:
                 livre_correct += 1
             if ref.chapter is None:
+                continue
+            if pred.chapter is None:
+                # `decodeChapterLabel` recovers a printed number from 61% of the
+                # labels. Where it recovers none there is nothing to compare, and
+                # counting that as a miss would score the printed edition's
+                # legibility rather than the matcher.
+                chapter_unavailable += 1
                 continue
             chapter_scoreable += 1
             if pred.livre == ref.livre and pred.chapter == ref.chapter:
@@ -111,6 +120,7 @@ def summarise(
                 livre_correct=livre_correct,
                 chapter_scoreable=chapter_scoreable,
                 chapter_correct=chapter_correct,
+                chapter_unavailable=chapter_unavailable,
             )
         )
     return rows
@@ -165,6 +175,7 @@ def write_summary(rows: Iterable[Summary], path: str | Path) -> None:
                 "livre_correct",
                 "chapter_scoreable",
                 "chapter_correct",
+                "chapter_unavailable",
             ]
         )
         for row in rows:
@@ -176,6 +187,7 @@ def write_summary(rows: Iterable[Summary], path: str | Path) -> None:
                     row.livre_correct,
                     row.chapter_scoreable,
                     row.chapter_correct,
+                    row.chapter_unavailable,
                 ]
             )
 
