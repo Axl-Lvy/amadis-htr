@@ -19,6 +19,71 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{microtype}
+\usepackage[a4paper,top=3cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
+
+% The palette and section furniture from the École Polytechnique internship
+% report template (polytechnique.sty, Merigoux), reused for its visual
+% identity only: no crest, no company logo, no French front matter, so that
+% pdfLaTeX-era package (babel, EPS logos) is not a dependency of a
+% LuaLaTeX/fontspec build.
+\usepackage{xcolor}
+\definecolor{reportblue}{RGB}{0,62,92}
+\definecolor{reportred}{RGB}{213,43,30}
+\definecolor{reportteal}{RGB}{0,104,128}
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\color{reportblue}\Large\bfseries\sffamily\filcenter}
+  {\thesection}
+  {0.5em}
+  {\MakeUppercase}
+  [{\color{reportred}\titlerule[1pt]}]
+\titleformat{\subsection}
+  {\color{reportteal}\large\scshape}
+  {\thesubsection}
+  {0.5em}
+  {}
+\titleformat{\subsubsection}
+  {\color{reportblue}\normalsize\scshape}
+  {\thesubsubsection}
+  {0.5em}
+  {\textbullet\ }
+
+% A plain title page in the same idiom as the template's \notitlepagelayout:
+% a ruled, uppercase, coloured title block, author and date below it. Called
+% from main.tex after \title/\author/\date, in place of the class's
+% \maketitle.
+%
+% \@title/\@author/\@date need catcode 11 on `@`. That catcode is set inside
+% every .cls/.sty while it loads, but this file reaches TeX through a plain
+% \input, which does not touch it, so `@` sits at its usual catcode 12
+% throughout: \@title then tokenises as \@ (the kernel's sentence-spacing
+% primitive) followed by four ordinary letters "title", and \@ run in
+% vertical mode is the "\spacefactor in vertical mode" crash this hunted
+% down on 2026-09-22 (it first looked like a \MakeUppercase/fontspec bug).
+\makeatletter
+\newcommand{\reportmaketitle}{%
+  \begin{titlepage}
+    \vspace*{4cm}
+    \begin{center}
+      {\color{reportblue}\rule{\textwidth}{1pt}}\\[0.4cm]
+      {\color{reportblue}\Huge\scshape \MakeUppercase{\@title}}\\[0.4cm]
+      {\color{reportblue}\rule{\textwidth}{1pt}}\\[3cm]
+      {\Large \@author}\\[0.5cm]
+      {\large \@date}
+    \end{center}
+    \vfill
+  \end{titlepage}
+}
+\makeatother
+
+% Translated from the template's "Déclaration relative au plagiat".
+\newcommand{\plagiarismdeclaration}{%
+  \section*{Statement of academic integrity}
+  I attest that I am the author of this work and that everything borrowed
+  from other sources is attributed to it and properly referenced.
+  \clearpage
+}
 
 % 16th-century quotation. Set in the source language and left unnormalised,
 % because the orthography is the object of study.
