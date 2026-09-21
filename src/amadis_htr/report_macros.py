@@ -306,8 +306,19 @@ THROUGHPUT_MACROS: tuple[Macro, ...] = (
     Macro("structMatchedA", "structure.csv", {"cohort": "A"}, "matched", "int"),
     Macro("structMissingA", "structure.csv", {"cohort": "A"}, "missing", "int"),
     Macro("structSpuriousA", "structure.csv", {"cohort": "A"}, "spurious", "int"),
-    Macro("structRecallA", "structure.csv", {"cohort": "A"}, "recall", "pct1"),
-    Macro("structPrecisionA", "structure.csv", {"cohort": "A"}, "precision", "pct1"),
+    # Named for what they measure. The detector's chapter decisions were
+    # hand-corrected before calibration ran, 128 promotions and 217
+    # demotions over family A, so these are not the detector unaided and a
+    # sentence citing them cannot say they are without the macro name
+    # contradicting it. docs/notes/2026-09-22-structural-figures-are-hand-checked.md
+    Macro(
+        "structRecallHandCheckedA", "structure.csv", {"cohort": "A"},
+        "recall", "pct1",
+    ),
+    Macro(
+        "structPrecisionHandCheckedA", "structure.csv", {"cohort": "A"},
+        "precision", "pct1",
+    ),
 )
 
 

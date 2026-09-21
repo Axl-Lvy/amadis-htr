@@ -223,6 +223,15 @@ family A's numerator behind a denominator two thirds of which never had a table 
 contents, and `structure.csv` has no `all` row so that the macro to write it does not
 exist.
 
+**Those two rates are hand-checked, and the section may not call them the system's.**
+Each book's `corrections.json` holds chapter decisions a reader made by hand, 128
+promotions and 217 demotions over family A, and calibration ran after them. The macros
+are named `\structRecallHandCheckedA` and `\structPrecisionHandCheckedA` so that a
+sentence claiming otherwise contradicts itself.
+`docs/notes/2026-09-22-structural-figures-are-hand-checked.md` bounds the difference
+and says what would settle it. The counts beside them, 587 printed chapters and 580
+matched, are what they say they are.
+
 **Inputs.** `eval/results/*.csv` by way of `report/generated/`. Figures from
 `figures/*.py`. Nothing typed.
 
