@@ -1,9 +1,11 @@
-"""Seeded stratified sampling of the out-of-domain gold pages.
+"""Seeded stratified sampling of the gold pages.
 
-The frame is gated on `data/gold/splits/training-pages.csv`, derived from the
-recovered `train.lst`. Some Amadis de Gaule pages are probably in the training
-corpus, so the sampler refuses to run without that file rather than quietly
-sampling a contaminated frame.
+The frame is every page of both works, because both are the target domain: the
+model exists to read *Amadis de Gaule* and the *Trésor des Amadis*, and pages of
+either are fair to sample. The one thing a scored page may not be is a page the
+model trained on, so the sampler takes the pages it saw and drops them.
+`data/gold/splits/training-pages.csv` lists those 487 pages, all of them
+*Trésor* T.1.
 """
 
 import csv
@@ -11,10 +13,6 @@ import random
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
-
-
-class TrainingContaminationError(RuntimeError):
-    """Raised when the training page list is absent, so contamination is unknown."""
 
 
 @dataclass(frozen=True)
@@ -30,17 +28,10 @@ class Candidate:
         return f"{self.family}/{self.provenance}"
 
 
-def excluded_livres(path: str | Path) -> set[int]:
-    """Every Livre that contributed a page to training."""
-    path = Path(path)
-    if not path.exists():
-        raise TrainingContaminationError(
-            f"{path} is missing. Derive it from the recovered train.lst before "
-            "sampling: without it there is no way to know which Livres the model "
-            "already saw."
-        )
+def pages_the_model_saw(path: str | Path) -> set[str]:
+    """Every page id in the training and validation split."""
     with open(path, encoding="utf-8", newline="") as handle:
-        return {int(row["livre"]) for row in csv.DictReader(handle) if row["livre"]}
+        return {row["page_id"] for row in csv.DictReader(handle) if row["page_id"]}
 
 
 def sample(
@@ -48,10 +39,10 @@ def sample(
     *,
     per_stratum: int,
     seed: int,
-    excluded: set[int],
+    seen: frozenset[str] | set[str] = frozenset(),
 ) -> list[Candidate]:
     """Draw up to `per_stratum` pages from each stratum, reproducibly."""
-    eligible = [c for c in candidates if c.livre not in excluded]
+    eligible = [c for c in candidates if c.page_id not in seen]
 
     strata: dict[str, list[Candidate]] = {}
     for candidate in eligible:

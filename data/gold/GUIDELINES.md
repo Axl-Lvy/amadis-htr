@@ -61,8 +61,8 @@ figure.
 
 ## Before any page is opened
 
-`data/gold/splits/training-pages.csv` must exist, derived from the recovered
-`train.lst`. The sampler refuses to run without it, because the Transkribus
-export lists collections of *Amadis de Gaule* material alongside the *Trésor*,
-so some Livres may already be in the training corpus and a contaminated frame
-would be invisible.
+`data/gold/splits/training-pages.csv` lists the 487 pages the model read, all of
+them *Trésor des Amadis* T.1. The sampler subtracts them from the frame, so that
+no page is annotated and scored that the model was trained on. The frame is
+otherwise all 24 books: both works are the target domain, and nothing here is
+sampled to prove a generalisation claim.

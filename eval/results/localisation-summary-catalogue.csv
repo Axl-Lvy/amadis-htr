@@ -1,0 +1,5 @@
+confidence,total,located,livre_correct,chapter_scoreable,chapter_correct,chapter_unavailable
+certain,101,101,100,52,38,49
+conjecture,4,4,4,0,0,4
+uncertain,4,4,4,0,0,1
+none,3,3,0,0,0,0

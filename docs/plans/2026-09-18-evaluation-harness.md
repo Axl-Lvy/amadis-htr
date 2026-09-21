@@ -2213,6 +2213,33 @@ machine:
 | `data/gold/splits/training-pages.csv` | `page_id,livre` | the sampler, gate G3, and therefore the whole gold set |
 | `data/runs/matcher/alignments.csv` | `piece,livre,chapter,start,end,score` | E5, the summary and the threshold sweep |
 
+### What actually landed, 2026-09-20
+
+`data/gold/splits/training-pages.csv` landed with the header
+`page_id,livre,split`, one column wider than the plan's `page_id,livre`.
+`excluded_livres()` reads it through `csv.DictReader` and ignores the extra
+column, and the widening is what the artefacts turned out to require: the 48
+validation pages drove checkpoint selection, so they are as seen by the model
+as the 439 training pages are, and a file that named only the 439 would
+understate what the fine-tune read. `livre` is empty on all 487 rows, because
+no *Amadis de Gaule* page was in training. The derivation, the seed proof and
+the per-collection accounting are in
+`docs/notes/2026-09-20-artefact-recovery.md`.
+
+`data/runs/matcher/alignments.csv` landed on 2026-09-21 instead, once the
+go-ahead came. Its header is `piece,cohort,passage_id,livre,chapter,start,end,score`,
+two columns wider than the plan's. `cohort` separates the 341 passages the
+pre-registered gate was read on from the 118 imported later, which are never
+pooled with them, and `passage_id` makes every row auditable back to the
+database. `read_predictions()` reads by name, so the extra columns cost nothing.
+`summarise()` also gained `chapter_unavailable`. See
+`docs/notes/2026-09-21-e5-localisation.md`.
+
+Superseded on 2026-09-21: the sampler no longer refuses to run and no longer
+excludes a Livre. Both works are the target domain, so the frame is all 24 books
+minus the pages the model read, and `excluded_livres` became
+`pages_the_model_saw`. Task 8's tests were rewritten accordingly.
+
 ## After the harness, still before Monday
 
 Three things the recovery does not gate, done on 2026-09-18 on
