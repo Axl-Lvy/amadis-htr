@@ -8,10 +8,16 @@ works are the target domain, so nothing here is framed as in domain or out of do
 and E1 reports one CER per work. This file keeps that skeleton and says what each
 section contains, what it reads, and what it may not say.
 
-**The report cannot be written today.** E1 to E5 are unmeasured, no LaTeX engine is
-installed, and `eval/results/` is empty apart from the localisation reference. Six of
-the nine sections can be drafted now against material that exists. Section 6 cannot,
-and section 7 depends on it. Each section below carries its status.
+**The report cannot be written in full today.** E1 to E4 are unmeasured. Six of the
+nine sections can be drafted now against material that exists, and section 6 can be
+started rather than only outlined. Section 7 still depends on what section 6 does not
+yet have. Each section below carries its status.
+
+*Revised 2026-09-22.* Two of this paragraph's blockers are gone. Tectonic 0.17.0 is
+installed and `make all` builds the report and the deck from a clean checkout, and
+`eval/results/` now holds E5's four CSVs and E6's two, rendered into 33 macros by
+`eval/run_all.sh`. E5 and E6 are measured; the sentence above counted them as
+unmeasured because neither was when it was written.
 
 ## Open decisions, with the default taken if nothing overrides it
 
@@ -204,11 +210,18 @@ literature, no speculation about cause.
 | E5 | a Trésor extract can be located in the baseline text | piece, within a cohort. The workbook cohort of 341 is the gated one and the 118 later imports are reported beside it, never pooled | none published, so the pre-registered gate stands in | bootstrap over pieces | above 90% Livre accuracy proceeds, below roughly 80% stops the work, quoted verbatim in the pre-registration file |
 | E6 | descriptive only | book, page | none | none, these are counts | reported only where a log or stored artefact backs it |
 
-E6 has material today: 24 `run.json` files covering 14,111 pages with zero failures at
-1.441 s/page over 5.65 hours, and 24 `calibration.json` files carrying per-book
-structural recall and precision against the printed table of contents. Every one of
-those numbers still has to pass through a tested harness module and
-`eval/results/*.csv` before it reaches the page.
+E6 is measured. Its 48 records are frozen under `data/runs/ocr/`, and
+`src/amadis_htr/throughput.py` writes `throughput.csv` and `structure.csv` from them:
+14,111 pages over 24 books with zero failures, 1.441 s/page, 5.65 hours. Every figure
+reaches the page as a macro, none typed.
+
+**Structure is family A alone, and the report may not pool it.** Books 1 to 12 print a
+table of contents to calibrate against and books 13 to 24 do not, so their
+`calibration.json` carries no `match` block at all. Family A recalls 580 of its 587
+printed chapters at a precision of 77.4%. A corpus-wide structural figure would put
+family A's numerator behind a denominator two thirds of which never had a table of
+contents, and `structure.csv` has no `all` row so that the macro to write it does not
+exist.
 
 **Inputs.** `eval/results/*.csv` by way of `report/generated/`. Figures from
 `figures/*.py`. Nothing typed.

@@ -1,0 +1,21 @@
+{
+  "coherenceResolved": 0,
+  "device": "gpu",
+  "failures": [],
+  "input": "amadis-de-gaule-3.pdf",
+  "model": "amadis-ft.mlmodel",
+  "outDir": "book-3",
+  "pageRange": null,
+  "pagesFailed": 0,
+  "pagesRequested": 198,
+  "pagesRun": 198,
+  "pagesSkippedAsDone": 0,
+  "passages": 19,
+  "seconds": 285.9,
+  "sourcePages": 198,
+  "threadsPerWorker": 1,
+  "unresolvedAmbiguous": 0,
+  "wordsCorrected": 0,
+  "workers": 16,
+  "workingWidth": 2200
+}

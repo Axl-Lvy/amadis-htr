@@ -13,9 +13,10 @@ than silently keeping one of the two definitions.
 Rounding lives in `format_value` and nowhere else, so a number cannot be
 reported to three decimals in the text and two in a table.
 
-Only the localisation results have a schema today. The recognition and
-correction registries are added when those evaluations produce their first
-CSV, because a registry written ahead of the data is a guess about the data.
+Localisation (E5) and throughput (E6) have schemas and registries. Recognition
+and correction do not, and theirs are added when those evaluations produce
+their first CSV, because a registry written ahead of the data is a guess about
+the data.
 """
 
 import csv
@@ -91,6 +92,12 @@ def format_value(raw: str, fmt: str) -> str:
         return f"{int(float(raw)):d}"
     if fmt.startswith("num"):
         return f"{float(raw):.{int(fmt[3:])}f}"
+    if fmt.startswith("hours"):
+        # The CSV records elapsed seconds, because that is what the harness
+        # timed. Hours are the unit a reader thinks in, and the conversion is
+        # presentation, so it lives here with the rounding rather than as a
+        # second column restating the first.
+        return f"{float(raw) / 3600:.{int(fmt[5:])}f}"
     if fmt.startswith("pct"):
         places = int(fmt[3:])
         value = float(raw) * 100
@@ -263,4 +270,57 @@ def _localisation_macros(cohort: str) -> tuple[Macro, ...]:
 
 LOCALISATION_MACROS: tuple[Macro, ...] = tuple(
     macro for cohort in COHORTS for macro in _localisation_macros(cohort)
+)
+
+
+#: E6, throughput and structural quality. Descriptive only: these are the
+#: harness's own counts and timings, not a measurement against a reference, so
+#: no macro here is an accuracy.
+#:
+#: Structure is family A alone. Books 13 to 24 print no table of contents, so
+#: there is nothing to calibrate against and `structure.csv` has no row for
+#: them. A macro named for the whole corpus would put family A's figure behind
+#: the whole corpus's denominator.
+THROUGHPUT_MACROS: tuple[Macro, ...] = (
+    Macro("ocrBooks", "throughput.csv", {"cohort": "all"}, "books", "int"),
+    Macro("ocrPages", "throughput.csv", {"cohort": "all"}, "pages", "int"),
+    Macro("ocrPagesFailed", "throughput.csv", {"cohort": "all"}, "failed", "int"),
+    Macro("ocrHours", "throughput.csv", {"cohort": "all"}, "seconds", "hours2"),
+    Macro(
+        "ocrSecondsPerPage", "throughput.csv", {"cohort": "all"},
+        "seconds_per_page", "num3",
+    ),
+    Macro("ocrPassages", "throughput.csv", {"cohort": "all"}, "passages", "int"),
+    Macro("ocrPagesFamilyA", "throughput.csv", {"cohort": "A"}, "pages", "int"),
+    Macro("ocrPagesFamilyB", "throughput.csv", {"cohort": "B"}, "pages", "int"),
+    Macro(
+        "ocrSecondsPerPageFamilyA", "throughput.csv", {"cohort": "A"},
+        "seconds_per_page", "num3",
+    ),
+    Macro(
+        "ocrSecondsPerPageFamilyB", "throughput.csv", {"cohort": "B"},
+        "seconds_per_page", "num3",
+    ),
+    Macro("structBooksA", "structure.csv", {"cohort": "A"}, "books", "int"),
+    Macro("structChaptersA", "structure.csv", {"cohort": "A"}, "toc_chapters", "int"),
+    Macro("structMatchedA", "structure.csv", {"cohort": "A"}, "matched", "int"),
+    Macro("structMissingA", "structure.csv", {"cohort": "A"}, "missing", "int"),
+    Macro("structSpuriousA", "structure.csv", {"cohort": "A"}, "spurious", "int"),
+    Macro("structRecallA", "structure.csv", {"cohort": "A"}, "recall", "pct1"),
+    Macro("structPrecisionA", "structure.csv", {"cohort": "A"}, "precision", "pct1"),
+)
+
+
+#: Every registry with a measured CSV behind it, in the order they reach the
+#: page. `eval/render_macros.py` renders exactly this and the suite asserts the
+#: committed `macros.tex` matches, so a registry added here without rerunning
+#: the pipeline fails the suite rather than going unnoticed.
+REGISTRIES: tuple[tuple[Macro, ...], ...] = (
+    LOCALISATION_MACROS,
+    THROUGHPUT_MACROS,
+)
+
+#: Flattened, which is what a renderer wants.
+ALL_MACROS: tuple[Macro, ...] = tuple(
+    macro for registry in REGISTRIES for macro in registry
 )

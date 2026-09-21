@@ -1,0 +1,217 @@
+{
+  "book": 24,
+  "designations": {
+    "found": 71,
+    "highest": 79,
+    "misread": [
+      2,
+      46
+    ],
+    "missing": [
+      2,
+      6,
+      8,
+      22,
+      25,
+      45,
+      46,
+      47
+    ],
+    "pages": {
+      "1": 17,
+      "10": 137,
+      "11": 148,
+      "12": 154,
+      "13": 162,
+      "14": 171,
+      "15": 182,
+      "16": 195,
+      "17": 206,
+      "18": 219,
+      "19": 231,
+      "20": 246,
+      "21": 252,
+      "23": 275,
+      "24": 284,
+      "26": 306,
+      "27": 322,
+      "28": 341,
+      "29": 351,
+      "3": 50,
+      "30": 355,
+      "31": 370,
+      "32": 379,
+      "33": 393,
+      "34": 399,
+      "35": 406,
+      "36": 420,
+      "37": 427,
+      "38": 436,
+      "39": 445,
+      "4": 74,
+      "40": 452,
+      "41": 463,
+      "42": 474,
+      "43": 484,
+      "44": 498,
+      "48": 543,
+      "49": 552,
+      "5": 80,
+      "50": 564,
+      "51": 574,
+      "52": 581,
+      "53": 592,
+      "54": 603,
+      "55": 613,
+      "56": 620,
+      "57": 628,
+      "58": 644,
+      "59": 650,
+      "60": 663,
+      "61": 676,
+      "62": 685,
+      "63": 697,
+      "64": 710,
+      "65": 719,
+      "66": 728,
+      "67": 737,
+      "68": 746,
+      "69": 753,
+      "7": 97,
+      "70": 763,
+      "71": 772,
+      "72": 783,
+      "73": 793,
+      "74": 802,
+      "75": 813,
+      "76": 827,
+      "77": 838,
+      "78": 847,
+      "79": 859,
+      "9": 123
+    },
+    "undesignated": [
+      6,
+      8,
+      22,
+      25,
+      45,
+      47
+    ],
+    "unreadable": []
+  },
+  "family": "B",
+  "out": "book-24",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 4
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 6
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 7
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 8
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 10
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 12
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 16
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 871
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 872
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 873
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 874
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 891
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 892
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 893
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 894
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 895
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 896
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 898
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 899
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 900
+      }
+    ],
+    "pages": 900,
+    "roleCounts": {
+      "body": 27651,
+      "footer": 281,
+      "header": 1144,
+      "title": 578
+    },
+    "unresolvedAmbiguous": 1
+  }
+}

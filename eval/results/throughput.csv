@@ -1,0 +1,4 @@
+cohort,books,pages,failed,seconds,seconds_per_page,passages
+A,12,3658,0,5521.6,1.509459,901
+B,12,10453,0,14808.1,1.416636,1242
+all,24,14111,0,20329.7,1.440699,2143

@@ -1,0 +1,547 @@
+{
+  "book": 6,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 40,
+        "expectedPage": 103,
+        "folio": 45,
+        "number": 7
+      },
+      {
+        "actualPage": 72,
+        "expectedPage": 53,
+        "folio": 20,
+        "number": 21
+      },
+      {
+        "actualPage": 148,
+        "expectedPage": 133,
+        "folio": 60,
+        "number": 31
+      },
+      {
+        "actualPage": 168,
+        "expectedPage": 153,
+        "folio": 70,
+        "number": 35
+      },
+      {
+        "actualPage": 184,
+        "expectedPage": 51,
+        "folio": 19,
+        "number": 38
+      },
+      {
+        "actualPage": 229,
+        "expectedPage": 213,
+        "folio": 100,
+        "number": 52
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.809,
+        "startPage": 15,
+        "title": "Ensuyt la Table du Sixiesme LiURE D'AMADIS DE GAULE Et premierement. Omme Perion de Gaule, second filz d'Amadis, partit de Londres, avecqu' sept aultres jeunes Princes, esperantz tirer en Yrlande, pour recevoir l'ordre de chevalerie, par la main du vieil Roy Cildadan : & de ce qu'il leur survint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 1.0,
+        "startPage": 18,
+        "title": "Fueillet premier. Comme la damoyselle conduict Perion de Gaule, en lieu, ou il receut l'ordre de chevalerie, & de ce qu'il luy advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.955,
+        "startPage": 22,
+        "title": "ii. Comme Perion de Gaule, vaincquit Alpatrafie Duc d'Orcalie, qui maintenoit samye estre plus belle que toutes les aultres dames, ou damoyselles du monde."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.944,
+        "startPage": 25,
+        "title": "Comme Lisuart, Florestan, & les aultres, navigantz par mer en la queste de Perion, le vaisseau dans lequel estoient Vaillades & Quedragant, fut jecté par tourmente en l'Isle du Geant Argamont : contre lequel ilz eurent combat, & le vaincquirent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.962,
+        "startPage": 30,
+        "title": "Comme la barque, ou navigeoient Perion de Gaule, surnommé le Chevalier de l'Esphere, & Alquise, vint surgir au pied d'une tresbelle Isle : & des adventures, qui luy advindrent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.92,
+        "startPage": 36,
+        "title": "Comme le vaisseau, auquel estoient Lisuart, Florestan, Parmenir, & Galvanes, feut jecté pres la grande cité de Trebisonde : & des propos qu'ilz eurent avecqu' l'Empereur, & les dames."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.826,
+        "startPage": 40,
+        "title": "Comme une damoyselle estrangere, arriva vers l'Empereur de Trebisonde, demandant un don à l'Infante Onolorie, qu'elle luy octroya trop legerement, pour sen repentir tout à loysir."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.938,
+        "startPage": 43,
+        "title": "Comme le Duc d'Ortilense, donna la bataille au Roy de la Breigne : & de ce qu'ilen advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.857,
+        "startPage": 47,
+        "title": "fveillet Xy. Comme Lisuart fut conduict vers Melie la magicienne, & du mauluais traictement qu'elle luy feit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.944,
+        "startPage": 50,
+        "title": "Comme Perion de Gaule, surnommé le Chevalier de l'Esphere, rencontra l'Infante Tiriaxe. & de maintes belles adventures, qui luy advindrent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.944,
+        "startPage": 54,
+        "title": "Comme le Chevalier de l'Esphere, & ses compaignons, rencontrerent le Souldan de Liquie : & du combat qui feut entre eulx."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 0.889,
+        "startPage": 60,
+        "title": "XX. Comme le Chevalier de l'Esphere, Abies d'Vrlande, & languines, arriajii verent en verent en Constantinople : & du bon recueil que leur feit l'Empereur."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.824,
+        "startPage": 63,
+        "title": "Comme Garinter, & Perion se combatirent contre le Roy de Sibernie, & ses nepveux, qu'ilz vaincquirent en plain camp."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.955,
+        "startPage": 66,
+        "title": "Comme le duc d'Ortilense, ayant desconfit le Roy de la Breigne, retourna à Trebisonde : & de l'arrivée d'Alquife à la court de l'Empereur"
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 1.0,
+        "startPage": 69,
+        "title": "Comme l'Empereur de Trebisonde s'embarqua, pour aller contre le Roy Armato, & la descente des Payens en Constantinople. chapitre xy. fueillet xxviiiComme par le moyen de l'Infante Gradafilée, Lisuart eut la vie saulue, & r'entra en Constantinople."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.818,
+        "startPage": 76,
+        "title": "Comme Melie sceut la perte de Lisuart, & du desplaisir qu'elle, & Armato eurent, pource qu'il s'estoit saulvé en Constantinople : & de ce qu'il enadvint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.933,
+        "startPage": 80,
+        "title": "Comme Lisuart receut l'ordre de chevalerie, & des grandz merveilles & adventures qui advindrent en ce jour mesmes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.786,
+        "startPage": 82,
+        "title": "Comme les Payens delibererent assaillir la ville, & de l'effort merveilleux qu'ilz y feirent pour la forcer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 1.0,
+        "startPage": 87,
+        "title": "Du secours qui arriva aux ennemys, & de la grand'flotte de Chrestiens qui vindrent lever le siege de Constantinople."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.833,
+        "startPage": 72,
+        "title": "Comme les Roys, & seigneurs, dames, & damoyselles, enchantez en l'Isle Ferme, se resveillerent. & de leur navigation en Thrace, par le moyen d'Alquife."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.962,
+        "startPage": 102,
+        "title": "Xix. Comme les princes Payens, sassemblerent en conseil, pour veoir ce qu'ilz avoient à faire, sçachants le grand secours des Chrestiens arrivé : & de la resolution qu'ilz prindrent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.938,
+        "startPage": 111,
+        "title": "Comme l'Empereur de Trebisonde, Amadis, & la Royne Calafie combatirent les Roys Armato, Grifilant, & la Royne Pintiquinestre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 0.957,
+        "startPage": 116,
+        "title": "Comme Almirix de Liquie, feut esleu chef de l'armée des Payens : & d'un Nain qu'il envoya en l'ost des Chrestiens vers la Royne Pintiquinestre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 25,
+        "score": 1.0,
+        "startPage": 120,
+        "title": "Du combat qui feut entre le Chevalier de la vraye Croix, & le Roy de l'Isle Geante, la Royne Pintiquinestre, & Almirix de Liquie, chef de l'armée Payenne : & des propos qu'eut Gradafilée à Lisuart, pour la salvation de son pere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 0.769,
+        "startPage": 124,
+        "title": "Comme les princes Payens, apres avoir esté simal menez, envoyerent demander tresves aux princes de la Chrestienté, qui les leur refuserent : & de ce quil de ce qu'il enadvint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.95,
+        "startPage": 127,
+        "title": "De la cruelle bataille, qui feut entre les Chrestiens, & Payens, tant par mer que par terre : & de ce qu'il en succeda."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.929,
+        "startPage": 133,
+        "title": "Comme les princes Chrestiens, venuz au secours de l'Empereur de Constantinople, delibererent retourner en leur pais : & de l'entreprinse que feirent aulcuns chevaliers, pour aller conduire la Royne Mabile."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 1.0,
+        "startPage": 141,
+        "title": "Comme Amadis, Esplandian, Perion, & Lisuart, retournerent en Constantinople, laissants la Royne Mabile en la compaignie des aultres chevaliers, qui la conduirent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.667,
+        "startPage": 144,
+        "title": "fueillet laiijiComme Lisuart, ayant receu la letre de l'Infante Onolorie, partit secretement de Constantinople : & du retour des princes Chrestiens en leur pais."
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.931,
+        "startPage": 148,
+        "title": "fveillet luy, Comme Lisuart cheminant, ainsi que fortune le guidoit, au bout de quelque temps entra en une barque : & du combat qu'il eut avecqu'aulcuns coursaires, qui emmenoient Alquise prisonniere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.773,
+        "startPage": 154,
+        "title": "vii. Comme Lisuart print port en l'Isle des Serpentz, ou, par tromperie d'une damoyselle, entra en un chasteau, auquel il feut emprisonné."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.923,
+        "startPage": 160,
+        "title": "Comme Gastilles & Tartarie, s'embarquerent pour aller en Constantinople, porter la teste du Serpent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.917,
+        "startPage": 163,
+        "title": "Comme le Chevalier Solitaire, navigant en mer, feut jecté par fortune au pied d'une roche, en laquelle Amadis, Oriane & aultres estoient prisonniers, qu'il delivra."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 0.826,
+        "startPage": 168,
+        "title": "Comme l'Empereur de Trebisonde avecqu' sa flotte, print port en ses pais : & des propos qu'eut la princesse Gricilerie, avecqu' le Chevalier de l'Esphere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.96,
+        "startPage": 173,
+        "title": "vii. Comme le Chevalier de l'Esphere suyvit la duchesse d'Austriche, pour laquelle il eut combat contre deux de ses oncles, qui luy avoient tollu ses pais."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 1.0,
+        "startPage": 180,
+        "title": "Comme le Chevalier de l'Esphere, força la ville de Vienne en Austriche, & la rendit paisible à la duchesse, avecqu' tout le pais."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 0.971,
+        "startPage": 184,
+        "title": "Comme sur la fin de l'aunée, que le Chevalier Solitaire sortit de Constantinople (apres avoir mis à fin maintes estranges adventures) rencontra le Chevalier de l'Esphere, avecqu' lequel il eut combat, se mescognoissants l'un l'aultre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 40,
+        "score": 0.867,
+        "startPage": 194,
+        "title": "y. Comme les chevaliers prindrent congé de leur hoste, & r'entrants en mer, feurent jectez en la grand'Bretaigne : ou ilz eurent combat contre Florestan & Parmenir, ne les cognoissant point. sueillet. Comme le Chevalier Solitaire, & l'Alleman, traversants la forest aveeAlquise, Dinerple le filz de l'Empereur de Rome, envoya prier le Solitaire de rompre une lance avecques luy, pour l'amour des dames."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 0.857,
+        "startPage": 197,
+        "title": "fucillet xe. Comme le Solitaire & l'Alleman, envoyerent Alquife vers le Roy Amadis : & du propos qu'elle luy tint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.923,
+        "startPage": 199,
+        "title": "Comme le Solitairé & l'Alleman, requisrent au Roy leur permettre tenir les rangz, contre tous ceulx, qui vouldroient venir jouster, & rompre lances, par l'espace de huict jours."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 0.955,
+        "startPage": 202,
+        "title": "Comme estant le Roy Amadis, accompaigné de maintz preudhommes, arriva en court le prince Olorius d'Espaigne, pour le supplier luy donner chevalerie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 44,
+        "score": 0.938,
+        "startPage": 205,
+        "title": "t xciiji. Comme Urgande arriva par mer à Fenuse, & de la frayeur qu'elle donna à ceulx de la ville"
+      },
+      {
+        "matchedOn": "title",
+        "number": 45,
+        "score": 0.933,
+        "startPage": 208,
+        "title": "fveillet. xeyi. Comme les deux tenants, emporterent l'honneur des deux, trois, quatre, cinqu, & sixiesmes journées du tournay."
+      },
+      {
+        "matchedOn": "title",
+        "number": 46,
+        "score": 1.0,
+        "startPage": 210,
+        "title": "Comme au sortir du soupper du Roy Amadis, entra une damoyselle, qui luy apporta un messaige, de la part de deux chevaliers estranges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 47,
+        "score": 0.929,
+        "startPage": 213,
+        "title": "fveillet. xeviil. Comme les deux tenants emporterent l'honneur de la septiesme journée : & de ceulx, qu'ilz abbatirent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 48,
+        "score": 0.957,
+        "startPage": 215,
+        "title": "fveillet c. Comme les deux tenants, emporterent l'honneur de la huictiesme, & derniere journée : & de l'arrinée du Chevalier Verd, par lequel ilz feurent desarçonnez, & Amadis mesmes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.926,
+        "startPage": 218,
+        "title": "Comme par le moyen d'Urgande, les deux tenants feurent cogneuz : & des mariagés de Perion filz de Galaor, avecqu' la Royne Pintiquinestre, & du saige Alquif, avecqu' Urgande la descogneue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 50,
+        "score": 0.938,
+        "startPage": 220,
+        "title": "Comme un jour de sainct Jean, le Roy Amadis devisant entre plusieurs grandz seigneurs, se presenta le gouverneur de Cicile, menant quant & luy un Roy, & une Royne enchantez : & de ce qu'il en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 51,
+        "score": 0.875,
+        "startPage": 227,
+        "title": "Comme un chevalier vint deffier Amadis, de la part du Roy de la Saulvaigine : & du retour de ceulx qui estoient venuz nouvellement en court."
+      },
+      {
+        "matchedOn": "title",
+        "number": 52,
+        "score": 0.75,
+        "startPage": 229,
+        "title": "Comme Lisuart & ses compaignons feurent jectez par tormente en Espaigne : & du secours qu'ilz feirent au Roy don Brian de Moniaste, contre le Roy Miramamolin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 53,
+        "score": 0.944,
+        "startPage": 231,
+        "title": "vili. Comme les deux ostz se rencontrerent, & de l'ayde que feirent Lisuart, & ses compaignons au Roy des Espaignes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 54,
+        "score": 0.821,
+        "startPage": 235,
+        "title": "Comme le vaisseau ounavigcoient Lisuart & ses compaignons, seutiecépar cté par tormente en l'Ile des Singes, ou ilz veirent merveilles : & du recueil que leur feirent Alquif, & Urgande la descogneue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 56,
+        "score": 0.957,
+        "startPage": 244,
+        "title": "Comme Lisuart, & ses compaignons arriverent en Trebisonde : & du recueil, qui leur feut fait par l'Empereur, & les dames.  chapitre lufueillet. cxilli. Comme les cinq chevaliers, feurent faire la reverance à l'Empereur : & des propos que Perion & Lisuart eurent avecqu' les deux princesses, à la fenestre treillissée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 57,
+        "score": 0.905,
+        "startPage": 248,
+        "title": "fveillet, exve Comme l'Empereur de Trebisonde tenant court ouverte, entra Fristion, avecqu' son equippaige : & comme Lisuart & Onolorie, meisrent fin a ceste adventure."
+      },
+      {
+        "matchedOn": "title",
+        "number": 58,
+        "score": 0.925,
+        "startPage": 252,
+        "title": "fveillet exviiComme un messaiger apporta nouvelles à l'Empereur de Trebisonde, que le Roy de la Saulvaigine, & ses deux freres estoient arrivez en ses pais, pour combatre Lisuart, Perion, & Olorius, suyvant ce qu'ilz avoient accordé en la presence du Roy Amadis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 59,
+        "score": 0.889,
+        "startPage": 255,
+        "title": "Comme Lisuart, Perion, & Olorius, entrerent au camp : & du combat, qu'ilz eurent contre Sulpicie, Roy de la Saulvaigine, Graffante, & Bostroffe."
+      },
+      {
+        "matchedOn": "title",
+        "number": 60,
+        "score": 0.964,
+        "startPage": 259,
+        "title": "fueillet exvi. Comme, apres que les trois chevaliers feurent guairiz de leurs playes, Lisuart & Perion allerent parler à leurs dames aymées, à la fenestre du jardin, & de ce qui en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 62,
+        "score": 1.0,
+        "startPage": 262,
+        "title": "fveillet exxiliComme l'Empereur & Perion, chassants en la forest, trouverent une damoyselle pleurant, & de ce qu'il en advint. chapitre luifueillet. cxviiii. Comme l'Empereur & Perion de Gaule, feurent arrestez, par la trahyson de la damoyselle qui les conduysoit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 63,
+        "score": 0.952,
+        "startPage": 266,
+        "title": "Comme Lisuart, & Olorius feurent pris prisonniers, par ceulx mesmes qui arresterent l'Empereur & Perion, & depuis escartez sans sçavoir ou, on les conduisoit."
+      }
+    ],
+    "missing": [],
+    "passages": 62,
+    "precision": 0.952,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 21,
+        "startPage": 92,
+        "title": "Lomme les Roys, & seigneurs, dames, & damoyselles, enchantez en l'Isle Ferme, se resveillerent. & de leur navigation en Thrace, par le moyen d'Alquife."
+      },
+      {
+        "number": 60,
+        "startPage": 264,
+        "title": "omme l'Empereur & Perion, de Gaule, seurentarreslez, par la trahyson de la damoyselle quiles conduysoit. Chapirre LXII."
+      },
+      {
+        "number": 62,
+        "startPage": 268,
+        "title": "Comme lImperatrix feut advertie, que l'Empereur Perion, Olorius, & Lisuart estoient perduz : & de l'ennuy qu'en prindrent Onolorie & Gricilerie, mesmes pour se sentir grosses d'enfants."
+      }
+    ],
+    "tocChapters": 59,
+    "unscorable": 0
+  },
+  "out": "book-6",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 13
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 14
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 271
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 272
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 273
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 275
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 276
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 277
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 278
+      }
+    ],
+    "pages": 279,
+    "roleCounts": {
+      "body": 9803,
+      "footer": 133,
+      "header": 344,
+      "title": 320
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 59,
+    "missingFolios": 17,
+    "repairedNumbers": 7,
+    "sequenceBreaks": 7,
+    "suspectFolios": 19
+  }
+}

@@ -188,6 +188,9 @@ def test_the_committed_results_regenerate_from_the_committed_inputs(tmp_path):
         write_sweep(sweep(scoped, predictions, SWEEP_THRESHOLDS), sweep_out)
         for produced in (summary, sweep_out):
             committed = REPO / "eval/results" / produced.name
-            assert produced.read_text(encoding="utf-8") == committed.read_text(
-                encoding="utf-8"
-            ), f"{produced.name} does not match the committed copy"
+            # read_bytes, not read_text: text mode normalises newlines, and
+            # csv.writer terminates rows with CRLF, so a checkout that rewrote
+            # them would pass in text mode while `git diff` showed drift.
+            assert produced.read_bytes() == committed.read_bytes(), (
+                f"{produced.name} does not match the committed copy"
+            )

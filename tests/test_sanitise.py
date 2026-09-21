@@ -1,6 +1,6 @@
 import json
 
-from amadis_htr.sanitise import sanitise_workflow, scrub_text
+from amadis_htr.sanitise import sanitise_workflow, scrub_text, scrub_run_paths
 
 
 def test_static_data_is_removed_entirely():
@@ -143,3 +143,37 @@ def test_code_node_source_is_never_touched():
     doc = {"name": "x", "nodes": [{"name": "Prep coherence",
                                    "parameters": {"jsCode": code}}]}
     assert sanitise_workflow(doc)["nodes"][0]["parameters"]["jsCode"] == code
+
+
+def test_run_paths_are_reduced_to_basenames():
+    # The basename is the whole of what the method needs: which source PDF was
+    # read and which model read it. The directories above it say where one
+    # machine keeps its corpus and that the model came off a private checkout.
+    scrubbed = scrub_run_paths(
+        {
+            "input": "/home/someone/Documents/Amadis de Gaule/amadis-de-gaule-3.pdf",
+            "outDir": "/home/someone/Documents/Amadis de Gaule/ocr/book-3",
+            "model": "/home/someone/IdeaProjects/home-lab/services/ocr/amadis-ft.mlmodel",
+            "out": "/home/someone/Documents/Amadis de Gaule/ocr/book-3",
+            "pagesRun": 198,
+        }
+    )
+    assert scrubbed["input"] == "amadis-de-gaule-3.pdf"
+    assert scrubbed["outDir"] == "book-3"
+    assert scrubbed["model"] == "amadis-ft.mlmodel"
+    assert scrubbed["out"] == "book-3"
+    assert scrubbed["pagesRun"] == 198
+
+
+def test_an_unknown_field_is_left_visible_rather_than_rewritten():
+    # A field a later harness version adds should arrive unscrubbed, so a
+    # reviewer sees it, instead of being silently reduced by a rule written
+    # before it existed.
+    scrubbed = scrub_run_paths({"newPath": "/home/someone/secret/place"})
+    assert scrubbed["newPath"] == "/home/someone/secret/place"
+
+
+def test_scrubbing_does_not_mutate_the_record_it_was_given():
+    original = {"input": "/home/someone/a/b.pdf"}
+    scrub_run_paths(original)
+    assert original == {"input": "/home/someone/a/b.pdf"}

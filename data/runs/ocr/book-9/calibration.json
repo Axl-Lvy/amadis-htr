@@ -1,0 +1,661 @@
+{
+  "book": 9,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 30,
+        "expectedPage": 41,
+        "folio": 11,
+        "number": 3
+      },
+      {
+        "actualPage": 96,
+        "expectedPage": 319,
+        "folio": 150,
+        "number": 55
+      },
+      {
+        "actualPage": 102,
+        "expectedPage": 107,
+        "folio": 44,
+        "number": 15
+      },
+      {
+        "actualPage": 153,
+        "expectedPage": 157,
+        "folio": 69,
+        "number": 26
+      },
+      {
+        "actualPage": 191,
+        "expectedPage": 363,
+        "folio": 172,
+        "number": 66
+      },
+      {
+        "actualPage": 197,
+        "expectedPage": 381,
+        "folio": 181,
+        "number": 69
+      },
+      {
+        "actualPage": 221,
+        "expectedPage": 177,
+        "folio": 79,
+        "number": 30
+      },
+      {
+        "actualPage": 230,
+        "expectedPage": 237,
+        "folio": 109,
+        "number": 41
+      },
+      {
+        "actualPage": 274,
+        "expectedPage": 283,
+        "folio": 132,
+        "number": 52
+      },
+      {
+        "actualPage": 312,
+        "expectedPage": 359,
+        "folio": 170,
+        "number": 67
+      },
+      {
+        "actualPage": 316,
+        "expectedPage": 377,
+        "folio": 179,
+        "number": 68
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.579,
+        "startPage": 21,
+        "title": "Ensuyt la Table des matieres Et premierement. Le l'avanture de la belle Silvie, & comme le berger Darinel devint amoureux d'elle, & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.824,
+        "startPage": 26,
+        "title": "Fueillet l. Comme dom Florisel & Garinter trouverent Darinel faisant ses complaintes, & comme au recit qu'il leur fit de la beauté de Silvie, ilz se mirent à la queste d'elle : & du combat qu'eurent ces deux Princes pourson amour."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.958,
+        "startPage": 30,
+        "title": "Comme dom Florisel devint berger, pour mieux avoir moyen de s'acointer de la belle Silvie : & comme elle fut frappée de l'amour du prince Anastarax."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.96,
+        "startPage": 45,
+        "title": "Comme le prince Anaxartes & l'infante Alastraxerée nasquirent de la royne Lahara, & des lettres qu'elle envoya à Trebisonde & ailleurs, pour solemniser la joye de leur naissance."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.864,
+        "startPage": 50,
+        "title": "Comme le prince Anaxartes & la princesse Alastraxerée, cheminans au pais de Perse trouverent une avanture fort estrange, & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 1.0,
+        "startPage": 57,
+        "title": "fveillet xy. Comme le prince Anaxartes & Alastraxerée sa sœur, se departirent d'ensemble, & de ce qui avint depuis à la belle Infante."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.833,
+        "startPage": 64,
+        "title": "Comme le prince Anaxartes, apres avoir delaissé l'infante Alastraxerée sa sœur, combatit deux geans, avecqu' plusieurs autres Chevaliers qu'il vaincquit, & delivra l'infante Barraxa."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.9,
+        "startPage": 74,
+        "title": "Comme le prince Anaxartes & sa sœur (apres qu'ilz eurent conquis l'inexpugnable vallée du lac aux Rochers) envoyerent embassadeurs & lettres aux gouverneurs & habitans de la prouince, pour recevoir d'eux le serment de fidelité."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.962,
+        "startPage": 77,
+        "title": "Comme dom Florisel & Silvie sortirent de l'enfer d'Anastarax, & de là vindrent au port de Jaffe, ou ilz s'embarquerent pour tirer ou estoit l'avanture du mirouer d'Amours."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.818,
+        "startPage": 81,
+        "title": "Comme dom Florisel de Niquée, Silvie & leur compagnie, arriverent au chasteau ou estoit l'avanture du mirouenr d'Amours, & plusieurs autres choses estranges, ausquelles il mist fin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.708,
+        "startPage": 86,
+        "title": "Comme dom Florisel combatit le pere de Furio Cornelio, & deux autres geaus qu'il vaincquit dans le chasteau du mirouer d'Amours, & comme Silvie acheva l'avanture."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.952,
+        "startPage": 94,
+        "title": "Du combat qu'eut dom Florisel contre un Chevalier Gregeoys pour l'amour de Silvie, & d'unes lettres que luy envoya Arlande princesse de Thrace, par yne sienne Damoyselle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 15,
+        "score": 0.897,
+        "startPage": 102,
+        "title": "Des complaintes & regretz doloreux que fit Arlande, ayant leu les lettres de dom Florisel, & comme elle & sa cousine Arlinde se mirent en queste pour le trouver.  chapitre xy. fueillet xliComme la princesse Arlande descouvrit son amour à dom Florisel, & de la subtile invention dont elle usa pour jouyr d'iceluy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.964,
+        "startPage": 112,
+        "title": "Du cruel comhat qu'eut dom Florisel contre un geant corsaire & six Chevaliers, qui avoient enlevé Silvie & Arlinde, au moyen dequoy la tromperie d'Arlande princesse de Thrace fut descouverte"
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 1.0,
+        "startPage": 116,
+        "title": "Comme dom Florisel & Silvie estans en queste de la princesse Alastraxerée, se destournerent pour aller au chasteau de la cruauté de Manatiles roy d'Epire."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.947,
+        "startPage": 121,
+        "title": "Comme allant dom Florisel au chasteau de la cruauté de Manatiles, fut assaill, par douze Chevaliers qui gardoient le passage, lesquelz il vaincquit : puis entra au chasteau avecques Silvie, ou ilz virent l'avanture du prince Arpilior &y de l'infante Galatée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.929,
+        "startPage": 127,
+        "title": "Comme le prince Arpilior & l'infante Galatée furent avertis, par dom Florisel & Silvie, de la tromperie de leurs ymages, au moyen dequoy ilz furent desenchantez & mis hors de peine."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.973,
+        "startPage": 131,
+        "title": "Comme le roy Manatiles sceut que dom Florisel eftoit dans son chasteau ou il le combatit, acompagné de plusieurs Chevaliers qui furent tous vaincuz, & comme apres cela le prince Arpilior espousa l'infante Galatée, au grand contentement & resjouyssance de tout le peuple d'Epire."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.925,
+        "startPage": 138,
+        "title": "fueil. lyi. Comme dom Florisel & Silvie passans par le royaume de Calidonie, rencontrerent en chemin trois Chevaliers conduisantz une lictiere, en laquelle y en avoit un qui se complaignoit amerement de la cruauté d'une Damoyselle : & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.947,
+        "startPage": 142,
+        "title": "Du combat qu'eut dom Florisel contre un Chevalier estranger pour l'amour de Silvie, allant esprouver l'avanture de la duchesse Armide : & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 0.909,
+        "startPage": 145,
+        "title": "t lxi. Comme Silvie descouvrit le secret de sa pensée à dom Florisel, & depuis s'estans embarquez pour tirer en Babilone furent separez l'un de l'autre par une tempeste qui s'esleva sur la mer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 0.808,
+        "startPage": 153,
+        "title": "Comme Silvie arriva à la fonteine des amours d'Anastarax, ou survint la princesse Alastraxerée, qui combarit les dix Chevaliers desquelz Silvie estoit eschapée le jour precedant, & quelle en fut la fi. chap-xxy.  fueil lxviiComme estant Alastraxerée avecqu' Silvie à la fonteine des amours d'Anastarax, passa par là un chariot de grande magnificence conduit de seize Chevaliers, lesquelz elle abatit tous l'un apres l'autre à la jouste, & de l'excellence qui estoit dans le chariot."
+      },
+      {
+        "matchedOn": "title",
+        "number": 27,
+        "score": 1.0,
+        "startPage": 165,
+        "title": "Comme Alastraxerée sceut ou alloient les Dames & Damoyselles du chariot avecqu' leurs Chevaliers, & l'ocasion pourquoy elles s'estoient mises en tel equipage."
+      },
+      {
+        "matchedOn": "title",
+        "number": 28,
+        "score": 0.55,
+        "startPage": 158,
+        "title": "Comme les Dames qui estoient dans le chariot avecqu' Alastraxerée & Silvie, s'arresterent à la fonteine des amours d'Anastarax pour eux refraischir, attendant passer la grand' chaleur du jour, & de ce qu'elles y firent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 0.867,
+        "startPage": 171,
+        "title": "fueillet mesme. Comme les deux Princesses & toute leur trouppe furent voir l'enfer d'Anastarax, lequel fut delivré par l'infante Alastraxerée & Silvie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.6,
+        "startPage": 221,
+        "title": "fveillet lexvi. Comme le pere & la mere nourrisiers de Silvie arriverent à Niquée le jour qu'elle espousa le prince Anastarax, & du bon recueil qui leur fut fait apres qu'ilz l'eurent recogneuen & declaré de qui elle estoit fille."
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.95,
+        "startPage": 180,
+        "title": "Comme dom Florisel & Darinel eschaperent le danger de la mer par grand bazard, & furent jettez en terre au royaume de Polonye."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.917,
+        "startPage": 187,
+        "title": "Comme la belle Heleine de Polonye & sa cousine l'infante Timbrie demourerent en grand pensement, & quasi toutes ravies en l'amour de dom Florisel, apres qu'il les eut laissées au jardin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.917,
+        "startPage": 192,
+        "title": "Comme Darinel retourna en l'abaye pour avoir response de l'infante Heleine, & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.929,
+        "startPage": 195,
+        "title": "Comme les infantes Heleine & Timbrie partirent de l'abaye, & s'en allerent à l'hermitage de la mandeliere, ou elles trouverent dom Florisel dormant souz un arbre aupres de la fonteine."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 0.833,
+        "startPage": 199,
+        "title": "fueillet lxxxyiii. Comme dom Florisel alla la nuict au jardin de l'abaye ou estoit l'infante Heleine, à laquelle il parla, & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.973,
+        "startPage": 205,
+        "title": "Comme la princesse Heleine fut mandée par le Roy son pere pour aller esprouver l'avanture de la tente des quatre Chevaliers, contendans pour l'amour d'une Damoyselle, & du deul qu'en fit dom Florisel apres qu'elle l'en eut averty."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 0.727,
+        "startPage": 193,
+        "title": "Comme allant dom Florisel à la cité de Polonye, en intention d'esprouver l'avanture des quatre freres, il receut lettres de la princesse Silvie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.842,
+        "startPage": 211,
+        "title": "fueillet xcitiiDes propoz que tint dom Florisel avecqu' le gentilhomme de Silvie, & du cruel combat qu'il eut contre un Chevalier sur le chemin de Polonye."
+      },
+      {
+        "matchedOn": "title",
+        "number": 39,
+        "score": 0.914,
+        "startPage": 215,
+        "title": "Comme plusieurs Chevaliers, & entre autres dom Briant frere de la belle Heleine, esprouverent l'avanture de la tente ou estoit la Damoyselle enchantée, lesquelz furent repoulsez & vaincuz par les quatre freres, contendans pour l'afueillet xcyiiimour d'elle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 1.0,
+        "startPage": 230,
+        "title": "Comme le prince Anaxartes monta au chasteau des merveilles d'Amour, &"
+      },
+      {
+        "matchedOn": "folio",
+        "number": 43,
+        "score": 1.0,
+        "startPage": 241,
+        "title": "d'Amour."
+      },
+      {
+        "matchedOn": "folio",
+        "number": 44,
+        "score": 1.0,
+        "startPage": 246,
+        "title": "& des choses estranges qu'il y vid."
+      },
+      {
+        "matchedOn": "title",
+        "number": 46,
+        "score": 0.583,
+        "startPage": 101,
+        "title": "Comme aussi tost que la princesse de Thrace fut avertie de la prinse de dom Florisel au chasteau du mirouer d'Amour, pensant que ce fust Alastraxerée, l'envoya querir (apres luy avoir fait, present de plusieurs beaux acoustrementz de femme) & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 47,
+        "score": 0.862,
+        "startPage": 260,
+        "title": "fueil. exyi. Comme l'infante Alastraxerée arrina à la fonteine de l'hermitage des amandiers, ouelle trouva la belle Heleine de Polonye avecqu' Timbrie sa cousine, & des propoz qu'elles eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 48,
+        "score": 1.0,
+        "startPage": 264,
+        "title": "Comme la princesse Alastraxerée combatit plusieurs Chevaliers qui conduisoient deux lictieres, au moyen dequoy elle entendit des nouvelles de dom Florisel."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.966,
+        "startPage": 274,
+        "title": "D'unes lettres qu'Astibel des Sciences envoya par un nain à la princesse Arlande, dont elle fut fort joyeuse, cognoissant par icelles le moyen de se venger d'Amadis de Grece."
+      },
+      {
+        "matchedOn": "title",
+        "number": 50,
+        "score": 0.95,
+        "startPage": 276,
+        "title": "Comme les Damoyselles d'Alastraxerée arriverent à l'abaye des Roys, ou estoient les infantes Heleine & Timbrie, ausquelles elles presenterent les lettres de leur maistresse."
+      },
+      {
+        "matchedOn": "title",
+        "number": 51,
+        "score": 0.913,
+        "startPage": 279,
+        "title": "Comme nouvelles vindrent à la princesse Arlande que l'avanture & enchantement du chasteau du mirouer d'Amour avoit prins fin, & du moyen par lequel l'infante Alastraxerée eschapa des prisons d'Arlande."
+      },
+      {
+        "matchedOn": "title",
+        "number": 52,
+        "score": 0.6,
+        "startPage": 274,
+        "title": "Comme apres qu'Alastraxerée eut laissé la princesse Arlande, elle rencontra ses Damoyselles, qui luy apporterent lettres des infantes Heleine & Timbrie. Depuis elle s'embarqua & fut jettée par tourmente en la coste de Perse, & des merveilles qu'elle y trouva."
+      },
+      {
+        "matchedOn": "title",
+        "number": 53,
+        "score": 0.905,
+        "startPage": 295,
+        "title": "Comme allant dom Florisel garder la tour de l'Univers, rencontra un nain qui luy bailla un heaume, avecqu' lettres du magicien Anaxenes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 54,
+        "score": 0.923,
+        "startPage": 299,
+        "title": "Comme dom Florisel commença à garder la tour de l'Univers, & des combatz qu'il eut contre plusieurs Chevaliers."
+      },
+      {
+        "matchedOn": "title",
+        "number": 55,
+        "score": 0.909,
+        "startPage": 96,
+        "title": "D'un cruel combat que dom Florisel eut, gardant la tour de l'Univers, contre un Chevalier estranger, & des merveilles qui en avindrent. Chapitre ly. fueillet cxlijComme Darinel arrina en Polonye avecque les lettres de dom Florisel, lesquelles il presenta à la princesse Heleine, & de ce qui en auint. chapitre lvifueillet cxlvi. Des propoz que dom Florisel eut avecqu' Silvie estant blessé, & du retour de Darinel en la cité de Niquée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 56,
+        "score": 0.967,
+        "startPage": 326,
+        "title": "Comme l'infante Alastraxerée fut jettée par fortune de mer en l'isle de Colcos, ou elle fut prinse pour dom Florisel, & du bon recueil que luy fit le prince dom Falanges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 59,
+        "score": 1.0,
+        "startPage": 336,
+        "title": "Comme dom Florisel peu de temps apres son partement de Niquée, fut par tourmente de mer jetté en l'isle de Colcos, ou il fut prins pour l'infante Alastraxerée, & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 60,
+        "score": 0.895,
+        "startPage": 341,
+        "title": "fueillet clyinn. Comme l'infante Alastraxerée alla le matin visiter dom Florisel estant encoresdans le lict, & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 61,
+        "score": 0.938,
+        "startPage": 343,
+        "title": "Des propoz qu'eut dom Florisel avecqu' le prince dom Falanges, apres le partement de l'infante Alastraxerée, & comme il moyenna sa liberté."
+      },
+      {
+        "matchedOn": "title",
+        "number": 62,
+        "score": 0.963,
+        "startPage": 346,
+        "title": "Comme Anaxartes & l'infante Artymire de Cypre, furent jettez par fortune de mer en yne contrée, ou ilz trouverent plusieurs Damoyselles aupres d'une fonteine, l'une desquelles le mist en grand' perplexité."
+      },
+      {
+        "matchedOn": "title",
+        "number": 63,
+        "score": 0.864,
+        "startPage": 349,
+        "title": "Comme le yaillant prince Anaxartes descouvrit le secret de son cueur à l'infante Artymire, & d'unes lettres qu'il envoya, par elle, à Oriane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 64,
+        "score": 0.75,
+        "startPage": 352,
+        "title": "p. Comme l'infante Artymire retourna yers Anaxartes, auquel elle racompta tous les propoz que luy avoit tenuz la belle Oriane, & du subtil moyen par lequel il luy fit de rechef tenir des lettres."
+      },
+      {
+        "matchedOn": "title",
+        "number": 65,
+        "score": 0.625,
+        "startPage": 307,
+        "title": "Des regretz que fit Anaxartes pour n'avoir nouvelles ny de la princesse Oriane ny de ses lettres, & comment par fortune il parla une nuict à elle, & des propoz qu'ilz tindrent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 66,
+        "score": 0.846,
+        "startPage": 191,
+        "title": "Comme dom Florisel de Niquée & dom Falanges d'Astre, vindrent surgir au royaume de Polonye, & de l'arrivée du prince dom Lucidor, à qui la belle Heleine estoit promise."
+      },
+      {
+        "matchedOn": "title",
+        "number": 67,
+        "score": 0.583,
+        "startPage": 312,
+        "title": "Comme les deux Princes, à sçavoir dom Florisel & dom Falanges, virent arriver la flotte ou estoit dom Lucidor : & du retour de dom Florisel vers Heleine, de laquelle, apres plusieurs propoz, il eut jouissance."
+      },
+      {
+        "matchedOn": "title",
+        "number": 68,
+        "score": 0.583,
+        "startPage": 316,
+        "title": "y. Des regretz & lamentations que fit la princesse Heleine apres le partement de dom Florisel, & de la consolation que l'infante Timbrie luy donna."
+      },
+      {
+        "matchedOn": "title",
+        "number": 69,
+        "score": 0.615,
+        "startPage": 197,
+        "title": "Comme le Roy de Polonye fut averty du ravissement de la princesse Heleine sa fille, de Timbrie, avecqu' toutes leurs Damoyselles : & du grand deul que luy & dom Lucidor en menerent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 70,
+        "score": 1.0,
+        "startPage": 386,
+        "title": "Comme dom Florisel & le prince dom Falanges furent assailliz par dom Lucidor des Vengeances, & dom Briant frere de la belle Heleine : & quelle fut l'issue du cruel conflict d'entr'eux."
+      },
+      {
+        "matchedOn": "title",
+        "number": 71,
+        "score": 1.0,
+        "startPage": 392,
+        "title": "D'unes lettres que le prince dom Lucidor des Vengeances envoya à l'infante Alastraxerée par un de ses gentilhommes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 71,
+        "score": 0.7,
+        "startPage": 210,
+        "title": "Comme la flotte de l'infante Alastraxerée & des Princes, à sçavoir dom Florisel de Niquée & dom Falanges, fut en grand danger de perir en mer par tourmente : & comme ilz vindrent surgir en l'empire de Niquée."
+      }
+    ],
+    "missing": [
+      {
+        "folio": null,
+        "number": 45,
+        "title": "arresté prisonnier."
+      }
+    ],
+    "passages": 82,
+    "precision": 0.768,
+    "recall": 0.984,
+    "spurious": [
+      {
+        "number": 4,
+        "startPage": 36,
+        "title": "Comme Darinel trouva Silvie avecqu dom Florisel, lequel pour son prenier faict d'armes nit à nort deux Chevaliers qui la vouloientemmener. Chapitre m"
+      },
+      {
+        "number": 5,
+        "startPage": 41,
+        "title": "Comme dom Florisel de Niquée receut l'ordre de chevalerie, par les mains du roy de Lacedemone, & de ce qui luy auint depuis, allant avecqu' Silvie & Darinel, voir l'enfer d'Anastarax. Chapirre V."
+      },
+      {
+        "number": 18,
+        "startPage": 108,
+        "title": "Comme la princesse Arlande descouurit son amour à don Florisel, & de la sibtile invention dont elle ysa pour jouyr d'iceluy. Chapitre AXVI."
+      },
+      {
+        "number": 30,
+        "startPage": 166,
+        "title": "Comme les Dames qui estoient dans le chariot avecqu' Alastraxerée & Silvie, s'arresterent à la fonteine des amours d'Anastarax pour eux refraischir, attendant passer la grand' chaleur du jour, & de ce qu'elles y firent."
+      },
+      {
+        "number": 41,
+        "startPage": 208,
+        "title": "cité de Polonye, en intention d'esprouver l'avanture des quatre"
+      },
+      {
+        "number": 45,
+        "startPage": 218,
+        "title": "fit baptiser, & du triumphe solemnel qui fut fait le jour mesmes qu'il espousa Silvie en la cité de Niquée. Chapitre AXL."
+      },
+      {
+        "number": 47,
+        "startPage": 224,
+        "title": "Comme le fort prince Anaxartes s'esgara de sasœur Alastraxerée, pour secourir deux Damoyselles que certains Chevaliers emmenoient par force, lesquelz il poursuyvit bien avant en mer, & à la fin les combatit. Chapitre AXLI."
+      },
+      {
+        "number": 49,
+        "startPage": 237,
+        "title": "Comme apres que l'infante Artymire eut longuement attendu le prince Anaxartes, elle se mist en chemin pour le suyvre à travers les rochers, ou elle trouva le Roy son pere & ses Chevaliers enchantez, lesquelz à son arrivée revindrent en leur naturel, puis tous ensemble suyvirent le chemin du chasteau des merveilles d'Amour. Chapitre XLIII."
+      },
+      {
+        "number": 52,
+        "startPage": 252,
+        "title": "Comme aussi tost que la princesse de Thrace fut avertie de la prinse de dom Florisel au chasteau du mirouer d'Amour, pensant que ce fust Alastraxerée, l'envoya querir (apres luy avoir fait present de plusieurs beaux acoustrementz de femne) & des propoz qu'ilz eurent ensemble. Chapitre AXLVI."
+      },
+      {
+        "number": 59,
+        "startPage": 284,
+        "title": "Comme apres qu'Alastraxerée cut laisé la princesse Arlande, elle rencontra ses Danoyselles, qui luy apporterent lettres des infantes Heleine & Timbrie. Depuis elle s'embarqua & fut jettée par tourmente en la costé de Perse, & des merveilles qu'elley trouva. Chapitre LII."
+      },
+      {
+        "number": 62,
+        "startPage": 305,
+        "title": "risel eut gardant la tour de l'Univers, contre un Chevalier estranger, & des merveilles qui en avindrent."
+      },
+      {
+        "number": 66,
+        "startPage": 320,
+        "title": "Des propoz que dom Florisel eut avecques Silvie estant blesé, & du retour de Darinel en la cité de Niquée."
+      },
+      {
+        "number": 74,
+        "startPage": 354,
+        "title": "Comme l'infante Artymire retourna vers Anaxartes, auquel elle racompta tous les propoz que luy avoit tenuz la belle Oriane, & du subtil moyen par lequel il luy fi de recheftenir des lettres. Chapitre LXIIII."
+      },
+      {
+        "number": 75,
+        "startPage": 360,
+        "title": "Des regretz que fit Anaxartes pour n'avoir nouvelles ny de la princesse Oriane ny de ses lettres, & comment par fortune il parla yne nuict à elle, & des propoz qu'ilz tindrent ensemble."
+      },
+      {
+        "number": 76,
+        "startPage": 363,
+        "title": "& dom Falanges d'Astre, vindrent surgir au royaume de Polonye, & de l'arrivée du prince dom Lucidor, à qui la belle Heleine estoit promise. Chapitre LXVI."
+      },
+      {
+        "number": 77,
+        "startPage": 369,
+        "title": "dom Florisel & dom Falanges, virent arriver la flotte ou estoit dom Lucidor : & du retour de dom Florisel pers Heleine, delaquelle, apres plusieurs propoz, il eut jouyssance."
+      },
+      {
+        "number": 78,
+        "startPage": 378,
+        "title": "fit la princesse Heleine apres le partement de dom Florisel, & de"
+      },
+      {
+        "number": 79,
+        "startPage": 382,
+        "title": "adverty du ravissement de la princesse Heleine sa fille, de Timbrie avec toutes leurs Damoyselles : & du grand deul que luy & dom Lucidor en menerent. Chapitre ALXIX."
+      },
+      {
+        "number": 82,
+        "startPage": 397,
+        "title": "Comme la flotte de l'infante Alastraxerée & des Princes, à sçavoir dom Florisel de Niquée & dom Falanges, fut en grand danger de perir en mer par tourmente : & comme ilz vindrent surgir en l'empire de Niquée."
+      }
+    ],
+    "tocChapters": 64,
+    "unscorable": 1
+  },
+  "out": "book-9",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 5
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 7
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 19
+      }
+    ],
+    "pages": 400,
+    "roleCounts": {
+      "body": 15285,
+      "footer": 364,
+      "header": 546,
+      "title": 367
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 64,
+    "missingFolios": 16,
+    "repairedNumbers": 8,
+    "sequenceBreaks": 11,
+    "suspectFolios": 2
+  }
+}

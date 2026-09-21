@@ -1,0 +1,204 @@
+{
+  "book": 23,
+  "designations": {
+    "found": 63,
+    "highest": 68,
+    "misread": [
+      54
+    ],
+    "missing": [
+      22,
+      35,
+      46,
+      47,
+      54
+    ],
+    "pages": {
+      "1": 17,
+      "10": 177,
+      "11": 193,
+      "12": 203,
+      "13": 214,
+      "14": 227,
+      "15": 254,
+      "16": 277,
+      "17": 296,
+      "18": 325,
+      "19": 339,
+      "2": 35,
+      "20": 352,
+      "21": 372,
+      "23": 398,
+      "24": 411,
+      "25": 437,
+      "26": 448,
+      "27": 467,
+      "28": 474,
+      "29": 495,
+      "3": 51,
+      "30": 506,
+      "31": 515,
+      "32": 526,
+      "33": 534,
+      "34": 542,
+      "36": 592,
+      "37": 597,
+      "38": 610,
+      "39": 617,
+      "4": 73,
+      "40": 628,
+      "41": 642,
+      "42": 666,
+      "43": 693,
+      "44": 701,
+      "45": 713,
+      "48": 744,
+      "49": 759,
+      "5": 93,
+      "50": 767,
+      "51": 775,
+      "52": 791,
+      "53": 800,
+      "55": 825,
+      "56": 833,
+      "57": 839,
+      "58": 845,
+      "59": 852,
+      "6": 109,
+      "60": 864,
+      "61": 875,
+      "62": 886,
+      "63": 890,
+      "64": 897,
+      "65": 906,
+      "66": 914,
+      "67": 923,
+      "68": 929,
+      "7": 130,
+      "8": 150,
+      "9": 169
+    },
+    "undesignated": [
+      35,
+      46,
+      47
+    ],
+    "unreadable": [
+      22
+    ]
+  },
+  "family": "B",
+  "out": "book-23",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 4
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 5
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 6
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 7
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 8
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 10
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 12
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 951
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 952
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 953
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 954
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 955
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 956
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 957
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 958
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 959
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 960
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 961
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 962
+      },
+      {
+        "detail": "chapter 34 spans 42 leaves",
+        "kind": "longPassage",
+        "page": 542
+      }
+    ],
+    "pages": 962,
+    "roleCounts": {
+      "body": 29965,
+      "footer": 339,
+      "header": 1353,
+      "title": 459
+    },
+    "unresolvedAmbiguous": 0
+  }
+}

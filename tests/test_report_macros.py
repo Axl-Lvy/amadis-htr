@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from amadis_htr.report_macros import (
+    ALL_MACROS,
     LOCALISATION_MACROS,
     Macro,
     MacroNameError,
@@ -124,7 +125,7 @@ def test_the_committed_macros_file_is_what_the_writer_emits(tmp_path):
     # is exactly what the registry renders from the committed results. Editing
     # either by hand fails here instead of reaching the page.
     reference = tmp_path / "macros.tex"
-    write_generated(render_macros(LOCALISATION_MACROS, REPO / "eval/results"), reference)
+    write_generated(render_macros(ALL_MACROS, REPO / "eval/results"), reference)
     committed = REPO / "report" / "generated" / "macros.tex"
     assert committed.read_text(encoding="utf-8") == reference.read_text(
         encoding="utf-8"

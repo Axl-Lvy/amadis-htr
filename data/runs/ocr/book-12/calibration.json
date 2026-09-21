@@ -1,0 +1,941 @@
+{
+  "book": 12,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 48,
+        "expectedPage": 55,
+        "folio": 19,
+        "number": 6
+      },
+      {
+        "actualPage": 69,
+        "expectedPage": 77,
+        "folio": 30,
+        "number": 1
+      },
+      {
+        "actualPage": 105,
+        "expectedPage": 49,
+        "folio": 16,
+        "number": 1
+      },
+      {
+        "actualPage": 115,
+        "expectedPage": 125,
+        "folio": 54,
+        "number": 19
+      },
+      {
+        "actualPage": 147,
+        "expectedPage": 137,
+        "folio": 60,
+        "number": 1
+      },
+      {
+        "actualPage": 161,
+        "expectedPage": 165,
+        "folio": 74,
+        "number": 28
+      },
+      {
+        "actualPage": 210,
+        "expectedPage": 91,
+        "folio": 37,
+        "number": 1
+      },
+      {
+        "actualPage": 216,
+        "expectedPage": 223,
+        "folio": 103,
+        "number": 39
+      },
+      {
+        "actualPage": 230,
+        "expectedPage": 97,
+        "folio": 40,
+        "number": 1
+      },
+      {
+        "actualPage": 242,
+        "expectedPage": 255,
+        "folio": 119,
+        "number": 1
+      },
+      {
+        "actualPage": 268,
+        "expectedPage": 257,
+        "folio": 120,
+        "number": 48
+      },
+      {
+        "actualPage": 305,
+        "expectedPage": 309,
+        "folio": 146,
+        "number": 1
+      },
+      {
+        "actualPage": 318,
+        "expectedPage": 323,
+        "folio": 153,
+        "number": 60
+      },
+      {
+        "actualPage": 352,
+        "expectedPage": 359,
+        "folio": 171,
+        "number": 1
+      },
+      {
+        "actualPage": 381,
+        "expectedPage": 183,
+        "folio": 83,
+        "number": 72
+      },
+      {
+        "actualPage": 385,
+        "expectedPage": 391,
+        "folio": 187,
+        "number": 1
+      },
+      {
+        "actualPage": 397,
+        "expectedPage": 169,
+        "folio": 76,
+        "number": 1
+      },
+      {
+        "actualPage": 402,
+        "expectedPage": 171,
+        "folio": 77,
+        "number": 1
+      },
+      {
+        "actualPage": 414,
+        "expectedPage": 177,
+        "folio": 80,
+        "number": 1
+      },
+      {
+        "actualPage": 438,
+        "expectedPage": 189,
+        "folio": 86,
+        "number": 1
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.818,
+        "startPage": 19,
+        "title": "u La Table des Chapitres conTENUZ EN CE PRESENT LIVRE Et premierement. Momme don Rogel de Grece, acompagné de l'infante Leonide alla esprouver l'avanture de la roche enflamée, & comme il painquit toutes les gardes du chasteau, & le cruel geant Gal patraf."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.933,
+        "startPage": 26,
+        "title": "Fueillet l. Comme don Rogel perdit l'infante Leonide, puis se jetta dans l'ardante bouche de la roche enflamée pour la recouvrer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.963,
+        "startPage": 35,
+        "title": "Comme le prince Agesilan continuant ses haultz faitz d'armes souz le nom & habit de Daraide, eut un perilleux combat contre un Chevalier incogneu : & de la grande passion que souffroit don Galtazar de Barberousse pour son amour."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 42,
+        "title": "Comme Daraide, Garaye, don Galtazar, & ses freres estans debarquez en l'isle de Guindaye, se departirent par le moyen d'une Damoyselle, & d'un Chevalier à demy mort, qu'ilz rencontrerent en leur chemin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 1.0,
+        "startPage": 48,
+        "title": "Des estranges rencontres qui avindrent à Daraide, à Garaye, & à don Galtazar en la queste de l'escrin que le magicien Cinistide envoyoit à la Princesse Diane.  chapitre y. fveillet xvi. De la triste vie que la princese Diane menoit pour l'absence de Daraide : & comme le Roy de Cores, & la belle Royne de Corit arriverent en la cité de Guindaye."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 62,
+        "title": "Du cruel combat qu'eut Daraide contre le Roy de Cores : & comme apres sa victoire elle se donna à cognoistre à la royne Sidonie, qui la mena en grand' joye vers la princesse Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.886,
+        "startPage": 69,
+        "title": "viifveil. xxii. Des propoz que Diane & la duchesse Lardenie eurent ensemble sur les amours de Daraide, & comme elles l'allerent visiter tous les jours jusques à ce qu'elle fust guerie des playes recevens au combat precedant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 1.0,
+        "startPage": 81,
+        "title": "Comme la nef des sages Alquif & Urgande, avecques les nobles Princes qui estoient en icelle, vint surgir devant la cité de Constantinople."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.85,
+        "startPage": 86,
+        "title": "fveil. xxxijComme don Rogel requit d'amour la Damoyselle Agreste qui le conduisoit : & des gracieuses paroles qu'ilz eurent ensemble par les chemins."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.826,
+        "startPage": 89,
+        "title": "Comme don Rogel & don Filisel estans arrivez en Athenes, don Filisel s'enanoura d'une belle & gracieuse Damne, nomnée Marfire, & d'une lettre qu'il luy escruit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.737,
+        "startPage": 94,
+        "title": "xij. Comme la belle & gracieuse Marfire envoya one sienne loyalle Damoyselle no¬née Cardoine yers don Filisel pour le consoler en sa langueur, & du surplus qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.821,
+        "startPage": 103,
+        "title": "Comme le jour d'yne grand'feste don Filisel s'en alla en habit desguise voir na dane Marfire dans sa chambre, selon qu'elle luy avoit mandé par sa damoyselle Cardoine."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.583,
+        "startPage": 105,
+        "title": "Comme don Filisel alla voir de nuyt la belle Marfire, & des gracieux propoz qu'il eut avec elle, & la damoyselle Carie.  cha xy. fueil. xly. Comme don Filisel alla voir de jour la belle Marfire, & des gracieux propoz qu'il eut auec elle, & la damoyselle Carie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.905,
+        "startPage": 112,
+        "title": "xlyiComme Bruzerbe le crespelu Roy des Massagettes, vint à Constantinople desfier le Prince don Florisel sur l'offense de la royne Sidonie. un"
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.952,
+        "startPage": 115,
+        "title": "Dit cruel combat que don Florisel eut à l'encontre du roy Brugerbe le Crespelu en la presence des Princes & Princesses de Grece. chaxyiij. fu. xlix. Comme le roy Amadis s'estant esgaré à la suyte d'un sanglier, rencontra une Damoyselle laquelle ploroit un Chevalier mort, & de ce qui en auint. fveillet li."
+      },
+      {
+        "matchedOn": "folio",
+        "number": 20,
+        "score": 1.0,
+        "startPage": 129,
+        "title": ""
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.867,
+        "startPage": 135,
+        "title": "Chapitre xxi. Des propoz que Diane eut avecqu' Daraide sur la promesse qu'elle avoit faite à la Royne : & comme elle se donna à cognoistre à sa dame Diane pour Agesilan de Colchos."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.875,
+        "startPage": 145,
+        "title": "Comme par le conseil de Garaye, Daraide esprouva l'avanture de la tour de la Ducbesse de Bauiere, dont elle receut grande consolation."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 147,
+        "title": "De l'estrange tromperie que deux Damoyselles firent à Garaye, apres que Daraide l'eut laissée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.9,
+        "startPage": 154,
+        "title": "y. Comme les deux vaillans Chevaliers, don Florarlan de Trace, & Artaxerxe, furent jettez par la tempeste en l'Isle de Colchos, au moyen dequoy lon cogneut don Falanges estre filz du roy Gradamart."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.929,
+        "startPage": 158,
+        "title": "Comme la belle Marfire abandonna les amours de don Filisel, & de la triste & douloureuse vie qu'il en menoit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 28,
+        "score": 0.762,
+        "startPage": 161,
+        "title": "xxvi. fveil. Ixxi. Comme apres que le Roy don Falanges & sa chere espouse, furent partis de la court, Daraide & Garaye prindrent port devant la cité de Constantinople, & des caresses que les Princes & Princesses leur firent à l'arrinée. Chapire xvi. Comme Daraide, & Garaye furent receuens des Princesses de Grece, & de ce qui se passa entre Daraide, & entre la belle infante Fortine."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.917,
+        "startPage": 173,
+        "title": "Comme en la presence de tous les Princes & Princesses de Grece, Daraide demanda un don au prince Florisel, lequel luy otroya, au grand desplaisir & ennuy de toute la court."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 176,
+        "title": "xxix. fveil. lxxviri. Comme le roy Amadis donna l'ordre de chevalerie au filz de l'Empereur de Rome, & au filz du Roy de Beocie, lesquelz ce jour mesmes prindrent leur chemin vers la cité de Sparte, en la compagnie de don Rogel, à la requeste de trois Damoyselles."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.92,
+        "startPage": 179,
+        "title": "Des amoureux propoz que don Rogel tint avecques l'une des Damoyselles : & comme luy & les deux nobles Princes en gaignerent encores trois autres en une certaine avanture."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.889,
+        "startPage": 186,
+        "title": "xxxi. fveil. Ixxxi. Des gracieuses tromperies que la Dame d'un chasteau ou les trois Princes estoient logez, & une Damoyselle firent à don Rogel, & à son Escuyer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.926,
+        "startPage": 193,
+        "title": "fveil. Ixxxiiii. Comme les trois Princes se separerent des trois Damoyselles qu'ilz avoient con quises, & comme ilz arriverent en la ville de Sparte, & declarerent au Roy l'ocasion de leur venue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.957,
+        "startPage": 196,
+        "title": "xxxiii. fveil. Ixxxviii. Du combat que les trois Princes eurent contre les neuf Chevaliers, & comme don Brianges s'en amoura de l'infante Griande fille du Roy de Sparte."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 0.957,
+        "startPage": 203,
+        "title": "Comme la Royne de Sparte, & l'Infante sa fille, & apres elles, le Roy, allerent voir les Chevaliers naurez, & des paroles qui se passerent entr'eux."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.882,
+        "startPage": 206,
+        "title": "Des propoz que Marinde tint à Sarcire en la faveur de don Rogel, & comme l'Infante, & don Brianges parlerent ensemble, & de ce qui fut deliberé entr'eux de faire alors que les Princes seroient gueris."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.957,
+        "startPage": 210,
+        "title": "xxxvi.  fu.xcini. Comme don Rogel, & don Brianges jouyrent des amours de l'infante Griande & de la duchesse Sarcire, & comme ilz se despartirent de Sparte au grand regret de leurs amyes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 39,
+        "score": 0.867,
+        "startPage": 216,
+        "title": "xcyi. Comme don Florisel de Nicquée & Daraide furent par tempeste jettez en une Isle, ou ilz trouverent une fort estrange avanture. cha. xxxviii.  fu. xcix. Du cruel combat que Florisel, & Daraide eurent avecque les Geans dans le chasteau de Belleueue, & comme par leur sçavoir plus que par force d'armes, ilz sortirent du grand danger ou ilz estoient apres leur victoire."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.792,
+        "startPage": 230,
+        "title": "Comme l'avanture des Dieux des flames infernalles d'Amour fut achevée, & comme le Prince don Florisel recogneut le Chevalier enchauté dedans le Vase de Cristal."
+      },
+      {
+        "matchedOn": "title",
+        "number": 151,
+        "score": 0.941,
+        "startPage": 235,
+        "title": "cui. Comme Garinter fut recogneu, & marié avecque l'infante Danistée fille du Roy de l'isle Artadeffe, & du depart de don Florisel & Daraide."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.862,
+        "startPage": 239,
+        "title": "Comme les Roys de Russie, & de Gaze, & plusieurs autres Roys leurs contderez & alliez prindrent port à grand' puissance en l'Isle de Guindaye, & de la lettre qu'ilz escrinirent à la royne Sidonie, avecque la response d'icelle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 0.962,
+        "startPage": 243,
+        "title": "De ce que fit la royne Sidonie apres le départ du Duc de Galde : & des propoque Diane & Lardenie eurent ensemble sur la longue absence de Daraide,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 242,
+        "title": "fieillet cxiil. De l'avanture qui auint aux avantcoureurs des Roys, ce pendant qu'ilz marchoient en bataille rangée yers la cité de Guindaye. cha. xlijji. fu. cxyi, Des aspres & cruelz assaultz qui furent donnez à la cité de Guindaye : & com me la magnanimité & hardiesse de la royne Sidonie empescha la ville d'estre prise des ennemys."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.591,
+        "startPage": 55,
+        "title": "Comme don Florisel de Nicquée, & Daraide, arriverent sans se donner à cognoistre en la cite de Guindaye, & furent logez dans le Palays par le commandement de la Royne."
+      },
+      {
+        "matchedOn": "title",
+        "number": 47,
+        "score": 0.913,
+        "startPage": 263,
+        "title": "xlyi. fveil. cxxi. De la sage maniere par laquelle Daraide acomplit la promesse qu'elle avoit failu te à la royne Sidonie de combatre don Florisel de Nicquée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 48,
+        "score": 0.895,
+        "startPage": 268,
+        "title": "Comme Daraide apres avoir tenu quelques propoz avec don Florisel, alla trou ver la Royne en sa chambre, ou depuis don Florisel fut encores apellé."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.911,
+        "startPage": 272,
+        "title": "p. m De la grande joye qui estoit en la cité de Guindaye pour la yenuen de Daraide, & des propos que Lardenie eut avec elle, & depuis avecque Diane, & comme don Florisel & Diane s'estans veuz, il fut acordé que de nuyt l'on feroit une saillie sur les ennemys."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.913,
+        "startPage": 280,
+        "title": "Comme l'excellent Prince don Florisel de Nicquée, & Daraide sortirent de nuyt sur les ennemys & de la grande extremité ou la cité de Guindaye se trouva reducte."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.87,
+        "startPage": 284,
+        "title": "l. fveil. cxxxi. Dusecours inesperé qui vint durant la bataille à la royne Sidonié, à raison dequoy la cité de Guindaye ne fut point prise."
+      },
+      {
+        "matchedOn": "title",
+        "number": 52,
+        "score": 0.84,
+        "startPage": 289,
+        "title": "li. fu exxxiii. Comme l'excellente Daraide poursuyvit le Roy de Russie, iusques dans la tour ren de Phebus, & de ce qui auint de son entrée en l'avanture de la tour de Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 292,
+        "title": "Du cruel & hazardeux combat que don Rogel de Grece & Daraide eurent ensemble, sur la statué decapitée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.87,
+        "startPage": 294,
+        "title": "liji.  fu. cxxxyiiComme ce qui avoit esté profetizé de Diane s'acomplissant, la Royne Alastraxerée recogneut le prince Agesilan son filz alors qu'on le ploroit pour mort."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.765,
+        "startPage": 299,
+        "title": "fveil. cxxxviii. Des devis que Diane eut auecqu' Lardenie sur l'avanture pasée, & comme elle alla voir Agesilan."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.875,
+        "startPage": 305,
+        "title": "Des cruelles douleurs que don Florisel enduroit pour l'amour de la royne Sidonie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.688,
+        "startPage": 315,
+        "title": "Comme les Princes fiancez esprouverent l'avanture de l'infant don Rosaraa, &r de la Duchesse de Baviere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 60,
+        "score": 0.706,
+        "startPage": 318,
+        "title": "liji, fn. cxlix. De la glorieuse fin des amours du prince Agesilan & de la princesse Diane renfermez dans le chasteau de la Duchesse de Bauieres. cha. lix. fu. cle Des propos que tint don Filisel avec deux Damoyselles en retournant de la cité d'Athenes, & comme le duc d'Alfarce arriva en Constantinople."
+      },
+      {
+        "matchedOn": "title",
+        "number": 61,
+        "score": 1.0,
+        "startPage": 328,
+        "title": "Comme la royne Cleofile & don Arlanges furent fiancez, & du départ du roy Amadis & de la royne Oriane pour s'en aller en l'Isle de Guindaye,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 62,
+        "score": 0.824,
+        "startPage": 331,
+        "title": "y. Comme le roy Amadis & l'Empereur Amadis de Grece, furent poussez par la tempesle en l'isle Solstice, ou ilz trouverent une estrange avanture."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.667,
+        "startPage": 337,
+        "title": "fueillet elvii. Comne le Roy de Gandes bien acompagné vint au devant du roy Amadis, & du bon acveil qu'il luy fit à l'arrivée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.913,
+        "startPage": 341,
+        "title": "lxiii. fuei. elx. Comme la duchesse Sirisie fit acorder les deux Princesses de Juges, & comme chacune d'elles playda les raisons de sa cause en la presence du Roy & de l'Empereur Amadis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.905,
+        "startPage": 350,
+        "title": "Ixiiji. fveil. clxii. Comme le roy Amadis & l'Empereur Amadis de Grece, firent prononcer leur arrest sur le different des deux Princesses, & comme ilz se departirent de l'isle Solstice."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.941,
+        "startPage": 352,
+        "title": "lxy. fieil clxyi. Comme le roy Amadis & sa compagnie prindrent port en l'isle de Guindaye ou ilz rencontrerent sur leur chemin une fort plaisante avanture. ch. lxvi. fu clxvii. Comme les Princes chevauchans yers la cité de Guindaye furent mis en grande confusion par une certaine avanture d'un Chevalier qu'ilz rencontrerent par les chemins."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.889,
+        "startPage": 368,
+        "title": "De ce qui avint à l'Empereur Amadis de Grece apres qu'il fut sorty du chasteau."
+      },
+      {
+        "matchedOn": "title",
+        "number": 69,
+        "score": 0.96,
+        "startPage": 370,
+        "title": "lxvinn. fveil. clxxy. Comne le roy Amadis, &y la royne Oriane, avecque leur compagnie, arriverent en la cité de Guindaye ou ilz furent tresbien receuz par la royne Sidonie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.556,
+        "startPage": 119,
+        "title": "Comme le roy Amadis, & la royne Oriane esprouverent l'avanture de la tour enchantée, & de ce qui en auint,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 71,
+        "score": 0.958,
+        "startPage": 379,
+        "title": "lex. fveil. clxxviii. Comme don Rogel & don Brianges estans sortis de la ville de Guindaye, trouverent yne Damoyselle morte en un carrefour, & de ce qui en avint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 72,
+        "score": 0.947,
+        "startPage": 381,
+        "title": "Comme don Rogel de Grece rencontra yne Damoyselle qui portoit un esparvier, à raison dequoy il fut mis en une fort belle & perilleuse avanture."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.9,
+        "startPage": 385,
+        "title": "Des baultz faitz d'armes que fit don Rogel pour tirer les trois Damoyselles dehors du chasteau. Comme don Rogel en continuant l'avanture des trois Damoyselles, montaez l'estude du Magicien Gandistin, & du furieux combat qu'il eut à l'encontre d'yne espouventable beste,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.824,
+        "startPage": 397,
+        "title": "Comme don Brianges de Beocie trouva l'ocasion de l'avanture qu'il cherchoit &y de l'estrange vangeance qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.909,
+        "startPage": 402,
+        "title": "exc, Des propos que don Rogel & l'infante Sidere eurent ensemble sur leurs amours aupres d'une plaisante riviere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.857,
+        "startPage": 406,
+        "title": "exciiComme don Rongel de Grece combatit trois Chevaliers, pour delivrer trois Da moyselles qu'ilz emmenoient, & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.875,
+        "startPage": 410,
+        "title": "fu. excijiiQui estoit le Chevalier lequel emmenoit les palefrois des Damoyselles, & les chevaulx des Chevaliers occis, & de ce qui auint à don Rogel en le poursuyvant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.75,
+        "startPage": 414,
+        "title": "fveillet excyii. De ce que firent les trois Infantes & Sardenie en attendant la venve de don Rogel."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 418,
+        "title": "excyinn. Comme Sardenie se descouvrit à don Rogel, puis se departirent l'un de l'autre, & comme don Rogel s'embarqua avecque les trois Infantes pour passer au Royaume de Perse."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.96,
+        "startPage": 422,
+        "title": "De l'espouventable & estrange avanture qui auint en la cité de Guindaye, au moyen de laquelle les Princes furent mis en grande confusion, & en grand danger de leurs personnes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.955,
+        "startPage": 428,
+        "title": "Comme le roy : Amadis & les autres Princes partirent de l'isle de Guindaye, laissant la royne Sidonie en grand' solitude, & comme la belle Royne de Galdap l'alla voir."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.893,
+        "startPage": 430,
+        "title": "lxxxiii. fneil, ccy. Du grand danger ou se trouverent tous ces nobles Princes pour la tempeste, & comme Agesilan & Diane separez des autres nauz, furent estrangement secourus apres leur naufrage, par un Chevalier volant.  cha. lxxxiiii. fu. ccyi. Qui estoit le Chevalier volant, & de la penitence qu'il faisoit en l'Isle Verde fveil. ccyiii. pour avoir occis son pere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.929,
+        "startPage": 438,
+        "title": "lxxxy. Comme Patrifond essaya par divers enchantemens à jouyr de la belle princesse Diane, & des avantures qui en auindrent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.95,
+        "startPage": 442,
+        "title": "cex. Du cruel sacrifice qui se faisoit au dieu Tervagant en l'isle Desolée, ou les cour saires avoient emmené la princesse Diane. cha. lxxxvii.  fueil. cexii. Comme la tempeste renversa le Prince don Rogel dedans un gouffre de mer, au grand regret de l'infante Sidere, & de don Brianges de Beocie, & de ce qui en afueil cexiii. vint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.966,
+        "startPage": 449,
+        "title": "lxxxviii. Comme la Damoyselle que don Brianges avoit empeschée de se noyer, luy desroba son cheval & ses armes : & de l'ocasion qui le fit separer des Infantes de Per se pour aller en la cité de Gamal."
+      },
+      {
+        "matchedOn": "title",
+        "number": 90,
+        "score": 0.833,
+        "startPage": 452,
+        "title": "lxxxix. fveil cexvi. Comme don Brianges de Beocie sauva la vie à un jeune Damoyseau que deux trabistres vouloient mettre à mort, & de cequien auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.88,
+        "startPage": 456,
+        "title": "Des propos que la duchesse Polinecque, & la belle Arfleure curent ensemblément sur la querelle de leurs amours, & de la trahison que Polinecque machina pour se vanger du Prince don Bruzanges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.971,
+        "startPage": 461,
+        "title": "xci. fu cexx. Comme le Prince de Beocie arriva en la cité de Gamal, ou il descouvrit les trabisons de Polinecque à la royne Florelle, & fit cesser le combat entrepris sur la mort du Prince don Bruganges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 94,
+        "score": 0.958,
+        "startPage": 464,
+        "title": "xcil. fuei. cexxi. Qui estoient les deux Chevaliers lesquelz avoient entrepris le combat en la faveur du prince Bruzanges, & comme don Rogel de Grece s'enamoura de la belle Florelle Royne de Canabée. chapt. xcui. fueil. cexxiii. Des merveilleuses avantures qui avindrent à don Agesilan de Colchos en la queste de la princesse Diane, & comme il delivra le Roy des Garamantes de la miserable faim en laquelle le detenoit un Dragon volant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 95,
+        "score": 0.765,
+        "startPage": 475,
+        "title": "fueillet cexxy. Comme don Agesilan occit l'horrible monstre marin de l'isle Desolée, & affran chit les habitans du cruel hommage qu'ilz devoient au dieu Tervagant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.882,
+        "startPage": 482,
+        "title": "fueillet cexxix. Du dueil que menoit l'infante Sidere pour l'absence de don Rogel, & comme elle se mit en sa queste avec ses deux sœurs."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.957,
+        "startPage": 486,
+        "title": "xcyi. fu. cexxxii. Comme don Rogel de Grece, don Brianges de Beocie, & les Infantes de Perse, departirent de Canabée : & comme la royne Florelle mourut de douleur pour le dépar de don Rogel."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.833,
+        "startPage": 492,
+        "title": "xeyii. fveil cexxxiiii. Comme les Princes partis de la cité de Guindaye prindrent port devant Constantinople, & de la façon que Diane fit son entrée dans la ville."
+      },
+      {
+        "matchedOn": "title",
+        "number": 99,
+        "score": 0.882,
+        "startPage": 494,
+        "title": "fueillet cexxvii. Comme les trois Imperatrices, avec les autres Roynes & Princesses sortirent en la gallerie du Palays pour recevoir la compagnie nouvellement arrivée,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 100,
+        "score": 0.95,
+        "startPage": 496,
+        "title": "fueillet cexxxviii. Comme les sages Alquif & Urgande se departirent de Constantinople, & d'une lettre de deffy que douze nains aporterent aux Princes de Grece."
+      }
+    ],
+    "missing": [],
+    "passages": 118,
+    "precision": 0.712,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 5,
+        "startPage": 48,
+        "title": "Qui vid jamais eturgeons Nouer en telle maniere ? Qui vid jamais telz plongeons Sonder si bien la riviere ?"
+      },
+      {
+        "number": 10,
+        "startPage": 78,
+        "title": "Comme Diane, & la royne Briangie allerent yne nuit espier ce que faisoit Daraide dans le jardin avecqu' les autres Damoyselles."
+      },
+      {
+        "number": 17,
+        "startPage": 107,
+        "title": "Comme don Filisel alla voir de nuyt la belle Marfire, & des gracieux propoz qu'il eut avec elle, & la Damoyselle Carie."
+      },
+      {
+        "number": 18,
+        "startPage": 110,
+        "title": "jour la belle Marfire, & des gracieux propoz qu'il eut avec elle, & la Damoyselle Carie."
+      },
+      {
+        "number": 22,
+        "startPage": 126,
+        "title": "Comme le roy Amadis recogneut la belle Dame qu'il avoit delivrée d'entre les mains du fier geant Bruzo Cornelio, & le Chevalier qui l'avoit secouru."
+      },
+      {
+        "number": 25,
+        "startPage": 138,
+        "title": "La cruelle responce de Diane à Daraide."
+      },
+      {
+        "number": 28,
+        "startPage": 150,
+        "title": "Si voz prouesses, & bravades N'ont trouvé mon amour trop dous, Riez au moins de ces gambades Que je fais pour l'amour de vous."
+      },
+      {
+        "number": 32,
+        "startPage": 166,
+        "title": "Comme Daraide, & Garaye surent receues des Princesses de Grece, & de ce qui se passa entre Daraide, & entre la belle infante Fortune."
+      },
+      {
+        "number": 33,
+        "startPage": 170,
+        "title": "Aux peuples, & aux Roys, commune Depart à peu ce qui est rare, Domtant la gloire, & le renom, Espargnant chichement ses dons; Me voulut, lors que je fu née, Un seul ainsi aura la gloire Estant ma mere infortunée Qu'en sa travaillée victoire De Fortune prester le nom. Il preigne ses justes guerdons. Le nom seul est en moy volage, Et comme la Fortune apreste Car le vouloir, & le courage Aux plus grans Roys mainte tempeste, Constans en moy seront tousjours : Ainsi aux aux Princes de renom, Maints inconstans, en ma constance Je seray tempeste commune, Verront maugré leur resistance Monstrant en moy de la Fortune"
+      },
+      {
+        "number": 34,
+        "startPage": 172,
+        "title": "Pasipbée de sa misere Voulant les ardeurs alleger, S'acointa du beuf adultere"
+      },
+      {
+        "number": 35,
+        "startPage": 172,
+        "title": "Mais quoy ? ces peu chastes femelles Le masle ont seulement aymé,"
+      },
+      {
+        "number": 36,
+        "startPage": 172,
+        "title": "N'aye point mon cueur enflamé, Ce cruel martire plus doux, Si est ce que cil qui m'enflame"
+      },
+      {
+        "number": 37,
+        "startPage": 172,
+        "title": "M'est trop plus felon & cruel, Nature plus forte que tous. Sans espoir martirant mon ame A quelle autre peine plus dure"
+      },
+      {
+        "number": 38,
+        "startPage": 172,
+        "title": "Si la douleur qu'ores j'endure"
+      },
+      {
+        "number": 39,
+        "startPage": 172,
+        "title": "Surpasse tout autre douleur ?"
+      },
+      {
+        "number": 48,
+        "startPage": 206,
+        "title": "eux de faire alors que les Princes seroient gueris."
+      },
+      {
+        "number": 51,
+        "startPage": 223,
+        "title": "Du cruel combat que Florisel, & Daraide eurent avecque les Geants dans le chateau de Belleveuë, & comme par leur sçavoir plus que par force d'armes, ilz sortirent du grand danger ou ilz estoient apres leur victoire. Chapitre AU XXXIX."
+      },
+      {
+        "number": 53,
+        "startPage": 230,
+        "title": "present sacrifice, au grand soulagement de ceux qui en les adorant tempereront la furie de leurs amours, par la secrete vertu de la leur; jusques à ce que la brave Serpente avec un feu dont elle les surpassera, & par une plus extreme loyauté,"
+      },
+      {
+        "number": 58,
+        "startPage": 244,
+        "title": "Harengue de la royne Sidonie, aux citoyens de Guindaye. Si le devoir dont nous sommes re¬"
+      },
+      {
+        "number": 59,
+        "startPage": 249,
+        "title": "De l'avanture qui auint aux avancoureurs des Roys, ce pendant qu'ilz marchoient en bataille rangée vers la cité de Guindaye."
+      },
+      {
+        "number": 60,
+        "startPage": 255,
+        "title": "firent donnez à la cité de Guindaye, & comme la magnan mité & hardiesse de la Royne Sidonie empescha la ville d'estre prinse des ennemys."
+      },
+      {
+        "number": 61,
+        "startPage": 260,
+        "title": "& Daraide, arriverent sans se donner à cognoistre en la cité de Guindaye, & fureut logez dans le palays par le commandement de la Royne."
+      },
+      {
+        "number": 72,
+        "startPage": 309,
+        "title": "Comme Agesilan & Diane, le Prince de Rome & la royne Briangie furent fiancez, & comme Agesilan fit la duchesse Lardenie Royne de Cores."
+      },
+      {
+        "number": 74,
+        "startPage": 317,
+        "title": "La sortie des deux plus excellens en amour & en beauté, sera defendue, jusques à ce que deux autres avecque la souveraine excellence de leur excellence, ayent moyenné leur sortie par leur entrée : & jusques alors ilz demeureront renfermez en leur gloire, jouyssans de leurs loyalles amours, & du repos tant desiré."
+      },
+      {
+        "number": 76,
+        "startPage": 323,
+        "title": "Despropos que tint don Filisel avec deux Damoyselles en retournant de la cité d'Athenes ; & comme le duc d'Alfarce arriva en Constantinople."
+      },
+      {
+        "number": 77,
+        "startPage": 327,
+        "title": "Lettre de la royne Sidonie."
+      },
+      {
+        "number": 84,
+        "startPage": 361,
+        "title": "Comme les Princes chevauchans vers la cité de Guindaye furent mis en grande confusion par yne certaine aventure d'un Chevalier qu'ilz rencontrerent par les chemins."
+      },
+      {
+        "number": 87,
+        "startPage": 373,
+        "title": "ne Oriane esprouverent l'avanture de la tour enchantée, & de ce qui en advint."
+      },
+      {
+        "number": 91,
+        "startPage": 389,
+        "title": "l'aventure des trois Damoyselles, monta en l'estude du Magicien Gandistin, & du furieux combat qu'il eut à l'encontre d'une espouventable beste."
+      },
+      {
+        "number": 92,
+        "startPage": 394,
+        "title": "cis la cruelle Lionce fit sortir les trois Damoyselles hors du chasteau pour sçavoir si l'aventure estoit achevée."
+      },
+      {
+        "number": 94,
+        "startPage": 402,
+        "title": "Car je suis immortelle, & ne pers que mon ombre."
+      },
+      {
+        "number": 103,
+        "startPage": 434,
+        "title": "Qui estoit le Chevalier volant, & de la penitence qu'il faisoit en l'Isle verde pour avoir occis son pere."
+      },
+      {
+        "number": 106,
+        "startPage": 445,
+        "title": "Comme la tempeste renversa le Prince don Rogel dedans un gouffre de mer, au grand regret de l'infante Sidere, & de don Brianges de Beocie, & de ce qui en advint."
+      },
+      {
+        "number": 112,
+        "startPage": 468,
+        "title": "Des merveilleuses aventures qui avindrent à don Agesilan de Colchos en la queste de la princesse Diane, & comme il delivra le Roy des Garamantes de la miserable faim en laquelle le detenoit un Dragon volant."
+      }
+    ],
+    "tocChapters": 84,
+    "unscorable": 0
+  },
+  "out": "book-12",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 499
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 500
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 501
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 504
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 505
+      }
+    ],
+    "pages": 505,
+    "roleCounts": {
+      "body": 19560,
+      "footer": 392,
+      "header": 686,
+      "title": 517
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 84,
+    "missingFolios": 40,
+    "repairedNumbers": 6,
+    "sequenceBreaks": 67,
+    "suspectFolios": 11
+  }
+}

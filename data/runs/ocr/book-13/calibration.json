@@ -1,0 +1,188 @@
+{
+  "book": 13,
+  "designations": {
+    "found": 22,
+    "highest": 57,
+    "misread": [
+      14,
+      16,
+      27,
+      34,
+      35,
+      37,
+      39,
+      45,
+      47,
+      49,
+      51,
+      56
+    ],
+    "missing": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      14,
+      15,
+      16,
+      17,
+      20,
+      21,
+      24,
+      25,
+      26,
+      27,
+      30,
+      31,
+      32,
+      34,
+      35,
+      37,
+      39,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      53,
+      54,
+      55,
+      56
+    ],
+    "pages": {
+      "1": 43,
+      "11": 131,
+      "12": 141,
+      "13": 151,
+      "18": 208,
+      "19": 220,
+      "2": 54,
+      "22": 250,
+      "23": 265,
+      "28": 318,
+      "29": 332,
+      "33": 379,
+      "36": 414,
+      "38": 435,
+      "4": 73,
+      "40": 472,
+      "41": 489,
+      "42": 499,
+      "43": 510,
+      "44": 523,
+      "52": 617,
+      "57": 696
+    },
+    "undesignated": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      15,
+      17,
+      20,
+      21,
+      24,
+      25,
+      26,
+      30,
+      31,
+      32,
+      46,
+      48,
+      54
+    ],
+    "unreadable": [
+      3,
+      5,
+      50,
+      53,
+      55
+    ]
+  },
+  "family": "B",
+  "out": "book-13",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 4
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 5
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 6
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 726
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 741
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 742
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 743
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 744
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 745
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 746
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 747
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 748
+      },
+      {
+        "detail": "chapter 57 spans 45 leaves",
+        "kind": "longPassage",
+        "page": 696
+      }
+    ],
+    "pages": 748,
+    "roleCounts": {
+      "body": 16355,
+      "footer": 218,
+      "header": 873,
+      "title": 323
+    },
+    "unresolvedAmbiguous": 0
+  }
+}

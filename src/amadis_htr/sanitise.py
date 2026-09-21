@@ -8,7 +8,8 @@ ids and run residue are not.
 
 import copy
 import re
-from typing import Any
+from pathlib import PurePosixPath
+from typing import Any, Mapping
 
 PLACEHOLDER_HOST = "example.invalid"
 PLACEHOLDER_IP = "0.0.0.0"
@@ -99,3 +100,29 @@ def sanitise_workflow(document: dict) -> dict:
                     }
 
     return _scrub(out)
+
+
+#: The only fields in an OCR run record that hold a filesystem path. Everything
+#: else the harness wrote is a count, a flag or a note about the page. Audited
+#: over all 48 recovered files: no other value contains an absolute path.
+_PATH_FIELDS = ("input", "outDir", "model", "out")
+
+
+def scrub_run_paths(record: Mapping[str, Any]) -> dict[str, Any]:
+    """Reduce a run record's absolute paths to their basenames.
+
+    The basename is the whole of what the method needs: which source PDF was
+    read and which fine-tuned model read it. The directories above it say where
+    one person's machine keeps its corpus and that the model came off a private
+    home-lab checkout, which is run residue rather than method.
+
+    Only the four known path fields are touched, so a field added by a later
+    harness version arrives unscrubbed and visible rather than silently
+    rewritten.
+    """
+    out = dict(record)
+    for field_name in _PATH_FIELDS:
+        value = out.get(field_name)
+        if isinstance(value, str) and value:
+            out[field_name] = PurePosixPath(value).name
+    return out

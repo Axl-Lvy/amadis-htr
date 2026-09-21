@@ -1,0 +1,327 @@
+{
+  "book": 1,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 217,
+        "expectedPage": 274,
+        "folio": 132,
+        "number": 41
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.941,
+        "startPage": 16,
+        "title": "fu. premier. Comment l'infante Helisene & sa damoyselle Dariolette s'en allerent en la chambre ou le Roy Perion estoit couché.chapitre, jifveillet. jiji. Comme le Roy Perion partant de la petite Bretaigne cheminoit, ayant le cœur remply d'ennuy, & de melancolie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.938,
+        "startPage": 30,
+        "title": "fu. vii. Comme le Roy Languines emmena avec luy le Damoysel de la Mer, & Gandalin filz de Gandalles."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.857,
+        "startPage": 36,
+        "title": "fu.xi. Comme le Roy Lisuart navigant par la mer, print port en Escoce, ou il fut grandement honnoré & bien recueilly."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.857,
+        "startPage": 46,
+        "title": "fu.xiiii. Comme Urgande la descogneue apporta une lance au Damoysel de la Mer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.885,
+        "startPage": 53,
+        "title": "fu. xix. Comme le Damoysel de la Mer, se combatit contre les gardes du chasteau de Galpan, & depuis contre ses freres, & à la fin avecques Galpan mesmes. chapitre, vii. fu.xxiii. Comme le troisjesme jour apres que le Damoysel de la Mer fut party du Roy Languines, arriverent les trois chevaliers qui menoient un chevalier navré dans une lictiere & sa desloyalle femme."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.929,
+        "startPage": 62,
+        "title": "fu.xxy. Comme le Roy Lisuart envoya vers la princesse Oriane sa fille, qu'il avoit long temps laissée en la court du Roy Languines, lequel la luy renvoya accompaignée de l'infante Mabile sa fille unicque, & de bonne compaignie de chevaliers, dames & damoyselles."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.947,
+        "startPage": 72,
+        "title": "fu. xxvii. Comme le Damoysel de la Mer combatit le Roy Abies, sur le different de la guerre qu'il menoit en Gaule."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.95,
+        "startPage": 77,
+        "title": "fu. xxxii. Comme le Damoysel de la Mer est cogneu par le Roy Perion son pere, & par la Royne Helisene sa mere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 1.0,
+        "startPage": 83,
+        "title": "fu-xxxiiii. Comme le Geant menant Galaor au Roy Lisuart, pour le faire chevalier, rencontra son frere Amadis, par la main duquel il le voulut estre, & non d'aultre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.833,
+        "startPage": 91,
+        "title": "fu. Xxxvii. Comme Galaor vainquit le Geant de la roche de Galtares,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 1.0,
+        "startPage": 99,
+        "title": "Comme Amadis au partir d'Urgande la descogneue, arriva en un chasteav ou il luy advint ce que entendrez."
+      },
+      {
+        "matchedOn": "title",
+        "number": 15,
+        "score": 0.889,
+        "startPage": 111,
+        "title": "fuxlu. Comme le Roy Lisuart feit eriger sepulchre à Dardan & à s'amye, avec epitaphes, pour memoire, & de l'honneur qu'il feit à Amadis, apres avoir esté trouvé & cogneu."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.952,
+        "startPage": 121,
+        "title": "fu li. Comme Amadis se feit cognoistre au Roy Lisuart, aux princes, & grands seigneurs de sa court : desquelz il fut haultement receu & festoyé."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.938,
+        "startPage": 129,
+        "title": "fueillet. lui. Quelles furent les adventures d'Agraies, depuis son retour de Gaule ou il avoit laissé Amadis. o chap-x vii.  fulx. Comme Amadis estant bien voulu en la maison du Roy Lisuart, entendit nouvelles de son frere Galaor."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.933,
+        "startPage": 146,
+        "title": "fu. lxy. Comme Amadis combatit contre Angriote & son frere, qui gardoient le passaige du val, contre ceulx qui ne vouloient accorder que leur amye estoit moins belle que celle d'Angriote."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.958,
+        "startPage": 155,
+        "title": "fu.lxix. Comme Amadis fut enchanté par Arcalaus, lors qu'il voulut delivrer la dame Grindaloya de prison, & aultres, puis eschappa de ses enchantemens, par l'ayde d'Urgande."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.897,
+        "startPage": 162,
+        "title": "fu. lxxiiii. Comme Arcalaus porta nouvelles à la court du Roy Lisuart que Amadis estoit mort, qui fut occasion de maintes lamentations & regretz que fei rent ses amys, especialement la pricesse Oriane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.92,
+        "startPage": 168,
+        "title": "fu. Ixx vii. Comme Galaor arriva fort blessé en un monastere, ou il sejourna quinze jours attendant qu'il feust guery, puis s'en partit, comme il vous sera declairé."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.85,
+        "startPage": 179,
+        "title": "fu lxxx. Comme Amadis se partit du chasteau de la dame, & des choses qui luy furent occurrentes en son chemin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 0.92,
+        "startPage": 183,
+        "title": "fu. Ixxxy. Comme le Roy Lisuart estant à la chasse, veid venir le long d'un grand che min trois chevaliers armez, & de ce qu'il leur advint. ch. xxiiii. fu. Ixxxvii. Comme Amadis, Galaor, & Balays, se delibererent d'aller ou estoit le Roy Lisuart, & des adventures qu'ilz leur survindrent entredeux. ch. xXv. fu xci. Comme Galaor fut venger la mort du chevalier qu'il avoit trouvé mort soubz l'arbre du carrefour."
+      },
+      {
+        "matchedOn": "title",
+        "number": 27,
+        "score": 0.92,
+        "startPage": 200,
+        "title": "fu. xciii. Comme Amadis courant apres le chevalier qui emmenoit la damoyselle par force, rencontra un aultre chevalier, contre lequel il combatit, & ce qu'il en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.8,
+        "startPage": 207,
+        "title": "fu xcvi. Comme Amadis se combatit contre le chevalier qui luy avoit desrobé la damoyselle ainsi qu'il dormoit, & le vainquit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 0.8,
+        "startPage": 210,
+        "title": "viji.  fu.xcix. Comme Balays se porta à l'entreprise de suyvre le chevalier qui avoit fait perdre le cheval à Galaor."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.923,
+        "startPage": 214,
+        "title": "fu. c. j. Comme le Roy Lisuart tint court magnifique, & de ce qu'il advint durant icelle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.938,
+        "startPage": 222,
+        "title": "fu. c. jii. Comme le Roy Lisuart s'en partit de Vindilisora, pour aller en sa bonne cité de Londres tenir court royalle. Comme le Roy Lisuart voulut avoir l'advis des princes & seigneurs sur ce qu'il avoit affaire, pour au plus hault exalter & entretenir chevalerie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.92,
+        "startPage": 233,
+        "title": "Comme durant ceste grande & joyeuseassemblée, vint en court une damoyselle vestue de dueil, requerir au Roy Lisuart ayde contre quelque tort qui luy avoit estéfait."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.87,
+        "startPage": 242,
+        "title": "fu. cx. Comme le Roy Lisuart fut en danger de perdre sa personne & ses estatz, par les promesses illicites qu'il feit troplegierement. cha XXXV. fu : cxy. Comme Amadis & Galaor sceurent que l'on avoit emmené le Roy prisonnier & sa fille, parquoy ilz se diligenterent de les aller secourir."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 1.0,
+        "startPage": 258,
+        "title": "Comme don Galaor delivra le Roy Lisuart de la prison, en laquelle on le menoit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 0.75,
+        "startPage": 264,
+        "title": "II.  fu. cxxiii. Comme les nouvelles vindrent à la Royne de la prinse du Roy, & que Bar sinan s'efforcoit d'usurper la ville de Londres."
+      },
+      {
+        "matchedOn": "title",
+        "number": 40,
+        "score": 0.917,
+        "startPage": 268,
+        "title": "fu : cxx vi. Cone Amadis vint au secours de la ville de Londres, ch. xxxix. fu. cxxviii. Comme le Roy Lisuart tint court en la ville de Londres plusieurs jours durant lesquelz furent festoyez maintz grandz personnaiges qui sy trouverent, la pluspart desquelz y sejournerent bien long temps apres."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 0.643,
+        "startPage": 217,
+        "title": "XX. Comme Amadis delibera d'aller combatre Abiseos & ses deux filz, pour venger la mort du Roy, pere de la belle Briolania, & de ce qu'il en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.966,
+        "startPage": 281,
+        "title": "Comme don Galaor s'en alla avec la dame, apres le chevalier qui avoit abbatu luy & ses compaignons, lequel il trouva, & combatirent ensemble, puis au plus fort du combat s'entrecogneurent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 0.733,
+        "startPage": 289,
+        "title": "fu. cxxxvi. Comme don Florestan fut engendré du Roy Perion, à la belle fille du comte de Selandria."
+      },
+      {
+        "matchedOn": "title",
+        "number": 44,
+        "score": 0.882,
+        "startPage": 300,
+        "title": "fu-cxxxix. Comme Galaor & Florestan cheminantz vers le royaulme de Sobradisa rencontrerent troys damoyselles à la fontaine des Oliviers."
+      }
+    ],
+    "missing": [
+      {
+        "folio": null,
+        "number": 1,
+        "title": "Ensuyt la table du premier livre d'Amadis de Gaule. Et premierement. QVelz furent les Roys Garinter & Perion, & d'un combat qu'eut icelluy Perion par cas fortuit contre deux chevaliers : Puis contre un Lyon qui devoroit un Cerf en leur presence, & de ce qu'il en advint."
+      }
+    ],
+    "passages": 42,
+    "precision": 0.81,
+    "recall": 0.971,
+    "spurious": [
+      {
+        "number": 2,
+        "startPage": 23,
+        "title": "Comme le Roy Perion partant de la petite Bretaigne cheminoit, ayant le cœur trop remply d'ennuy & de melancolie."
+      },
+      {
+        "number": 7,
+        "startPage": 58,
+        "title": "Comme le troisjesme jour apres que le Damoysel de la mer fut party du Roy Languines, arriverent les trois Chevaliers qui menoient un Chevalier navré dans une lictiere, & sa desloyalle femme. Chapitre. VIII."
+      },
+      {
+        "number": 17,
+        "startPage": 138,
+        "title": "Comme Amadis estant bien voulu en la maison du Roy Lisuart, entendit nouvelles de son frere Galaor."
+      },
+      {
+        "number": 24,
+        "startPage": 189,
+        "title": "Comme Amadis, Galaor & Balays se delibererent d'aller ou estoit le Roy Lisuart, & des adventures qui leur survindrent entredeux. Chapitre. XXV."
+      },
+      {
+        "number": 25,
+        "startPage": 196,
+        "title": "Comme Galaor fut venger la mort du chevalier qu'il avoit trouvé mort soubz l'arbre du carrefour."
+      },
+      {
+        "number": 32,
+        "startPage": 228,
+        "title": "Comme le Roy Lisuart vouleit avoir l'advis des princes & seigneurs sur ce qu'il avoit affaire, pour au plus hault exalter & entretenir chevalerie."
+      },
+      {
+        "number": 35,
+        "startPage": 249,
+        "title": "Comme Amadis & Galaor sceurentque l'on avoit emmené le Roy Lisuart prisonnier, & sa fille, parquoy ilz se diligenterent de les aller secourir. Chapitre XXXVI."
+      },
+      {
+        "number": 39,
+        "startPage": 275,
+        "title": "Comme Amadis delibera daller combatre Abiseos, & ses deux filz pour venger la mort du Roy pere de la belle Briolanie, & de ce qu'il en advint."
+      }
+    ],
+    "tocChapters": 35,
+    "unscorable": 1
+  },
+  "out": "book-1",
+  "structural": {
+    "anomalies": [],
+    "pages": 315,
+    "roleCounts": {
+      "body": 12417,
+      "footer": 411,
+      "header": 435,
+      "title": 192
+    },
+    "unresolvedAmbiguous": 0
+  },
+  "toc": {
+    "entries": 35,
+    "missingFolios": 30,
+    "repairedNumbers": 2,
+    "sequenceBreaks": 9,
+    "suspectFolios": 1
+  }
+}
