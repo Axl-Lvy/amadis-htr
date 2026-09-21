@@ -17,6 +17,15 @@ from typing import Iterable, Mapping, Sequence
 
 from amadis_htr.ground_truth import CONFIDENCES, Reference
 
+#: The accept thresholds the sweep reports, 0.40 to 1.00 in hundredths.
+#:
+#: Built by dividing integers rather than by adding 0.01 repeatedly. Repeated
+#: addition reaches 0.8600000000000001 at the forty-seventh step, and a piece
+#: scoring exactly 0.86 then falls on the other side of `score < threshold`,
+#: which moves one accepted piece in the catalogue cohort. The sweep is a
+#: decision boundary, so its thresholds are the numbers they are printed as.
+SWEEP_THRESHOLDS: tuple[float, ...] = tuple(x / 100 for x in range(40, 101))
+
 
 @dataclass(frozen=True)
 class Prediction:
@@ -80,6 +89,41 @@ def read_predictions(path: str | Path) -> dict[int, Prediction]:
                 score=float(row["score"] or 0.0),
             )
     return out
+
+
+def read_predictions_by_cohort(
+    path: str | Path,
+) -> dict[str, dict[int, Prediction]]:
+    """The same output, split on the import batch it came from.
+
+    The two batches are not one test set. The gate was pre-registered on the
+    workbook batch when it was the only one, so pooling them would be scoring
+    against a test set enlarged after the numbers were seen. Every figure the
+    report states is therefore per cohort, and this is where they part.
+    """
+    out: dict[str, dict[int, Prediction]] = {}
+    with open(path, encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            piece = int(row["piece"])
+            out.setdefault(row["cohort"], {})[piece] = Prediction(
+                piece=piece,
+                livre=_optional_int(row["livre"]),
+                chapter=_optional_int(row["chapter"]),
+                score=float(row["score"] or 0.0),
+            )
+    return out
+
+
+def references_for(
+    references: Mapping[int, Reference], predictions: Mapping[int, Prediction]
+) -> dict[int, Reference]:
+    """The reference rows one cohort is scored against.
+
+    A cohort is scored only on the pieces it holds. Keeping the other cohort's
+    references in the denominator would count every piece it never imported as
+    a piece this one failed to locate.
+    """
+    return {p: r for p, r in references.items() if p in predictions}
 
 
 def summarise(

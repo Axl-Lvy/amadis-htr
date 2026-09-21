@@ -1,14 +1,21 @@
 import math
+from pathlib import Path
 
 from amadis_htr.ground_truth import Reference
 from amadis_htr.localisation import (
+    SWEEP_THRESHOLDS,
     Prediction,
     read_ground_truth,
     read_predictions,
+    read_predictions_by_cohort,
+    references_for,
     summarise,
     sweep,
+    write_summary,
     write_sweep,
 )
+
+REPO = Path(__file__).resolve().parent.parent
 
 
 def _refs() -> dict[int, Reference]:
@@ -135,3 +142,52 @@ def test_writers_create_their_own_output_directory(tmp_path):
     out = tmp_path / "results" / "nested" / "sweep.csv"
     write_sweep(sweep(_refs(), _preds(), [0.0]), out)
     assert out.exists()
+
+
+def test_the_sweep_thresholds_are_the_numbers_they_are_printed_as():
+    # Adding 0.01 sixty times reaches 0.8600000000000001, and a piece scoring
+    # exactly 0.86 then falls on the other side of `score < threshold`. That is
+    # one accepted piece in the catalogue cohort, so the thresholds are built by
+    # dividing integers instead.
+    assert len(SWEEP_THRESHOLDS) == 61
+    assert SWEEP_THRESHOLDS[0] == 0.40 and SWEEP_THRESHOLDS[-1] == 1.00
+    assert SWEEP_THRESHOLDS[46] == 0.86
+    accumulated = [0.400 + 0.010 * i for i in range(61)]
+    assert accumulated[46] != 0.86
+
+
+def test_the_two_cohorts_are_read_apart():
+    by_cohort = read_predictions_by_cohort(REPO / "data/runs/matcher/alignments.csv")
+    assert set(by_cohort) == {"catalogue", "workbook"}
+    # The batches are disjoint: no piece was imported twice.
+    assert not set(by_cohort["catalogue"]) & set(by_cohort["workbook"])
+
+
+def test_a_cohort_is_scored_only_on_the_pieces_it_holds():
+    # Keeping the other cohort's references in the denominator would count
+    # every piece this batch never imported as one it failed to locate.
+    references = read_ground_truth(REPO / "data/localisation/ground-truth.csv")
+    by_cohort = read_predictions_by_cohort(REPO / "data/runs/matcher/alignments.csv")
+    scoped = references_for(references, by_cohort["workbook"])
+    assert set(scoped) <= set(by_cohort["workbook"])
+    assert len(scoped) < len(references)
+
+
+def test_the_committed_results_regenerate_from_the_committed_inputs(tmp_path):
+    # data/runs/ is frozen so the evaluation reruns on any machine with Python.
+    # That only means something while a rerun reproduces what is committed, so
+    # this is the check that eval/results was not hand-edited and that the
+    # matcher output behind it is the one the numbers came from.
+    references = read_ground_truth(REPO / "data/localisation/ground-truth.csv")
+    by_cohort = read_predictions_by_cohort(REPO / "data/runs/matcher/alignments.csv")
+    for cohort, predictions in by_cohort.items():
+        scoped = references_for(references, predictions)
+        summary = tmp_path / f"localisation-summary-{cohort}.csv"
+        sweep_out = tmp_path / f"localisation-sweep-{cohort}.csv"
+        write_summary(summarise(scoped, predictions), summary)
+        write_sweep(sweep(scoped, predictions, SWEEP_THRESHOLDS), sweep_out)
+        for produced in (summary, sweep_out):
+            committed = REPO / "eval/results" / produced.name
+            assert produced.read_text(encoding="utf-8") == committed.read_text(
+                encoding="utf-8"
+            ), f"{produced.name} does not match the committed copy"
