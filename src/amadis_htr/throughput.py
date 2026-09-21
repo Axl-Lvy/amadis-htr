@@ -11,6 +11,15 @@ books 13 to 24 (family B) do not: their `calibration.json` has no `toc` and no
 figure wearing the whole corpus's denominator, and family B's absence is a
 property of the books rather than a failure of the run. Throughput pools
 across both because a page is a page; structure does not.
+
+**The structural figures are hand-checked, not unaided.** Each book's
+`corrections.json` holds chapter decisions a reader made by hand, 128
+promotions and 217 demotions over family A, and `calibration.json` was written
+after them. What `structure.csv` reports is therefore the corrected detector,
+and the unaided figure is not in the artefacts at all. The macros carry the
+caveat in their names, and
+`docs/notes/2026-09-22-structural-figures-are-hand-checked.md` bounds what the
+difference could be.
 """
 
 import csv
