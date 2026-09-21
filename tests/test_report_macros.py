@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 import pytest
@@ -169,3 +170,40 @@ def test_a_rate_over_an_empty_band_is_an_error_not_a_zero(tmp_path):
     )
     with pytest.raises(ValueError, match="does not exist"):
         render_macros([macro], tmp_path)
+
+
+def test_every_figure_the_report_cites_is_a_macro_the_registry_defines():
+    # Rule 1's enforcement is an undefined control sequence, which only bites
+    # when Tectonic runs. That job is slow and needs a LaTeX toolchain, so the
+    # same breakage is caught here in the fast suite: a section citing a figure
+    # the evaluation has not produced fails before anyone builds a PDF.
+    #
+    # The registry is the vocabulary. Anything else a section uses is either a
+    # LaTeX control sequence or a macro from the preamble, so both are read and
+    # the difference is what has nothing behind it.
+    defined = {macro.name for macro in ALL_MACROS}
+    preamble = (REPO / "report/preamble.tex").read_text(encoding="utf-8")
+    defined |= set(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}", preamble))
+    generated = set(
+        re.findall(
+            r"\\newcommand\{\\([A-Za-z]+)\}",
+            (REPO / "report/generated/macros.tex").read_text(encoding="utf-8"),
+        )
+    )
+    assert generated == {macro.name for macro in ALL_MACROS}
+
+    for section in sorted((REPO / "report/sections").glob("*.tex")):
+        body = "\n".join(
+            line for line in section.read_text(encoding="utf-8").splitlines()
+            if not line.lstrip().startswith("%")
+        )
+        cited = set(re.findall(r"\\([a-z][A-Za-z]*)", body))
+        # A figure's name is the registry's own naming convention: a lowercase
+        # head followed by a capital. Plain LaTeX commands (\section, \emph,
+        # \ref) have no capital in them, so they do not reach this filter.
+        figures = {name for name in cited if any(c.isupper() for c in name)}
+        missing = sorted(figures - defined)
+        assert not missing, (
+            f"{section.name} cites {missing}, which no registry defines. "
+            "Either the evaluation behind it has not run, or the name is wrong."
+        )

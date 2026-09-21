@@ -100,6 +100,12 @@
 }
 \makeatother
 
+% A file name in this repository. \texttt and not url's \path: \path also
+% breaks a line after a hyphen, which opens a gap inside ground-truth.csv and
+% reads as though the name were being hyphenated. The names cited are short
+% enough to set unbroken.
+\newcommand{\file}[1]{\texttt{#1}}
+
 % 16th-century quotation. Set in the source language and left unnormalised,
 % because the orthography is the object of study.
 \newcommand{\qtr}[1]{\textfrench{\emph{#1}}}

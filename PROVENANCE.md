@@ -46,6 +46,13 @@ here so the omission is deliberate and visible:
 - the fine-tune at "approximately 0.58% CER on a standalone test", stated in the
   artefacts README with no test set, no log and no code behind it
 - a "759-page corpus" whose scope nothing records
+- the baseline text at "1,770 chapters" and "3,646,003 word tokens", and the
+  seed index at "518,743 seeds over 76,548 words". These are properties of the
+  production database, and the only read this repository ever took from it was
+  the alignment export recorded below, which carried no census. Section 3 of
+  the report therefore describes the search space without stating its size, and
+  `src/amadis_htr/corpus.py` records the omission beside the counts it does
+  derive.
 
 Each is either re-measured by this harness or dropped.
 

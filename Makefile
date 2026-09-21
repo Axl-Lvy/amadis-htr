@@ -11,7 +11,10 @@ all: report slides
 report: report/main.pdf
 slides: slides/main.pdf
 
-report/main.pdf: report/main.tex report/preamble.tex report/refs.bib report/generated/macros.tex
+SECTIONS = $(wildcard report/sections/*.tex)
+
+report/main.pdf: report/main.tex report/preamble.tex report/refs.bib \
+                 report/generated/macros.tex $(SECTIONS)
 	cd report && $(TECTONIC) $(FLAGS) main.tex
 
 slides/main.pdf: slides/main.tex report/preamble.tex report/generated/macros.tex
