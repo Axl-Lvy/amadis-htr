@@ -16,8 +16,8 @@ the baseline.
 
 The system works and is in production. What does not exist is a measurement of it. The
 only recognition figure anywhere is a validation CER on a 10% page-level split of a
-single volume. There is no figure of any kind for *Amadis de Gaule*, which is the
-larger of the two works, no word error rate, no measured baseline, no evaluation of either LLM pass, and the structural quality figures the
+single volume. There is no recognition figure of any kind for *Amadis de Gaule*, which
+is the larger of the two works, no word error rate, no measured baseline, no evaluation of either LLM pass, and the structural quality figures the
 pipeline itself computes are discarded on import.
 
 This repository exists to produce those measurements and the report that presents them.

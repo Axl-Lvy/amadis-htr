@@ -71,8 +71,8 @@ them. Why off-the-shelf OCR fails on 16th-century French print: long `ſ`, bâta
 drop caps, running heads and catchwords, folio numbering in two systems, three scan
 provenances of uneven quality. What exists today, which is one validation CER on a 10%
 page-level split of a single volume, and what that number cannot support. The gap, in
-the spec's own terms: no figure of any kind for *Amadis de Gaule*, no WER, no
-measured baseline, no
+the spec's own terms: no recognition figure of any kind for *Amadis de Gaule*, no
+WER, no measured baseline, no
 evaluation of either LLM pass, and structural figures the pipeline computes and
 discards. The three claims as the answer, one paragraph each, and a forward reference
 to the section that evaluates each.
