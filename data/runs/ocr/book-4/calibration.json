@@ -1,0 +1,377 @@
+{
+  "book": 4,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 100,
+        "expectedPage": 103,
+        "folio": 41,
+        "number": 16
+      },
+      {
+        "actualPage": 134,
+        "expectedPage": 37,
+        "folio": 8,
+        "number": 23
+      },
+      {
+        "actualPage": 149,
+        "expectedPage": 49,
+        "folio": 14,
+        "number": 24
+      },
+      {
+        "actualPage": 162,
+        "expectedPage": 63,
+        "folio": 21,
+        "number": 20
+      },
+      {
+        "actualPage": 175,
+        "expectedPage": 75,
+        "folio": 27,
+        "number": 10
+      },
+      {
+        "actualPage": 181,
+        "expectedPage": 81,
+        "folio": 30,
+        "number": 32
+      },
+      {
+        "actualPage": 198,
+        "expectedPage": 97,
+        "folio": 38,
+        "number": 34
+      },
+      {
+        "actualPage": 212,
+        "expectedPage": 201,
+        "folio": 90,
+        "number": 36
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.657,
+        "startPage": 23,
+        "title": "Ensuyt la table du quatriesme Livre d'Amadis de Gaule. Et premierement. u grand dueil que feit la Royne Sardamyre apres qu'elle sceut la mort du prince Saluste Quide, & de larrivée de Oriane en lisle ferme."
+      },
+      {
+        "matchedOn": "folio",
+        "number": 2,
+        "score": 1.0,
+        "startPage": 38,
+        "title": "fo premier Description de l'ignographie & plant dupalais que A polidon avoit faict construyre enlisse ferme."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.833,
+        "startPage": 46,
+        "title": "Du propos quetint Amadis à Grasinde, & de la responce qu'elle luy seit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.833,
+        "startPage": 53,
+        "title": "Des propos que Oriane & Mabile eurent avec Gandalin, & de ce qu'il feit entendre depar elles à Amadis. chay. foxvi Comme nouvelles vindrent au roy Lisuart de la deffaicte des Romains, & de la prinse de Oriane, dontil fut trop desplaisant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.727,
+        "startPage": 63,
+        "title": "Lettre envoyée par Oriane estanten lisle ferme à la Royne samerc."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.783,
+        "startPage": 68,
+        "title": "Comme le roy Lisuart tint conseil sur ce quil avoit affaire contre les chenaliers de lisle ferme, & de la resolution qui sut prinse."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.852,
+        "startPage": 74,
+        "title": "Comme Quedragant & Briam essans en haulte mer furent gettez par la tempeste si loing de leur chemin qu'ayans perdu toute comngnoissance de terre, rencontrerent casuellement la royne Briolanie, & de cequileuraduint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.556,
+        "startPage": 83,
+        "title": "Du Rapport que feirent Quedragant & Briam aux chevaliers de lisle serme de lembassade ouilz avoientesléenvoyez, & de cequ'ilenfut ordonné."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.632,
+        "startPage": 84,
+        "title": "soxexi. Comme maistre Helizabel arrivaes pais de Grasande, puis passi en Constantinople vers L'empereur, suyvant le commandement de Amadis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 0.727,
+        "startPage": 88,
+        "title": "Comme Gandalinatriva en Gaule, & des propos quil tint au Roy Perion."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.917,
+        "startPage": 91,
+        "title": "Comme Guislan le pensif arriva vers L'empereur de Rome, Filipinel en Suese, & Brandoyvas enyolande."
+      },
+      {
+        "matchedOn": "title",
+        "number": 39,
+        "score": 0.75,
+        "startPage": 94,
+        "title": "Comme Grasandofilz du Roy de Boesme estant en mer, rencontra Gyontes, & de cequ'illeuradvint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.857,
+        "startPage": 100,
+        "title": "Comme L'empereur de Rome print port, avec son armée a vindilisore, ou le Roy Lisuart l'attendoit, & de ce qu'il leul advint. chapitre xu. foxxxix. Comme le Roy Perion futadverty du deslogement deses ennemys, & de l'ordre quil tint pouraller au devant les combatre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.762,
+        "startPage": 106,
+        "title": "Comme Gaudalin, & Lasinde escuyer de Bonneo de bonne mer su rent faictz chevaliers, & de la bataille que se donnerent les Roys Lisuart & Perion."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.769,
+        "startPage": 113,
+        "title": "De l'ordre du combat que tindrent les deux arménes estans les tresves finées."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.95,
+        "startPage": 117,
+        "title": "Des propos que le Roy Lisuart eut avec les Romains apres la bataille donnée, & comme le sainct homme Nascian qui gouverna Splau dian en ses jeunes ans, sachant ceste guerre partit de son hermitaige pour venir vers les deux Roys essayer à les mettre en bonne paix,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.783,
+        "startPage": 130,
+        "title": "Comme le Roy Aravigue estantadverty de la perte qu'avoit faicte le Roy Lisuart, & du deslogement de son camp, delibera de luy donner labataille."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 1.0,
+        "startPage": 134,
+        "title": "Comme le Roy Lisuart fut assailly du Roy Aravigue qui le deffit, & du secours que luy donna Amadis. chap-xxij. folvi. Comme Amadis vint au secours du Roy Lisuart, & de la deffaicte du Roy Aravigue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 0.818,
+        "startPage": 149,
+        "title": "Comme le Roy Lisuart arriva à Vindilisore, oulattendit la Royne laquelle il feit peu apres desloger, avec sa fille Lconor pour allet en lisle ferme."
+      },
+      {
+        "matchedOn": "title",
+        "number": 25,
+        "score": 0.857,
+        "startPage": 151,
+        "title": "Comme leroy Perion & sa compaignie prindrent le cheminde lisle Ferme, & de ce qu'ilz feirent avant l'arrivée du roy Lisuart vers eulx."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 0.913,
+        "startPage": 157,
+        "title": "y Comme Bonneo de bonne mer, & Branfil furent ordonnez pour aller en Gaule querir la royne Helisene & Galaor, & des adventures quilz eurent en retournant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.812,
+        "startPage": 162,
+        "title": "Comme Bonneo de bonne mer, Branfil, & Angriote suyvirent la royne de Dace, & des adventures qu'ilz eurent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.846,
+        "startPage": 169,
+        "title": "Comme le roy Lisuart, la royne Brisene, & Leonor leur fille partirent de Vindilisore pour venir en lisle Ferme, ainsi qu'il avoit esté deliberé aupartir de Lubanie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 0.963,
+        "startPage": 173,
+        "title": "viijfolxxiiii Des propos que Amadis eut avec son cousin Dragonis en luy donnant le royaulme de la profonde Isle & la princesse Estoillette à femme, qu'il aymoit de long temps."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.857,
+        "startPage": 175,
+        "title": "Comme les nopces de Amadis, de Oriane, & des autres princes & dames furent celebrées en lisle Ferme, ou le jour mesmes Oriane esprouva l'arc des loyaulx amans de la chambre deffendre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.923,
+        "startPage": 181,
+        "title": "Comment Urgande la descongneue exposa devant tous les choses qu'elle avoit predictes estre advenues, & comme elle print congé d'Amadis & de toute la compaignie pour s'en retourner cha xxxj. folxxx Comme Amadis se partit seul pour aller venger le chevalier qu'une dame avoitemmené mort en ung basteau, & de ce qu'il luy advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.562,
+        "startPage": 198,
+        "title": "y Comme Dariolette voyant Amadis en tel dangier faisoit ung dueil merveilleux, & comme Balan & luy devindrent amys."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.769,
+        "startPage": 204,
+        "title": "Comme Grasandor entra en queste pour trouver Amadis, & des adventures qu'ileut en son voyaige."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.8,
+        "startPage": 212,
+        "title": "Comme estant Amadis en lisle Vermeille, devisant avec Grasander, veirent en mer une fuste, laquelle vint à port, ou ily avoit gens quileur dirent nouvelles de l'armée qui estoit alléc en Sansuegue & auxlsles des Landes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.85,
+        "startPage": 230,
+        "title": "y Comme estant Balan en la tente de Galvanes, les principaulx de l'armée le vindrent veoir, & des propos qu'ilz eurentensemble."
+      }
+    ],
+    "missing": [
+      {
+        "folio": 3,
+        "number": 20,
+        "title": "Comme Nascian retourna vers le Roy Lisuart, avec la responce du Roy Perion."
+      },
+      {
+        "folio": null,
+        "number": 30,
+        "title": "vij. Comme leroy Lisvartestantà la chasse sucprins prisonnier paren chantement, & de ce quilenadvint."
+      }
+    ],
+    "passages": 35,
+    "precision": 0.857,
+    "recall": 0.938,
+    "spurious": [
+      {
+        "number": 5,
+        "startPage": 60,
+        "title": "Comme nouvelles vindrent auRoy Lisuart de la deffaite des Romains, & de la prinse"
+      },
+      {
+        "number": 15,
+        "startPage": 104,
+        "title": "Comme le Roy Perion fut adverty du deslogement de ses ennemys, & de l'ordre"
+      },
+      {
+        "number": 29,
+        "startPage": 186,
+        "title": "Comme Amadis se partit seul pour aller venger le Chevalier qu'une dame avoit emmené morten un basteau, & de ce qu'il luy advint."
+      },
+      {
+        "number": 30,
+        "startPage": 191,
+        "title": "Comme Amadis sortit duport de l'Isle de l'Infante, pour suyvre la routte qu'il avoit entreprinse."
+      },
+      {
+        "number": 35,
+        "startPage": 234,
+        "title": "Comme Le Roy Lysuart estant à la chasse fut prins prisonnier par enchantement & de ce qu'il en advint."
+      }
+    ],
+    "tocChapters": 32,
+    "unscorable": 2
+  },
+  "out": "book-4",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 4
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 5
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 6
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 7
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 8
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 9
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 10
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 245
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 246
+      }
+    ],
+    "pages": 246,
+    "roleCounts": {
+      "body": 8800,
+      "footer": 143,
+      "header": 285,
+      "title": 138
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 32,
+    "missingFolios": 10,
+    "repairedNumbers": 6,
+    "sequenceBreaks": 17,
+    "suspectFolios": 9
+  }
+}

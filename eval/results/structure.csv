@@ -1,0 +1,2 @@
+cohort,books,pages,toc_chapters,matched,missing,spurious,recall,precision
+A,12,3658,587,580,7,169,0.988075,0.774366

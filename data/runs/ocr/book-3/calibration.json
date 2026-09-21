@@ -1,0 +1,195 @@
+{
+  "book": 3,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 80,
+        "expectedPage": 69,
+        "folio": 30,
+        "number": 7
+      },
+      {
+        "actualPage": 99,
+        "expectedPage": 89,
+        "folio": 40,
+        "number": 9
+      },
+      {
+        "actualPage": 141,
+        "expectedPage": 39,
+        "folio": 15,
+        "number": 13
+      },
+      {
+        "actualPage": 150,
+        "expectedPage": 157,
+        "folio": 74,
+        "number": 14
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.952,
+        "startPage": 22,
+        "title": "omme Amadis estant en l'Isle Ferme, s'enquist à Gandalles des nouvelles de la court du Roy Lisuart, deliberant passer en Gaule avec Bruneo, pour eviter sa melencollie. Et des avantures qui luy survindrent par la tempeste qui le gecta en l'Isle Triste."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.793,
+        "startPage": 32,
+        "title": "Comme le Roy Cildadan & Galaoren allant vers le Roy Lisuart, rencomntrerent douze Chevaliers & une dame qui conduisoient un jeune damoy sel, laquelle les pria de supplier le faire Chevalier."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.971,
+        "startPage": 44,
+        "title": "Comme le Roy Lisuart eut bataille contre les Chevaliers de l'Isle Ferme, lesquelz il deffit, & de la grande liberalité dont il usa depuis envers Galvanes, en luy restituant toutes les terres & pays de Madasime."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.78,
+        "startPage": 52,
+        "title": "Comme Amadis estant avec le Roy Perion son pere, se trouva merveilleusement melancolique se voyant eslogné d'Oriane, & au contraire Bru neo trescontent ayant occasion aysée de veoir & parler à Melicie quand il vouloit, & des entreprises qu'ilz feirent l'un & l'autre, pour passer leurs fan tasies."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.867,
+        "startPage": 64,
+        "title": "Comme les Chevaliers aux armes des serpens, retournans en Gaule eurent fortune contraire qui les jecta en lieu ou Arcalaus les cuida faire mourir, & de ce qui leur advint depuis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.926,
+        "startPage": 80,
+        "title": "Comme Splandian estoit nourry avec l'Hermite Nascian, & des grandes adventures qu'eut en ce temps Amadis, changeant de nom, en se faisant apeller le chevalier à la verde espée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.884,
+        "startPage": 92,
+        "title": "V. Comme le Roy Lisuart chassantien la forest ou il avoit laissé les dames, trouva causuellement un jeune damoysel, lequel luy monstra le chemin de l'Hermitage, ou Nascian le bon Hermite se tenoit : Et fut cest enfantre cogneu longtemps apres pourfilz d'Amadis & d'Oriane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.875,
+        "startPage": 99,
+        "title": "Comme le Chevalier à la verde espée estant party d'avec le Roy Tafinor de Boesme, vint es marches de Romanie, ouil touva Grasinde sur les an jii champs champs acompagnée de plusieurs gentilz hommes, dames & damoyselles, mesmes d'un Chevalier nommé Brandasidel : lequel le vouloit contraindre par force d'armes faire venir parler à icelle Grasinde, & du combat qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.921,
+        "startPage": 107,
+        "title": "u. Comme quelque temps apres que le Chevalier à la Verde Espée eut fait voille en mer, & laissé les Isles de Romanie, fut jecté par fortune en l'Isle du dyable, ou il combatit contre un monstre appellé Endriague."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.704,
+        "startPage": 116,
+        "title": "Comme le Chevalier à la verde espée feit entendre à l'Empereur de Con stantinople, à qui appartenoit l'Isle ou il avoit occis l'Endriague, la fortu ne & grande victoire qu'il avoit eue, & des choses qui luy advindrent depuis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 0.885,
+        "startPage": 129,
+        "title": "Comme le Chevalier à la verde espée partit de Constantinople pour satisfaire la promesse qu'il avoit faite à la belle Grasinde, & de ce qu'il enad vint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.778,
+        "startPage": 141,
+        "title": "Comme la Royne Sardamire arriva avec les autres ambassadeurs de l'em pereur Patin à la court du Roy Lisuart esperans emmener à leur retour Oriane, & de cequ'il advint à aucus Chevaliers Romains injurians un Chevalier errant."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.774,
+        "startPage": 150,
+        "title": "refleur vers Oriane puis qu'il avoit si mal traicté ses Chevaliers qui luy te Comme la Royne Sardamire envoya prier Florestan de la conduire à Mi noient compagnie qu'ilz ne la pouoient suyvre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.7,
+        "startPage": 169,
+        "title": "Comme le Chevalier Grec & ses compagnons, conduirent la belle Grasinde, au lieu ou le combat devoit estre fait, & de ce qu'il en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.903,
+        "startPage": 177,
+        "title": "Comme le Roy Lisuart envoya querir Oriane, pour la livrer aux Romains & de ce qu'il advint à un Chevalier de l'Isle Ferme, mesmes du conbat qu'eut Grumedan contre ceulx qui l'avoient deffié."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.862,
+        "startPage": 191,
+        "title": "Comme le Roy Lisuart livra aux ambassadeurs de l'Empereur sa fille Oriane & autres damoyselles pour les conduire à Rome, lesquelles peu apres furent secourves des Chevaliers de l'Isle Ferme."
+      }
+    ],
+    "missing": [
+      {
+        "folio": 1,
+        "number": 1,
+        "title": "Cy commence la Table du Et premierement."
+      }
+    ],
+    "passages": 17,
+    "precision": 0.941,
+    "recall": 0.941,
+    "spurious": [
+      {
+        "number": 14,
+        "startPage": 158,
+        "title": "Comme le Chevalier a la Verde espée, nommé depuis le chevalier Grec, Bruneo de bonne mer, & Angriotte d'Estravaulx, s'embarquerent en la compaignie de la belle Grasinde, & de ce quilleuradvint."
+      }
+    ],
+    "tocChapters": 17,
+    "unscorable": 1
+  },
+  "out": "book-3",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 9
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 10
+      }
+    ],
+    "pages": 198,
+    "roleCounts": {
+      "body": 7756,
+      "footer": 83,
+      "header": 233,
+      "title": 119
+    },
+    "unresolvedAmbiguous": 0
+  },
+  "toc": {
+    "entries": 17,
+    "missingFolios": 1,
+    "repairedNumbers": 0,
+    "sequenceBreaks": 1,
+    "suspectFolios": 3
+  }
+}

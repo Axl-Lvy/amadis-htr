@@ -1,0 +1,218 @@
+{
+  "book": 2,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 24,
+        "expectedPage": 51,
+        "folio": 21,
+        "number": 7
+      },
+      {
+        "actualPage": 96,
+        "expectedPage": 105,
+        "folio": 48,
+        "number": 13
+      },
+      {
+        "actualPage": 137,
+        "expectedPage": 35,
+        "folio": 13,
+        "number": 17
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.898,
+        "startPage": 11,
+        "title": "Cy commence la Table Et premierement. Le second livre d'Amadis de Gaule, au commencement duquel sera fait description de l'Isle Ferme, qui y feit les enchantements, & meit les grandz thesors qui sy trouverent. Et fait l'acteur ce discours, pource qu'au quart livre il n'est quasi propos d'aultre chose que de ce qui advint en icelle Isle, tant à Amadis qu'à maintz aultres chevaliers estranges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.939,
+        "startPage": 16,
+        "title": "Comme Amadis, Galaor, Florestan, & Agraies, ayants prins congé de la belle Briolania, pour retourner vers le Roy Lisuart, furent conduictz en l'Isle Ferme, pour y esprouver l'arc des loyaulx amants, & les aultres adventures d'icelle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.947,
+        "startPage": 26,
+        "title": "Comme Durin s'en partit pour aller vers Amadis, auquel il presenta les letres d'Oriane. Et du mal qu'il en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.967,
+        "startPage": 30,
+        "title": "Comme Gandalin & Durin suivirent le chemin qu'Amadis avoit prins, & luy porterent ses armes qu'il avoit oubliées, puis le trouverent dormant : Et comme il se combatit contre un chevalier qu'il vaincquit. fueillet. vi."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.786,
+        "startPage": 37,
+        "title": "Quel estoit le chevalier vaincu par Amadis : Et de ce qui luy estoit advenu avant qu'il eust combat contre luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.931,
+        "startPage": 41,
+        "title": "Comme don Galaor, Florestan, & Agraies entreprindrent la queste d'Amadis, lequel ayant laissé ses armes, changea son nom, & se retira en un hermitaige avecqu' un hermite tresancien, poury vivre solitairement."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.714,
+        "startPage": 24,
+        "title": "Comme Durin retourna vers la princesse Oriane, à laquelle il feit entendre les piteuses nouvelles d'Amadis, & du grand dueil qu'elle feit apres avoir sceu le desespoir de luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.893,
+        "startPage": 55,
+        "title": "Comme don Guilan le pensif, porta en la court du Roy Lisuart l'escu, & les armes les armes d'Amadis qu'il avoit trouvées à la fontaine du plain champsans aulcune garde."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.963,
+        "startPage": 61,
+        "title": "Comme estant le beau Tenebreux en la Roche pauvre avecqu' l'hermite, y arriva une nef, en laquelle estoit Corisande, cherchant son amy Florestan, Et de ce qu'il leur advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.956,
+        "startPage": 70,
+        "title": "Comme estant la damoyselle de Dannemarc en la queste d'Amadis, apres maintz grandz travaulx qu'elle eut, traversant plusieurs Isles estranges, arriva de fortune en la Roche pauvre, ou estoit Amadis que l'on appelloit le beau Tenebreux, lequel elle recogneut : Et s'en retournerent ensemble vers Oriane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.97,
+        "startPage": 77,
+        "title": "Comme Galaor, Florestan & Agraies partirent de l'Isle Ferme pouraller chercher Amadis, duquel ilz ne peurent avoir nouvelles, pour diligence qu'ilz feissent : au moyen dequoy ilz retournerent tous à la court du Roy Lisuart."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 0.949,
+        "startPage": 88,
+        "title": "Comme estant le Roy Lisuart à table, se vint presenter un chevalier estrange, armé de toutes pieces, qui le deffia des propos que Florestan eut avecqu' luy : Et comme Oriane fut consolée pour les bonnes nouvelles qu'elle eut d'Amadis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.926,
+        "startPage": 96,
+        "title": "Comme le beau Tenebreux envoya faire faire un nouveau harnoys à Londres, par Enil son Escuyer : Et des adventures qui luy advindrent enallant à Mirefleur veoir Oriane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.881,
+        "startPage": 107,
+        "title": "Comme apres que le beau Tenebreux eut achevé ces adventures, il se retira à la Fontaine des trois Canalz, & de là print le chemin de Mirefleur, ou il trouva Oriane, avecqu' laquelle il demoura huict jours entiers : & au mesme temps arriva à la court du Roy Lisuart un gentilhomme portant deux joyaulx singuliers, pour esprouver les loyaulx amants, lesquelz Amadis & Oriane delibererent essayer sans estre cogneuz du Roy ne d'aultres."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.886,
+        "startPage": 116,
+        "title": "Comme la damoyselle de Dannemarc fut envoyée à Londres, sçavoir quelle response Enil avoit obtenue du Roy, sur le saufconduict que demandoit le beau Tenebreux : lequel depuis y mena Oriane esprouver les joyaulx estranges. Chapitre xy. fueillet. liii. Comme apres que le beau Tenebreux eut r'amenée Oriane à Mirefleur, il s'en partit pour estre en la bataille avecqu' le Roy Lisuart : Et de ce qu'il luy advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.929,
+        "startPage": 137,
+        "title": "Comme le Roy Cildadan & Galaor à leur deceu furent emportez par douze damoyselles, & mis l'un en une forte tour environnée de mer : & l'aultre en un jardin cloz de hautz murs, ou ilz pensoient estre en prison : Et de ce qu'il leur advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.833,
+        "startPage": 147,
+        "title": "Comme le soir ensuyvant, estant le Roy hors de table, se promenant le longdes galeries de son palays, advisa en mer deux grandz feuz qui venoient droict en la ville."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.985,
+        "startPage": 154,
+        "title": "Comme apres le partement d'Urgande, estant le Roy Lisuart prest à monter à cheval pour executer l'entreprinse, qu'il avoit faite sur l'Isle du Lac ardent, se presenta devant luy une damoyselle Geante, qui estoit venue par mer, sçavoir de luy s'il luy plaisoit remettre la querelle qu'il pretendoit en ce voyage, sur le combat d'Ardan Canile, contre Amadis de Gaule, soubz les conditions qui vous seront desduictes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.909,
+        "startPage": 168,
+        "title": "t. Comme Bruneo de bonne mer combatit Madamain l'ambitieux, frere de la damoyselle injurieuse : & de l'accusation que feirent aulcuns ennemys d'Amadis au Roy : parquoy luy & maintz aultres qui le voulurent suivre, sabsenterent de la court."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.929,
+        "startPage": 180,
+        "title": "Comme Amadis avecqu' plusieurs de ses compaignons quitterent le service du Roy Lisuart, & s'enallerent esprouver les adventures, tant de l'arc des loyaulx amoureux, que de la chambre defendue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.944,
+        "startPage": 190,
+        "title": "y. Comme Oriane se trouva en grande perplexité, non seulement à cause du departement d'Amadis, mais pource qu'elle se sentit grosse d'enfant : Et de ce qu'il advint aux douze chevaliers qui estoient partiz de l'Isle Ferme, pour tirer hors de captivité Madasime, & ses damoyselles : lesquelles le Roy Lisuart vouloit faire mourir à grand tort."
+      }
+    ],
+    "missing": [],
+    "passages": 22,
+    "precision": 0.955,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 16,
+        "startPage": 127,
+        "title": "Comme apres que le beau l'enebreux eut remenée Oriane à Myrefleur, il s'en partit pour estre en la bataille avecqu' le Roy Lisuart : & dece qu'il luy advint. Chapitre AXVI."
+      }
+    ],
+    "tocChapters": 21,
+    "unscorable": 0
+  },
+  "out": "book-2",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 203
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 204
+      }
+    ],
+    "pages": 204,
+    "roleCounts": {
+      "body": 7821,
+      "footer": 108,
+      "header": 256,
+      "title": 163
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 21,
+    "missingFolios": 3,
+    "repairedNumbers": 1,
+    "sequenceBreaks": 1,
+    "suspectFolios": 2
+  }
+}

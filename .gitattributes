@@ -1,0 +1,10 @@
+# The evaluation's outputs have to round-trip byte for byte: a rerun on
+# unchanged inputs rewrites them identically, and the suite asserts it. Python's
+# csv.writer terminates rows with CRLF, as RFC 4180 asks, so any end-of-line
+# conversion on checkout would make a fresh clone fail a test that passes here.
+# core.autocrlf is a per-developer setting, so the guarantee is pinned in the
+# repository instead of left to whoever cloned it.
+eval/results/*.csv -text
+data/runs/**/*.csv -text
+data/localisation/*.csv -text
+data/gold/splits/*.csv -text

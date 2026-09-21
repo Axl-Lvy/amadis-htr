@@ -1,0 +1,701 @@
+{
+  "book": 8,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 42,
+        "expectedPage": 53,
+        "folio": 16,
+        "number": 10
+      },
+      {
+        "actualPage": 53,
+        "expectedPage": 63,
+        "folio": 21,
+        "number": 12
+      },
+      {
+        "actualPage": 68,
+        "expectedPage": 65,
+        "folio": 22,
+        "number": 14
+      },
+      {
+        "actualPage": 93,
+        "expectedPage": 97,
+        "folio": 39,
+        "number": 21
+      },
+      {
+        "actualPage": 161,
+        "expectedPage": 65,
+        "folio": 22,
+        "number": 41
+      },
+      {
+        "actualPage": 261,
+        "expectedPage": 33,
+        "folio": 6,
+        "number": 60
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.875,
+        "startPage": 25,
+        "title": "fueili. Comme Zair, par le conseil d'Abra, entreprit d'aller à Trebisonde voir & conquerir la Princesse Onolorie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.938,
+        "startPage": 29,
+        "title": "Comme l'Empereur de Trebisonde & sa compagnie entrerent en la grand' cité, & de l'arrivée d'Urgande, qui troubla aucunement toute l'asemblée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.944,
+        "startPage": 34,
+        "title": "Comme Zair Soudan de Babilone envoya demander saufconduit à l'Empereur, à fin de le visiter & sous couleur dequoy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.8,
+        "startPage": 36,
+        "title": "Des propoz, que Lisuart & Perion eurent au jardin, avec Onolorie & Gricilerie, la nuict precedante que Zair prit terre : Et de l'entrée d'iceluy Zair en Trebisonde."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.893,
+        "startPage": 40,
+        "title": "Comme le Soudan Zair à table, & trop passionné de l'amour de l'Infante onolorie, defia, pour l'amour d'elle, à la jouste tous Chevaliers, qui voudroient faire armes, pour l'amour de leurs amyes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.808,
+        "startPage": 42,
+        "title": "Comme Lair se maintint les huit premiers jours, & d'une lettre, qu'il escrivit à l'Infante Onolorie, dont elle ne se trouva on seul brin contente. Cha. vii. Fue.xiComme Zirfée Royne d'Argenes arriva à la Court de l'Empereur : Et de ce qui se passa entre elle & Urgande la Descogneue. Cha viii. Fueil. xii. Comme le vaillant Birmartes arriva en la Court de l'Empereur de Trebisonde, poursuyvant l'entreprise qu'il avoit faite sur l'image de l'Infante Onorie, & du combat qu'il eut contre Zair. cha ix. Fueil. xivi. Comme l'Infante Abra descouurit sa pensée à Lisuart de Grace, & la response qu'il luy fit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 0.562,
+        "startPage": 53,
+        "title": "Comme le Soudan Zair, & l'Infante Abra sa sœur, avec les Roys & Princes de leur troupe, se firent Crestienner, & de l'esmeute qui avint en la Court de l'Empereur. cha.xi. Fueillet. xviiComme l'Empereur envoya dire à Lisuart, & à l'Infante Onolorie, qu'ilz eussent à trouver deux Chevaliers, qui entrassent en champ de bataille pour soustenir leur droit à l'encontre des freres du Roy d'Egipte, & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.909,
+        "startPage": 65,
+        "title": "Comme Lisuart & la Princesse Onolorie furent amenez sur un eschafault, pour voir quelle seroit l'issie du Chevalier, qui soustenoit leur droit & justistcation."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.8,
+        "startPage": 68,
+        "title": "Du combat qui fut entre Fulurtin, Macartes, & Zaharan: Et du grand Chevalier qui survint au camp, par le moyen duquel Lisuart & Onolorie demeurerent absouz, & les deux assaillans vaincuz."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.947,
+        "startPage": 71,
+        "title": "Comme le grand Chevalier cheminant avec Lisuart fut cogneu de luy : Et des propoz qu'ilz eurent ensemble. chapitre xy. fueillet xxy. Comme l'Empereur de Trebisonde sceut pour certain, que le grand Chevalier entré le dernier au camp estoit Gradafilée, dont il s'esbahit grandement, & tous ceux de sa Court aussi."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.762,
+        "startPage": 76,
+        "title": "fveil xxvii. Comme le Roy Amadis, & Amadis de Grace, surnommé le Chevalier de l'ardante Espée, delivrerent de mort Birmartes, & furent faitz amys."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.833,
+        "startPage": 81,
+        "title": "fveil xxviii. Comme Niquée envoya chercher Amadis de Grece, surnommé le Chevalier de l'ardante Espée : & d'une lettre qu'elle luy escrivit par son Nain Bugando. chapitce xviii. fveil XXX. Comme apres qu'Amadis de Grace eut la lettre de Niquée, r'envoya Buzando vers elle : & de la response qu'il luy fit"
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.852,
+        "startPage": 93,
+        "title": "fu.xxxiiii. Comme Amadis de Grace cheminant droit à Londres, rencontra deux Chevaliers, qui à bride abatue couroient l'un apres l'autre, le dernier desquelz le desarconna inopinément. chapitre xxfueil xxxvi. Comme le Roy Amadis & les Dames retournerent à Mirefleur : Et de propoz brus que depuys Amadis de Grece &y Lucelle eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.684,
+        "startPage": 101,
+        "title": "Comme Bugando presenta à Niquée la lettre, que luy escrivit Amadis de Grace : Et de ce qu'il en avint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.844,
+        "startPage": 104,
+        "title": "Comme allant Nequée faire quelque sejour en un palais qu'avoit le Soudan el dans la forest, futrencontrée casvellement par Anastarax son frere, qui (ne la cognoissant) en devint trop amoureux chaxxiii. fveil. xlii. Comme Zirfée prevoyant la fin des amours de Niquée & Anastarax, les enchanta tous deux, & maintz autres, qui depuys voulurent les aller voirchapitre xxijii. fueillet xlivii. Comme l'Empereur de Constantinople assembla grosse armée, pour courre sus à l'Empereur de Trebisonde, & venger l'injure de Perion & Lisuart de Grace."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 0.9,
+        "startPage": 115,
+        "title": "Comme la Princesse Onolorie acoucha secret ment d'une fille : Et des regretz qu'elle faisoit pour l'absence de son mary & amy"
+      },
+      {
+        "matchedOn": "title",
+        "number": 27,
+        "score": 0.789,
+        "startPage": 118,
+        "title": "fuxlviiDe la grande trahison, que fit Zair Soudan de Babilone, pour ravir Onolorie : Et de ce qui en auint"
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 0.818,
+        "startPage": 121,
+        "title": "fueil xlvinn. Comme l'Empereur de Trebisonde & sa compagnie furent recoux Zair occis, & son arnée defaite, par celle du Roy Amadis de Gaulechapitre xxviit. Qui furent ceux qui emmenerent Buxando : Et de l'arrinée d'Amadis de quece à Alfarin, poursuyvant tousjours son entreprise."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.895,
+        "startPage": 129,
+        "title": "fveil li. Comme Amadis de Grece combatit le Geant Cynofal, & le vainquit, sur la querelle de la Royne Liberna"
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.81,
+        "startPage": 132,
+        "title": "fveil. lijji. Comme le Chevalier sans repos combatit Albernis, & le mit à mort, rendant la Royne Liberna paisible du Royaume d'Alexandrie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.739,
+        "startPage": 139,
+        "title": "fveil. luiComme Abra arrina en Babilone, ou la vint peu apres trouver Zabara Royne de Caucase, laquelle depuys envoya defier Lisuart de Grace, sçachant la mort de Zair."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.905,
+        "startPage": 142,
+        "title": "fveil lix. Comme le Chevalier sans Repos & la Royne Liberna furent voir la gloire de Niquée, ou elle entra, & luy non."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.714,
+        "startPage": 144,
+        "title": "Comme Lidia messagere d'Abra vint trouver Lisuart, & luy presenta la letrre de sa maistresse."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 0.952,
+        "startPage": 147,
+        "title": "let lxiiComme la Royne de Sarmarte, envoyée par Zahara, presenta le cartel qu'elle escrivoit à Lisuart : & de la response qu'il luy fit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.8,
+        "startPage": 149,
+        "title": "fveil. lxiii. Comme Abra & Zahara receurent la response des cartelz, qu'elles avoient envoyez à Lisuart"
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 0.806,
+        "startPage": 152,
+        "title": "fveil lxiin. Comme Amadis de Grace rencontra un Damoysel, qui luy monstra les pourtraitz des quatre plus belles Dames du monde, que le Roy Mouton avoit osté à Buzando le Nain."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 0.6,
+        "startPage": 155,
+        "title": "freil lxvi. Comme Amadis de Grace prit port en l'Isle Depeuplée, ou il trouva une estrange avanture : & de ce qui luy auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 0.926,
+        "startPage": 161,
+        "title": "Comme Amadis de Grece fut au chasteau de l'Isle de Lica, pour delivrer Bugando le Nain des mains du Roy Mouton, qui le tenoit prisonnier. cha. xexix. fueil lxx, Comme Buzando fit entendre à Amadis de Grece le vouloir de Niquée, luy baillant la lettre qu'elle luy escrivoit. cha.xl. fueil, lxxis. Comme Amadis de Grœce ayant eu combat contre yn grand Chevalier, fut destourné d'aller esprouver la gloire de Niquée, & la cause pourquoy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.929,
+        "startPage": 175,
+        "title": "Comme l'Imperatrix de Babilone & la Royne de Caucase arriverent en la Court de l'Empereur de Trebisonde, ou fut acordé des armes & du jour, que Lisuart & Zabara se combatroient"
+      },
+      {
+        "matchedOn": "title",
+        "number": 44,
+        "score": 0.885,
+        "startPage": 177,
+        "title": "lxxviiComme la Royne Zahara entra en la grande Cité, & de la magnificence & triumphe, qu'il y ent aux noces de Lisuart &z Perion, avec les deux Infantes de Trebisonde, durans lesquelles arriverent la Royne d'Alexandrie, & tous ceux qu'Amadis de Grece avoit desenchantez. Chapire ciiComme estant Lisuart couché avec Ovolorie la premiere nuict de leurs noces, devisans ensemble, uy sceut tellement tirer les vers dunez, qu'elle luy de lara la perte de son enfant, qu'elle estimoit estre Amadis de Grace."
+      },
+      {
+        "matchedOn": "title",
+        "number": 45,
+        "score": 0.812,
+        "startPage": 186,
+        "title": "fveillet lexxi. Comme Lisuart de Grace, & la Royne Zahara entrerent au camp ou elle fut vaincue. cha xlyfveil lexxus. Comme Lerfan & Malfadée vindrent en Trebisonde de la part d'Amadis de Grece : & d'une Damoyselle estrange, qui demanda congé à l'Empereuxr pour un combat, qu'entreprenoit faire un Chevalier incogneu contre tous venats, dont la Court receut plaisir cha xlvifheil. lexxyComme la Damoyselle messagiere de l'Imperatrix de Babilone, amena Amadis de Grece vers sa maistresse, & des propoz qu'elle eut avec luy, pensant que ce fust Lisuart,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 46,
+        "score": 0.789,
+        "startPage": 195,
+        "title": "lxxxy. Comme la Damoyselle d'Abra yint deffier Lisuart : & des propoz qu'Amadis & luy eurent ensemble premier que venir à l'effait."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.926,
+        "startPage": 199,
+        "title": "lœxxviis. Comme Zabara fut quite & absonte envers Lisuart, & de la promesse qu'elle luy avoit fait le jour qu'ilz eurent combat ensemble, & d'une estrange avanture qui auint en la Court de l'Empereur."
+      },
+      {
+        "matchedOn": "title",
+        "number": 50,
+        "score": 0.84,
+        "startPage": 203,
+        "title": "fueil laxxix. Comme le Chevalier, qui avoit entrepris les joustes, fut cogneu, & celle qu'il conduisoit aussi & de l'espreuve qu'il fist pour entrer au chasteau des secretz"
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.867,
+        "startPage": 205,
+        "title": "fueil xeiComme Lisuart & Amadis de Grace, apres avoir tant combatu l'un coutre l'autre, qu'il estoient au point de mourir, s'entrecogneurent pour pere & filz prit fin l'enchantement d'Urgande : declarant Alquif les Propheries predites de long temps sur ce fait. chapitre lifueil. xeij. Comme l'Impera rix de Rome Esclariane fut donnée pour femme & espouse à Florestan, filz du Roy de Sardaigne : des propoz qu'ent Amadis de Grece avec Lucelle, &y depuis avec Zahara."
+      },
+      {
+        "matchedOn": "title",
+        "number": 53,
+        "score": 0.952,
+        "startPage": 215,
+        "title": "lij. ueil. xey. Comme Amadis de Grace alla vour Abra, pour la prier de paix avec son pere : Et de l'espreuve que firent Olorius d'Espaigne & autres Chevaliers à l'avanture du chasteau."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.75,
+        "startPage": 218,
+        "title": "fveil xe viiComme Lisuart & Amadi de Grace furent emmenez par tromperie hors de la Court, & depuis secouruz par la Royne Zahara, & sa troupe de femmes, qui la suyvirent"
+      },
+      {
+        "matchedOn": "title",
+        "number": 57,
+        "score": 0.75,
+        "startPage": 222,
+        "title": "luijfueil xeyiijComme la Royne Zahara secourut Lisuart, Amadis de Grece, &y Gra dafilée, & faisant carnaige de tous les trabistres, prindrent les deux Nins & la Damoyselle qui avoit basty la trahison, qu'ilz ramenerent en Trebisonde. chapitre lyfueile Comme aucuns autres Chevaliers esprouverent l'avanture du chasteau des Segretz : Et de ce qu'il en aunt. chapire lyiComme l'Imperatrix Abra esprouva l'avanture du chasteau : Et des propoz qu'amadis de Gracc & Lucelle eurent ensemble sur ce qui s'estoit passé le jour prece dant chapitre lyijfueil. cui. Comme la Royye d'Argenes vint trouver Alquif, & Urgande, & ensemble furentenlevez par espritz, pour voir la gloire de Niquée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 61,
+        "score": 0.889,
+        "startPage": 245,
+        "title": "Comme la Damoyselle Alquife aporta en la Court de l'Empereur la lettre de Zirfée : Et de l'arrinée d'Amadis de Grœce avecques Lucida, vers le Roy Magadan en Saba. chapine lx. fueillet exi. Comme le Roy Amadis & sa flote navigans en mer furent jetez en la coste de Niquée, assez pres du lieu ou estoit la fille du Soudan enchantée, & là descendirent pour esprouver l'avanture."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.864,
+        "startPage": 249,
+        "title": "fveil cxii. Comme le Roy Mouton retourna garder l'entrée du palais enchanté, & de ce qui auint aux Roys Amadis & Galaor parlans à un Hermite."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.913,
+        "startPage": 252,
+        "title": "). fueillet exiiiiGomme le Roy Amadis fut voir la gloire de Niquée, apres avoir defait & occis le Roy Mouton de Lica, qui gardoit l'entrée, & de ce qui luy auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 63,
+        "score": 0.654,
+        "startPage": 256,
+        "title": "Comme Niquee r'envoya Buzando en la queste d'Amadis de Grace, & de ce qui auint en l'Isle Trapobanne contre celuy qui usurpoit le Royaume sur l'infante Licide."
+      },
+      {
+        "matchedOn": "title",
+        "number": 64,
+        "score": 0.781,
+        "startPage": 258,
+        "title": "fueillet exvij. Comme l'imperat ix Abra fir assembler soixante Roys ses vassaux : Et de la remuiso ance qu'elle leur fit, & de la grande armée des Crestiens, qui vint se joindre en la montaigne Defendue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 60,
+        "score": 0.833,
+        "startPage": 261,
+        "title": "fneil exvij. Comme Amadis de Grace se fist vendre pour Damoyselle esclave au Soudan de Niquée par Gradamarte : & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 67,
+        "score": 0.8,
+        "startPage": 264,
+        "title": "exx. Comme le Soudan apre avoir requis Nereide d'amour la conduit voir sa fille Niquée : & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 68,
+        "score": 0.915,
+        "startPage": 270,
+        "title": "fveillet exxi. Comme le Prince de Thrace recouvra l'escu qui avoit esté desrobé au Roy Mouton de Lica à l'ocasion duquel il devint tant passionné de l'amour de Niquée qu'il luy en con la depuys la vie, ayant pris par enchantement le visage semblable à Amadis de Grece."
+      },
+      {
+        "matchedOn": "title",
+        "number": 69,
+        "score": 0.75,
+        "startPage": 276,
+        "title": "fueill t exxiiii. Comme le Prince de Thrace parla à Niquée, ou il fut descouvert par Nereide estant auhault de la tour de l'Univers : & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 71,
+        "score": 0.789,
+        "startPage": 280,
+        "title": "Comme Nereide declaya au Soudan l'entreprise du Prince de Thrace : du conbar que luy & elle eurent ensemble, & quelle en fut lyssue. chapitre let. Camme Nereinde vainquit en champ de bataille le Prince de Thrace : & depuis Fulurtin, qui le pensoit venger."
+      },
+      {
+        "matchedOn": "title",
+        "number": 72,
+        "score": 0.8,
+        "startPage": 287,
+        "title": "fueillet exxx. Comme Niquée se voulut deffaire sçachant la mort d'Amadis de Grace, & la victoire de Nereide."
+      },
+      {
+        "matchedOn": "title",
+        "number": 73,
+        "score": 0.692,
+        "startPage": 291,
+        "title": "fveil. exxxiii. Comme Nereide fut voir Fulurtin en prison : & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 74,
+        "score": 0.724,
+        "startPage": 296,
+        "title": "furillet cxxxy. Comme les nouvellesyindrent en Trebisonde de l'armée d'Abra qui marchoitcontre l'Empereur, Lisuart : Et du congé que donna le Soudan à Nercide pour aller au secours d'Amadis avec cinqe cens Chevaliers."
+      },
+      {
+        "matchedOn": "title",
+        "number": 75,
+        "score": 0.55,
+        "startPage": 113,
+        "title": "Comme l'Empereur de Trebisonde, l'Imperatrix sa femme, & Onolorie leur fille passerent de ce siecle en l'autre : Et des nouvelles qui vindrent au nouveau Empereur Lisuart de la mort de son filz Amadis de Grace. chapitre lexy. fueillet exxxviij Comme le guet de Trebisonde descouvrit la grosse armée des Babi loniens : Et d'une lettre qu'Abra escrivit à Lisuart, le reconfortantde la mort de l'Imperatrix safemme."
+      },
+      {
+        "matchedOn": "title",
+        "number": 76,
+        "score": 0.895,
+        "startPage": 306,
+        "title": "t exl. Comme les gens de l'Imperatrix Abra assaillirent la ville le Trebisonde : Et du secours qu'amena l'Imperatrix Axiane.  cha lxxvij. fveil cxliij Comme l'Imperatrix Axiane envoya defier Abra, & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 79,
+        "score": 0.938,
+        "startPage": 313,
+        "title": "fveillet exlivij. Du combat des dix Chevaliers contre les dix payens : Et de la merveilleusé bataille, tant par mer que par terre, qui fut entre les deux armées, ou Nereide se trouva."
+      },
+      {
+        "matchedOn": "title",
+        "number": 80,
+        "score": 0.714,
+        "startPage": 319,
+        "title": "fueillet exlvi, Comme l'Impe atrix Abra desesperée, se cuida jeter en mer : Et des propoz qu'elle & l'Empereur Lisuarteurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 82,
+        "score": 0.75,
+        "startPage": 322,
+        "title": "Comme Lucencio secourat la Dame sauvage, qui l'avoit porté norrir à Feline, &y de ce qui en auint  cha lxxxi. fveil. el. Comme vavigant Nereinde avec sa compagnie pour retourner à Niquée, courut fortune qui le jeta dans l'armée de mer qu'anoit dresé la Royne Labara en deliberation de venger la mort d'Amadis de Grece."
+      },
+      {
+        "matchedOn": "title",
+        "number": 69,
+        "score": 0.706,
+        "startPage": 329,
+        "title": "Comme la Royne de Caucase raconta à Nereide la cause de sa navigation à Niqué : Et des propoz qu'elles eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 70,
+        "score": 0.8,
+        "startPage": 335,
+        "title": "fuell. clilijComme Gradamarte pensant retourner à Niquée vers Nereinde, cuyda perir en mer. Et de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 71,
+        "score": 0.824,
+        "startPage": 337,
+        "title": "clviiComme navigant Amadis de Grace vers Trebisonde fut avec Niquée & Zabara jeté en une Isle, ou il leur auint des cas estranges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 88,
+        "score": 0.727,
+        "startPage": 342,
+        "title": "Comme le preud'homme raconta à Amadis &y à la Royne la cause de l'enchantement de cesteisle, & de ce quil enaunt cha lecayi. Co mme estant Amadis de Grece & la Royne de Caucase cachez dans le palais arrina Mostruofuron, & de ce qu'il en auint. fueillet clxiichapitre lxxx vij. Comme Amadis de Grece mit à mort Mostruofuron le Geant, & delivra de prison le Roy Gradamarte, Ordan, & Bugando le Nainfveillet clxvi."
+      },
+      {
+        "matchedOn": "title",
+        "number": 89,
+        "score": 0.769,
+        "startPage": 355,
+        "title": "Comme les prisonniers de Mostruofuron furent delivrez, & des propoz que Gradamarte, & les autres eurent avec Amadis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 90,
+        "score": 0.88,
+        "startPage": 357,
+        "title": "fveil clxvil. Comme l'Empereur de Trebisonde mit d'acord Axiane & Abra, qu'il prità femme & espouse, par le moyen de Gradafilée, qui l'en suplia humblement. chapitre xe. fueil. elxvii. Comme la flote de Zahara arriva à veue de Trebisonde, ou elle prist port, estant Amadis de Grace en l'habit de Nereinde, & depuys recogneu pour cil qu'il estoit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 91,
+        "score": 0.826,
+        "startPage": 365,
+        "title": "clxxii. Comme Furio Cornelio yint en la court de l'Empereur Lisuart, deffier Amadis de Grece, sur la mort du Prince de Thrace, & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 93,
+        "score": 0.839,
+        "startPage": 368,
+        "title": "fveil clxvii. Comme nouvelles vindrent en la grand' Bretaigne qu'Amadis de Grace estoit vif & mary de Niquée : Des lettres que Lucelle luy escrivit, & de la response qui luy en fut faite par luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 94,
+        "score": 0.926,
+        "startPage": 375,
+        "title": "s. Comme ayant Niquée enfanté don Florisel & partie des autres Dames & Damoyselles, maintz beaux enfants, fut faite grande assemblée en la cité du Soudan de Niquée, & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 95,
+        "score": 0.921,
+        "startPage": 376,
+        "title": "et clxxvii. Comme allant l'Empereur Esplandian à la chasse trouva le Roy Alizar l'outrageux, qu'il combatit & mit à mort, &y à ceste ocasion fut assailly d'un Chevalier estranger dont l'un & l'autre tomberent presque au peril de leur vie."
+      }
+    ],
+    "missing": [
+      {
+        "folio": null,
+        "number": 1,
+        "title": "Ensuyt la table des matieres conTENVES DANS L'HVITIESME LIVRE d'Amadis de Gaule. et Premierement. Omme le Soudan de Babilone s'enamoura en songeant de la Princesse Onolorie."
+      },
+      {
+        "folio": 110,
+        "number": 59,
+        "title": "fveil cix. Comme Zifce, Alquif, & Urgande courstruient l'esmerveillable tour de l'Univers."
+      }
+    ],
+    "passages": 97,
+    "precision": 0.68,
+    "recall": 0.971,
+    "spurious": [
+      {
+        "number": 1,
+        "startPage": 23,
+        "title": "Comme le Soudan de Babilone s'enamoura en songeant de la Princesse Onolorie. Chapitre Premier. Ortune trop variable desirant faire cognoistre à chacun sa mobilité, & à fin qu'elle jouisse avecqu' plus de raison du titre d'inconstante, prend un plaisir singulier à se manifester farousche, ligiere, & sans aucun arrrest : specialement lors que l'onpense avoir la joye & prosperité plus prochaine & asseurée, ansiquellesit experinen¬"
+      },
+      {
+        "number": 8,
+        "startPage": 45,
+        "title": "Comme Zirfée Royne d'Argenes arrina à la court de l'Empereur & de ce quise passaentre elle & Urgande la Descogneué. Chapitre ViII."
+      },
+      {
+        "number": 9,
+        "startPage": 48,
+        "title": "Comme le vaillant Birmartesarrina en la court de l'Empereur de Trebisonde, poursuyvant l'entreprise qu'il avoit faite sur l'image de l'Infante Onorie, & du combat qu'il eut contre Zair. Chapitre AIX."
+      },
+      {
+        "number": 11,
+        "startPage": 56,
+        "title": "fante Abra sa seur, aucc les Roys & Princes de leur troups, se frrent chrestienner, & de l'esmeute qui avint en la court de l'Empereur. Chapitre XI."
+      },
+      {
+        "number": 12,
+        "startPage": 63,
+        "title": "à Lisuart, & à l'Infante Onolorie, qu'ilz cussent à trouver deux Chevaliers, qui entrassent en champ de bataille, pour sousteuir leur droit à l'encontre desfreres du Roy d'Egipre, & de ce qui en auint. Chapitre XII."
+      },
+      {
+        "number": 16,
+        "startPage": 75,
+        "title": "sonde scent pour certain, que le grand Chevalier entré le dernier au camp estoit Gradafilée, dont il s'esbahit grandement, & tous ceux de la Court aussi. Chapitre XVI."
+      },
+      {
+        "number": 19,
+        "startPage": 84,
+        "title": "Zirfee, Royne dArgenes, eut"
+      },
+      {
+        "number": 20,
+        "startPage": 90,
+        "title": "ce ent la lettre de Niquée, r'envoya Buzando vers elle : & de la response qu'il luiy fitChapirre XIX."
+      },
+      {
+        "number": 22,
+        "startPage": 99,
+        "title": "Comme le Roy Amadis & les Dames retournerent à Mirefleur : Et des propoz que depuys Amadis de Grace & Lucelle eurent ensemble. Chapitre AXXI."
+      },
+      {
+        "number": 25,
+        "startPage": 108,
+        "title": "Comme Zirfée prevoyant la fin des anours de Niquée & Anastarax, les enchanta tous deix, & maints autres, qui depuys les voulurent allervoir. Chapitre AXXIIII."
+      },
+      {
+        "number": 30,
+        "startPage": 125,
+        "title": "Qui furent ceux qui emmeneret Buzando : Et de l'arrinée d'Amadis de Grece à Alfarin, poursiyuant tousjours son entreprise. Chapitre XXIX."
+      },
+      {
+        "number": 41,
+        "startPage": 165,
+        "title": "Comme Buzando fit entendre à Amadis de Grece le voiloir de Niquée lu baillantla lettre qu'ella luy escrinoit. Chapitre XL."
+      },
+      {
+        "number": 42,
+        "startPage": 167,
+        "title": "eu combat contre un grand Chevalier, fut destourné d'aller esprouver la gloire de Niquée, & la cause pourquoy."
+      },
+      {
+        "number": 45,
+        "startPage": 183,
+        "title": "avec Onolorie la preniere nuict de leurs noces, devisans ensenble, luy sceut tellement tirer les vers dunez, qu'elle luy declara la perte de son enfant, qu'elle estinoit"
+      },
+      {
+        "number": 47,
+        "startPage": 191,
+        "title": "drent en Trebisonde de la part d'Amadis de Grece : & d'une Damoyselle estrange qui demanda congé à l'Empereur, pour un combat qu'entreprenoit faire un Chevalier incogneu contre tous venans, dont la Courtreceut plaisir. Chapitre AXLVI."
+      },
+      {
+        "number": 48,
+        "startPage": 193,
+        "title": "re de l'Imperatrix de Babilone amena Amadis de Grece yers sa maistresse, & des propos qu'elle eut avec luy pensant que ce fust Lisuart"
+      },
+      {
+        "number": 53,
+        "startPage": 212,
+        "title": "Esclariane fut donnée pour femme & espouze à Florestan filz du Roy de Sardaigne : des propoz qu'eut Amadis de Grece avec Lucelle, & depuys avec Zahara. Chapitre LII."
+      },
+      {
+        "number": 57,
+        "startPage": 227,
+        "title": "Comme aucuns autres Chevaliers esprouverent l'avanture du chasteau des secretz : Et de ce qu'il en avint. Chapitre LVI. Avois laissé au chapitre precedant le pere & le filz presta à esprouver l'avanture du chasteau, à laquelle Lucencio, Olorius Prince d'Espagne, Florelus d'Austrie, Perion de Gaule, Gradamarte, & plusieurs autres avoient failPly : aquerans toutesfois les uns plus que les autres honincur, selon que la bonté d'eux, & la resstance qu'ilz"
+      },
+      {
+        "number": 58,
+        "startPage": 233,
+        "title": "Comme l'Imperatrix Abra esprouna l'avanture du chasteau : Et des propoz qu'Amadis de Grace & ilz eurent ensemble sur ce qui s'estoit passé le jour precedant. Chapitre LVII."
+      },
+      {
+        "number": 59,
+        "startPage": 239,
+        "title": "Comme la Royne d'Argenes vint trouver Alquif, & Urgande, & ensemble furent enlevez par espriz, pour voir la gloire de Nintée."
+      },
+      {
+        "number": 60,
+        "startPage": 241,
+        "title": "Comme Zirfee, Alquif, & Urgande, constrairent l'esnerveillable tour de l'Univers. Chapire LIX."
+      },
+      {
+        "number": 62,
+        "startPage": 247,
+        "title": "te navigans enmer firent jetez en la coste de Niquée assez pres du lieu ou estoit la fille du Sondan enchantée, & la descendirent pour esprouver, l'avanture. Chapitre LXI."
+      },
+      {
+        "number": 72,
+        "startPage": 282,
+        "title": "de bataille le Prince de Thrace, & depuys Fulurtin, qui le pensoit venger."
+      },
+      {
+        "number": 76,
+        "startPage": 298,
+        "title": "Comme l'Empereur de Trebisonde, l'Imperatrix sa femme, & Onolorie leur fille, passerent de ce siecle en l'autre : Et des nouvelles qui vindrent au nouueau Empereur Lisuars, de la mort de son filz Amadis de Grace. Chapire Lxxy."
+      },
+      {
+        "number": 77,
+        "startPage": 301,
+        "title": "souvenoit & de l'Imperatrix, & de son filz, qu'il ne pouvoit oublier. Comme le guet de Trebisonde descouurit la grosse armée des Babiloniens. Et d'yne lettre qu'Abra escrivit à Lisuart, le reconfortant de la mort de l'Imperarix sa senne. Chapitre ALXXVI."
+      },
+      {
+        "number": 79,
+        "startPage": 310,
+        "title": "Comme l'Imperatrix Axiane envoya deffier Abra, & de ce qu'il en auint. Chapitre ALXXVIII."
+      },
+      {
+        "number": 83,
+        "startPage": 326,
+        "title": "Comme navigant Nereide avcc sa compagnie, pour retourner à Niquée, courut fortune, qui les jeta dans l'arnée de mer, qu'avoit dresé la Royne Zahara, en deliberation de penger la mort d'Amadis de Grace. Chapirre LXXXII."
+      },
+      {
+        "number": 88,
+        "startPage": 347,
+        "title": "Et la Royne de Caucase cachez dans le palais arrina Mostruofu¬"
+      },
+      {
+        "number": 89,
+        "startPage": 351,
+        "title": "Comme Amadis de Grece mit à mort Mostruofuron le Geant, & delivra de prison le Roy Gradamarte, Ordan, & Buzando le Nain. Chapirre ALXXXVIII."
+      },
+      {
+        "number": 92,
+        "startPage": 361,
+        "title": "Comme la flotte de Zahara arrina à veue de Trebisonde, ou elle prit port, estant Amadis de Grece en l'hahit de Nereide Et depuis recogneu pour cil qu'il estoit. Chapitre XCI.."
+      },
+      {
+        "number": 97,
+        "startPage": 382,
+        "title": "mes demeurerent enchantez en la tour de l'ynivers, par Zirfée, Alquif, & Urgande. Chapitre AXCVI."
+      }
+    ],
+    "tocChapters": 68,
+    "unscorable": 2
+  },
+  "out": "book-8",
+  "structural": {
+    "anomalies": [],
+    "pages": 386,
+    "roleCounts": {
+      "body": 13801,
+      "footer": 303,
+      "header": 488,
+      "title": 482
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 68,
+    "missingFolios": 45,
+    "repairedNumbers": 18,
+    "sequenceBreaks": 28,
+    "suspectFolios": 2
+  }
+}

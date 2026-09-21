@@ -19,6 +19,19 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{microtype}
+% Everything from here to the quotation macros styles an `article`, and
+% beamer already owns all of it: it loads geometry with its own options, so
+% loading it again with ours is an option clash that stops the deck's build
+% outright, and titlesec has no meaning for a frame. The deck still shares
+% the font, the language setup and the macros below the guard, which is the
+% point of one preamble.
+%
+% \makeatletter sits outside the guard on purpose. TeX tokenises the whole
+% branch as it reads it, so `@` has to be a letter before the argument is
+% read, not once the branch is taken; otherwise \@title inside tokenises as
+% \@ followed by `title' and crashes exactly as the note below describes.
+\makeatletter
+\@ifclassloaded{beamer}{}{%
 \usepackage[a4paper,top=3cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
 
 % The palette and section furniture from the École Polytechnique internship
@@ -84,6 +97,8 @@
   from other sources is attributed to it and properly referenced.
   \clearpage
 }
+}
+\makeatother
 
 % 16th-century quotation. Set in the source language and left unnormalised,
 % because the orthography is the object of study.

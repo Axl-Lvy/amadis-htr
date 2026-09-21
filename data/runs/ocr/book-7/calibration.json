@@ -1,0 +1,517 @@
+{
+  "book": 7,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 29,
+        "expectedPage": 32,
+        "folio": 8,
+        "number": 6
+      },
+      {
+        "actualPage": 86,
+        "expectedPage": 76,
+        "folio": 30,
+        "number": 17
+      },
+      {
+        "actualPage": 127,
+        "expectedPage": 134,
+        "folio": 59,
+        "number": 27
+      },
+      {
+        "actualPage": 166,
+        "expectedPage": 156,
+        "folio": 70,
+        "number": 37
+      },
+      {
+        "actualPage": 205,
+        "expectedPage": 196,
+        "folio": 90,
+        "number": 48
+      },
+      {
+        "actualPage": 228,
+        "expectedPage": 236,
+        "folio": 110,
+        "number": 54
+      },
+      {
+        "actualPage": 245,
+        "expectedPage": 236,
+        "folio": 110,
+        "number": 59
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 1.0,
+        "startPage": 18,
+        "title": "Ensuyt la Table du Septiesme et premierement. omme certains coursaires Mores presenterent au Roy de Saba Magadan le Damoysel de l'ardante Espée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.867,
+        "startPage": 20,
+        "title": "fueillet iComme le Roy Magadan, estant aux toiles, fut assailly d'un Ours, & delivré par le Damoysel de l'ardante Espée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.857,
+        "startPage": 22,
+        "title": "fueillet jComme Fulurtin & le Damoysel de l'ardante Espée furent armez Chevaliers par la main du Roy Magadan : & de la faulce acusacion que fist Maudan par envie, contre la Royne Buruca."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.857,
+        "startPage": 26,
+        "title": "Comme le Chevalier de l'ardante Espée trouva un Hermite More, & des propoz qu'ilzeurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.611,
+        "startPage": 29,
+        "title": "Comme apres que le Chevalier de l'ardante Espée eut recoux le Roy de Saba, & son filz, entra en l'espesseur de la forest, ou il rencontra un vieillard : & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.8,
+        "startPage": 35,
+        "title": "Comme le Chevalier de l'ardante Espée vint à la montaigne Defendue, ouil eut combat contre Frandalo, Frandalon, & Belleris, qu'il vainquit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.87,
+        "startPage": 46,
+        "title": "Des propoz que le Roy de Jerusalem eut avecque le Chevalier de l'ardante espée, sur le fait de sa liberté : & depuys avecqu' Frandalo, & Belleris."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.714,
+        "startPage": 49,
+        "title": "fueillet xy. Comme Garinde pressée par Onolorie d'aller à Filine querir le petit Amadis de Grace perdu, s'enfuyt desesperée à travers le boys, sans oser plus retourner vers sa maistresse : & de ce qui en avint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.632,
+        "startPage": 52,
+        "title": "fueillet xyiComme Lucencio & Florindo s'enfuirent secretement de Filine à Constantinople, ou Lucencio receut Chevalerie par la main d'Esplandian son oncle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.952,
+        "startPage": 58,
+        "title": "Comme Lucencio eut combat avecque le Chevalier qui avoit prins par force le beaume que la damoyselle de la Duchesse de Savoye portoit & le vainquit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.958,
+        "startPage": 63,
+        "title": "Comme l'Empereur Esplandian arriva en la montaigne Defendue, ou il se combatit contre le Chevalier de l'ardante Espée : & quelle fut l'yssue de leur combat. Comme les vingt Turcqe qu'Uneril avoit amenez de la Natolie, pour le secours de la montaigne Defendue, se misrent en devoir de tuer l'Empereur Esplandian : & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 1.0,
+        "startPage": 73,
+        "title": "Comme estant le Chevalier de l'ardante Espée en queste de la damoyselle Alquife, rencontra Alpatracie Roy de Sicile, avecqu' lequel il combatit : & de ce qu'il leur auint depuys."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 1.0,
+        "startPage": 82,
+        "title": "Comme le Roy de Sicile, & le Chevalier de l'ardante Espée eurent combat l'un apres l'autre contre le Chevalier de la Duchesse : & de ce qu'il en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 1.0,
+        "startPage": 86,
+        "title": "Comme le Roy Amadis eut nouvelles que l'Empereur Esplandian avoit reconquis la montaigne Defendue, & sceut que celuy qui avoit si mal traité le Chevalier du Quay, estoit le Chevalier de l'ardante Espée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.933,
+        "startPage": 89,
+        "title": "y. Comme le Chevalier du Quay vainquit Orizenes, & Bravarte, qui le vindrent assaillir en armes dissimulez & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.9,
+        "startPage": 92,
+        "title": "Comme le Roy de Sicile, & le Chevalier de l'ardante Espée, arriverent en l'isle de Silanchie, ou ilz combatirent Frandalon Ciclops, & son filz"
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 0.88,
+        "startPage": 99,
+        "title": "Comme le Chevalier de l'ardante Espée mist à mort la Geante, femme de Frandalon Ciclops, & s'en amoura de la belle Lucelle, pour laquelle il fist depuys maints haultx faitz d'armes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.971,
+        "startPage": 103,
+        "title": "D'une avanture merveilleuse qui auint au Roy de Sicile, au Chevalier de l'ardante Espée, à la Royne, Lucelle, & à Frandamelle, qui fut cause de les separer de leur flotte, & pres de perir en mer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.857,
+        "startPage": 106,
+        "title": "Comme le Roy de Sicile, & ceux qui navigeoient en la barque furent poussez en l'Isle d'Argenes & de ce qui leur auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.846,
+        "startPage": 109,
+        "title": "y. Comme le Chevalier de l'ardante Espée conquist le chasteau de l'Isle d'Argenes : Et des combatz qu'il y ent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 0.941,
+        "startPage": 115,
+        "title": "Comme le Chevalier de l'ardante Espée monta à la chambre du tresor, ou estoient l'Empereur de Trebisonde, Lisuart de Grece, & Perion de Gaule, enchantez : & de ce qu'il leur auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 25,
+        "score": 0.783,
+        "startPage": 124,
+        "title": "fueillet l. Comme Zirfée enchanta l'Empereur de Trebisonde, Lisuart, Perion, & Olorius au chasteau de l'Isle d'Argenes, ou elle arresta depuys Gradafilée, estant en la queste de Lisuart."
+      },
+      {
+        "matchedOn": "title",
+        "number": 27,
+        "score": 0.8,
+        "startPage": 127,
+        "title": "Comme estant l'Empereur de Trebisonde, Lisuart, Perion Olorius, & Gradafiée, hors de l'encbantement, on ilz anoient esté tenuz par longues années, eureut plusieurs propoz avecqu' Alpatracie, & le Chevalier de l'ardante Espée. chaptre xxvi Comme un seul Chevalier se combatit contre six, devant le chasteau de l'isle d'Argenes : & de ce qu'il leur auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 28,
+        "score": 0.952,
+        "startPage": 136,
+        "title": "Comme le Chevalier, qui s'en estoit fuy, retourna vers ses compaignons, & amena Lucencio, qui eut combat contre le Chevalier de l'ardante Espée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 1.0,
+        "startPage": 143,
+        "title": "fevillet lx Comme le Chevalier aux armes Noires fut cogneu de l'Empereur, & des autres : & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.929,
+        "startPage": 146,
+        "title": "fevillet lxiii. Comme l'Infante Axiane, estant arrivée en sa maison de plaisance, envoya querir le Chevalier de l'ardante Espée, & Gradamarte, pour estre mienx traitez qu'ilz n'estoient : car il n'avoient aucun Chirurgien qui les pensast."
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.882,
+        "startPage": 150,
+        "title": "Comme le Chevalier de l'ardante Espée fist rendre à Axiane son chasteau : Et des propoz que le Roy de Sicile & elle eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 1.0,
+        "startPage": 153,
+        "title": "Comme l'Empereur de Trebisonde, le Roy de Sicile, & tous les autres, tant Chevaliers, que dames, & damoyselles, demeurez au chasteau de la chambre du tresor, furent voir Axiane : Et des merveilles qu'elle leur monstra."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.667,
+        "startPage": 157,
+        "title": "Comme Alquife arriva par mer en l'Isle d'Argenes : & du deslogement de l'Empereur, & autres, pour retourner en leur pais."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.857,
+        "startPage": 159,
+        "title": "fueillet lexi. Comme Malfadée, fille du Geant de la grand' Siclade, fut demander ayde au Roy Amadis, qui pour la venger du Geant Mascaron s'en alla avecqu' elle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 0.933,
+        "startPage": 162,
+        "title": "Comme Malfadée la Geante conta au Roy Amadis son infortune : & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.964,
+        "startPage": 164,
+        "title": "Comme navigant par nuict l'Empereur de Trebisonde, le Roy de Sicile, & leur compaignie, passa devant eulx une barque, en laquelle estoit un Chevalier, & une dame, qui pleuroit tendrement."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 0.974,
+        "startPage": 166,
+        "title": "Comme le Roy Amadis print port en la grand' Siclade, & combatit contre Mascaron : & du peril ou il se trouva, dont il fut delivré, par le Chevalier de l'ardante Espée, & Gradamarte, qui y survindrent en bonne heure pour luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 0.935,
+        "startPage": 171,
+        "title": "y. Comme navigants en mer, le Chevalier de l'ardante Espée, & Gradamarte, arriverent par fortune en l'Isle de la tour Vermeille, ou fut combatu & deffait Gandalfe & tirerent de prison Galeote, & Madasime, pere & mere de Balan."
+      },
+      {
+        "matchedOn": "title",
+        "number": 39,
+        "score": 0.875,
+        "startPage": 177,
+        "title": "Comme le Chevalier de l'ardante Espée envoya au Roy Amadis la teste de Gandalfe par la damoyselle Macette, & permist emporter le corps en l'Isle Sagitaire, pour estre inhumé."
+      },
+      {
+        "matchedOn": "title",
+        "number": 40,
+        "score": 0.977,
+        "startPage": 178,
+        "title": "Commne l'Empereur de Trebisonde, & sa compaignie, entrerent en la coste de la grand' Bretaigne, ou ilz prindrent port, & vindrent au quay, que gardoit le Chevalier de la Duchesse de Savoye, contre qui Perion de Gaule eut combat qui fut separé par la Duchesse d'Austriche, & le Chevalier du Quay cogneu."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 0.952,
+        "startPage": 183,
+        "title": "fevil. lxxxi. Comme Aiquife alla trouver la Royne Oriane, pour luy faire entendre la nouvelle de Perion, & Lisuart, qui estoient en ses pais."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.933,
+        "startPage": 186,
+        "title": "Comme l'Empereur de Trebisonde, & sa compaignie, vindrent à Londres visiter la Royne Oriane : & des propoz qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 1.0,
+        "startPage": 188,
+        "title": "feuil lexxy. Comme Macette arriva en la court du Roy Amadis, avecque la tesle du Roy Gandaife : & des nouvelles qu'elle y porta, qui fisrent desloger Balan, & repren dre la route de l'Isle de la tour Vermeille, ou sejournoit pour lors le Chevalier de l'ardante Espée, & Gradamarte."
+      },
+      {
+        "matchedOn": "title",
+        "number": 44,
+        "score": 0.903,
+        "startPage": 191,
+        "title": "fevil. lxxxvi. Comme le Geant Lerfan de la Roche vint à la grand'Siclade, ou le Roy Amadis luy donna à femme & espouse Malfadée, & s'en retourna le Roy en la grand' Bretaigne."
+      },
+      {
+        "matchedOn": "title",
+        "number": 45,
+        "score": 0.964,
+        "startPage": 192,
+        "title": "Comme navigant le Roy Amadis par la mer Mediterranée, pour entrer en l'Occean, rencontra la Royne Buruca, femme du Roy Magadan de Saba, qui estoit en queste du Chevalier de l'ardante Espée, pour defendre la faulce acusacion, que Maudan avoit faite des amours d'eulx deux."
+      },
+      {
+        "matchedOn": "title",
+        "number": 47,
+        "score": 0.895,
+        "startPage": 197,
+        "title": "Comme le Roy Amadis combatit Maudan, & Azaruque son cousin, qu'il def fist: puys s'embarqua pour retourner es parties de Septentrion."
+      },
+      {
+        "matchedOn": "title",
+        "number": 47,
+        "score": 0.97,
+        "startPage": 202,
+        "title": "Comme estant l'Empereur Arquisil en la yille de Maiance, arriva à court Acaye, filz du Roy de Tessalie, lequel Manasses, filz du Duc de Buillon, mist à mort, par jalousie de l'Infante Esclariane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 48,
+        "score": 1.0,
+        "startPage": 205,
+        "title": "Comme le Duc de Buillon sceut la mort de son filz : & de la grand'ruze qu'il fist pour mettre à mort l'Empereur, & Dinerpie son filz, pour s'emparer de l'Empire."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.667,
+        "startPage": 209,
+        "title": "y. Comme la Princesse Brisenne, & sa fille Esclariane, se perdirent enmer, & furent prinses par coursaires."
+      },
+      {
+        "matchedOn": "title",
+        "number": 50,
+        "score": 0.92,
+        "startPage": 211,
+        "title": "fveil xcyi. Comme l'un des soldatz des deux coursaires desroba l'Infante Esclariane, & la cuydant forcer fut secourue par don Florestan : & d'une estrange avanture qui leur auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 51,
+        "score": 0.864,
+        "startPage": 217,
+        "title": "fueil. xcyii. Comme au resueil de la Princesse Brisenne, ne trouvant point sa fille, fut grandement desesperée, de ce qui en avint, & la sorte que finablement elle fut de livrée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 53,
+        "score": 0.968,
+        "startPage": 222,
+        "title": "fueil c. Comme l'Empereur de Trebisonde, le Roy de Sicile, & autres, qui atendoient le retour du Roy Amadis à Londres, voyants son retardement, prindrent congé de la Royne, & suyvirent leur chemin, & leurs entrepranses. chapirre lii. Comme apres que le Chevalier de l'ardante Espée fut guery des playes qu'il avoit receues combatant contre Gandalfe, s'embarqua avecqu' Gradamarte : & d'une merveilleuse avanture qu'ilz trouverent en mer,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 54,
+        "score": 0.955,
+        "startPage": 228,
+        "title": "fveil ciii. Quel estoit le Chevalier, qui eut ce gros combat contre celuy de l'ardante Espée & l'ocasion pour laquelle il navigeoit en tel equipaige."
+      },
+      {
+        "matchedOn": "title",
+        "number": 55,
+        "score": 0.947,
+        "startPage": 238,
+        "title": "Comme estant Birmartes guery, print congé du Roy d'Apolonie, & d'Onorie, pour commencer son entreprinse : & de ce qui en auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 57,
+        "score": 0.8,
+        "startPage": 241,
+        "title": "cxi. Comme le Chevalier de l'ardante Espée se desroba de Gradamarte, pour aller chercher Birmartes : & de ce qui leur avint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 59,
+        "score": 0.917,
+        "startPage": 245,
+        "title": "Comme le Roy de Sicile, & sa flotte, eurent nouvelles de la mort du feu Empereur Arquisil, & son filz, & de leur arrivée à Naples. chapite lyiii. fveil. cxiii. Comme Birmartes arriva en la court du Roy de Naples, ou il deffia tous les Chevaliers qui y estoient, sur la beauté de leurs amyes : & des merveilles quil y fst."
+      },
+      {
+        "matchedOn": "title",
+        "number": 60,
+        "score": 0.846,
+        "startPage": 250,
+        "title": "y. Comme un Chevalier estrange vint combatre Birmartes : & de ce qui leur avint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 61,
+        "score": 0.931,
+        "startPage": 255,
+        "title": "fueil exvii Comme le Chevalier de l'ardante Espée arriva en sa tente, ou il avoit laisé la damoyselle d'Alquif, & s'avisa d'escrire au Roy Magadan de Saba, s'excusant de ce qui luy avoit esté mis sus."
+      },
+      {
+        "matchedOn": "title",
+        "number": 62,
+        "score": 0.839,
+        "startPage": 258,
+        "title": "Comme nouvelles vindrent aux Roys estants à Naples, du gros apareil que faisoit l'usurpateur de l'Empire, pour venir leur donner la bataille au Friol: & de la rencontre qu'il eut contre le Roy de Metz."
+      },
+      {
+        "matchedOn": "title",
+        "number": 63,
+        "score": 1.0,
+        "startPage": 261,
+        "title": "Comme la ville de Maiance fut prinse d'emblée, & par qui."
+      }
+    ],
+    "missing": [],
+    "passages": 63,
+    "precision": 0.889,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 6,
+        "startPage": 32,
+        "title": "lier de l'ardente Espéc eut recoux le Roy de Saba & son filz, entra en l'espesseur de la forest, ou il rencontra un vieillard : & des propoz qu'ilz eurent ensemble,"
+      },
+      {
+        "number": 13,
+        "startPage": 69,
+        "title": "Comme les vingt Tures, que Yneril avoit amenez de la Natolie, pour le secours de la montaigne Defendue, se misrent en devoir de tuer l'Empereur Esplandian : & de ce qu'il en avint."
+      },
+      {
+        "number": 15,
+        "startPage": 78,
+        "title": "Comme Alpacracie Roy de Sicile, & sa flotte, furent poussez par tempeste en la grand'Bretaigne, ou ilz eurent combat contre un Chevalier gardant un passage, pour l'amour de la Duchesse de Savoye."
+      },
+      {
+        "number": 27,
+        "startPage": 134,
+        "title": "Comme un seul Chevalier se combatit contre six, devant le chasteau de l'Isle d'Argenes : & de ce qu'il leur avint."
+      },
+      {
+        "number": 53,
+        "startPage": 223,
+        "title": "Comme apres que le Chevalier de l'ardante Espée fut guery des playes qu'il avoit receuens, combatant contre Gandalfe, s'embarqua avecqu' Gradamarte : & d'une merveilleuse avanture qu'ilz trouverent en mer."
+      },
+      {
+        "number": 55,
+        "startPage": 235,
+        "title": "Comme Birmates fut voir la belle Onorie en sa prison : & des propoz qu'ilz eurent ensemble. Chapitre Lu."
+      },
+      {
+        "number": 59,
+        "startPage": 247,
+        "title": "Comme Birmartes arriva en la court de Roy de Naples, ou il deffia tous les Chevaliers qui y estoient, sur la beauté de leurs amyes : & des merveilles qu'il y fist."
+      }
+    ],
+    "tocChapters": 56,
+    "unscorable": 0
+  },
+  "out": "book-7",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 8
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 264
+      }
+    ],
+    "pages": 265,
+    "roleCounts": {
+      "body": 9033,
+      "footer": 237,
+      "header": 290,
+      "title": 316
+    },
+    "unresolvedAmbiguous": 2
+  },
+  "toc": {
+    "entries": 56,
+    "missingFolios": 19,
+    "repairedNumbers": 8,
+    "sequenceBreaks": 11,
+    "suspectFolios": 5
+  }
+}

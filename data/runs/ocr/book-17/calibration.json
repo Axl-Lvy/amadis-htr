@@ -1,0 +1,191 @@
+{
+  "book": 17,
+  "designations": {
+    "found": 84,
+    "highest": 89,
+    "misread": [],
+    "missing": [
+      16,
+      17,
+      63,
+      72,
+      75
+    ],
+    "pages": {
+      "1": 37,
+      "10": 150,
+      "11": 161,
+      "12": 168,
+      "13": 177,
+      "14": 191,
+      "15": 198,
+      "18": 230,
+      "19": 239,
+      "2": 50,
+      "20": 249,
+      "21": 260,
+      "22": 269,
+      "23": 282,
+      "24": 298,
+      "25": 312,
+      "26": 321,
+      "27": 330,
+      "28": 334,
+      "29": 346,
+      "3": 62,
+      "30": 353,
+      "31": 363,
+      "32": 373,
+      "33": 380,
+      "34": 391,
+      "35": 403,
+      "36": 415,
+      "37": 421,
+      "38": 430,
+      "39": 441,
+      "4": 76,
+      "40": 452,
+      "41": 461,
+      "42": 475,
+      "43": 482,
+      "44": 500,
+      "45": 507,
+      "46": 523,
+      "47": 534,
+      "48": 542,
+      "49": 555,
+      "5": 88,
+      "50": 559,
+      "51": 572,
+      "52": 580,
+      "53": 588,
+      "54": 597,
+      "55": 609,
+      "56": 625,
+      "57": 631,
+      "58": 639,
+      "59": 644,
+      "6": 98,
+      "60": 656,
+      "61": 663,
+      "62": 670,
+      "64": 682,
+      "65": 688,
+      "66": 694,
+      "67": 702,
+      "68": 711,
+      "69": 724,
+      "7": 114,
+      "70": 732,
+      "71": 737,
+      "73": 753,
+      "74": 772,
+      "76": 782,
+      "77": 789,
+      "78": 799,
+      "79": 807,
+      "8": 131,
+      "80": 813,
+      "81": 819,
+      "82": 826,
+      "83": 837,
+      "84": 844,
+      "85": 859,
+      "86": 870,
+      "87": 877,
+      "88": 882,
+      "89": 893,
+      "9": 139
+    },
+    "undesignated": [
+      17,
+      63,
+      75
+    ],
+    "unreadable": [
+      16,
+      72,
+      90,
+      91
+    ]
+  },
+  "family": "B",
+  "out": "book-17",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 4
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 5
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 6
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 8
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 38
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 919
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 920
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 921
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 922
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 923
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 924
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 925
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 926
+      }
+    ],
+    "pages": 926,
+    "roleCounts": {
+      "body": 25744,
+      "footer": 883,
+      "header": 1430,
+      "title": 502
+    },
+    "unresolvedAmbiguous": 0
+  }
+}

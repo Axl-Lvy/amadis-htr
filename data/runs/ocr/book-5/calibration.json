@@ -1,0 +1,418 @@
+{
+  "book": 5,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 15,
+        "expectedPage": 19,
+        "folio": 3,
+        "number": 2
+      },
+      {
+        "actualPage": 84,
+        "expectedPage": 73,
+        "folio": 30,
+        "number": 20
+      },
+      {
+        "actualPage": 143,
+        "expectedPage": 145,
+        "folio": 66,
+        "number": 34
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.826,
+        "startPage": 15,
+        "title": "Sensuyt la table du cinqiesme livre d'Amadis de Gaule. Et premierement. Omme Esplandian endormy au navire de la grand' Serpente, se trouva à son resveil joignant la roche de la damoiselle enchanteresse : & de ce qui advint. Premier chapitre. Fueillet premier. Comme Esplandian ayant leu les lignes mises au roulleau que tenoit le lion, print la gueine luisante : & des propos que luy & Sergil eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.962,
+        "startPage": 21,
+        "title": "Comme la barque ou estoit le Chevalier noir & le muet, arriva es marches de Turcquie pres la montaigne defendue : & des propos qu'un hermite & le Chevalier noir eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.958,
+        "startPage": 25,
+        "title": "Comme le Chevalier noir monta à la roche, ou par force d'armes mit à mort trois Chevaliers Geants, & delivra le Roy Lisuart de prison."
+      },
+      {
+        "matchedOn": "title",
+        "number": 5,
+        "score": 0.892,
+        "startPage": 32,
+        "title": "Comme apres que le Roy Lisuart fut mis hors de prison, Matrocofre re aisne de Furion le Geant, arriva en ses navires au pied de la Roche defendue : & du combat que luy & le Chevalier noir eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.833,
+        "startPage": 39,
+        "title": "fveillet x. Dugrand desplaisir que print le Roy Lisuart par l'absence du Chevalier noir : & des propos que luy tint Arcabonne mere de Matroco, sur ses infortunes passées."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.958,
+        "startPage": 43,
+        "title": "xiii. Comme le Geant Matroco mourut, dont Arcabonne fut si perturbée qu'ayant failly à tuer le Roy Lisuart, se precipita elle mesmes en la mer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.778,
+        "startPage": 45,
+        "title": "fveillet xy. Comme maistre Helizabel trouva le Chevalier noir en l'hermitaige ou s'estoit retire : & des propos qu'ilz eurent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.926,
+        "startPage": 47,
+        "title": "Comme la damoiselle Carmelle, trouva en l'hermitaige le Chevalier noir dormant, & eut fantaisie de le tuer : mais le voyant si beau, fut soubdainement esprinse de son amour."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.684,
+        "startPage": 50,
+        "title": "Comme le Roy Lisuart adverty par la damoiselle Carmelle, du lieu ou estoit le Chevalier noir, s'en partit seul avecqu'elle, pour l'aller veoir."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 0.913,
+        "startPage": 56,
+        "title": "Comme Talanque & Ambor raconterent au Roy les adventures que ilz avoyent eves, cherchant leur compaignon Esplandian, depuis le temps qu'ilz receurent l'ordre de Chevalerie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 90,
+        "score": 0.889,
+        "startPage": 63,
+        "title": "Comme une nuict, estant le Roy Lisuart en son lict, pensant comme il pourroit retourner en la grand'Bretaigne, entr'ouyt un son si melodieux qu'il se leva pour l'escouter, & de ce qui en advint. chxii. Comme le Roy Lisuart s'embarqua en la grand'Serpente : & de la de pesche que feit Esplandian à la damoiselle Carmelle, pour aller vers l'Infante Leonorine, fille de l'Empereur de Constantinople. cxiil fauxe Comme le Roy Lisuart partit de l'Ille ferme avecqu' grand'compaignie de Chevaliers, dames & damoiselles, lesquelz approchants de Londres rencontrerent en la forest prochaine quatre Chevaliers, qui envoyereut demander quatre coups de lance à Esplandian."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.789,
+        "startPage": 68,
+        "title": "fueil rui Comme estant Esplandian au chemin de l'ille Ferme, fut assailly par un Chevalier estranger, qui le guettoit en la forest. chxv. fu xrtin Comme le Roy de Dace, Garinter, & Manely secoururent Urgandel, descogneue, qu'aulcuns Chevaliers vouloient oultrager, pour le secours qu'elle avoit fait au petit filz de l'Empereur de Rome. ch. xui. su xrix, Comme Urgande la descogneue print conge des Chevaliers, & senalla en la garde de deux dragons vers l'Empereur & l'Imperatrix porter leur petit filz, pour la perte duquel la court estoit esmeue. c. xvii. fu xxxiDes adventures estranges qu'eurent le Roy de Dace & Manely, depuis qu'ilz furent partiz d'avecqu' Urgande la descogneue : & du passetemps que leur donnerent deux vieilz singes de la grand'race, en une ille ou ilz airiverent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.69,
+        "startPage": 80,
+        "title": "fveillet xexii. Comme le pirate Frandalo navigeant en mer feut jete par tourmente en l'isle ou estoyent le Roy de Dace & Manely, avec lequel il eut combat & de cequi en advint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 1.0,
+        "startPage": 84,
+        "title": "Comme estans les Chevaliers au navire de Frandalo, attendans la mer bonace, prierent la damoiselle leur dire à qui elle estoit, & ce qu'elle avoit veu de ceulx dont elle avoit parle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.947,
+        "startPage": 87,
+        "title": "y Comme la damoiselle Carmelle declaira son ambassade à l'Infante Leonorine : & des propos qu'elles eurent ensemble sur le fait d'Esplandian."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.938,
+        "startPage": 90,
+        "title": "xxxvii. Des propos que la princesse Leonorine eut avecqu' la damoiselle Carmelle sur le fait de son ambassade."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.875,
+        "startPage": 92,
+        "title": "Comme nouvelles vindrent à l'Empereur du siege qu'Armato Roy des Turcqs avoit mis en la montaigne defendue : & de la charge qu'il donna à Frandalo poury mener secours, avecqu' Mancly, & le Roy de Dace."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 0.911,
+        "startPage": 95,
+        "title": "Comme Esplandian, estant guery de ses playes, print conge du Roy Lisuart, & de la court, pour retourner en l'isle Ferme, ou il avoit laisse le navire de la grand'Serpente : dedans lequel (accompaigne sculement de maistre Elizabet & Sergil) il sembarqua pour retourner en la montaigne defendue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 25,
+        "score": 0.875,
+        "startPage": 98,
+        "title": "Comme Esplandian commanda à ceulx qu'il avoit delivrez d'aller en Constantinople, remercier la belle Leonorine, fille de l'Empereur: & retint seulement Gandalin & Lasinde avec luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 0.667,
+        "startPage": 106,
+        "title": "fucil xliComme nouvelles vindrent au camp du Roy des Turcqs Armato de la deffaite de sonarmée de mer, par Frandalo : & des entreprinses des ons & desaultres."
+      },
+      {
+        "matchedOn": "title",
+        "number": 27,
+        "score": 0.833,
+        "startPage": 109,
+        "title": "sueillet xlviComme le Roy de Turcquie Armato fut donne en garde à Gandalin : & des propos que luy tint Frandalo."
+      },
+      {
+        "matchedOn": "title",
+        "number": 28,
+        "score": 0.864,
+        "startPage": 115,
+        "title": "r. Comme grande partie des Chevaliers qui souloyent acompaigner le Roy Lisuart s'en retournerent en leurs maisons : & du couronnement dAmadis & Oriane à Londres."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 0.875,
+        "startPage": 118,
+        "title": "Comme la ville d'Alfarin en la Turcquie, fut prinse d'assault par Esplandian, & ceulx de sa compaignie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.826,
+        "startPage": 126,
+        "title": "Comme Gandalin & Lasinde conduirent l'Infante Heliaxe, & le Geant Foron en la ville d'Alfarin, vers Esplandian & Frandalo : & de l'honneste & bon traitement qu'ilz luy feirent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.923,
+        "startPage": 130,
+        "title": "Comme Gastiles print conge d'Esplandian, puis feit voile en Constantinople vers l'Empereur : & de l'arrivée de Palomir, Branfil & aultres Chevaliers de la grand'Bretaigne, en la ville d'Alfarin. ch. xxxi fueil. luiiiComme Frandalo accompaigne de quatre vingrz Chevaliers sortit d'Alfarin, pour aller courre vers Tesifante : & de la prinse d'Eiraca capipitaine de la ville."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.75,
+        "startPage": 138,
+        "title": "sueillet lxi. Du grand ennuyqu'eut Esplandian ayant entendu par le messaiger de Gastiles le mescontentement qu'avoit la princesse Leonorine, contre luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 1.0,
+        "startPage": 143,
+        "title": "Comme Esplandian & ceulx de la compaignie monterent au palais ruine de la damoiselle enchanteresse : & des merveilles qu'ilz y trouverent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.76,
+        "startPage": 153,
+        "title": "Comme Esplandian ayant attendu le retour de Garinter Roy de Dace, par l'espace de deux sepmaines, & voyant qu'il n'en avoit nouvelles, delibera (par le conseil de Carmelle) aller en personne en Constantinople.  chapitre xexu fveillet lxviiiComme Esplandian fut mis dedans le coffre de cedre, & porte avecque latombe en la chambre de la princesse Leonorine : & des propos qu'ilz eurentensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 0.875,
+        "startPage": 161,
+        "title": "sueillet lxxComme Esplandian feit faire voile en la montaigne defendue : & des grandes adventures qui luy advindrent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 1.0,
+        "startPage": 164,
+        "title": "Comme Frandalo & la trouppe des Chevaliers Chrestiens prindrent d'emblée la ville de Galatie : & de la depesche de Gandalin vers l'Empereur de Constantinople, pour avoir secours."
+      },
+      {
+        "matchedOn": "title",
+        "number": 39,
+        "score": 0.905,
+        "startPage": 171,
+        "title": "f lxxvi. Comme Urgande la descogneue arriva à Galatie, & du danger ouelle se trouva par la tromperie que luy feit Melye l'enchanteresse."
+      },
+      {
+        "matchedOn": "title",
+        "number": 40,
+        "score": 0.684,
+        "startPage": 177,
+        "title": "Comme Carmelle arrina à Tessante vers Hellaxe : & du combit merveilmerveilleux qu'eurent Esplandian, Frandalo, Gandalin, Enil, contre trou Geants, & douze Chevaliers Turcqs."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 0.926,
+        "startPage": 181,
+        "title": "fueillet lecri Comme Esplandian entra en la spelonque de Melye, pour avoir sesl vres : & d'une charge qu'on feit à luy, Frandalo, Enil & Gandalin, ainsi qu'ilz pensoyent retourner en Galatie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.769,
+        "startPage": 185,
+        "title": "fueillet lexrii Comme les Chevaliers de la grand'Bretaigne, qui estoyent a Galave sembarquerent avecqu' Urgande au navire de la grand'Serpente, pouralle en Constantinople : & de ce qui leuradvint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 0.867,
+        "startPage": 190,
+        "title": "fueil lxxxui Comme Norandel & la Roine Menoresse feurent amoureux l'un de l'aultre : & des propos qu'ilz eurent ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 87,
+        "score": 0.879,
+        "startPage": 194,
+        "title": "sueil lxxaiz Comme Urgande la descogneue declara à l'Empereur la prophetie qui avoit este trouvée en la tombe : & de deux dragons qui l'emporterenten l'air avecqu' le Roy Armato, & Melye, au mylieu de la ville de Tesifante"
+      },
+      {
+        "matchedOn": "title",
+        "number": 88,
+        "score": 0.909,
+        "startPage": 197,
+        "title": "fveillet xeComme les deux dragons porterent Urgande, Melye, & le Roy Armato au mylieu de la ville de Tesifante : & de la grande armée que fei mettre sus Armato, pour entrer es pais de l'Empereur de Constantinople."
+      },
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.909,
+        "startPage": 199,
+        "title": "fveillet xeiLetre du Roy des Turcqs Armato, à tous les princes d'Orient. fxciiComme le corsaire Crelcelm nepueu de l'admiral Tartarie apporta nouvelles à Esplandian de la grand'armée de merque preparoyent les seigneurs du Levant, pour venir en Constantinople. cha xlvi. fu. xeuComme Crelcelm & Belleriz retournerent à la montaigne defendue avecqu'un brigantin, qu'ilz prindrent charge de Turcqs, par lesquelzilz sceurent toutes les entreprinses des ennemis."
+      },
+      {
+        "matchedOn": "title",
+        "number": 40,
+        "score": 0.88,
+        "startPage": 210,
+        "title": "xlvii. fuxcuiLetres d'Esplandian, à l'Empereur de Rome. fveillet xcui. Comme la grand' cite de Constantinople fut assiegée par les princes du Levant: & des saillies que feirent ceulx de la ville pour les garder dap procher."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.947,
+        "startPage": 215,
+        "title": "xeix. Comme les dix Chevaliers Chrestiens entrerent au camp : & du combat qui fut entre eulx & les dix Payens que presenta le Souldan de Liquie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 51,
+        "score": 0.9,
+        "startPage": 219,
+        "title": "Comme la Roine Calafie vint au secours des payens, & du merveilleux & perilleux assault qu'elle donna en Constantinople. ch. l. fu. ciiComme les princes Chrestiens tant de la mer Ponant que du Levant, assemblerent leurs forces, pour venir au secours de l'Empereur de Constantinople : & de leur navigation."
+      }
+    ],
+    "missing": [],
+    "passages": 53,
+    "precision": 0.774,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 2,
+        "startPage": 19,
+        "title": "Comme Esplandian ayant leu les lignes mises au roulleau que tenoit le Lion, print la gueine luisante : & des propos que luy & Sergil eurent ensemble."
+      },
+      {
+        "number": 13,
+        "startPage": 65,
+        "title": "Comme le Roy Lisuart partit de l'Isle Ferme, avecqu' grand' compaignie de Chevaliers, dames & damoiselles, lesquelz approchants de Londres, rencontrerent en la forest prochaine, quatre Chevaliers, qui envoyerent demander quatre coups de lance à Esplandian."
+      },
+      {
+        "number": 15,
+        "startPage": 72,
+        "title": "Comme le Roy de Dace, Garinter & Manely secoururent Urgande la descogneue, qu'aulcuns Chevaliers vouloyent oultraiger, pour le secours qu'elle avoit fait au petit filz de l'Empereur de Rome."
+      },
+      {
+        "number": 16,
+        "startPage": 75,
+        "title": "Comme Urgande la descogneue print conge des Chevaliers, & s'en alla en la garde de deux Dragons vers l'Empereur & l'Imperatrix porter leur petit filz, pour la perte duquel toute la court estoit esmeue."
+      },
+      {
+        "number": 17,
+        "startPage": 76,
+        "title": "Des adventures estranges qu'eurent le Roy de Dace, & Manely depuis qu'ilz feurent partiz d'avecqu' Urgande la descogneue. Et du passetemps que leur donnerent deux vieilz Singes de la grand'race en une Isse, ouilz arriverent."
+      },
+      {
+        "number": 31,
+        "startPage": 135,
+        "title": "Comme Frandalo, accompaigne dequatre vingez Chevaliers, sortit d'Alfarin pour aller courre vers Tesifante : de la prinse de Heiraca capitaine de la ville."
+      },
+      {
+        "number": 48,
+        "startPage": 223,
+        "title": "Comme les princes Chrestiens tant de la mer du Ponant que du Levant assemblerent leurs forces, pour venir au secours de l'Empereur de Constantinople, & de leur navigation."
+      },
+      {
+        "number": 49,
+        "startPage": 227,
+        "title": "Comme Esplandian & le Roy de Dace feurent envoyez querir par Gandalin en la montaigne defendue, ou ilz estoyent demourez, en attendant le secours des princes Chrestiens : & d'une letre que le Souldan de Liquie & la Roine Calafie escrivirent à Amadis & Esplandian."
+      },
+      {
+        "number": 50,
+        "startPage": 233,
+        "title": "avecqu'les princes de la Chrestiente qui luy feirent tresbon recueil. Comme le Roy Amadis & son filz Esplandian combatirent le Souldan de Liquie, & la Roine Calafie : & de la bataille qui feut le jour mesmes, par mer & par terre entre les Chrestiens & Payens."
+      },
+      {
+        "number": 51,
+        "startPage": 239,
+        "title": "Comme apres que les Payens feurent chassez de Trace, l'Empereur renonça à son empire, & en investit Esplandian, faisant le mariaige de luy & de sa fille Leonorine."
+      },
+      {
+        "number": 52,
+        "startPage": 244,
+        "title": "Comme l'Empereur Esplandian envoya Norandel, prendre possession des pais qu'il luy avoit donnez : & de la prinse de Tesifante. Chapitre Lu."
+      },
+      {
+        "number": 53,
+        "startPage": 245,
+        "title": "Come Urgande la descogneue envoya prier le Roy Amadis, l'Empereur Esplandian, dom Galaor Roy de Sobradise & aultres, d'eulx trouver en l'Isle ferme, & des merveilleux enchantemens qu'elle feit sur culx."
+      }
+    ],
+    "tocChapters": 41,
+    "unscorable": 0
+  },
+  "out": "book-5",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 14
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 144
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 250
+      }
+    ],
+    "pages": 250,
+    "roleCounts": {
+      "body": 9068,
+      "footer": 147,
+      "header": 291,
+      "title": 318
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 41,
+    "missingFolios": 18,
+    "repairedNumbers": 7,
+    "sequenceBreaks": 12,
+    "suspectFolios": 2
+  }
+}

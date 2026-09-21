@@ -1,0 +1,696 @@
+{
+  "book": 11,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 22,
+        "expectedPage": 29,
+        "folio": 6,
+        "number": 2
+      },
+      {
+        "actualPage": 30,
+        "expectedPage": 33,
+        "folio": 8,
+        "number": 3
+      },
+      {
+        "actualPage": 61,
+        "expectedPage": 99,
+        "folio": 41,
+        "number": 22
+      },
+      {
+        "actualPage": 70,
+        "expectedPage": 73,
+        "folio": 28,
+        "number": 14
+      },
+      {
+        "actualPage": 84,
+        "expectedPage": 197,
+        "folio": 90,
+        "number": 60
+      },
+      {
+        "actualPage": 107,
+        "expectedPage": 97,
+        "folio": 40,
+        "number": 25
+      },
+      {
+        "actualPage": 165,
+        "expectedPage": 169,
+        "folio": 76,
+        "number": 43
+      },
+      {
+        "actualPage": 184,
+        "expectedPage": 177,
+        "folio": 80,
+        "number": 53
+      },
+      {
+        "actualPage": 240,
+        "expectedPage": 245,
+        "folio": 114,
+        "number": 70
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.9,
+        "startPage": 19,
+        "title": "Ensuyt la Table des chapitres CONTENUZ EN CEPRESENT LIVRE. Et premierement. Omme la royne Sidonie se sentit grosse d'enfant : & de la naissance de la belle Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 0.7,
+        "startPage": 22,
+        "title": "Fueillet Premier. Description du chasteau de Febus & de Diane, avec toutes ses sigularitez.  chapitre ijfueillet iii. De la naissance du prince Rogel de Grece & de sa phisiononue avec ses meurs & conditions."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 0.875,
+        "startPage": 30,
+        "title": "Comme le prince Agesilan naquit & de sa figure & complexion."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.938,
+        "startPage": 37,
+        "title": "Comme Florarlan party de Trapezonde, eut combat contre quelques chevaliers, & debat avecques une dame & une damoyselle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.962,
+        "startPage": 44,
+        "title": "fueilx. Comme le chevalier envoyé par Florarlan avec l'escu du duc de Galde, vint à Trapezonde. Et du deffy que le roy de Gaze presenta à Florisel."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.947,
+        "startPage": 47,
+        "title": "Du combat entre le prince Florisel de Niquée & le roy de Gaze pour la querelle de la royne Sidonie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 1.0,
+        "startPage": 54,
+        "title": "fveillet xy. Comme le chevalier du Fenix fut porté par tourmente en l'isle de Dardanie, & de ses fortunes."
+      },
+      {
+        "matchedOn": "title",
+        "number": 13,
+        "score": 0.818,
+        "startPage": 57,
+        "title": "Comme estant le chevalier du Fenix aßis devant le chasteau, veid revenir le nain qu'il en avoit veu sortir la nuit precedente, & de ce qui en auint. echapitrex. fveillet xx. Comme les chevaliers qui avoient combatu contre celuy du Fenix allerent fatre leur plainte à la royne de Dardanie, de la princesse sa fille. chapitre xifueillet xxii. Comme le gean Madaran vint avec son armée livrer l'assaut à la ville de Dardanie.  chapite xij. fuleiletxxiii. Du combat du chevalier du Fenix contre le fort gean Madaran, avec heureuse victoire"
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.826,
+        "startPage": 70,
+        "title": "y. Comme le roy de Gaze s'alla presenter à la royne Sidonie, & quelle estoit la perfection de la beauté de sa fille Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.857,
+        "startPage": 77,
+        "title": "Comme Daraide & Garaye aborderent en l'isle de Guindaye, & de ce qui leur avint à l'arrinée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.923,
+        "startPage": 81,
+        "title": "Comme Daraide & Guraye depeschées du chevalier de l'escritteau, rencontrerent deux damoyselles, & de ce qui passa entr'elles. chapitre xyu. fveillet xxxii. Comme Daraide & Garaye rencontrerent un chevalier qui emmenoit le palefroy d'une Damoyselle & de l'issuen."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.952,
+        "startPage": 87,
+        "title": "Comme Daraide & Garaye arriverent en la ville de Guindaye, & de la allerent trouver la royne Sidonie en son logis de mer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 1.0,
+        "startPage": 91,
+        "title": "p. Comme la royne Sidonie mena Daraide & Garaye à la ville, & les donna à la princesse Diane sa fille."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 1.0,
+        "startPage": 96,
+        "title": "Du passetemps du luth que print Diane avec Daraide & Garaye, & de leurs menuz propos ensemble."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 0.571,
+        "startPage": 61,
+        "title": "Comme la royne de l'isle de Dardanie requit le chevalier du Fenix d'espouser la princesse Lucenie sa fille, & de sa responce."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.875,
+        "startPage": 101,
+        "title": "Comme le roy de Lacemone vint vers l'emperiere Niquée de la part du Soudan son pere pour la mener vers luy, & du succez de leur voyage."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 0.938,
+        "startPage": 104,
+        "title": "Comme les nouvelles coururent par le monde que l'emperiere Niquée estoit perie en mer, & du merveilleux deul qu'on en mena."
+      },
+      {
+        "matchedOn": "title",
+        "number": 25,
+        "score": 1.0,
+        "startPage": 107,
+        "title": "Comme l'Empereur Amadis de Grece alla voyager par mer & par terre en queste de Niquée & de ses aventures."
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 1.0,
+        "startPage": 112,
+        "title": "y. Comme Amadis de Grece & sa damoyselle Finistée reprindrent leur chemin & de ce qui leur auint avecques la belle Angelée à l'occasion d'un chevalier."
+      },
+      {
+        "matchedOn": "title",
+        "number": 28,
+        "score": 0.895,
+        "startPage": 115,
+        "title": "Comme le prince Florisel fut porté par tempeste en l'isle de Garaye & des aventures estranges qui luy avindrent.  chap-xxyij. fveillet xlix. Comme Floriselsortit de la prison ou la naine l'avoit enfermé & entra en un beau verger & de ce qui depuis luy auint."
+      },
+      {
+        "matchedOn": "folio",
+        "number": 29,
+        "score": 1.0,
+        "startPage": 122,
+        "title": "Du cruel combat de Florisel contre le gean Bazaran & ses chevaliers."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.842,
+        "startPage": 125,
+        "title": "De la brave bataille du prince Anastarax & de Filisel son filz contre le geant Brosdolf : & du secours que Florisel leur donna."
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.909,
+        "startPage": 128,
+        "title": "Comme les princes Florisel & Anastarax arriverent au chasteau : & de la mort de la geante Batalaze."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.857,
+        "startPage": 130,
+        "title": "fueillet ly. Comme Fenix de Corinte & Aflibel de Mesopotamie rencontrerent deux damoyselles, & qu'elle en fut l'issué."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.909,
+        "startPage": 135,
+        "title": "De la triste vie que Daraide menoit en l'amour de Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.952,
+        "startPage": 138,
+        "title": "De l'entrée & reception sumptueuss de la royne Cleofile en la ville de Guindaye, & le motif de sa venue à voir Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 1.0,
+        "startPage": 139,
+        "title": "fueillet le Comme la royne Cleofile alla diner avecques Diane, ou Garaye se donna à elle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 36,
+        "score": 0.833,
+        "startPage": 143,
+        "title": "fveillet lai. Comme les roynes & leurs Damoyselles esprounserent l'aventure de la caue des deux tours & avec quelle yssue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 0.963,
+        "startPage": 145,
+        "title": "Du plaisir que print la royne Cleofile es devises & paintures historiées au palais de Diane : principalement en une transmutation de Nymphe en biche blanche, faitte par la déesse Diane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 1.0,
+        "startPage": 148,
+        "title": "fueillet lxiniComme arriva à la cour un beau jeune chevalier menant la duchesse de Baviere : & de la requeste qu'ilz firent à la royne Sidonie."
+      },
+      {
+        "matchedOn": "title",
+        "number": 40,
+        "score": 0.867,
+        "startPage": 152,
+        "title": "Du comhat perilleux entre le chevalier du Fenix & Rosaran & la fin d'iceluy par yn estrange enchantement."
+      },
+      {
+        "matchedOn": "title",
+        "number": 41,
+        "score": 1.0,
+        "startPage": 156,
+        "title": "Du lignage de Rosaran & la cause du chasteau enchanté."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 1.0,
+        "startPage": 158,
+        "title": "Comme les roynes & Daraide, & Garaye esprouverent l'aventure du chasteau enchanté."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 0.824,
+        "startPage": 161,
+        "title": "Comme l'empereur Amadis de Grece delivra yne Damoyselle des mains de deux Chevaliers qui la vouloient forcer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.8,
+        "startPage": 163,
+        "title": "Du mauvais tour qu'une damoyselle brassa à l'empereur Amadis qui avoit la nuit refuse sa compagnie,"
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 1.0,
+        "startPage": 165,
+        "title": "Comme l'empereur Amadis de Grece devisant avec Finistée en chemin, rencontra yne littiere que deux geans conduysoient avec plusieurs chevaliers."
+      },
+      {
+        "matchedOn": "title",
+        "number": 47,
+        "score": 0.857,
+        "startPage": 170,
+        "title": "Comme les chevaliers du geant saillirent de rechef sur Amadis, qui les rembarra. Et comme il trouva leans la princesse Lucelle. chapitre xlvifueillet lxxvi. Des discours de la princesse Lucelle avec sa damoyselle Anastasiane, & apres avec Amadis, à qui elle recita l'occasion de sa yenve au chasteau d'Aldarin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 48,
+        "score": 1.0,
+        "startPage": 175,
+        "title": "fueillet laxvii. Comme l'empereur & Mandroc le geant, gueris de leurs playes, s'embarquerent à la persuasion de Lucelle pour aller en France."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.842,
+        "startPage": 177,
+        "title": "fueillet lexix. Comme Florisel & Anastarax avec leur compagnie partirent du chasteau des Geans, & par tourmente furent jettez en une dutre isle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 50,
+        "score": 0.765,
+        "startPage": 179,
+        "title": "fueillet luxt, Comme Florisel, Anastarax & leurs dames furent pris par fraude de la dame de l'isle &y de ses enfans."
+      },
+      {
+        "matchedOn": "title",
+        "number": 51,
+        "score": 0.864,
+        "startPage": 182,
+        "title": "Comme les roys de Gaze & de Bugie envoyerent Galtazar de Barberousse & sesfreres, deffier la royne Sidonié, au cas qu'elle & sa fille ne les vousissent accepter pour maryz."
+      },
+      {
+        "matchedOn": "title",
+        "number": 53,
+        "score": 0.909,
+        "startPage": 184,
+        "title": "Comme Galtazar de barberousse executa son embassade envers la royne Sidonie : & comme Florarlan, Artaxerxes, & Daraide, accepterent le deffy contre les trois gemeaux.  chapitre lijfueillet lxxxii. Des propos que Diane tint à Daraide sur le combat qu'elle avoit accepté : & comme elle receut l'ordre de chevalerie par la main de Florarlan."
+      },
+      {
+        "matchedOn": "title",
+        "number": 54,
+        "score": 1.0,
+        "startPage": 190,
+        "title": "y. Du combat des trois freres contre Daraide, & les chevaliers du Fenix & du Roulleau."
+      },
+      {
+        "matchedOn": "title",
+        "number": 57,
+        "score": 0.846,
+        "startPage": 194,
+        "title": "Des choses estranges que Florarlan & Artaxerxes virend au palais de Mars ou la Royne les fit loger.  chapitre ly. fveillet lxxxviii. Des devis de Diane avec Daraide estant au lit navrée & d'une damoyselle qui vint en cour requerir un don à la Royne.  cha lvi.  fueil. lxxxix. Comme navigant la royne Cleofile & Garaye, rencontrerent en mer un corsaire nomné Grandan le bossu, qui leur liura un perilleux assaut."
+      },
+      {
+        "matchedOn": "title",
+        "number": 53,
+        "score": 1.0,
+        "startPage": 204,
+        "title": "fueillet xeiiComme Garaye decouvrit à la royne Cleofile qu'elle estoit homme, & du debat qui fut entre eux sur ce propos."
+      },
+      {
+        "matchedOn": "title",
+        "number": 60,
+        "score": 0.615,
+        "startPage": 84,
+        "title": "fveil. xciii. Comme allant Daraide avec la damoyselle Galtazire dessendirent pres d'one fonteine ou survint un chevalier qui leur joua yne trousse. ch. lix. fu. xciiii. Comme Daraide & sa compagnie se mirent à recercher le Fraudeur, gy de leur succez."
+      },
+      {
+        "matchedOn": "title",
+        "number": 61,
+        "score": 0.969,
+        "startPage": 213,
+        "title": "y. Comme les chevaliers que Daraide envoya à la royne Sidonie, se presenterent à elle luy faisant le discours joyeux de l'acte du fraudeur : Et comme Lardenie decouvrit à Diane le secret d'Agesilan."
+      },
+      {
+        "matchedOn": "title",
+        "number": 62,
+        "score": 0.909,
+        "startPage": 218,
+        "title": "fueillet xcyiji. Comme l'empereur Amadis de Grece & la princesse Lucelle travaillez & ennuyez de la mer prindrent terre : & comme par mal contentement il se deroba d'elle qui le suivit avec Mandroc."
+      },
+      {
+        "matchedOn": "title",
+        "number": 63,
+        "score": 0.955,
+        "startPage": 221,
+        "title": "fueillet c. Comme allant la princesse Lucelle avecques le geant Mandroc en queste de l'empereur Amadis se virent en grand peril, & quelle fut l'isuen."
+      },
+      {
+        "matchedOn": "title",
+        "number": 64,
+        "score": 0.95,
+        "startPage": 225,
+        "title": "t cii. Comme Amadis de Grece (apres avoir delivré de danger la princesse) partit sans parler à elle, & comme elle alla apres luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 65,
+        "score": 0.692,
+        "startPage": 228,
+        "title": "Comme l'empereur Amadis par sa haute chevalerie conquit le chastean d'Ar gantas &y delivra les prisonniers."
+      },
+      {
+        "matchedOn": "title",
+        "number": 66,
+        "score": 0.9,
+        "startPage": 232,
+        "title": "fueillet cy. Comme le prince Falanges n'ayant nouvelles de son filz Agesilan ne de l'emperiere Niquée & de tous ceux qui estoient allez en sa queste, s'exposa à la fortune pour les aller trouver & la princesse Alastraxerée sa femme avec luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.933,
+        "startPage": 233,
+        "title": "fueillet cyii. Comme Gandastes le brave, roy de Frigie vint à Trapesonde pour entrer en combat singulier contre Florisel sur la querelle de Sidonie. Et comme Rogel de Grece le vainquit en la deffence de son pere."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 0.8,
+        "startPage": 237,
+        "title": "fueillet cyiii. Comme Rogelguery de ses playes deliura trou danoyselles des mains de trois chevaliers chevaliers qui les vouloient forcer : & des menuz propos qui passerent entre luy g elles."
+      },
+      {
+        "matchedOn": "title",
+        "number": 70,
+        "score": 0.826,
+        "startPage": 240,
+        "title": "fveillet ex. Come Rogel reprenant son chemin, abatit à la jousle les chevaliers de la dame des quatre chasteaux, & des amourettes qu'il demena avec elle. chelxix. fcxi¬Comme le prince Falanges d'Affre arriva en une isle ou il fut en extremdanger, & de l'estrange secours qui luy survint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 71,
+        "score": 0.871,
+        "startPage": 250,
+        "title": "Comme Rogel de Grece s'enamoura de la l'elle Leonide. Et Filisel de Moutespi d'Avaxare. Et comme l'emperiere laissa à la duchesse de Gazen sonisle, la faisant battiser, & tous les habitans d'icelle."
+      },
+      {
+        "matchedOn": "title",
+        "number": 72,
+        "score": 0.913,
+        "startPage": 254,
+        "title": "Comme Galtazire conta à Daraide l'aventure pour laquelle elle l'emmenoit : & comme elles arriverent au royaume de Tessalie, ou ellé delivra un chevalier des mains de deux damoyselles."
+      },
+      {
+        "matchedOn": "title",
+        "number": 73,
+        "score": 0.941,
+        "startPage": 258,
+        "title": "fueillet exvii. Comme Daraide fut receue de la royne de Tessalie, laquelle apres avoir yeu les deux princes enchantez, s'achemina yers le chasteau du mont."
+      },
+      {
+        "matchedOn": "title",
+        "number": 74,
+        "score": 0.875,
+        "startPage": 261,
+        "title": "fueillet exx. Comme Daraide combatit contre le gean du chasteau du mont, & contre le fier &y cruel Cavalyon, & qu'elle en fut l'issue, cha laxiini. fueil exxijij. Comme Rosafar & Artifire estans desenchantez allerent voir Daraide au chasteau des Rochers."
+      },
+      {
+        "matchedOn": "title",
+        "number": 75,
+        "score": 0.931,
+        "startPage": 268,
+        "title": "fueillet exxy. Comme l'empereur Amadis de Grece, & la princesse Lucelle vindrent trouver le roy Lucidor : Et du songe qu'eut l'empereur, qui le fit de partir d'elle, & aller en la queste de Niquée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 77,
+        "score": 0.95,
+        "startPage": 271,
+        "title": "fueillet cxxyi. Comme l'empereur Amadis & Finistée aborderent en une isle ou ilz sejournerent long temps &y de l'estrange aventure qui leur y auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 78,
+        "score": 0.955,
+        "startPage": 274,
+        "title": "fveillet exxvii. Comme la nef en laquelle estoit l'emperiere Niquée, cy les autres princes fut jettée par tempeste en l'isle inconnuen : & des estranges merveilles qui leur apparurent avant que la voir"
+      },
+      {
+        "matchedOn": "title",
+        "number": 79,
+        "score": 0.955,
+        "startPage": 277,
+        "title": "fveillet exxviii. Comme Alquif & Urgande monstrerent aux princes & princesses dedans le miroir de la tour de leur chasteau une plaisante aventure lors avenant en l'isle de Guindaye."
+      },
+      {
+        "matchedOn": "title",
+        "number": 80,
+        "score": 0.857,
+        "startPage": 281,
+        "title": "Comme les sages monstrerent encore aux princes & dames dedans le miroir de la tour yne autre plaisante aventure de l'isle de Guindaye."
+      },
+      {
+        "matchedOn": "title",
+        "number": 81,
+        "score": 0.962,
+        "startPage": 286,
+        "title": "Comme estans les sages partiz de leur isle quand & les princes, furent laucez en une autre par tempeste, ou l'emperiere Niquée ent une fort estrange rencontre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 82,
+        "score": 0.833,
+        "startPage": 291,
+        "title": "fveillet exxxivi. Comme Galtazire arriva en la ville de Guindaye, & presenta à Diane la lettre de Daraide & le Cavalyon."
+      },
+      {
+        "matchedOn": "title",
+        "number": 83,
+        "score": 0.938,
+        "startPage": 297,
+        "title": "fueil. exxxvii. Comme Daraide partie du royaume de Tessalie, fut par fortunal lancée au royaume de Galdap, & de ce qui l'y auint."
+      },
+      {
+        "matchedOn": "title",
+        "number": 84,
+        "score": 0.786,
+        "startPage": 300,
+        "title": "Du roy Galinides de Galdapamoureux de Daraide, jusques à en perdre le ses.  dhapire lxgui. Des tours d'extreme affection dont usa la royne Salderne à Daraide."
+      },
+      {
+        "matchedOn": "title",
+        "number": 86,
+        "score": 0.97,
+        "startPage": 308,
+        "title": "fveillet exliit. Comme le roy de Gelde averty de la forcenerie du roy de Galdap, entra en ses pais à grosse arnée : & du danger ou estoit la royne & son royaume, sans le secours de Daraide."
+      },
+      {
+        "matchedOn": "title",
+        "number": 87,
+        "score": 0.933,
+        "startPage": 314,
+        "title": "fveillet exl. De ce qui auint à Daraide en chemin depuis qu'elle fut hors du royaume de Galdap."
+      },
+      {
+        "matchedOn": "title",
+        "number": 88,
+        "score": 1.0,
+        "startPage": 317,
+        "title": "fueillet exlviii. De la vie amoureuse que menoit Garaye en l'isle de Lemnos avec la royne Cleofile."
+      },
+      {
+        "matchedOn": "title",
+        "number": 89,
+        "score": 1.0,
+        "startPage": 321,
+        "title": "Du moyen de reconciliation & appointement de dom Arlanges avec la royne Cleofile."
+      }
+    ],
+    "missing": [],
+    "passages": 90,
+    "precision": 0.8,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 1,
+        "startPage": 17,
+        "title": "dables commise en l'impression de ce liure."
+      },
+      {
+        "number": 4,
+        "startPage": 29,
+        "title": "de Grece & de sa phisionomie avec ses meurs & conditions."
+      },
+      {
+        "number": 6,
+        "startPage": 34,
+        "title": "Comme Florarlan de Trace rauy d'Amour par l'ymage de la royne Cleophile, pourchassa à estre chevalier pour avoir moyen de luy faire service. Chapitre U."
+      },
+      {
+        "number": 13,
+        "startPage": 64,
+        "title": "Comme le geant Madaran vint avec son armée livrer l'assaut à la ville de Dardanie."
+      },
+      {
+        "number": 14,
+        "startPage": 67,
+        "title": "nix contre le fort geant Ma duran, avec heureuse pictoire."
+      },
+      {
+        "number": 16,
+        "startPage": 73,
+        "title": "moura de Diane, par la seule veuen de son ymage. Et du conseil que dom Arlanges d'Espagne son compagnon luy donna. Chapitre A XV."
+      },
+      {
+        "number": 23,
+        "startPage": 99,
+        "title": "Comme la royne de l'isle de Dardanie requit le chevalier du Fenix d'espouser la princesse Lucenie sa fille, & de sa responce."
+      },
+      {
+        "number": 29,
+        "startPage": 119,
+        "title": "son ou la naine l'avoit enfermé & entra en un beau verger & de ce qui depuis luy auint."
+      },
+      {
+        "number": 40,
+        "startPage": 150,
+        "title": "sibel de Mesopotanie yindrentà la jouste contre Rosaran, &y perdirent leurs Damoyselles. Chapitre AUXXXIX"
+      },
+      {
+        "number": 48,
+        "startPage": 172,
+        "title": "celle avec sa damoyselle Anastasiane, & apres avec Amadis, à qui elle recita l'occasion de sa venue au chasteau d'Aldarin."
+      },
+      {
+        "number": 54,
+        "startPage": 188,
+        "title": "Des propos que Diane tint à Daraide sur le combat qu'elle avoit accepté : & comme elle recent l'ordre de chevalerie par la main de Florarlan."
+      },
+      {
+        "number": 57,
+        "startPage": 195,
+        "title": "Des devis de Diane avec Daraide estant au lit navrée & d'une Damoyselle qui vint en cour requerir un don à la Royne."
+      },
+      {
+        "number": 58,
+        "startPage": 201,
+        "title": "Comme navigant la royne Cleofile & Garaye, rencontrerent en mer yn corsaire nommé Grandun le bossu, qui leur liura un perilleux assaut."
+      },
+      {
+        "number": 60,
+        "startPage": 205,
+        "title": "Comme allant Daraide avec la damoyselle Galdazire dessendirent pres d'une fontaine ousurvint un chevalier qui leur joua une trousse."
+      },
+      {
+        "number": 61,
+        "startPage": 208,
+        "title": "Comme Daraide & sa compagnie se mirent à recercher le Fraudeur, & de leur succez."
+      },
+      {
+        "number": 71,
+        "startPage": 245,
+        "title": "Comme le prince Falanges d'Astre arrina en une isle ou il fut en extreme danger, & de l'estrange secours qui luy survint."
+      },
+      {
+        "number": 76,
+        "startPage": 265,
+        "title": "Comme Rosafar & Artifire estas desenchantez allerent voir Daraide au chasteaudes Rochers."
+      },
+      {
+        "number": 86,
+        "startPage": 304,
+        "title": "Des tours d'extreme affection dont ysa la royne Salderne à Daraide."
+      }
+    ],
+    "tocChapters": 72,
+    "unscorable": 0
+  },
+  "out": "book-11",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 329
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 330
+      }
+    ],
+    "pages": 330,
+    "roleCounts": {
+      "body": 12365,
+      "footer": 295,
+      "header": 392,
+      "title": 385
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 72,
+    "missingFolios": 33,
+    "repairedNumbers": 19,
+    "sequenceBreaks": 16,
+    "suspectFolios": 3
+  }
+}

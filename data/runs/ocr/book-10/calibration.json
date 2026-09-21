@@ -1,0 +1,574 @@
+{
+  "book": 10,
+  "family": "A",
+  "match": {
+    "folioMismatches": [
+      {
+        "actualPage": 41,
+        "expectedPage": 82,
+        "folio": 32,
+        "number": 12
+      },
+      {
+        "actualPage": 42,
+        "expectedPage": 50,
+        "folio": 16,
+        "number": 6
+      },
+      {
+        "actualPage": 69,
+        "expectedPage": 58,
+        "folio": 20,
+        "number": 9
+      },
+      {
+        "actualPage": 83,
+        "expectedPage": 184,
+        "folio": 83,
+        "number": 42
+      },
+      {
+        "actualPage": 86,
+        "expectedPage": 92,
+        "folio": 37,
+        "number": 14
+      },
+      {
+        "actualPage": 94,
+        "expectedPage": 98,
+        "folio": 40,
+        "number": 16
+      },
+      {
+        "actualPage": 109,
+        "expectedPage": 98,
+        "folio": 40,
+        "number": 19
+      },
+      {
+        "actualPage": 129,
+        "expectedPage": 160,
+        "folio": 71,
+        "number": 35
+      },
+      {
+        "actualPage": 141,
+        "expectedPage": 38,
+        "folio": 10,
+        "number": 29
+      },
+      {
+        "actualPage": 145,
+        "expectedPage": 42,
+        "folio": 12,
+        "number": 31
+      },
+      {
+        "actualPage": 149,
+        "expectedPage": 36,
+        "folio": 9,
+        "number": 32
+      },
+      {
+        "actualPage": 153,
+        "expectedPage": 150,
+        "folio": 66,
+        "number": 33
+      },
+      {
+        "actualPage": 162,
+        "expectedPage": 166,
+        "folio": 74,
+        "number": 37
+      },
+      {
+        "actualPage": 168,
+        "expectedPage": 158,
+        "folio": 70,
+        "number": 38
+      },
+      {
+        "actualPage": 188,
+        "expectedPage": 192,
+        "folio": 87,
+        "number": 43
+      }
+    ],
+    "matched": [
+      {
+        "matchedOn": "title",
+        "number": 1,
+        "score": 0.97,
+        "startPage": 20,
+        "title": "Ensuyt la Table des matieres Omme les nouvelles de l'aventure du Tref & estrif (autrement dit la Tente & contention) vindrent à la nef des princes Florisel de Niquée, & Falanges d'Astre : lesquelz allerent à l'espreuve couvertz & desguisez, & de ce qui leur avint en chemin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 2,
+        "score": 1.0,
+        "startPage": 28,
+        "title": "Fueillet Premier. Comme l'aventure du Tref & estrif, des quatre freres fut achevée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 3,
+        "score": 1.0,
+        "startPage": 36,
+        "title": "Fueillet. y. Du devis de Florisel avec Alastraxerée, en faveur du prince Falanges."
+      },
+      {
+        "matchedOn": "title",
+        "number": 4,
+        "score": 0.889,
+        "startPage": 40,
+        "title": "Comme les nouvelles vindrent à la princesse Arlande que l'enchantement de la tour de l'Univers estoit deffait."
+      },
+      {
+        "matchedOn": "title",
+        "number": 6,
+        "score": 0.857,
+        "startPage": 42,
+        "title": "Comme le prince Birmartes arriva au royaume d'Apollonie, ou fut tenu conseil sur le recouvrement d'Helene. Chapitre y. Fueillet xijComme le conte d'Armignac retourna avec la responce des lettres de Florisel."
+      },
+      {
+        "matchedOn": "title",
+        "number": 7,
+        "score": 0.923,
+        "startPage": 57,
+        "title": "Comme le prince Falanges se perdit à la chasse, picquant apres un Faulcon."
+      },
+      {
+        "matchedOn": "title",
+        "number": 8,
+        "score": 0.963,
+        "startPage": 62,
+        "title": "Comme la Princesse declara à Falanges tout le fait pour lequel elle luy avoit demandé le dom. Et comme il esprouva l'aventure de l'Idole des Vengeances d'Amour."
+      },
+      {
+        "matchedOn": "title",
+        "number": 9,
+        "score": 0.615,
+        "startPage": 69,
+        "title": "De ce qui auint en Constantinople depuis que le prince Falanges en fut party."
+      },
+      {
+        "matchedOn": "title",
+        "number": 10,
+        "score": 0.769,
+        "startPage": 73,
+        "title": "y. Comme Florisel se mit en queste de Garinter, & de ses estranges aventures en chemin."
+      },
+      {
+        "matchedOn": "title",
+        "number": 11,
+        "score": 1.0,
+        "startPage": 80,
+        "title": "De la cerimonie qui fut celebrée en la presence de Florisel au chasteau de l'Isle Environnée."
+      },
+      {
+        "matchedOn": "title",
+        "number": 12,
+        "score": 0.636,
+        "startPage": 41,
+        "title": "Des propos que le sage Astibel eut avec la princesse Arlande, touchant les affai res de Florisel de Niquée, & comme elle remit les deux Princes en liberté."
+      },
+      {
+        "matchedOn": "title",
+        "number": 14,
+        "score": 0.882,
+        "startPage": 86,
+        "title": "Comme la royne Zahara partit avec ses deux enfans à grand'flotte pour aller en Apolonie, & de l'estrange aventure qui leur survint. Cha xiij. Fueil. xxxijij. Comme le fort Anaxartes arriva au palais Doré, & des grandz merveilles qu'il y vit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 16,
+        "score": 0.667,
+        "startPage": 94,
+        "title": "Comme la princesse Alastraxerée alla apres Anaxartes son frere, & donnerent fin à l'aventure. Chapitre xy. Fueillet xxxyiii. Comme la grand' flotte de Lucidor arriva à veuén de Constantinople, laquelle en ji les Grecz voulurent empescher de prendre terre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 17,
+        "score": 1.0,
+        "startPage": 100,
+        "title": "Comme la flotte se desbarqua, & de quelle magnificence la royne Zahara&x ses enfans prindrent terre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 18,
+        "score": 0.786,
+        "startPage": 103,
+        "title": "De la premiere journée & des harangues que firent les chesz principaiilx à leurs armées."
+      },
+      {
+        "matchedOn": "title",
+        "number": 19,
+        "score": 0.929,
+        "startPage": 109,
+        "title": "Du grand deul qu'on mena pour les mortz d'un costé & d'autre. Et comme la treue fut acordée pour trente jours."
+      },
+      {
+        "matchedOn": "title",
+        "number": 20,
+        "score": 1.0,
+        "startPage": 111,
+        "title": "y. Comme le roy Sizirfan & don Frises de lusitanie avec dixhuit autres Chevaliers de leur ost envoyerent un cartel de deffy au prince Amadis de Grece, à Florisel de Niquée & dixhuit Chevaliers de la ville lequel fut accepté par eulx."
+      },
+      {
+        "matchedOn": "title",
+        "number": 21,
+        "score": 0.824,
+        "startPage": 114,
+        "title": "Comme une grand' flotte nouvelle arrina au port de Constantinople, qui fort espouventa ceux de la ville."
+      },
+      {
+        "matchedOn": "title",
+        "number": 22,
+        "score": 1.0,
+        "startPage": 117,
+        "title": "Comme la princesse Alastraxerée envoya deffier le prince Falanges par lettre : &y la response qu'elle receut de luy."
+      },
+      {
+        "matchedOn": "title",
+        "number": 23,
+        "score": 0.941,
+        "startPage": 121,
+        "title": "De la bataille d'Amadis de Grece, Florisel, & dixhuit Chevaliers : contre le Roy de Scithie, & autant d'autres Geans."
+      },
+      {
+        "matchedOn": "title",
+        "number": 24,
+        "score": 1.0,
+        "startPage": 126,
+        "title": "Comme Macartes Roy de Thir despescha un cartel de deffy au roy Amadis de Gaule."
+      },
+      {
+        "matchedOn": "title",
+        "number": 25,
+        "score": 0.929,
+        "startPage": 129,
+        "title": "Comme une damoyselle estrangément acoustrée vint devers les princes Grecz portant une lettre de la royne Cleofile"
+      },
+      {
+        "matchedOn": "title",
+        "number": 26,
+        "score": 1.0,
+        "startPage": 131,
+        "title": "Fueillet ly. Du bon recueil qui fut fait à la royne Cleofile tant en la ville que dans le camp."
+      },
+      {
+        "matchedOn": "title",
+        "number": 27,
+        "score": 0.9,
+        "startPage": 134,
+        "title": "Fueillet loi. Du combat qui fut entre le roy Amadis & celuy de Thir."
+      },
+      {
+        "matchedOn": "title",
+        "number": 28,
+        "score": 0.958,
+        "startPage": 139,
+        "title": "De la confusion en laquelle la royne Cleofile se trouva, & de la harengue qu'elle fit en la presence des princes Grecz, avant son partement."
+      },
+      {
+        "matchedOn": "title",
+        "number": 29,
+        "score": 0.913,
+        "startPage": 141,
+        "title": "eueillet lx. Comme les princes Grecz arresterent par deliberation de conseil que Florisel ouvriroit quelque proposition de bouche à Lucidor, avant que retourner à l'exploit de leur guerre."
+      },
+      {
+        "matchedOn": "title",
+        "number": 30,
+        "score": 0.941,
+        "startPage": 143,
+        "title": "Comme les amours de Lucelle se resueillerent au cueur d'Amadis de Grece : & comme Florisel parla à Lucidor, & de la responce qu'il luy fit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 31,
+        "score": 0.955,
+        "startPage": 145,
+        "title": "Des prodiges & presages qui auindrent avant la bataille, & des harengues faites par les Capitaines generaulx à leurs gens, avant que la commencer."
+      },
+      {
+        "matchedOn": "title",
+        "number": 32,
+        "score": 0.905,
+        "startPage": 149,
+        "title": "Qui estoit le roy Breon, & de la trahison qu'il machina. Et la harengue du roy Amadis, apres la perte de la bataille."
+      },
+      {
+        "matchedOn": "title",
+        "number": 33,
+        "score": 0.917,
+        "startPage": 153,
+        "title": "y. Comme les princes Grecz executerent leur desein nocturne, & qu'elle en fut l'issue."
+      },
+      {
+        "matchedOn": "title",
+        "number": 34,
+        "score": 0.889,
+        "startPage": 159,
+        "title": "Comme les princes Grecz rentrerent en la cité, & des lamentations que fit Helene."
+      },
+      {
+        "matchedOn": "title",
+        "number": 35,
+        "score": 0.636,
+        "startPage": 129,
+        "title": "Dumerveilleux acte de Silercie damoyselle de la royne Cleofile pour sauver sa maistresse des mains du neveu de Breon : Et du secours que luy donna Amadis de Grece."
+      },
+      {
+        "matchedOn": "title",
+        "number": 37,
+        "score": 0.864,
+        "startPage": 162,
+        "title": "Comme Amadis de Grece desconfit les Rugiens avec l'ayde de Fulurtin, se departit de luy, & des merveilleuses aventures qu'il rencontra. ch. xxxyi. fu-lxxii. De la solitude d'Amadis de Grece & de ce qu'il fit avec le Damoysel."
+      },
+      {
+        "matchedOn": "title",
+        "number": 38,
+        "score": 0.917,
+        "startPage": 168,
+        "title": "Comme le damoysel Florarlan mena Amadis de Grece yeoir les naurez d'Armide."
+      },
+      {
+        "matchedOn": "title",
+        "number": 42,
+        "score": 0.56,
+        "startPage": 83,
+        "title": "y. Comme Amadis de Grece esprouva l'aventure de la queste d'Armide, & de ce qui luy auint. Chapit.xxxix Fueil. Ixxvi. Des propos que la princesse Armide tint à Amadis de Grece, & comme elle demeura enchantée. Chapit. xl. Fueill. lxxviii. De la grieve passion d'Anaxartes & des propos qu'il ent avec la princesse Oriane. Chapit.xliFueil lexx. Comme les princes Florisel & Falanges furent gettez par tempeste en l'isle de Guindaye, & de l'estrange aventure qu'ilz y trouverent."
+      },
+      {
+        "matchedOn": "title",
+        "number": 43,
+        "score": 1.0,
+        "startPage": 188,
+        "title": "Du grand danger auquel les deux Princes se trouverent avec la royne Sidonie à cause de ses loix. Chapit.xliiji. Fueil lxxxy. Comme un herault se vint presenter devant la royne Sidonie, la sommant de certain tribut, &y de ce que Moraizel luy respondit."
+      },
+      {
+        "matchedOn": "title",
+        "number": 49,
+        "score": 0.562,
+        "startPage": 171,
+        "title": "Comme Moraizel & Falanges combatirent contre le roy Astradolfe, & son frere, & de ce qui en auint, Chapit. xlviFueil. lxxxviii. De ce qui auint au prince Zahir, avec un Chevalier insencé. Ch.xlvii. Enxc. Comme Zabir alla au chasteau ou estoit la desloyalle femme, ou luy survindrent aventures diverses. Chapit. xlvini. Fueil. xci. De ce qui avint au Duc de Molasie par mer en la conduite de la belle Oriane."
+      },
+      {
+        "matchedOn": "title",
+        "number": 52,
+        "score": 0.571,
+        "startPage": 174,
+        "title": "Comme le prince Lucidor, avec sa sœur la princesse Lucelle, se meist sur mer pour aller en Constantinople consommer son mariage, & des estranges rencontres qu'il eut en chemin. Chapit. l. Fueil. xcy. Comme la princesse Lucelle esprouva l'aventure de la queste d'Armide à la requeste du damoysel Florarlan. Chapit. li. Fueil xcyiiComme Amadis de Grece arrina en yne Isle, ou il fut en tresgrand danger."
+      }
+    ],
+    "missing": [],
+    "passages": 68,
+    "precision": 0.559,
+    "recall": 1.0,
+    "spurious": [
+      {
+        "number": 7,
+        "startPage": 50,
+        "title": "Comme le conte d'Armignac retourna avec la responce des lettres de Florisel."
+      },
+      {
+        "number": 15,
+        "startPage": 92,
+        "title": "au palais Doré, & des grandz merveilles qu'il y vit."
+      },
+      {
+        "number": 17,
+        "startPage": 98,
+        "title": "Comme la grand' flotte de Lucidor arrina à veuen de Constantinople, laquelle les Gr cz voulurent empescher de prendre terre."
+      },
+      {
+        "number": 37,
+        "startPage": 160,
+        "title": "damoyselle de la royne Cleofile pour sauver sa maistresse des mains du neveu de Breon : Et du secours que luy donna Amadis de Grece."
+      },
+      {
+        "number": 39,
+        "startPage": 166,
+        "title": "De la solitude d'Amadis de Grece & de cequ'ilsit aucc le danoysel."
+      },
+      {
+        "number": 43,
+        "startPage": 177,
+        "title": "De la grieve passion d'Anaxartes & des propos qu'il eut avec la princesse Oriane."
+      },
+      {
+        "number": 44,
+        "startPage": 180,
+        "title": "langes furent gettez par tempeste en l'isle de Guindaye, & de l'estrange aventure qu'ilz y trouverent."
+      },
+      {
+        "number": 45,
+        "startPage": 184,
+        "title": "Comme la Royne vint au lievou les Chevaliers combatoient, lesquelz se rendirent àelle."
+      },
+      {
+        "number": 47,
+        "startPage": 192,
+        "title": "ter devant la royne Sidonie, la sommant de certain tribut, & de ce que Moraizel luy respondit."
+      },
+      {
+        "number": 48,
+        "startPage": 194,
+        "title": "Comme Moraizel & Falanges combatirent contre le roy Astradolse, & sonfrere, & de ce qui en avint."
+      },
+      {
+        "number": 49,
+        "startPage": 197,
+        "title": "De ce qui avint au prince Zahir, avec un Chevalier insencé."
+      },
+      {
+        "number": 50,
+        "startPage": 201,
+        "title": "ou estoit la desloyalle femme, ou luy survindrent aventures diverses."
+      },
+      {
+        "number": 51,
+        "startPage": 205,
+        "title": "sie par mer en la conduite de la belle Oriane."
+      },
+      {
+        "number": 52,
+        "startPage": 208,
+        "title": "sœur la princesse Lucelle, se meist sur mer pour aller en Constantinople consommer son mariage, & des estranges rencontres qu'il eut en chemin."
+      },
+      {
+        "number": 53,
+        "startPage": 212,
+        "title": "Comme la princesse Lucelle esprouna l'aventure de la queste d'Arnide à la requeste du danoysel Florarlan."
+      },
+      {
+        "number": 54,
+        "startPage": 218,
+        "title": "en une Isle, ou il fut en tresgrand danger."
+      },
+      {
+        "number": 55,
+        "startPage": 221,
+        "title": "Despropos que lapucelle Artimire tint à la princesse Oriane allant sur la mer : & du danger ou elles se virent."
+      },
+      {
+        "number": 56,
+        "startPage": 225,
+        "title": "es Comme la princesse Lucelle, Arlande, & la duchesse Armide furent volées, & de ce qui leur auint. Chapitre LIII."
+      },
+      {
+        "number": 57,
+        "startPage": 230,
+        "title": "Comme les Princes furent portez par tempeste en l'isle de la Couche enchantée, ouilz eurent une merveilleuse rencontre."
+      },
+      {
+        "number": 58,
+        "startPage": 236,
+        "title": "Comme les Damesquiestoient demeurées au rivage pindrent trouver les Chevaliers, sur lesquelz elles firent piteuses complaintes."
+      },
+      {
+        "number": 59,
+        "startPage": 238,
+        "title": "Des grandz merveilles de la salle de Mirabelle & de Mostruofuron."
+      },
+      {
+        "number": 60,
+        "startPage": 240,
+        "title": "Comme les Princes arriverent a Constantinople, & comme Lucidor alla porter les premieres nouvelles de toutes leurs aventures."
+      },
+      {
+        "number": 61,
+        "startPage": 244,
+        "title": "Comme le beau Damoysel Florarlan entra en la grand' salle du palais avec une lettre qui troubla grandement la cour."
+      },
+      {
+        "number": 62,
+        "startPage": 249,
+        "title": "Falanges, la pucelle Alastraxerée, & Florisel de Niquée, ayans pris terre, allerent chascun à part combatre les gardes des quatre chaucées."
+      },
+      {
+        "number": 63,
+        "startPage": 252,
+        "title": "Comme la pucelle Alastraxerée delivra les trois Princes prisonniers, par subtile invention."
+      },
+      {
+        "number": 64,
+        "startPage": 259,
+        "title": "entrer dedans le chasteau le geant Brostolfe, qui seul des quatre estoit demeuré vif."
+      },
+      {
+        "number": 65,
+        "startPage": 261,
+        "title": "Comme le roy de Trace vint au chasteau du Lac aux quatre chaucées, ne sachant rien de ce qui y estoit avenu."
+      },
+      {
+        "number": 66,
+        "startPage": 264,
+        "title": "Comme le damoysel Florarlan porta à Constantinople les nouvelies de la victoire des Princes."
+      },
+      {
+        "number": 67,
+        "startPage": 266,
+        "title": "Comme les fiançailles & noces des Princes & Princesses furent faites en grande magnificence."
+      },
+      {
+        "number": 68,
+        "startPage": 269,
+        "title": "De l'aventure estrange des Danoyselles de la roye Sidonie. Et comne le roy Amadis fut enlevé & transporté par les sages."
+      }
+    ],
+    "tocChapters": 38,
+    "unscorable": 0
+  },
+  "out": "book-10",
+  "structural": {
+    "anomalies": [
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 274
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 275
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 276
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 277
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 279
+      },
+      {
+        "detail": "no line survived post-processing",
+        "kind": "emptyPage",
+        "page": 280
+      }
+    ],
+    "pages": 280,
+    "roleCounts": {
+      "body": 10136,
+      "footer": 197,
+      "header": 425,
+      "title": 291
+    },
+    "unresolvedAmbiguous": 1
+  },
+  "toc": {
+    "entries": 38,
+    "missingFolios": 6,
+    "repairedNumbers": 9,
+    "sequenceBreaks": 7,
+    "suspectFolios": 13
+  }
+}
