@@ -2226,8 +2226,14 @@ no *Amadis de Gaule* page was in training. The derivation, the seed proof and
 the per-collection accounting are in
 `docs/notes/2026-09-20-artefact-recovery.md`.
 
-`data/runs/matcher/alignments.csv` did not land. It needs database access and
-an explicit go-ahead, and neither was in scope on recovery day.
+`data/runs/matcher/alignments.csv` landed on 2026-09-21 instead, once the
+go-ahead came. Its header is `piece,cohort,passage_id,livre,chapter,start,end,score`,
+two columns wider than the plan's. `cohort` separates the 341 passages the
+pre-registered gate was read on from the 118 imported later, which are never
+pooled with them, and `passage_id` makes every row auditable back to the
+database. `read_predictions()` reads by name, so the extra columns cost nothing.
+`summarise()` also gained `chapter_unavailable`. See
+`docs/notes/2026-09-21-e5-localisation.md`.
 
 Superseded on 2026-09-21: the sampler no longer refuses to run and no longer
 excludes a Livre. Both works are the target domain, so the frame is all 24 books

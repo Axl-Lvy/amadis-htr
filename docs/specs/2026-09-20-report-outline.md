@@ -201,7 +201,7 @@ literature, no speculation about cause.
 | E2 | the accept rule keeps a generative pass from rewriting the text | suspect span | correction off, same recognition output | bootstrap over pages for the CER delta | the rejection rate is descriptive and the threshold sweep is exploratory, so no cell passes or fails |
 | E3 | the LLM resolves ambiguous head and foot lines better than geometry alone | candidate line | always-`body`, and geometry without the LLM | bootstrap over pages | below 30 instances in a cell, the analysis degrades to a descriptive breakdown and says so |
 | E4 | escalation and the lexicon earn their cost | drop cap | gate only, and no lexicon | bootstrap over pages | same 30-instance rule |
-| E5 | a Trésor extract can be located in the baseline text | passage | none published, so the pre-registered gate stands in | bootstrap over passages | above 90% Livre accuracy proceeds, below roughly 80% stops the work, quoted verbatim in the pre-registration file |
+| E5 | a Trésor extract can be located in the baseline text | piece, within a cohort. The workbook cohort of 341 is the gated one and the 118 later imports are reported beside it, never pooled | none published, so the pre-registered gate stands in | bootstrap over pieces | above 90% Livre accuracy proceeds, below roughly 80% stops the work, quoted verbatim in the pre-registration file |
 | E6 | descriptive only | book, page | none | none, these are counts | reported only where a log or stored artefact backs it |
 
 E6 has material today: 24 `run.json` files covering 14,111 pages with zero failures at
@@ -213,10 +213,12 @@ those numbers still has to pass through a tested harness module and
 **Inputs.** `eval/results/*.csv` by way of `report/generated/`. Figures from
 `figures/*.py`. Nothing typed.
 
-**Status.** Blocked. E1 needs the gold set and a CUDA box, E2 needs Ollama, E3 and E4
-need the annotation pass, E5 needs `data/runs/matcher/alignments.csv` which needs
-database access and a go-ahead, E6 needs the harness modules that read the recovered
-JSON. The fallbacks are the named ones in the implementation plan's blocked table.
+**Status.** E5 is measured, on 2026-09-21, and its four CSVs are in
+`eval/results/`. Its denominators have to be stated three ways: pieces per cohort,
+certain pieces for a Livre figure, and pieces with a recoverable printed chapter
+number for a chapter figure, which is 125 of 317 on the gated cohort. The rest is
+blocked. E1 needs the gold set and a CUDA box, E2 needs Ollama, E3 and E4 need the
+annotation pass, E6 needs the harness modules that read the recovered JSON. The fallbacks are the named ones in the implementation plan's blocked table.
 
 **Not here.** Interpretation of any kind.
 
