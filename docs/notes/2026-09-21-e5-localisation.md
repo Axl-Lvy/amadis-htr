@@ -54,29 +54,39 @@ compare, and `summarise()` sets those aside instead of failing them.
 (317 of 317) and 76.2% chapter (96 of 126) for this cohort. The chapter
 numerator is identical and the denominator differs by one. The Livre figure is
 99.4% rather than 100% because the earlier run scored against the claim stored
-in the database, which is the matcher's own past output as often as it is a
-human's pick, and this one scores against the editor's workbook.
+in the database, and a stored claim cannot be told apart from the matcher's own
+past output, as the amadis harness says in its own comment. This run scores
+against the editor's workbook, which is independent of both.
 
 **The pre-registered gate passes.** It reads "correct LIVRE well above 90%
 proceeds", and the workbook cohort is 99.4%.
 
 **The three misses.** Pieces 223 and 224, both referenced to Livre 18, were
-matched to Livre 8 at scores 0.924 and 0.942. Either the workbook's 18 is a slip
-for 8 or the matcher is wrong twice in a row on adjacent pieces, and nothing
-here settles which. Piece 47, referenced to Livre 2, was matched to Livre 18 at
-0.438, the lowest score in the export.
+matched to Livre 8 at scores 0.924 and 0.942. Their stored claims say Livre 8
+too, with chapters `XXII` and `XXVI` against the workbook's 22 and 26, so the
+database agrees with the matcher and cannot arbitrate: that claim is derived
+from the alignment. These two rows are what the 317 of 317 was made of. Either
+the workbook's 18 is a slip for 8 or the matcher is wrong twice on adjacent
+pieces, and only re-reading the *Trésor* settles it. Piece 47, referenced to
+Livre 2, was matched to Livre 18 at 0.438, the lowest score in the export.
 
 ## What the sweep says about `MIN_SCORE = 0.808`
 
 `eval/results/localisation-sweep-workbook.csv` and its catalogue counterpart
 hold the curve from 0.40 to 1.00 in steps of 0.01.
 
-On the workbook cohort precision is flat at 0.994 from 0.40 all the way to 0.90,
-while coverage falls from 1.000 to 0.732. The two errors score 0.924 and 0.942,
-so no threshold in the observed range excludes them, and 0.808 buys nothing
-there. It is also exactly the lowest score in that cohort, which is what the
-project's own note meant by an empirically observed floor: the constant was read
-off this data rather than chosen against a cost.
+On the workbook cohort precision sits at 0.994 from 0.40 to 0.85 while coverage
+falls only from 1.000 to 0.981, so 0.808 buys nothing: it admits every piece the
+cohort has, errors included. The constant is that cohort's own minimum score,
+0.808219, rounded down to three decimals, which is what the project's note meant
+by an empirically observed floor. It was read off this data rather than chosen
+against a cost.
+
+Buying out the two errors costs almost everything. They score 0.924 and 0.942,
+so precision only reaches 1.000 at 0.95, and there coverage is 0.114, 36 pieces
+of 317. At 0.93 precision is 0.991 for a coverage of 0.334. On this cohort the
+matcher's score separates nothing useful, and the report says so rather than
+recommending a threshold the curve does not support.
 
 On the catalogue cohort the picture differs, because that batch has the one
 low-scoring error. Precision reaches 1.000 at 0.80 and holds, for a coverage of
