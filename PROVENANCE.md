@@ -100,3 +100,21 @@ as `derived/prep/train.lst`
 
 Only E5's pass and fail criteria are quoted. The rest of that plan is
 implementation detail for the private repository.
+
+## The matcher run, 2026-09-21
+
+`data/runs/matcher/alignments.csv` is derived, not copied. It is the output of
+`scripts/alignment-export.ts`, written for this purpose in the amadis working
+tree and left uncommitted there, run with `--env-file=.env.local` against the
+development database over the tailnet. The script reads and never writes. The
+matcher never sees the claim: the claim columns in the raw export are read
+separately and are not what any figure scores against.
+
+| artefact | sha256 |
+|---|---|
+| raw export, `~/amadis-artefacts/derived/matcher/alignments-raw.csv` | `7220965980ef7a4f6699a871474705036d4ac4fd738646c8e191ea0f1aaf2a74` |
+| `npm run harness:alignment` output, same directory | `5b8ac576cc68aa1ac069cea99c1779cb91b888d80602bd890e59231eae218b05` |
+
+The raw export carries passage titles and is mirrored rather than committed,
+because section 5 of the design spec keeps the corpus out of this repository.
+What is committed is keyed by piece and records the title agreement as a number.
