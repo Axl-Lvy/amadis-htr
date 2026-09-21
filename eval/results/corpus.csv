@@ -1,0 +1,4 @@
+cohort,pieces,aligned,unaligned,livres,certain,conjecture,uncertain,none,chars_mean,chars_median,chars_min,chars_max
+catalogue,112,112,0,3,101,4,4,3,1060.4,843.0,196,3189
+workbook,341,341,0,12,317,0,6,18,1414.7,1177.0,189,5756
+all,457,453,4,15,422,4,10,21,1327.1,1071.0,189,5756

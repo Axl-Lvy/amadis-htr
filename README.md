@@ -36,6 +36,7 @@ outputs exist so that the evaluation is reproducible without it.
 | `data/runs/` | every system's frozen output, one file per system per page |
 | `eval/results/` | the CSVs every figure and every reported number reads |
 | `report/generated/` | LaTeX macros and tables written from those CSVs |
+| `report/sections/` | one file per section of the report, each carrying its own drafting status |
 | `report/`, `slides/` | the report and the defence deck, sharing one preamble |
 | `pipeline/` | the sanitised pipeline snapshot |
 
@@ -62,7 +63,8 @@ without re-running the evaluation, and every file in it carries a header
 saying it is generated. It is written by `src/amadis_htr/report_macros.py` and
 never edited by hand. A number the evaluation has not produced has no macro,
 and citing it is an undefined control sequence, which stops the build rather
-than reaching the page.
+than reaching the page. The same breakage is caught in the fast test suite, so
+a section citing an unmeasured figure fails without a LaTeX toolchain present.
 
 See `docs/specs/2026-09-18-amadis-htr-report-design.md` for the full design,
 including the evaluation protocol, and `docs/plans/` for the implementation

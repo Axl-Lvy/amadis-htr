@@ -13,10 +13,10 @@ than silently keeping one of the two definitions.
 Rounding lives in `format_value` and nowhere else, so a number cannot be
 reported to three decimals in the text and two in a table.
 
-Localisation (E5) and throughput (E6) have schemas and registries. Recognition
-and correction do not, and theirs are added when those evaluations produce
-their first CSV, because a registry written ahead of the data is a guess about
-the data.
+The corpus census, localisation (E5) and throughput (E6) have schemas and
+registries. Recognition and correction do not, and theirs are added when those
+evaluations produce their first CSV, because a registry written ahead of the
+data is a guess about the data.
 """
 
 import csv
@@ -291,6 +291,8 @@ THROUGHPUT_MACROS: tuple[Macro, ...] = (
         "seconds_per_page", "num3",
     ),
     Macro("ocrPassages", "throughput.csv", {"cohort": "all"}, "passages", "int"),
+    Macro("ocrBooksFamilyA", "throughput.csv", {"cohort": "A"}, "books", "int"),
+    Macro("ocrBooksFamilyB", "throughput.csv", {"cohort": "B"}, "books", "int"),
     Macro("ocrPagesFamilyA", "throughput.csv", {"cohort": "A"}, "pages", "int"),
     Macro("ocrPagesFamilyB", "throughput.csv", {"cohort": "B"}, "pages", "int"),
     Macro(
@@ -322,11 +324,65 @@ THROUGHPUT_MACROS: tuple[Macro, ...] = (
 )
 
 
+#: Section 3, the corpus. Descriptive, and counted from the repository's own
+#: files rather than from the production database, so what has no macro here is
+#: what this repository cannot derive: `src/amadis_htr/corpus.py` names the
+#: three figures the design spec states in prose and this registry drops.
+#:
+#: The cohorts partition the aligned pieces and not the reference, so
+#: `\corpusPieces` is larger than the two cohort counts together and
+#: `\corpusUnaligned` is the difference.
+CORPUS_MACROS: tuple[Macro, ...] = (
+    Macro("corpusPieces", "corpus.csv", {"cohort": "all"}, "pieces", "int"),
+    Macro("corpusAligned", "corpus.csv", {"cohort": "all"}, "aligned", "int"),
+    Macro("corpusUnaligned", "corpus.csv", {"cohort": "all"}, "unaligned", "int"),
+    Macro("corpusLivres", "corpus.csv", {"cohort": "all"}, "livres", "int"),
+    Macro("corpusCertain", "corpus.csv", {"cohort": "all"}, "certain", "int"),
+    Macro(
+        "corpusCertainShare", "corpus.csv", {"cohort": "all"},
+        "certain", "pct1", over="pieces",
+    ),
+    Macro("corpusConjecture", "corpus.csv", {"cohort": "all"}, "conjecture", "int"),
+    Macro("corpusUncertain", "corpus.csv", {"cohort": "all"}, "uncertain", "int"),
+    Macro("corpusUnassigned", "corpus.csv", {"cohort": "all"}, "none", "int"),
+    # The extract length is what survives of the design spec's "1411 code
+    # points on average": the alignment export carries both offsets, so the
+    # span a piece occupies in the baseline text is derivable even though the
+    # baseline text itself is not in this repository.
+    Macro("corpusCharsMean", "corpus.csv", {"cohort": "all"}, "chars_mean", "num0"),
+    Macro(
+        "corpusCharsMedian", "corpus.csv", {"cohort": "all"}, "chars_median", "num0"
+    ),
+    Macro("corpusCharsMin", "corpus.csv", {"cohort": "all"}, "chars_min", "int"),
+    Macro("corpusCharsMax", "corpus.csv", {"cohort": "all"}, "chars_max", "int"),
+    Macro(
+        "corpusPiecesCatalogue", "corpus.csv", {"cohort": "catalogue"},
+        "pieces", "int",
+    ),
+    Macro(
+        "corpusPiecesWorkbook", "corpus.csv", {"cohort": "workbook"}, "pieces", "int"
+    ),
+    Macro(
+        "corpusCharsMeanCatalogue", "corpus.csv", {"cohort": "catalogue"},
+        "chars_mean", "num0",
+    ),
+    Macro(
+        "corpusCharsMeanWorkbook", "corpus.csv", {"cohort": "workbook"},
+        "chars_mean", "num0",
+    ),
+    Macro("trainPages", "training.csv", {"split": "all"}, "pages", "int"),
+    Macro("trainPagesTrain", "training.csv", {"split": "train"}, "pages", "int"),
+    Macro("trainPagesVal", "training.csv", {"split": "val"}, "pages", "int"),
+    Macro("trainCollections", "training.csv", {"split": "all"}, "collections", "int"),
+)
+
+
 #: Every registry with a measured CSV behind it, in the order they reach the
 #: page. `eval/render_macros.py` renders exactly this and the suite asserts the
 #: committed `macros.tex` matches, so a registry added here without rerunning
 #: the pipeline fails the suite rather than going unnoticed.
 REGISTRIES: tuple[tuple[Macro, ...], ...] = (
+    CORPUS_MACROS,
     LOCALISATION_MACROS,
     THROUGHPUT_MACROS,
 )

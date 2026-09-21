@@ -13,11 +13,13 @@ nine sections can be drafted now against material that exists, and section 6 can
 started rather than only outlined. Section 7 still depends on what section 6 does not
 yet have. Each section below carries its status.
 
-*Revised 2026-09-22.* Two of this paragraph's blockers are gone. Tectonic 0.17.0 is
+*Revised 2026-09-22, twice.* Two of this paragraph's blockers are gone. Tectonic 0.17.0 is
 installed and `make all` builds the report and the deck from a clean checkout, and
-`eval/results/` now holds E5's four CSVs and E6's two, rendered into 33 macros by
-`eval/run_all.sh`. E5 and E6 are measured; the sentence above counted them as
-unmeasured because neither was when it was written.
+`eval/results/` now holds E5's four CSVs, E6's two and the corpus census's two,
+rendered into 56 macros by `eval/run_all.sh`. E5 and E6 are measured; the sentence above counted them as
+unmeasured because neither was when it was written. Section 3 is now drafted rather
+than only writable, and the report is split one file per section under
+`report/sections/`, each carrying its own status line.
 
 ## Open decisions, with the default taken if nothing overrides it
 
@@ -127,12 +129,29 @@ problem. The numbers: 3,646,003 word tokens of baseline text, 1,770 chapters, 24
 457 pieces in the localisation reference of which 422 carry a certain assignment. The
 training corpus as a subset of all this, 487 *Trésor* T.1 pages and 13,997 lines.
 
-**Inputs.** `data/localisation/ground-truth.csv` for the piece counts, the recovery
-note for the training-corpus counts, `data/gold/splits/training-pages.csv` for the page
-list. Figures: one plate showing one page per type family, if the scan reuse terms
-allow it.
+**Inputs.** `eval/results/corpus.csv` and `eval/results/training.csv`, written by
+`src/amadis_htr/corpus.py` from `data/localisation/ground-truth.csv`,
+`data/runs/matcher/alignments.csv` and `data/gold/splits/training-pages.csv`, and
+`eval/results/throughput.csv` for the book and page counts. Figures: one plate showing
+one page per type family, if the scan reuse terms allow it.
 
-**Status.** Writable now, except the plate.
+**Status.** *Drafted 2026-09-22*, in `report/sections/03-corpus.tex`, except the plate.
+Every count in it is a macro, which needed a census: the pieces, their confidence bands,
+their extract spans and the training split are counted by `src/amadis_htr/corpus.py`
+rather than quoted from this file.
+
+Three of the numbers this section planned are **not** in the draft. The baseline text's
+1,770 chapters and 3,646,003 word tokens, and the seed index's 518,743 seeds over 76,548
+words, are properties of the production database, and the only read ever taken from it
+was the alignment export, which carried no census. They now sit in `PROVENANCE.md`'s
+list of figures that are not reproduced here, which is the same treatment the four
+CER figures already get. What replaces them is the extract span, which the alignment
+export does support: the median piece is 1,071 code points and the longest 5,756.
+
+The training corpus's 13,997 lines are omitted for a weaker reason: they are derived and
+recorded in `docs/notes/2026-09-20-artefact-recovery.md`, but the `.arrow` files they
+were counted from are mirrored rather than committed, so this repository cannot recount
+them. The draft states the page counts, which it can.
 
 **Not here.** Sampling. That is section 5.
 

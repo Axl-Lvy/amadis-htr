@@ -1,0 +1,126 @@
+% Status: drafted 2026-09-22.
+%
+% Every count in this section is a macro rendered from eval/results/corpus.csv,
+% training.csv and throughput.csv. Three figures the outline planned for this
+% section are absent on purpose: the baseline text's chapter and word-token
+% counts, and the size of the seed index. They are properties of a production
+% database this repository does not hold, so PROVENANCE.md lists them among the
+% figures that are not reproduced here rather than the report stating them.
+\section{The corpus}
+\label{sec:corpus}
+
+This report measures one pipeline over two bodies of sixteenth-century French
+print that are not independent of one another. The first is
+\emph{Amadis de Gaule}, a chivalric romance cycle of \ocrBooks{} books running
+to \ocrPages{} scanned pages. The second is the \emph{Trésor} anthologies,
+printed compilations that quarry extracts out of that cycle and reprint them
+under thematic headings. An extract in a \emph{Trésor} is therefore a passage
+of \emph{Amadis} that already exists elsewhere in the same corpus, which is
+what turns the editorial question of \emph{where does this piece come from}
+into a retrieval problem with a checkable answer. The design specification
+settles both works as one target domain rather than as a domain and an
+out-of-domain control, and this report follows that: the two are reported
+separately where the type differs, and never as in-domain against
+out-of-domain.
+
+\subsection{Two editions, two type families}
+
+The \ocrBooks{} books do not form one edition. The first \ocrBooksFamilyA{}
+books, called family~A throughout this report, are a large folio setting in
+\emph{bâtarde} type with roman folio numbers and a printed table of contents at
+the front of each volume. The remaining \ocrBooksFamilyB{} books, family~B,
+are a later and smaller edition in clean roman type, with italic rubrics,
+arabic page numbers, and no printed table of contents at all. The two families are of very
+different weight: family~A is \ocrPagesFamilyA{} pages against family~B's
+\ocrPagesFamilyB{}, so two thirds of the corpus is the later setting.
+
+The division is not a presentational detail, and three later decisions rest on
+it. Recognition is reported per family, because a model fine-tuned on one kind
+of type has no claim on the other until it is shown. Structural calibration
+exists for family~A alone, because calibration needs a printed table of
+contents to score against and family~B prints none; section~\ref{sec:results}
+reports no corpus-wide structural figure for that reason. Throughput, by
+contrast, pools the two, because a page is a page to the recogniser and every
+book was run by one model on one device at one working width.
+
+\subsection{Scan provenance}
+
+The page images reach the pipeline from three holding institutions and in
+three different conditions. Book~1 arrives as an archive of bitonal 600~dpi
+TIFFs from the Bibliothèque municipale de Lyon. Books~3 and~4 are greyscale
+PDFs from Gallica. Book~18 is a copy held by the Biblioteca Valenciana and
+carries that library's stamp on the page, which the layout stage suppresses as
+an illustration region rather than reading it as text. The provenance of the
+remaining volumes is not recorded in any artefact this repository holds, and
+is therefore not claimed here.
+
+Provenance matters to the evaluation twice over. It is a source of variation
+that has nothing to do with the century the text was printed in, so
+section~\ref{sec:protocol} stratifies the gold set on it and the stamped copy
+is its own stratum. It also constrains what this repository may contain: reuse
+terms differ per holding institution and are unsettled for at least one of the
+three, so no page image and no transcribed text is committed here. What is
+committed is counts, timings and offsets, which is enough to rerun every
+evaluation in this report and not enough to reconstitute the corpus.
+
+\subsection{The \emph{Trésor} pieces and the localisation reference}
+
+A \emph{Trésor} piece is a contiguous span of the baseline text. The reference
+for where each piece belongs is the editor's own catalogue, transcribed into
+\file{data/localisation/ground-truth.csv}: \corpusPieces{} pieces, each with a
+Livre and, where the print gives one, a chapter. The catalogue is prose written
+by a scholar rather than a clean database field, so the transcription keeps the
+editor's own hedging instead of flattening it. \corpusCertain{} pieces
+(\corpusCertainShare{}) carry an unqualified assignment; \corpusUncertain{}
+are marked with a question mark, \corpusConjecture{} are bracketed as
+conjectures, and \corpusUnassigned{} name no location at all. Only the
+\corpusCertain{} certain pieces are scored in section~\ref{sec:results}, and
+the other three bands are reported as what they are: material the editor did
+not commit to, which a matcher cannot be graded against.
+
+The pieces are drawn from \corpusLivres{} of the \ocrBooks{} books, so the
+anthologies are selective rather than a systematic abridgement of the cycle.
+They are also short against what they are searched for. The matcher placed
+\corpusAligned{} of the \corpusPieces{} pieces and recorded the span of each:
+the median piece is \corpusCharsMedian{} code points, the mean
+\corpusCharsMean{}, the shortest \corpusCharsMin{} and the longest
+\corpusCharsMax{}. The search space each of them is sought in is the full
+transcription of all \ocrBooks{} books. Its size in words is a property of the
+production database, and no artefact in this repository records it, so this
+report does not state one.
+
+The pieces arrive in two batches, and the report keeps them apart everywhere.
+The workbook cohort is the \corpusPiecesWorkbook{} pieces taken from the
+editor's workbook, which is the batch that existed when E5's decision rule was
+pre-registered. The catalogue cohort is the \corpusPiecesCatalogue{} pieces
+taken later from a second document, the \emph{Juxtalinéaire} catalogue, and
+imported four days afterwards. Pooling them would mean
+enlarging a test set after seeing the numbers it produced, so they are never
+pooled, and each carries its own denominators. The two batches also differ in
+the material itself and not only in when they arrived: the workbook's pieces
+average \corpusCharsMeanWorkbook{} code points against the catalogue's
+\corpusCharsMeanCatalogue{}, about a third longer, which is one reason a single
+figure over the two would be hard to read even if it were legitimate to compute.
+
+\subsection{The training corpus}
+
+The fine-tune saw \trainPages{} annotated pages, and every one of them comes
+from the same Transkribus collection, \emph{Trésor des Amadis}~T.1. Of those,
+\trainPagesTrain{} were used for training and \trainPagesVal{} were held
+out. The held-out \trainPagesVal{} are validation and not test: they selected
+the shipped checkpoint, and section~\ref{sec:limitations} states what that
+costs. The split is stated here as a re-derived fact rather than an inherited
+one. The original file lists no longer exist, so the split was recomputed from
+the two export archives and confirmed against the compiled training data;
+\file{docs/notes/2026-09-20-artefact-recovery.md} records the derivation and
+the control that rules out a different random seed.
+
+Two consequences follow, and both cut against the system. The first is that
+the training material is one anthology volume, so both type families of
+\emph{Amadis de Gaule} itself are largely unseen by the model that transcribed
+them, and whether the fine-tune carries across the families is an open question
+this report answers rather than assumes. The second is subtler. No page of
+\emph{Amadis de Gaule} appears in the training list, so page-level contamination
+is zero; but the \emph{Trésor} excerpts \emph{Amadis}, so on \emph{Amadis}
+pages the model has read some of the text it is scored on, in another setting
+and another typeface. The report states this and does not correct for it.

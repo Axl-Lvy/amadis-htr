@@ -28,41 +28,19 @@
 % Written last, from the measured figures, never from the expected ones.
 \end{abstract}
 
-\section{Introduction}
-\label{sec:introduction}
-
-\section{Related work}
-\label{sec:related}
-
-\section{The corpus}
-\label{sec:corpus}
-
-\section{System}
-\label{sec:system}
-
-\section{Evaluation protocol}
-\label{sec:protocol}
-
-% This paragraph is written now rather than left blank, because it is what
-% forces the engine choice. It carries the two characters pdfLaTeX cannot set,
-% so a build that renders this page proves the toolchain before any result
-% depends on it.
-The correction pass marks the words it rewrote, so a line comes back as
-\qtr{et ſi \lmark cognoiſſoit \rmark le cheualier}. A line is accepted only
-when the text outside the markers is unchanged, which makes an unmarked
-rewrite a rejection rather than a silent edit.
-
-\section{Results}
-\label{sec:results}
-
-\section{Error analysis}
-\label{sec:errors}
-
-\section{Limitations}
-\label{sec:limitations}
-
-\section{Conclusion and released artefacts}
-\label{sec:conclusion}
+% One file per section, so a section can be drafted, reviewed and rewritten
+% without touching the others. The status of each is the first line of its own
+% file, and docs/specs/2026-09-20-report-outline.md says what each has to
+% contain and what it may not say.
+\input{sections/01-introduction.tex}
+\input{sections/02-related-work.tex}
+\input{sections/03-corpus.tex}
+\input{sections/04-system.tex}
+\input{sections/05-protocol.tex}
+\input{sections/06-results.tex}
+\input{sections/07-error-analysis.tex}
+\input{sections/08-limitations.tex}
+\input{sections/09-conclusion.tex}
 
 \printbibliography
 
