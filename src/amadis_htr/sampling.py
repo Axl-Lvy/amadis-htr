@@ -25,7 +25,11 @@ class Candidate:
 
     @property
     def stratum(self) -> str:
-        return f"{self.family}/{self.provenance}"
+        # Provenance is recorded for four of the 24 books and for no other, so a
+        # candidate may legitimately have none. Folding an empty provenance into
+        # the family rather than writing `A/` keeps the stratum name honest: it
+        # says the draw was stratified on family alone, which for E2 it is.
+        return f"{self.family}/{self.provenance}" if self.provenance else self.family
 
 
 def pages_the_model_saw(path: str | Path) -> set[str]:
