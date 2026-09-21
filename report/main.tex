@@ -1,0 +1,68 @@
+\documentclass[11pt,a4paper]{article}
+
+% The preamble declares no paths, so this file owns both of its own.
+\input{preamble.tex}
+% backend=bibtex, not biber, and the reason is environmental rather than
+% editorial. Tectonic bundles bibtex and invokes biber itself when it sees a
+% biblatex .bcf, so a missing biber fails the whole build. biber is packaged
+% but installing it needs root, and its dependency closure is 163 packages
+% including compiled Perl extensions, so it is not vendored here. Once biber is
+% on PATH (`sudo apt install biber`) this one word changes and nothing else.
+\usepackage[backend=bibtex,style=numeric,sorting=nyt]{biblatex}
+\addbibresource{refs.bib}
+
+% Every reported number comes from here. An undefined control sequence stops
+% the build, so a figure that has not been measured cannot reach the page.
+\input{generated/macros.tex}
+
+\title{Fine-tuning and post-correcting an HTR pipeline for
+  16th-century French print}
+\author{Axel Levy}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% Written last, from the measured figures, never from the expected ones.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+\section{Related work}
+\label{sec:related}
+
+\section{The corpus}
+\label{sec:corpus}
+
+\section{System}
+\label{sec:system}
+
+\section{Evaluation protocol}
+\label{sec:protocol}
+
+% This paragraph is written now rather than left blank, because it is what
+% forces the engine choice. It carries the two characters pdfLaTeX cannot set,
+% so a build that renders this page proves the toolchain before any result
+% depends on it.
+The correction pass marks the words it rewrote, so a line comes back as
+\qtr{et ſi \lmark cognoiſſoit \rmark le cheualier}. A line is accepted only
+when the text outside the markers is unchanged, which makes an unmarked
+rewrite a rejection rather than a silent edit.
+
+\section{Results}
+\label{sec:results}
+
+\section{Error analysis}
+\label{sec:errors}
+
+\section{Limitations}
+\label{sec:limitations}
+
+\section{Conclusion and released artefacts}
+\label{sec:conclusion}
+
+\printbibliography
+
+\end{document}

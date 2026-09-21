@@ -450,9 +450,26 @@ Blocking tasks in the plan. Each produces an output file, not an assertion.
 **G1. Juxtalinéaire against the training set.** `Juxtalinéaire pièces. Corrigé.docx`
 holds 460 line-diplomatic pieces transcribing *Trésor* material, and the training corpus
 is *Trésor* T.1. Cross-check the docx pieces against the 439 training pages. Any overlap
-makes the docx usable for C3 only, never as OCR gold. Note the known numbering offset:
-docx piece numbers run +3 ahead of the xlsx rows from piece 120 onward, and that mapping
-must be code in the repo rather than something remembered.
+makes the docx usable for C3 only, never as OCR gold.
+
+The numbering offset is derived, not remembered. `src/amadis_htr/juxtalineaire.py`
+aligns the two catalogues on their titles and emits
+`data/localisation/juxtalineaire-map.csv`. **The offset that had been remembered, +3
+from piece 120 onward, is wrong.** It is a staircase, and it was measured on
+2026-09-18 over all 457 workbook pieces at a mean title containment of 0.986:
+
+| workbook pieces | docx pieces | offset |
+|---|---|---|
+| 1 to 38 | 1 to 38 | 0 |
+| 39 to 67 | 40 to 68 | +1 |
+| 68 to 82 | 70 to 84 | +2 |
+| 83 to 457 | 86 to 460 | +3 |
+
+Docx pieces 39, 69 and 85 have no workbook counterpart. Two are continuations the
+docx prints as pieces of their own and the workbook folds into their predecessor, and
+one is a second prophecy of Urgande the workbook does not list at all. Workbook piece
+68 is the one genuine one-to-two pairing, and its low similarity in the map is the
+signal that it is a merge rather than a match.
 
 **G2. Gold set against training.** Confirm every `ood` page is from a Livre and appears
 in no training or validation list. Emit the check's output.
@@ -547,14 +564,23 @@ per-character workarounds. The document loads `fontspec` with a Unicode font tha
 coverage, and the font choice is recorded in `report/main.tex` rather than left to a
 default.
 
-**No LaTeX distribution is installed on this machine.** Two ways forward, and the choice
-is recorded here rather than assumed:
+**The engine is Tectonic, and the choice is recorded here rather than assumed.** One
+binary into `~/.local/bin`, no `sudo`. It fetches the packages a document actually uses
+and caches them, and it is XeTeX-derived, so `fontspec` and Beamer work. A first build
+needs the network and later ones do not. The alternative was TeX Live from the
+distribution's package manager, which is more complete but needs `sudo` for `apt
+install`, and needs it again for every package a document later adds. That second cost
+is the deciding one: a document under active writing gains packages, and under Tectonic
+gaining one is not an install step at all.
 
-- **Tectonic** (recommended): one binary into `~/.local/bin`, no `sudo`, fetches the
-  packages a document actually uses and caches them. It is XeTeX-derived, so `fontspec`
-  and Beamer work. A first build needs the network.
-- **TeX Live** via the distribution's package manager. More complete, but `apt install`
-  needs `sudo`, which this environment cannot supply, so the user runs it.
+**Measured on 2026-09-22**, Tectonic 0.17.0 on the big PC: `make all` produces both PDFs
+from a clean checkout, 5.9s warm. `pdftotext` reads long `ſ` (U+017F) and both markers
+(U+27E6, U+27E7) back out of `report/main.pdf`, so the font choice is proved by the
+build rather than asserted. `make clean` leaves the working tree clean, and CI runs the
+same two checks on every push.
+
+Libertinus arrives as the `libertinus-otf` package from Tectonic's bundle, not as a
+system font, so no `fontconfig` install is part of the toolchain.
 
 **Figures are matplotlib, saved as PDF** by one script per figure under `figures/`, each
 reading only `eval/results/*.csv`, and included with `\includegraphics`. No figure is
@@ -566,9 +592,13 @@ rounding fixed in one place) and one `.tex` table per result set, using `booktab
 report `\input`s them. A figure that has not been measured therefore has no macro, and
 citing it fails the build instead of reaching the page.
 
-**Bibliography:** `biblatex` with `biber`, `report/refs.bib`. The related-work section
-cites CATMuS, kraken, Transkribus and the LLM post-correction literature, so a real
-bibliography is needed rather than a hand-written list.
+**Bibliography:** `biblatex` over `report/refs.bib`. The related-work section cites
+CATMuS, kraken, Transkribus and the LLM post-correction literature, so a real
+bibliography is needed rather than a hand-written list. The backend is `bibtex`, not
+`biber`, for an environmental reason recorded in full in `report/main.tex`: Tectonic runs
+whichever backend biblatex asks for and fails outright when biber is absent, and biber
+needs root and pulls 163 packages including compiled Perl extensions. One word in
+`report/main.tex` changes it once biber is on `PATH`.
 
 Python 3.12 or later, `uv` for the environment. The two pipelines run 3.12 and the
 harness is developed on 3.13; nothing in the scoring code depends on the difference,

@@ -1,0 +1,73 @@
+# The suite and the report build are the two things this repository claims work
+# from a clean checkout. Both are claimed in the README, so both run here.
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Run the suite
+        run: uv run --extra dev pytest
+
+  report:
+    # `make all` needs Tectonic on the path and nothing else. Proving that here
+    # keeps the README's build claim from drifting away from the documents.
+    runs-on: ubuntu-latest
+    env:
+      TECTONIC_VERSION: 0.17.0
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache the Tectonic package bundle
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/tectonic
+          key: tectonic-${{ env.TECTONIC_VERSION }}-${{ hashFiles('report/preamble.tex', 'report/main.tex', 'slides/main.tex') }}
+          restore-keys: tectonic-${{ env.TECTONIC_VERSION }}-
+
+      - name: Install Tectonic
+        # One binary into a directory we own, which is how the README says to
+        # install it: no root, no TeX distribution.
+        run: |
+          set -euo pipefail
+          url="https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir -p "$HOME/.local/bin"
+          curl -sSLf "$url" | tar xz -C "$HOME/.local/bin" tectonic
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/tectonic" --version
+
+      - name: Build the report and the deck
+        run: make all
+
+      - name: The engine must set long s and both correction markers
+        # The evaluation protocol section carries all three characters, so a
+        # build that renders them proves the font choice rather than asserting
+        # it. pdftotext reads them back out of the PDF.
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          text=$(pdftotext report/main.pdf -)
+          for char in $'ſ' $'⟦' $'⟧'; do
+            printf '%s' "$text" | grep -q "$char" \
+              || { echo "missing $char in report/main.pdf"; exit 1; }
+          done
+          echo "long s, U+27E6 and U+27E7 all present"
+
+      - name: A build must leave the working tree clean
+        # Every intermediate is gitignored. A new build product that is not
+        # would show up here rather than in somebody's next commit.
+        run: |
+          make clean
+          git diff --exit-code
+          test -z "$(git status --porcelain -uall)" || { git status --porcelain -uall; exit 1; }

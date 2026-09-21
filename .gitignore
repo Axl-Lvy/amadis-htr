@@ -10,3 +10,23 @@ data/gold/pages/*
 
 # Recovered artefacts land here and are vendored deliberately, never bulk-added.
 data/runs/**/*.raw
+
+# LaTeX build products. The PDF is a release artefact, not a repository file.
+report/main.pdf
+slides/main.pdf
+report/*.aux
+report/*.bbl
+report/*.bcf
+report/*.blg
+report/*.log
+report/*.run.xml
+report/*.synctex.gz
+slides/*.aux
+slides/*.log
+slides/*.nav
+slides/*.out
+slides/*.snm
+slides/*.toc
+slides/*.synctex.gz
+report/*-blx.bib
+slides/*-blx.bib
