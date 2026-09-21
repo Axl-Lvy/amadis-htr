@@ -16,8 +16,8 @@ the baseline.
 
 The system works and is in production. What does not exist is a measurement of it. The
 only recognition figure anywhere is a validation CER on a 10% page-level split of a
-single volume. There is no out-of-domain evaluation, no word error rate, no measured
-baseline, no evaluation of either LLM pass, and the structural quality figures the
+single volume. There is no figure of any kind for *Amadis de Gaule*, which is the
+larger of the two works, no word error rate, no measured baseline, no evaluation of either LLM pass, and the structural quality figures the
 pipeline itself computes are discarded on import.
 
 This repository exists to produce those measurements and the report that presents them.
@@ -26,13 +26,13 @@ This repository exists to produce those measurements and the report that present
 
 Three evaluated contributions. Everything else is system description.
 
-**C1. A domain-adapted HTR model for 16th-century French print.**
+**C1. An HTR model that reads both works.**
 CATMuS-Print [Large] (Zenodo record 10592716, `catmus-print-fondue-large.mlmodel`)
 fine-tuned with kraken 7.0.2 on Transkribus-corrected ground truth. Two configurations
 were run: constant LR 1e-3 with no augmentation reached 0.86% val CER, and LR 3e-4 with
 `reduceonplateau` (factor 0.5) plus augmentation reached 0.50%, early stopping at epoch
 55 with `--lag 10`. The shipped artefact is `amadis-ft.mlmodel`, 22,890,323 bytes.
-The contribution is evaluated in domain and, for the first time, out of domain.
+The contribution is evaluated on held-out pages of each work, one CER per work.
 
 **C2. LLM post-processing under a conservative accept rule.**
 Two passes over recognised text. The first resolves whether an ambiguous line at the top
@@ -94,7 +94,7 @@ amadis-htr/
       text/<id>.txt          reference transcription
       lines/<id>.json        per-line reference: text, role, dropcap, polygon
       splits/                sampling seed, stratum assignment, the reannotated subset
-    val48/                   the in-domain Transkribus validation split, as used in training
+    val48/                   the Transkribus validation split, as used in training
     localisation/
       ground-truth.csv       xlsx column B, normalised, with the ambiguous rows flagged
       pieces.csv             passage id, text, source edition
@@ -168,14 +168,24 @@ Samples only. The full corpus stays in amadis behind Cloudflare Access.
   are new editorial work, released CC-BY-4.0.
 - **Model weights.** `amadis-ft.mlmodel` published on Hugging Face with a model card.
   The card states the base model, the training data and its provenance, the split, the
-  measured CER in domain and out of domain, the transcription convention the model emits,
-  and the intended use. The card cannot be written until the Monday recovery confirms
-  which checkpoint the shipped file came from.
+  measured CER on each of the two works, the transcription convention the model emits,
+  and the intended use. Writable since 2026-09-20: the shipped file is tied to
+  `checkpoint_55-0.9950.ckpt` by weight comparison.
 - **Training data.** The Transkribus PAGE XML is released as a dataset only if the
   annotators agree. Ask before assuming. If they do not, the report describes the corpus
   and releases the split file without the content.
 
 ## 6. Evaluation protocol
+
+**Decision, 2026-09-21: the two works are the target domain.** The model exists to
+read *Amadis de Gaule* and the *Trésor des Amadis*, so pages of either are fair to
+sample and no result is framed as in domain or out of domain. What survives of the
+contamination question is page level and nothing more: a page the model trained on
+cannot be scored, and `data/gold/splits/training-pages.csv` lists the 487 pages
+concerned, all of them *Trésor* T.1. The sampling frame is therefore every page of
+both works, the Livre exclusion is dropped, and E1 reports one CER per work rather
+than a generalisation gap. Sections 6.1, 7, 8 and 13 keep their original text below,
+with this decision overriding the framing in each.
 
 ### 6.0 The fold
 
@@ -229,14 +239,18 @@ baseline rather than corrected for.
 
 **Test sets.**
 
-- `val48`: the 48-page in-domain split from training (90/10 by page, seed 13, over
+- `val48`: the 48 held-out pages of the training split (90/10 by page, seed 13, over
   *Trésor des Amadis* T.1). Reported as **validation, not test**, because
   `val_accuracy` drove checkpoint selection and early stopping. Page-level splitting of
   one printed volume also leaves the same formes, type case and wear on both sides, which
-  the report states.
-- `ood`: the new gold set from *Amadis de Gaule* (section 7), drawn only from Livres that
-  gate G3 confirms were absent from training. This is the headline test set. "Out of
-  domain" here means pages and volumes the model never saw, not the *Amadis de Gaule*
+  the report states. Under the 2026-09-21 decision this is the *Trésor* figure, not an
+  in-domain one.
+- `gold`: the new annotated set from *Amadis de Gaule* (section 7), drawn from all 24
+  books. Called `ood` throughout the original text below. It is the *Amadis de Gaule*
+  figure and it carries the report, because it is the larger of the two works and the
+  one no page of which the model has read. The paragraph that follows was written when
+  the set was defined by exclusion, and is kept as the record of what was then unknown.
+  "Out of domain" there meant pages and volumes the model never saw, not the *Amadis de Gaule*
   edition as a whole: the Transkribus export lists `TRAINING_VALIDATION_SET_Amadis_4`
   (49 pages, 1,410 lines) and `_Amadis_3` (7 pages, 208 lines) among its collections, so
   roughly 56 pages of Livre material may be in the training corpus. The report states
@@ -266,8 +280,8 @@ comes out.
 **The grid.** Pipeline B accepts `--model` and `--llm` as flags, so four cells come free
 on any page set: `{stock, ft} × {correction off, correction on}`.
 
-**Run the grid on both test sets.** `val48` is *Trésor* material, which is where the
-model is in domain and where the correction pass actually ran in production, so the
+**Run the grid on both test sets.** `val48` is *Trésor* material, which is what the
+model trained on and where the correction pass actually ran in production, so the
 suspect-span rate there is the operationally meaningful one. Running E2 only on `ood`
 would measure the pass on material whose suspect-span rate nothing has ever observed.
 Both sets get the four cells and the two-model ablation.
@@ -415,8 +429,9 @@ reading it. Each gold page is transcribed, role-labelled, drop-cap-labelled and
 region-marked in the same sitting. This is what makes the wide scope affordable: E3 and
 E4 ride on E1's annotation cost instead of each needing their own campaign.
 
-**Sampling frame.** Pages from *Amadis de Gaule*, restricted to the Livres that gate G3
-shows contributed no page to training.
+**Sampling frame.** Pages from *Amadis de Gaule*, all 24 books, minus any page listed
+in `data/gold/splits/training-pages.csv` (as of 2026-09-20 that list contains no
+*Amadis de Gaule* page at all, so the subtraction removes nothing).
 Stratified over:
 
 - type family: books 1 to 12 against books 13 to 24
@@ -650,22 +665,22 @@ home of the compare-to-literature move.
 8. Limitations
 9. Conclusion and released artefacts
 
-The defence deck is a subset of the same content, leading with the out-of-domain result
-and the marker-anchor rejection rate, because those are the two findings a jury will not
-have expected.
+The defence deck is a subset of the same content, leading with the *Amadis de Gaule*
+CER and the marker-anchor rejection rate, because those are the two findings a jury
+will not have expected.
 
 ## 13. Risks and degradation rules
 
 | Risk | Rule |
 |---|---|
-| The in-domain split drove checkpoint selection | Reported as validation, never as test. The `ood` set is the headline. |
+| The *Trésor* split drove checkpoint selection | Reported as validation, never as test. The *Amadis de Gaule* set carries the report. |
 | Single annotator | Self-agreement reported as the noise floor. Differences below it are not claimed. |
-| Small `ood` sample | Bootstrap intervals on every figure. No claim rests on a point estimate. |
+| Small *Amadis de Gaule* sample | Bootstrap intervals on every figure. No claim rests on a point estimate. |
 | The fine-tune's advantage is partly convention | Every E1 figure reported raw and folded, with the unfoldable residual counted. |
 | E3 and E4 label counts too thin at 20 pages | If a cell falls below 30 instances, that analysis degrades from a measured accuracy to a descriptive breakdown, and the report says so. |
 | Scan reuse terms unclear | Images stay out of the repo until checked. Everything else ships. |
-| Recovery fails on Monday | Each dependent figure has a named fallback or is dropped. No figure is estimated. |
-| Some Livre pages were in training | The `ood` frame excludes every Livre that `train.lst` touches, and the report states how many Livre pages the fine-tune saw. |
+| Recovery fails on Monday | Each dependent figure has a named fallback or is dropped. No figure is estimated. Closed 2026-09-20: everything but the Transkribus baseline and the n8n timings was recovered. |
+| Some Livre pages were in training | Closed 2026-09-20: none were. The frame is all 24 books minus any page the model read, and that subtraction currently removes nothing. |
 
 ## 14. Open questions
 

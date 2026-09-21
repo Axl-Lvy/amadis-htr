@@ -83,8 +83,12 @@ unconstrained at page level.
 from *Amadis de Gaule*. Page-level contamination is zero, but the model has
 read the text of whichever Livres T.1 excerpts, and
 `data/localisation/ground-truth.csv` is the map of which those are. Whether
-that changes the `ood` frame is a judgement call, not a measurement, and it is
-open.
+that changes the frame is a judgement call, not a measurement, and it is open.
+
+**Decided 2026-09-21.** It does not. Both works are the target domain, the
+in-domain and out-of-domain framing is dropped, and E1 reports one CER per work.
+The frame is all 24 books minus the pages listed here. See the decision at the
+head of section 6 of the design spec.
 
 ## The deployed checkpoint is the one the README names
 

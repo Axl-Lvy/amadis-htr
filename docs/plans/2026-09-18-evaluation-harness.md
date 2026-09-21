@@ -2229,6 +2229,11 @@ the per-collection accounting are in
 `data/runs/matcher/alignments.csv` did not land. It needs database access and
 an explicit go-ahead, and neither was in scope on recovery day.
 
+Superseded on 2026-09-21: the sampler no longer refuses to run and no longer
+excludes a Livre. Both works are the target domain, so the frame is all 24 books
+minus the pages the model read, and `excluded_livres` became
+`pages_the_model_saw`. Task 8's tests were rewritten accordingly.
+
 ## After the harness, still before Monday
 
 Three things the recovery does not gate, done on 2026-09-18 on

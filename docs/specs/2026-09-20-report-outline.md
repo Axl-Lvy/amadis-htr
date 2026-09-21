@@ -3,7 +3,9 @@
 Date: 2026-09-20
 Status: drafted 2026-09-20 under the autonomy grant, awaiting review
 Extends: section 12 of `docs/specs/2026-09-18-amadis-htr-report-design.md`, which
-fixes the nine-section skeleton. This file keeps that skeleton and says what each
+fixes the nine-section skeleton. Follows that spec's 2026-09-21 decision that both
+works are the target domain, so nothing here is framed as in domain or out of domain
+and E1 reports one CER per work. This file keeps that skeleton and says what each
 section contains, what it reads, and what it may not say.
 
 **The report cannot be written today.** E1 to E5 are unmeasured, no LaTeX engine is
@@ -47,7 +49,7 @@ Section 9 states implications and does not re-argue them.
 **Purpose.** One paragraph a reader can stop at.
 
 **Content.** The corpus and why it is hard, in two sentences. The system in one. The
-three claims and the headline number for each, out-of-domain CER for C1, the
+three claims and the headline number for each, the *Amadis de Gaule* CER for C1, the
 marker-anchor rejection rate for C2, Livre and chapter accuracy for C3. One sentence
 on what the evaluation cost, meaning the gold set's size and its single annotator. One
 sentence on the released artefacts.
@@ -69,7 +71,8 @@ them. Why off-the-shelf OCR fails on 16th-century French print: long `ſ`, bâta
 drop caps, running heads and catchwords, folio numbering in two systems, three scan
 provenances of uneven quality. What exists today, which is one validation CER on a 10%
 page-level split of a single volume, and what that number cannot support. The gap, in
-the spec's own terms: no out-of-domain figure, no WER, no measured baseline, no
+the spec's own terms: no figure of any kind for *Amadis de Gaule*, no WER, no
+measured baseline, no
 evaluation of either LLM pass, and structural figures the pipeline computes and
 discards. The three claims as the answer, one paragraph each, and a forward reference
 to the section that evaluates each.
@@ -93,10 +96,10 @@ kraken as the engine, version 7.0.2, and what it ships and does not ship, which 
 E1's independent comparator has to be a chosen published model rather than a default.
 Transkribus as the annotation platform and as a commercial baseline, with its models
 opaque. LLM post-correction of OCR, where the literature's usual failure mode is
-fluent rewriting, which is exactly what C2's accept rule defends against. Close with the question the search has to answer: has anyone published an
-out-of-domain figure for a CATMuS-Print fine-tune on a second 16th-century
-edition? The novelty claim is made only if the search comes back empty, and the
-search is recorded.
+fluent rewriting, which is exactly what C2's accept rule defends against. Close with the question the search has to answer: has anyone published a CER for a
+CATMuS-Print fine-tune on a 16th-century French romance corpus of this size? The
+novelty claim is made only if the search comes back empty, and the search is
+recorded.
 
 **Inputs.** `report/refs.bib`, to be acquired. Nothing generated.
 
@@ -106,8 +109,8 @@ search is recorded.
 
 ## 3. The corpus
 
-**Purpose.** Describe the material precisely enough that the evaluation's strata and
-its contamination gates make sense.
+**Purpose.** Describe the material precisely enough that the evaluation's strata make
+sense, and establish that both works are one target domain rather than two.
 
 **Content.** Two editions and their type families, books 1 to 12 in large folio bâtarde
 with roman folio numbers against books 13 to 24 in smaller clean roman with italic
@@ -157,17 +160,18 @@ here is capped, and the cap is the page budget below.
 made before the numbers.
 
 **Content.** The gold set: frame, strata, the seeded sampler, the 20-page target, the
-exclusions and why front matter and woodcut pages are out. The annotation convention,
+exclusions and why front matter and woodcut pages are out. The frame is all 24 books
+of *Amadis de Gaule* minus the pages the model trained on, which is the only exclusion
+left and which currently removes nothing. The annotation convention,
 `data/gold/GUIDELINES.md`, written before annotating. Single annotator, with blind
 re-annotation of three pages after a week as the noise floor, and the rule that a
 difference below it is not claimed. The fold, defined once, applied identically to
 hypothesis and reference, and why every E1 figure is reported raw and folded. The
 metrics: CER and WER, whitespace counted, line breaks normalised to one space,
 character-weighted aggregation, bootstrap intervals over pages at 10,000 resamples. The
-contamination gates as outputs rather than assertions, with G3's result stated here:
-the split was re-derived and verified, no *Amadis de Gaule* page trained the model, and
-the *Trésor*-excerpts-*Amadis* caveat is stated as an open judgement rather than
-resolved. The pre-registered E5 gate, quoted verbatim in
+training split as a stated fact rather than an assertion: it was re-derived and
+verified against the compiled datasets, it is 487 *Trésor* T.1 pages, and no page of
+it is scored. The pre-registered E5 gate, quoted verbatim in
 `docs/pre-registration/2026-09-15-e5-alignment-gate.md`, together with the fact
 that its source file is untracked and its only timestamp before this repository
 was a filesystem mtime.
@@ -193,7 +197,7 @@ literature, no speculation about cause.
 
 | id | claim under test | unit | baseline | uncertainty | decision rule fixed in advance |
 |---|---|---|---|---|---|
-| E1 | the fine-tune recognises unseen 16th-century print better than its base | page | all of `stock`, `mccatmus` and `transkribus` are run, `transkribus` reported as confounded. Which one the headline is stated against is decided on the `ood` scores and recorded when decided | bootstrap over pages, 10,000 resamples, 95% | a difference smaller than the annotator's self-agreement CER is not claimed. `ood` is the headline and `val48` is labelled validation |
+| E1 | the fine-tune reads both works better than the published models do | page | all of `stock`, `mccatmus` and `transkribus` are run, `transkribus` reported as confounded. Which one the headline is stated against is decided on the scores and recorded when decided | bootstrap over pages, 10,000 resamples, 95% | a difference smaller than the annotator's self-agreement CER is not claimed. One CER per work, and the 48 *Trésor* pages stay labelled validation |
 | E2 | the accept rule keeps a generative pass from rewriting the text | suspect span | correction off, same recognition output | bootstrap over pages for the CER delta | the rejection rate is descriptive and the threshold sweep is exploratory, so no cell passes or fails |
 | E3 | the LLM resolves ambiguous head and foot lines better than geometry alone | candidate line | always-`body`, and geometry without the LLM | bootstrap over pages | below 30 instances in a cell, the analysis degrades to a descriptive breakdown and says so |
 | E4 | escalation and the lexicon earn their cost | drop cap | gate only, and no lexicon | bootstrap over pages | same 30-instance rule |
@@ -220,9 +224,9 @@ JSON. The fallbacks are the named ones in the implementation plan's blocked tabl
 
 **Purpose.** Say what the numbers mean, and what they mean against the literature.
 
-**Content.** Opens with the comparison move: where the measured out-of-domain CER sits
-relative to what section 2 reported, and what the gap says about domain adaptation from
-a single volume. Then the confusion table, quantifying the long `ſ`/`f`, `u`/`n`,
+**Content.** Opens with the comparison move: where the two measured CERs sit relative
+to what section 2 reported, and what the difference between the works says about a
+model trained on one of them. Then the confusion table, quantifying the long `ſ`/`f`, `u`/`n`,
 `c`/`e` and `H`/`R` confusions the project asserted and never counted. Then the
 stratified reading, whether the fine-tune generalises evenly across the two type
 families given that its training data is almost all *Trésor* T.1. Then what the LLM
@@ -244,9 +248,9 @@ and what the difference says about span selection rather than search.
 **Content.** The gold set is 20 pages and one annotator, with self-agreement as the
 noise floor. `val48` drove checkpoint selection, so it is validation and never test,
 and page-level splitting of one volume leaves the same formes and type wear on both
-sides. The `ood` set excludes no Livre at page level, and the *Trésor* excerpts
-*Amadis de Gaule*, so the model has read some of the text it is tested on even though
-it never saw the pages. Transkribus segmented independently and cannot be brought under
+The *Trésor* excerpts *Amadis de Gaule*, so on the *Amadis* pages the model has read
+some of the text it is scored on even though it never saw those pages. The report
+states that and does not correct for it. Transkribus segmented independently and cannot be brought under
 the held-constant segmentation, so it stays a confounded baseline. E3 and E4 cells may
 fall below 30 instances. The n8n production timings are on a machine not in scope, so
 E6 covers the batch runner only. The Transkribus baseline output was searched for and
@@ -293,8 +297,7 @@ confidence intervals. Nothing is cited from memory.
 - C. The three prompt versions of the coherence pass and the low-confidence prompt,
   verbatim, since E3 scores them against each other.
 - D. Per-page results tables for E1, which do not belong in the body.
-- E. The contamination gates' outputs, including the per-collection accounting that
-  closed G3.
+- E. The training split, its re-derivation and the per-collection accounting behind it.
 - F. What the sanitiser removes from the vendored pipeline files and why.
 
 ## Page budget
@@ -322,7 +325,7 @@ threshold table is what earns them.
 ## The defence deck
 
 `slides/main.tex` reads the same generated macros. It leads with the two findings a
-jury will not expect, the out-of-domain result from E1 and the marker-anchor rejection
+jury will not expect, the *Amadis de Gaule* CER from E1 and the marker-anchor rejection
 rate from E2, then the localisation sweep, then limitations. Sections 3 and 4 collapse
 to one slide each. Nothing in the deck is a number that is not in the report.
 
