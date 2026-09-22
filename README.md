@@ -45,7 +45,7 @@ Their outputs are committed so that everything above reruns without any of it.
 | --- | --- |
 | `src/amadis_htr/` | the scoring code |
 | `tests/` | one test module per source module |
-| `data/gold/` | the annotated *Amadis de Gaule* gold set and its guidelines |
+| `data/gold/` | the gold set: 118 corrected pages, their manifest and the guidelines |
 | `data/localisation/` | the human-assigned reference for passage localisation, and the map between the two piece catalogues |
 | `eval/` | the scripts that derive a committed artefact from a source file held elsewhere |
 | `data/runs/` | every system's frozen output: the OCR run records, the matcher export, and E2's frame and verdicts |
@@ -53,6 +53,7 @@ Their outputs are committed so that everything above reruns without any of it.
 | `eval/results/` | the CSVs every figure and every reported number reads |
 | `report/generated/` | LaTeX macros, tables and figures written from those CSVs |
 | `figures/` | the matplotlib scripts that draw every figure in the report |
+| `report/plates/` | the illustrative plates: a page of the source print, and the line crops the layout stage keys on |
 | `report/sections/` | one file per section of the report, each carrying its own drafting status |
 | `report/`, `slides/` | the report and the defence deck, sharing one preamble |
 | `pipeline/` | the sanitised pipeline snapshot |
@@ -83,9 +84,10 @@ and citing it is an undefined control sequence, which stops the build rather
 than reaching the page. The same breakage is caught in the fast test suite, so
 a section citing an unmeasured figure fails without a LaTeX toolchain present.
 
-See `docs/specs/2026-09-18-amadis-htr-report-design.md` for the full design,
-including the evaluation protocol, and `docs/plans/` for the implementation
-plans.
+The design notes, specifications and working notes this repository used to
+carry were removed on 2026-09-22: the report states its own protocol, and the
+history holds the rest. What survives is `docs/pre-registration/`, because a
+gate written before the numbers is evidence rather than commentary.
 
 ## Licence
 

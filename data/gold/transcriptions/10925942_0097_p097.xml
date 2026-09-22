@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15 http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15/pagecontent.xsd">
+    <Metadata>
+        <Creator>prov=READ-COOP:name=PyLaia@TranskribusPlatform:version=2.51.0:model_id=581889:lm=none:date=09_09_2026_14:33</Creator>
+        <Created>2025-09-29T22:45:09.527+02:00</Created>
+        <LastChange>2026-09-17T11:53:04.943+02:00</LastChange>
+        <TranskribusMetadata docId="10925942" pageId="103649462" pageNr="97" tsid="303377230" status="DONE" userId="443930" imgUrl="https://files.transkribus.eu/Get?fileType=view&amp;id=NYMVPBLSFPKOEUGQUSJBOAKF" xmlUrl="https://files.transkribus.eu/Get?id=PCSOQZJUFMJVGMSCLFBJBVMZ" imageId="86955865"/>
+    </Metadata>
+    <Page imageFilename="0097_p097.jpg" imageWidth="2479" imageHeight="3508">
+        <ReadingOrder>
+            <OrderedGroup id="ro_1790098191023" caption="Regions reading order">
+                <RegionRefIndexed index="0" regionRef="tr_1"/>
+            </OrderedGroup>
+        </ReadingOrder>
+        <TextRegion orientation="0.0" id="tr_1" custom="readingOrder {index:0;}">
+            <Coords points="211,68 211,3371 2048,3371 2048,68"/>
+            <TextLine id="tr_1_tl_3" custom="readingOrder {index:0;}">
+                <Coords points="210,251 2024,280 2024,178 1869,187 1830,148 1652,150 1611,189 1461,150 1401,191 1340,153 950,150 852,187 814,148 565,196 410,148 353,185 278,123 210,160"/>
+                <Baseline points="223,238 313,238 403,241 494,241 584,241 674,238 765,241 855,241 945,244 1036,244 1126,244 1216,244 1307,244 1397,244 1487,242 1578,244 1668,243 1758,241 1849,241 1939,244 2030,244"/>
+                <TextEquiv>
+                    <Unicode>semble qu'elle doive avoir plus d'efficace</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_4" custom="readingOrder {index:1;}">
+                <Coords points="210,362 2033,387 2033,296 1844,264 1442,301 1183,264 210,289"/>
+                <Baseline points="223,346 313,346 404,349 495,352 586,349 677,352 767,349 858,352 949,352 1040,351 1131,352 1221,352 1312,352 1403,352 1494,352 1585,352 1675,349 1766,349 1857,349 1948,352 2039,352"/>
+                <TextEquiv>
+                    <Unicode>à vous esmouvoir, &amp; donner cœur de bien</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_5" custom="readingOrder {index:2;}">
+                <Coords points="205,469 763,504 1194,460 1351,506 1483,469 2003,472 2003,401 1787,365 1650,403 1586,369 1506,401 1208,371 690,408 435,369 205,401"/>
+                <Baseline points="217,456 306,456 395,456 485,456 574,459 664,456 753,456 843,456 932,459 1022,459 1111,459 1200,459 1290,459 1379,456 1469,456 1558,459 1648,459 1737,453 1827,456 1916,456 2006,459"/>
+                <TextEquiv>
+                    <Unicode>combattre, que toutes les parolles d'hom¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_6" custom="readingOrder {index:3;}">
+                <Coords points="207,581 1019,613 1064,581 2017,581 2017,485 1433,515 1176,472 786,517 551,479 321,515 257,479 207,517"/>
+                <Baseline points="220,564 310,564 400,561 490,564 580,564 670,564 760,564 850,564 940,564 1030,564 1120,564 1210,564 1300,564 1390,564 1480,564 1570,564 1660,564 1750,564 1840,567 1930,564 2021,564"/>
+                <TextEquiv>
+                    <Unicode>me vivant, encores que fussiez quasi recreus</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_7" custom="readingOrder {index:4;}">
+                <Coords points="210,690 775,722 1035,677 2001,690 2001,613 1844,583 210,602"/>
+                <Baseline points="223,668 312,671 401,671 490,671 579,671 668,671 757,671 847,671 936,671 1025,668 1114,671 1203,671 1292,674 1381,674 1471,674 1560,674 1649,671 1738,673 1827,672 1916,671 2006,674"/>
+                <TextEquiv>
+                    <Unicode>&amp; mal equippez : &amp; au contraire, nous som¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_8" custom="readingOrder {index:5;}">
+                <Coords points="207,793 2021,802 2021,706 1914,688 1322,686 1267,731 1048,684 684,729 465,688 207,706"/>
+                <Baseline points="220,782 310,779 400,779 491,779 581,779 671,777 762,779 852,779 942,776 1033,776 1123,778 1213,779 1304,779 1394,779 1484,779 1575,779 1665,779 1755,779 1846,779 1936,779 2027,776"/>
+                <TextEquiv>
+                    <Unicode>mes icy la fleur &amp; force de la pluspart des</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_9" custom="readingOrder {index:6;}">
+                <Coords points="205,909 2021,907 2021,814 205,811"/>
+                <Baseline points="217,889 307,886 398,886 488,884 579,886 669,886 760,886 850,886 941,884 1031,886 1122,886 1212,888 1303,886 1393,883 1484,883 1574,886 1665,886 1755,886 1846,886 1936,886 2027,883"/>
+                <TextEquiv>
+                    <Unicode>Isles Occeanes, &amp; en si grand nombre, que</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_10" custom="readingOrder {index:7;}">
+                <Coords points="203,1016 2026,1019 2028,925 1648,905 1609,937 1326,905 1276,943 1028,905 205,925"/>
+                <Baseline points="217,988 307,991 398,994 489,994 580,994 671,997 761,994 852,994 943,994 1034,994 1125,991 1215,991 1306,991 1397,991 1488,992 1579,993 1669,991 1760,994 1851,994 1942,991 2033,988"/>
+                <TextEquiv>
+                    <Unicode>ce seroit quasi peché de douter de nostre</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_11" custom="readingOrder {index:8;}">
+                <Coords points="205,1105 905,1153 2019,1121 2019,1035 1873,1007 1802,1039 1547,1003 1483,1035 1139,1003 882,1046 613,1007 205,1037"/>
+                <Baseline points="217,1095 307,1100 397,1098 488,1099 578,1098 668,1100 759,1101 849,1101 939,1101 1030,1101 1120,1101 1210,1101 1301,1101 1391,1101 1481,1101 1572,1098 1662,1098 1752,1098 1843,1098 1933,1098 2024,1092"/>
+                <TextEquiv>
+                    <Unicode>victoire. Et pour plus la nous asseurer, sou¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_12" custom="readingOrder {index:9;}">
+                <Coords points="207,1233 759,1221 818,1267 866,1221 1996,1226 1996,1137 207,1146"/>
+                <Baseline points="220,1206 309,1209 398,1209 487,1206 576,1206 665,1206 754,1209 844,1209 933,1206 1022,1206 1111,1209 1200,1206 1289,1206 1378,1209 1468,1209 1557,1209 1646,1206 1735,1203 1824,1206 1913,1203 2003,1194"/>
+                <TextEquiv>
+                    <Unicode>vienne vous que nous sommes en une ter¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_13" custom="readingOrder {index:10;}">
+                <Coords points="198,1329 627,1370 1306,1333 1365,1372 1622,1322 2019,1322 1967,1244 1848,1269 1686,1221 1609,1258 1493,1224 1440,1267 1003,1224 825,1283 412,1224 198,1265"/>
+                <Baseline points="211,1313 301,1313 392,1315 482,1316 573,1315 664,1316 754,1316 845,1316 936,1313 1026,1313 1117,1314 1208,1316 1298,1316 1389,1316 1480,1316 1570,1313 1661,1313 1752,1310 1842,1310 1933,1310 2024,1307"/>
+                <TextEquiv>
+                    <Unicode>re estrangere, &amp; fort loingtaine de la no¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_14" custom="readingOrder {index:11;}">
+                <Coords points="205,1440 1046,1468 1456,1433 1675,1474 1757,1426 2019,1431 2019,1360 1935,1351 741,1340 399,1379 205,1342"/>
+                <Baseline points="217,1421 307,1421 397,1421 488,1424 578,1421 668,1421 759,1421 849,1421 939,1421 1030,1421 1120,1421 1210,1424 1301,1421 1391,1421 1481,1423 1572,1421 1662,1421 1752,1421 1843,1421 1933,1421 2024,1421"/>
+                <TextEquiv>
+                    <Unicode>stre, non point entre noz bons amys : mais</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_15" custom="readingOrder {index:12;}">
+                <Coords points="201,1531 1217,1529 1265,1577 1385,1538 2021,1540 2021,1474 1905,1438 1809,1479 1436,1440 1226,1481 481,1440 201,1479"/>
+                <Baseline points="214,1525 304,1525 395,1528 485,1528 576,1525 666,1525 757,1525 847,1528 938,1526 1028,1528 1119,1528 1209,1528 1300,1531 1390,1525 1481,1525 1571,1528 1662,1525 1752,1525 1843,1525 1933,1525 2024,1522"/>
+                <TextEquiv>
+                    <Unicode>au milieu de tous ceux qui desirent nostre</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_16" custom="readingOrder {index:13;}">
+                <Coords points="201,1641 766,1645 818,1682 1044,1643 1212,1682 1306,1648 2028,1648 2028,1540 1882,1593 1832,1552 795,1586 583,1540 506,1593 447,1554 201,1559"/>
+                <Baseline points="214,1633 309,1633 405,1633 501,1633 596,1633 692,1633 788,1636 884,1636 979,1633 1075,1636 1171,1636 1267,1636 1362,1633 1458,1633 1554,1633 1650,1633 1745,1633 1841,1633 1937,1633 2033,1630"/>
+                <TextEquiv>
+                    <Unicode>mort, chose que nous pouvons eviter, si</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_17" custom="readingOrder {index:14;}">
+                <Coords points="205,1759 2033,1759 2033,1663 1866,1693 1777,1648 1226,1684 1028,1648 829,1689 508,1645 205,1666"/>
+                <Baseline points="217,1740 308,1739 399,1740 490,1740 581,1740 672,1737 763,1740 854,1737 945,1737 1036,1739 1128,1740 1219,1740 1310,1740 1401,1740 1492,1738 1583,1737 1674,1737 1765,1737 1856,1737 1947,1737 2039,1737"/>
+                <TextEquiv>
+                    <Unicode>nous sommes une fois rompus : car ilz ont</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_18" custom="readingOrder {index:15;}">
+                <Coords points="210,1871 449,1866 494,1903 1069,1866 1187,1905 1329,1853 1518,1891 2030,1871 2030,1775 1935,1766 1456,1755 1158,1807 1087,1759 210,1771"/>
+                <Baseline points="223,1848 313,1846 404,1848 494,1848 585,1848 676,1846 766,1848 857,1849 948,1848 1038,1848 1129,1850 1220,1851 1310,1849 1401,1848 1492,1848 1582,1845 1673,1845 1764,1845 1854,1845 1945,1842 2036,1842"/>
+                <TextEquiv>
+                    <Unicode>force gens de cheval, par lesquelz seront</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_19" custom="readingOrder {index:16;}">
+                <Coords points="216,1994 1272,1953 2014,1980 2014,1878 1971,1859 1907,1903 1568,1910 216,1880"/>
+                <Baseline points="229,1949 318,1952 408,1955 497,1952 587,1955 677,1955 766,1952 856,1952 945,1955 1035,1952 1125,1955 1214,1955 1304,1952 1393,1952 1483,1952 1573,1952 1662,1952 1752,1949 1841,1949 1931,1946 2021,1949"/>
+                <TextEquiv>
+                    <Unicode>pour suyviz, sans avoir aucun moyen de</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_20" custom="readingOrder {index:17;}">
+                <Coords points="210,2085 2021,2085 2021,1992 1910,1967 1732,2005 1329,1967 210,2001"/>
+                <Baseline points="223,2063 313,2060 403,2063 493,2063 583,2060 674,2060 764,2062 854,2063 944,2060 1034,2060 1125,2060 1215,2063 1305,2063 1395,2060 1485,2060 1576,2063 1666,2060 1756,2060 1846,2057 1936,2054 2027,2054"/>
+                <TextEquiv>
+                    <Unicode>faire retraicte en noz vaisseaux, par ainsi il</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_21" custom="readingOrder {index:18;}">
+                <Coords points="205,2199 2030,2176 1998,2103 1734,2076 1659,2117 1301,2119 1119,2074 1062,2108 205,2101"/>
+                <Baseline points="217,2167 312,2167 408,2167 504,2167 599,2167 695,2167 791,2167 887,2167 982,2167 1078,2164 1174,2167 1270,2167 1365,2167 1461,2167 1557,2166 1653,2164 1748,2164 1844,2164 1940,2161 2036,2158"/>
+                <TextEquiv>
+                    <Unicode>nous fault resoudre de vaincre, ou de mou¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_22" custom="readingOrder {index:19;}">
+                <Coords points="207,2308 962,2311 1048,2274 1205,2324 1347,2324 1399,2281 1960,2281 2012,2315 2012,2213 1693,2181 1618,2217 207,2206"/>
+                <Baseline points="220,2274 309,2274 399,2271 489,2274 579,2271 669,2271 759,2274 849,2274 939,2271 1029,2274 1119,2274 1208,2274 1298,2274 1388,2274 1478,2271 1568,2271 1658,2269 1748,2271 1838,2271 1928,2271 2018,2271"/>
+                <TextEquiv>
+                    <Unicode>fir : car la necessité enquoy nous sommes,</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_23" custom="readingOrder {index:20;}">
+                <Coords points="223,2395 526,2431 1208,2393 1260,2429 1324,2390 1625,2425 2014,2386 2014,2322 1798,2286 1654,2324 1408,2292 1367,2329 1096,2292 223,2315"/>
+                <Baseline points="235,2379 324,2382 413,2382 502,2382 592,2382 681,2382 770,2379 860,2382 949,2379 1038,2379 1128,2382 1217,2382 1306,2382 1395,2379 1485,2379 1574,2379 1663,2379 1753,2379 1842,2376 1931,2376 2021,2379"/>
+                <TextEquiv>
+                    <Unicode>est trop plus à craindre que leur puissance.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_24" custom="readingOrder {index:21;}">
+                <Coords points="223,2525 2033,2498 2033,2390 1613,2436 1536,2393 1488,2431 1365,2400 1237,2438 1190,2400 588,2436 223,2404"/>
+                <Baseline points="235,2480 325,2486 415,2489 505,2486 595,2486 686,2486 776,2486 866,2486 956,2486 1046,2486 1137,2486 1227,2486 1317,2486 1407,2486 1497,2484 1588,2486 1678,2483 1768,2486 1858,2485 1948,2483 2039,2483"/>
+                <TextEquiv>
+                    <Unicode>Pourtant que chacun face son devoir, &amp; j'es</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_25" custom="readingOrder {index:22;}">
+                <Coords points="228,2637 2042,2611 2042,2516 1857,2552 1577,2502 1370,2539 980,2502 793,2541 757,2509 228,2527"/>
+                <Baseline points="241,2594 331,2594 421,2597 512,2594 602,2594 692,2594 783,2594 873,2594 963,2594 1054,2594 1144,2594 1234,2594 1325,2591 1415,2591 1505,2591 1596,2591 1686,2591 1776,2594 1867,2594 1957,2591 2048,2591"/>
+                <TextEquiv>
+                    <Unicode>pere plustost que la nuict nous separe, que</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_26" custom="readingOrder {index:23;}">
+                <Coords points="214,2716 1044,2716 1155,2755 1208,2716 2024,2716 2024,2618 214,2637"/>
+                <Baseline points="226,2698 316,2699 406,2698 496,2698 586,2698 677,2698 767,2698 857,2698 947,2698 1037,2698 1128,2698 1218,2701 1308,2698 1398,2698 1488,2698 1579,2698 1669,2695 1759,2695 1849,2698 1939,2695 2030,2689"/>
+                <TextEquiv>
+                    <Unicode>serons maistres &amp; seigneurs de tout ce pa¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_27" custom="readingOrder {index:24;}">
+                <Coords points="223,2842 472,2807 914,2810 984,2851 1025,2817 1107,2855 1313,2807 2005,2830 2003,2730 1752,2714 939,2728 902,2764 624,2709 520,2748 223,2730"/>
+                <Baseline points="235,2800 323,2806 412,2806 501,2806 590,2804 679,2806 768,2806 856,2806 945,2806 1034,2806 1123,2809 1212,2809 1301,2806 1390,2806 1478,2806 1567,2806 1656,2806 1745,2803 1834,2803 1923,2800 2012,2797"/>
+                <TextEquiv>
+                    <Unicode>ys &amp; redoutez cy apres en tous les en</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_28" custom="readingOrder {index:25;}">
+                <Coords points="219,2933 1032,2937 1030,2846 973,2858 934,2819 809,2851 615,2821 510,2842 481,2814 378,2842 280,2826 219,2864"/>
+                <Baseline points="232,2910 272,2910 312,2912 352,2911 393,2910 433,2911 473,2913 514,2912 554,2910 594,2910 635,2910 675,2910 715,2912 755,2913 796,2913 836,2912 876,2910 917,2910 957,2911 997,2913 1038,2916"/>
+                <TextEquiv>
+                    <Unicode>droicts du monde.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_29" custom="readingOrder {index:26;}">
+                <Coords points="285,3049 1928,3049 1930,2946 1787,2919 1691,2953 1183,2919 287,2971"/>
+                <Baseline points="298,3021 379,3021 461,3021 543,3021 625,3021 707,3019 788,3021 870,3021 952,3021 1034,3021 1116,3021 1197,3021 1279,3020 1361,3018 1443,3015 1525,3015 1606,3015 1688,3013 1770,3012 1852,3015 1934,3015"/>
+                <TextEquiv>
+                    <Unicode>Harangue du Roy Lisuard à ses chevaliers,</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_30" custom="readingOrder {index:27;}">
+                <Coords points="447,3149 834,3140 893,3181 980,3140 1812,3154 1812,3088 1709,3035 1454,3074 1347,3035 447,3067"/>
+                <Baseline points="459,3128 526,3127 594,3125 662,3125 730,3125 798,3125 865,3128 933,3127 1001,3125 1069,3125 1137,3125 1204,3126 1272,3125 1340,3123 1408,3122 1476,3120 1543,3119 1611,3119 1679,3119 1747,3121 1815,3128"/>
+                <TextEquiv>
+                    <Unicode>les advertissant de sa juste querelle,</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_31" custom="readingOrder {index:28;}">
+                <Coords points="549,3249 1652,3268 1784,3215 1689,3136 1495,3177 1246,3136 1123,3177 549,3170"/>
+                <Baseline points="561,3233 622,3236 684,3231 745,3233 807,3233 868,3233 930,3231 991,3233 1053,3230 1114,3233 1176,3233 1237,3231 1299,3230 1360,3229 1422,3227 1483,3227 1545,3225 1606,3221 1668,3220 1729,3212 1791,3209"/>
+                <TextEquiv>
+                    <Unicode>&amp; que à ceste cause ilz soustins¬</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextLine id="tr_1_tl_32" custom="readingOrder {index:29;}">
+                <Coords points="590,3377 932,3404 975,3361 1276,3347 1440,3377 1522,3338 1720,3347 1723,3297 1458,3240 1390,3281 875,3281 836,3245 766,3284 647,3247 592,3277"/>
+                <Baseline points="603,3346 659,3343 715,3344 771,3346 828,3346 884,3343 940,3343 996,3341 1053,3340 1109,3339 1165,3337 1221,3337 1278,3334 1334,3334 1390,3334 1446,3332 1503,3334 1559,3331 1615,3331 1671,3329 1728,3331"/>
+                <TextEquiv>
+                    <Unicode>sent son party vertueusement.</Unicode>
+                </TextEquiv>
+            </TextLine>
+            <TextEquiv>
+                <Unicode></Unicode>
+            </TextEquiv>
+        </TextRegion>
+    </Page>
+</PcGts>

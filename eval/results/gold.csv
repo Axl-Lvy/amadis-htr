@@ -1,0 +1,5 @@
+cohort,candidates,pages,lines,chars,words,trained_on,not_corrected,excluded
+all,1502,118,3269,128782,23189,487,896,1
+tresor1,934,114,3147,124114,22338,487,332,1
+tresor2,564,0,0,0,0,0,564,0
+amadis13,4,4,122,4668,851,0,0,0

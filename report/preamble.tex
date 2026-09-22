@@ -32,7 +32,20 @@
 % \@ followed by `title' and crashes exactly as the note below describes.
 \makeatletter
 \@ifclassloaded{beamer}{}{%
-\usepackage[a4paper,top=3cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+
+% Float placement. At LaTeX's defaults this report deferred every figure and
+% table past the bibliography: \topfraction 0.7 and \totalnumber 3 are too
+% tight for a ten-page document that carries eight floats, so each one failed
+% its page and queued. Loosened here rather than by scattering [!ht] over the
+% sections, because the sections should say what a figure is, not where it goes.
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.72}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
 
 % The palette and section furniture from the École Polytechnique internship
 % report template (polytechnique.sty, Merigoux), reused for its visual
@@ -90,12 +103,25 @@
 }
 \makeatother
 
-% Translated from the template's "Déclaration relative au plagiat".
-\newcommand{\plagiarismdeclaration}{%
-  \section*{Statement of academic integrity}
-  I attest that I am the author of this work and that everything borrowed
-  from other sources is attributed to it and properly referenced.
+% The abstract is a page of its own: the title page, then the abstract, then
+% section 1. `article` would otherwise set it at the head of the first body
+% page, where it reads as a preamble to the introduction rather than as the
+% thing a reader may stop at.
+\renewenvironment{abstract}{%
   \clearpage
+  \vspace*{2cm}
+  \begin{center}{\color{reportblue}\large\bfseries\sffamily\MakeUppercase{\abstractname}}\end{center}
+  \vspace{0.4cm}
+  \begin{quotation}\noindent\ignorespaces
+}{%
+  \end{quotation}\clearpage
+}
+
+% A claim in section 1. \noindent on every one of them, because the three were
+% ordinary paragraphs and only the first sat flush left: the other two took the
+% paragraph indent and the labels did not line up.
+\newcommand{\claim}[2]{%
+  \par\medskip\noindent\textbf{#1}\ \textbf{#2}\ \ignorespaces
 }
 }
 \makeatother

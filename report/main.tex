@@ -22,59 +22,54 @@
 
 \begin{document}
 \reportmaketitle
-\plagiarismdeclaration
 
 \begin{abstract}
 % Written from the measured figures only. Every number here also appears in
-% section 6; nothing is introduced by the abstract.
+% section 5; nothing is introduced by the abstract.
 A production pipeline has been transcribing a \ocrBooks{}-book cycle of
 16th-century French romance for a year on the strength of one validation error
 rate, measured on a 10\% page-level split of a single volume. This report
 measures what that number cannot support.
 
-Of the five experiments that test a claim, two are reported and three are not;
-a sixth, descriptive, is. The correction pass's marker-anchor accept rule ---
-suspect spans wrapped in \lmark~\rmark{}, a reply accepted only when every byte
-outside the markers returns unchanged --- was run over \corrOffered{}
-low-confidence lines on a seeded \corrPages{}-page sample of the
-\corrReachPagesWithSpan{} eligible pages, under a design registered beforehand.
-Weighted to the corpus it accepted \corrAcceptRate{} (95\%~CI \corrAcceptLow{}
-to \corrAcceptHigh{}) and refused \corrRewritesCaught{} replies for changing
-text outside the markers. That branch is what the rule claims to catch; it
-fires on any byte difference, so it bounds fluent rewriting from above rather
-than counting it.
-Passage localisation reaches \locLivreAccuracyWorkbook{} Livre accuracy on the
-pre-registered cohort against a gate written before the numbers existed, and
-\locChapterAccuracyWorkbook{} chapter accuracy --- a gap the pre-registration
-had already read as span selection, and whose two named preconditions for that
-reading were never tuned. The batch runner
-transcribed \ocrPages{} pages with \ocrPagesFailed{} failures at
-\ocrSecondsPerPage{}~s per page.
+Two of the three claims are tested here; recognition itself is not, because it
+needs a 20-page annotated gold set that does not exist, and this report names
+the absence rather than substituting a figure it can compute.
 
-Recognition itself is unevaluated: it needs a 20-page annotated gold set that
-does not exist, and this report names the absence instead of substituting a
-figure it can compute. Measuring the accept rule also exposed a hole in it.
+The correction pass's marker-anchor accept rule --- suspect spans wrapped in
+\lmark~\rmark{}, a reply accepted only when every byte outside the markers
+returns unchanged --- was run over \corrOffered{} low-confidence lines on a
+seeded \corrPages{}-page sample, under a design registered beforehand. Weighted
+to the corpus it accepted \corrAcceptRate{} (95\%~CI \corrAcceptLow{} to
+\corrAcceptHigh{}) and refused \corrRewritesCaught{} replies for changing text
+outside the markers. Measuring the rule also exposed a hole in it:
 \corrFindFallbackShare{} of the offered lines took a span-locating fallback
 that can mark one word twice, and on those an acceptance is not evidence that
-the rule held --- so the claim rests on under a third of its own evidence. The scoring code, the frozen run records and every result CSV are
-released --- no page image, no transcribed text --- so each figure rebuilds
-from committed inputs with no GPU, no model and no network.
+the rule held, so the claim rests on under a third of its own evidence.
+
+Passage localisation reaches \locLivreAccuracyWorkbook{} Livre accuracy on the
+pre-registered cohort against a gate written before the numbers existed, and
+\locChapterAccuracyWorkbook{} chapter accuracy. The batch runner transcribed
+\ocrPages{} pages with \ocrPagesFailed{} failures at \ocrSecondsPerPage{}~s per
+page.
+
+The scoring code, the frozen run records and every result CSV are released, so
+each figure rebuilds from committed inputs with no GPU, no model and no
+network.
 \end{abstract}
 
 % One file per section, so a section can be drafted, reviewed and rewritten
 % without touching the others. The status of each is the first line of its own
-% file, and docs/specs/2026-09-20-report-outline.md says what each has to
-% contain and what it may not say.
+% file.
 \input{sections/01-introduction.tex}
 \input{sections/02-related-work.tex}
-\input{sections/03-corpus.tex}
-\input{sections/04-system.tex}
-\input{sections/05-protocol.tex}
-\input{sections/06-results.tex}
-\input{sections/07-error-analysis.tex}
-\input{sections/08-limitations.tex}
-\input{sections/09-conclusion.tex}
+\input{sections/03-corpus-and-system.tex}
+\input{sections/04-protocol.tex}
+\input{sections/05-results.tex}
+\input{sections/06-discussion.tex}
+\input{sections/07-conclusion.tex}
 
-\printbibliography
+% \footnotesize: 15 entries set at body size ran to two of the report's ten
+% pages, which is a tenth of the document spent on its bibliography.
+{\footnotesize\printbibliography}
 
 \end{document}

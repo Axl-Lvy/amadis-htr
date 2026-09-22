@@ -1,5 +1,10 @@
 """Every figure in the report, from `eval/results/*.csv`.
 
+Three figures and no more. A bar chart of two bars says what a sentence says,
+and the report is ten pages: `corpus-extracts` and `e2-reasons` were dropped on
+2026-09-22 because their numbers are already in the prose beside them. The
+CSVs they read are still written and still checked.
+
 Rule 1 covers figures as well as numbers: a plot is a reported figure, so it is
 drawn from the committed results and never from a screenshot or a hand-made
 table. A figure whose CSV the evaluation has not produced is skipped and named,
@@ -37,7 +42,7 @@ def localisation_sweep() -> None:
     collapsed is the denominator.
     """
     fig, (top, bottom) = plt.subplots(
-        2, 1, figsize=(5.2, 3.2), sharex=True, height_ratios=[1, 1]
+        2, 1, figsize=(5.2, 2.5), sharex=True, height_ratios=[1, 1]
     )
     for cohort, colour in (("workbook", BLUE), ("catalogue", RED)):
         data = [r for r in rows(f"localisation-sweep-{cohort}.csv")
@@ -52,10 +57,10 @@ def localisation_sweep() -> None:
         axis.axvline(0.808, color=GREY, lw=0.8, ls=":", zorder=0)
     top.text(0.812, 98.35, "operating point", color=GREY, fontsize=7, va="bottom")
 
-    top.set_ylabel("precision (\\%)")
+    top.set_ylabel("precision (%)")
     top.set_ylim(98.2, 100.3)
     top.legend(loc="lower left")
-    bottom.set_ylabel("coverage (\\%)")
+    bottom.set_ylabel("coverage (%)")
     bottom.set_xlabel("accept threshold")
     bottom.set_ylim(-3, 105)
     for axis in (top, bottom):
@@ -71,7 +76,7 @@ def throughput_by_book() -> None:
     """
     data = rows("throughput-by-book.csv")
     pooled = {r["cohort"]: r for r in rows("throughput.csv")}
-    fig, axis = plt.subplots(figsize=(5.2, 2.1))
+    fig, axis = plt.subplots(figsize=(5.2, 1.8))
     axis.bar(
         [int(r["book"]) for r in data],
         [float(r["seconds_per_page"]) for r in data],
@@ -98,51 +103,6 @@ def throughput_by_book() -> None:
     save(fig, "e6-throughput")
 
 
-def corpus_extracts() -> None:
-    """Section 3: how long a Trésor piece is, per cohort."""
-    data = {r["cohort"]: r for r in rows("corpus.csv")}
-    fig, axis = plt.subplots(figsize=(5.2, 1.9))
-    cohorts = [c for c in ("catalogue", "workbook") if c in data]
-    y = range(len(cohorts))
-    axis.barh(
-        list(y),
-        [float(data[c]["chars_mean"]) for c in cohorts],
-        color=[TEAL, BLUE][: len(cohorts)],
-        height=0.45,
-    )
-    for i, cohort in enumerate(cohorts):
-        row = data[cohort]
-        axis.plot(
-            [float(row["chars_min"]), float(row["chars_max"])], [i, i],
-            color=GREY, lw=0.9, zorder=3,
-        )
-        axis.plot(
-            [float(row["chars_median"])], [i], marker="|", color="white",
-            markersize=9, mew=1.4, zorder=4,
-        )
-    axis.set_yticks(list(y), cohorts)
-    axis.set_xlabel("extract length (code points)")
-    axis.margins(y=0.35)
-    save(fig, "corpus-extracts")
-
-
-def correction_reasons() -> None:
-    """E2: why the accept rule refused, one bar per branch."""
-    data = [r for r in rows("correction-reasons.csv") if int(r["lines"])]
-    if not data:
-        return
-    fig, axis = plt.subplots(figsize=(5.2, 1.9))
-    labels = [r["reason"] for r in data][::-1]
-    values = [int(r["lines"]) for r in data][::-1]
-    colours = [RED if label == "outside-changed" else LIGHT for label in labels]
-    axis.barh(labels, values, color=colours, height=0.55)
-    for i, value in enumerate(values):
-        axis.text(value, i, f" {value}", va="center", fontsize=8)
-    axis.set_xlabel("lines rejected")
-    axis.margins(x=0.12, y=0.2)
-    save(fig, "e2-reasons")
-
-
 def correction_confidence() -> None:
     """E2: the recogniser's confidence on accepted against rejected lines."""
     import csv as _csv
@@ -156,7 +116,7 @@ def correction_confidence() -> None:
     rejected = [float(v["min_conf"]) for v in verdicts if v["accepted"] != "1"]
     if not rejected:
         return
-    fig, axis = plt.subplots(figsize=(5.2, 2.0))
+    fig, axis = plt.subplots(figsize=(5.2, 1.7))
     bins = [i / 20 for i in range(0, 13)]
     axis.hist(
         [accepted, rejected], bins=bins, color=[BLUE, RED], density=True,
@@ -173,8 +133,6 @@ FIGURES = (
      ("localisation-sweep-workbook.csv", "localisation-sweep-catalogue.csv")),
     ("E6 throughput", throughput_by_book,
      ("throughput.csv", "throughput-by-book.csv")),
-    ("corpus extracts", corpus_extracts, ("corpus.csv",)),
-    ("E2 reasons", correction_reasons, ("correction-reasons.csv",)),
     ("E2 confidence", correction_confidence, ("correction-verdicts.csv",)),
 )
 

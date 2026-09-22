@@ -1,0 +1,70 @@
+% Status: drafted 2026-09-22, cut twice the same day to the ten-page budget.
+% The gold set is the corrected Transkribus pages, not the sampled set this
+% section first specified. Its cost is stated here, not deferred to section 6.
+\section{Evaluation protocol}
+\label{sec:protocol}
+
+E1, E3 and E4 have not been run. What follows is the protocol they will run
+under, fixed before the numbers exist; E2's and E5's, which have run, are
+marked where they differ.
+
+\textbf{The gold set.} \goldPages{} pages carrying a corrected transcription:
+\goldPagesTresor{} of \emph{Trésor}~T.1 and \goldPagesAmadis{} of \emph{Amadis
+de Gaule} livre~13, \goldLines{} lines and \goldChars{} characters. They were
+not annotated for this report; they were corrected in Transkribus in the course
+of the edition. \file{eval/build\_gold\_set.py} selects them from
+\goldCandidates{} candidates: a page qualifies only if a human marked it
+finished and it is absent from the training split. That removes
+\goldRefusedTrained{} pages, \goldRefusedUncorrected{} carry no correction at
+all, and \goldRefusedExcluded{} is front matter. \file{data/gold/MANIFEST.csv}
+gives a row per candidate with its reason, so the set is checkable rather than
+asserted. The convention is \file{data/gold/GUIDELINES.md}, committed first.
+
+This replaces the twenty pages drawn seeded per stratum and annotated blind
+that this section first specified: ten hours of annotation was the binding
+constraint, and \goldPages{} already-corrected pages cost none of it. Four
+things were traded for that. The reference is \emph{post-edited, not blind} ---
+each page was corrected over a model's own output, which the manifest records
+per page --- so an error that reads plausibly survives, and the set leans
+towards the fine-tune, the system E1 exists to test. Its segmentation is
+\emph{Transkribus's own}, which makes that comparison worse than the confounded
+one below. Its frame is \emph{one work and one copy}, so the family and
+provenance strata collapse to a single cell. And \emph{no page was transcribed
+twice}, so there is no noise floor and \textbf{no difference is yet small
+enough to refuse.} Three pages transcribed blind under the same convention
+would settle the floor and size the lean at once.
+
+\textbf{Metrics.} Character and word error rate, defined in code rather than
+prose: whitespace counts as a character, runs of whitespace collapse to one
+space before comparison, and aggregation is character-weighted across pages.
+Every figure is reported twice, raw and folded. The fold --- NFC,
+long~\qtr{ſ} to \emph{s}, case folding, \emph{u}/\emph{v} and \emph{i}/\emph{j}
+collapsed --- is declared once, applied identically to hypothesis and
+reference, and is deliberately narrower than the matcher's own normaliser,
+because anything it removed beyond a transcription convention would hide a real
+recognition error. Uncertainty is the percentile bootstrap over pages, 10{,}000
+resamples, 95\%~\cite{efron1994bootstrap}. Pages and not characters: a badly
+inked or badly segmented page fails as a whole, so resampling characters would
+report an interval narrower than the evidence supports.
+
+\textbf{Baselines.} E1 will run the fine-tune against stock CATMuS-Print, a
+chosen published early-modern model, and Transkribus, with segmentation held
+constant across the first three. It cannot be held constant for Transkribus,
+which segments independently, so that comparison mixes recognition with layout
+and is reported as confounded.
+
+\textbf{Two pre-registrations.} E5's gate was written on 2026-09-15, before the
+matcher was scored, and is quoted verbatim in
+\file{docs/pre-registration/2026-09-15-e5-alignment-gate.md}. E2's design ---
+the frame, the sample and its seed, the treatment, and the fixed list of
+figures that would be reported --- was registered on 2026-09-22, before its
+run. E2 is the one experiment here that could be re-run on demand, which is
+exactly why its choices are dated earlier than its numbers.
+
+\textbf{What the protocol cannot do.} Scoring the correction pass against
+correction off as a change in error rate needs a reference transcription for
+the pages E2 sampled. The gold set does not cover them --- it is \emph{Trésor}
+and one \emph{Amadis} extract, while E2's frame is the \ocrBooks{} books' own
+OCR run --- so E2 reports what the accept rule did and makes no claim that the
+edits it kept are improvements. That limit was registered in advance, not
+discovered afterwards.

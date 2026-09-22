@@ -12,6 +12,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 uv run python eval/corpus_results.py
+uv run python eval/gold_results.py
 uv run python eval/localisation_results.py
 uv run python eval/throughput_results.py
 uv run python eval/correction_results.py

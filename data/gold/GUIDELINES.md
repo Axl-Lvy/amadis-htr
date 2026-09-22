@@ -1,5 +1,50 @@
 # Gold set annotation guidelines
 
+## What changed on 2026-09-22
+
+Everything below was written before annotation began, and it still governs the
+transcription convention. It no longer describes how the set was obtained.
+
+The set is not 20 pages drawn by `src/amadis_htr/sampling.py` and annotated from
+scratch. It is the 118 pages already corrected in Transkribus that the
+recognition model never read: 114 of *Trésor* T. 1 outside the training split,
+corrected 15–18 September 2026, and 4 of *Amadis de Gaule* livre 13, corrected
+4 June 2026. `eval/build_gold_set.py` selects them and
+`data/gold/MANIFEST.csv` records every candidate page with the reason it is in
+or out. 118 pages against 20, at no annotation cost, and ten hours of annotation
+was the binding constraint on the report.
+
+Five things were given up for that, and none of them is repaired by saying so:
+
+1. **The reference is post-edited, not blind.** Every page was corrected on top
+   of a model's own output — `model_id` 581889 for the 114, 554557 for the 4,
+   recorded per page in the manifest's `seeded_by` column. A recognition error
+   that reads plausibly survives correction, so the reference is biased towards
+   the system that produced the seed, which is the fine-tune. That bias points
+   the same way as the report's headline claim.
+2. **The frame is one work and one copy.** 114 pages of *Trésor* T. 1 and 4 of
+   one *Amadis* extract, not the 24 books. Stratification on type family and on
+   scan provenance is not possible over a single copy, so the strata collapse to
+   one cell and no generalisation across the corpus is supported.
+3. **The segmentation is Transkribus's.** The reference carries Transkribus's
+   own line boxes. Any comparison against Transkribus inherits that, and it is a
+   stronger objection than the confounded-baseline note the report already makes.
+4. **The labels are transcription only.** No line roles, no drop caps, no
+   structure tags — the PAGE XML carries `readingOrder` and nothing else. The
+   four-labels-per-page claim below does not hold for this set, and the
+   structural evaluation has nothing to score against.
+5. **There is no noise floor.** No page was annotated twice, so the rule below
+   — that no system difference smaller than the floor is claimed — currently has
+   no number in it.
+
+Points 1 and 5 are cheap to repair together, and should be: transcribe three of
+the kept pages from scratch, blind, under the convention below, and diff against
+the committed version. That is roughly an hour. It gives the floor point 5 needs
+and it measures point 1 directly, turning the post-editing bias from a caveat
+into a figure.
+
+## The convention
+
 Written before annotation begins. A convention settled halfway through is a
 convention that differs across the set.
 
