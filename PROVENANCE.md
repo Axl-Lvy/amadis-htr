@@ -62,8 +62,8 @@ Recovered over the tailnet from the host `bigpc`. None of it is committed here:
 it is mirrored to `~/amadis-artefacts/` on the laptop, whose `MANIFEST.sha256`
 hashes all 2,091 files. The training artefacts are 4,654,392,295 bytes over
 1,944 files, file count and byte count both equal to the source. What each
-artefact settles is recorded in
-`docs/notes/2026-09-20-artefact-recovery.md`.
+artefact settles was recorded in a working note removed on 2026-09-22; the
+hashes below are what the claim now rests on.
 
 The two source repositories on bigpc are behind the clones this table records
 above: amadis at `e34eb4c` (2026-09-16) against `3d5439d`, home-lab at

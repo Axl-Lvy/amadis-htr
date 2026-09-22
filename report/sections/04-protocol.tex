@@ -1,0 +1,56 @@
+% Status: drafted 2026-09-22, cut twice the same day to the ten-page budget.
+% The gold set's realised counts need the annotation pass.
+\section{Evaluation protocol}
+\label{sec:protocol}
+
+E1, E3 and E4 have not been run. What follows is the protocol they will run
+under, fixed before the numbers exist; E2's and E5's, which have run, are
+marked where they differ.
+
+\textbf{The gold set.} The frame is every page of all \ocrBooks{} books of
+\emph{Amadis de Gaule} minus any page in the training split. That list holds
+\trainPages{} pages, all of them \emph{Trésor}~T.1, so the subtraction
+currently removes nothing: page-level contamination is zero by construction,
+not by luck. Strata are type family, scan provenance, and page kind restricted
+to ordinary body pages --- front matter, tables of contents and woodcut pages
+are layout problems, not recognition problems. The draw is seeded per stratum,
+target 20 pages, which at 20 to 40 minutes a dense page is roughly ten hours of
+annotation and is the binding constraint on this report. There is one
+annotator; three pages are re-annotated blind after at least a week, and the
+error rate between the two passes is the gold set's noise floor. \textbf{No
+system difference smaller than that floor is claimed.} The transcription
+convention is fixed in \file{data/gold/GUIDELINES.md}, committed before
+annotation begins.
+
+\textbf{Metrics.} Character and word error rate, defined in code rather than
+prose: whitespace counts as a character, runs of whitespace collapse to one
+space before comparison, and aggregation is character-weighted across pages.
+Every figure is reported twice, raw and folded. The fold --- NFC,
+long~\qtr{ſ} to \emph{s}, case folding, \emph{u}/\emph{v} and \emph{i}/\emph{j}
+collapsed --- is declared once, applied identically to hypothesis and
+reference, and is deliberately narrower than the matcher's own normaliser,
+because anything it removed beyond a transcription convention would hide a real
+recognition error. Uncertainty is the percentile bootstrap over pages, 10{,}000
+resamples, 95\%~\cite{efron1994bootstrap}. Pages and not characters: a badly
+inked or badly segmented page fails as a whole, so resampling characters would
+report an interval narrower than the evidence supports.
+
+\textbf{Baselines.} E1 will run the fine-tune against stock CATMuS-Print, a
+chosen published early-modern model, and Transkribus, with segmentation held
+constant across the first three. It cannot be held constant for Transkribus,
+which segments independently, so that comparison mixes recognition with layout
+and is reported as confounded.
+
+\textbf{Two pre-registrations.} E5's gate was written on 2026-09-15, before the
+matcher was scored, and is quoted verbatim in
+\file{docs/pre-registration/2026-09-15-e5-alignment-gate.md}. E2's design ---
+the frame, the sample and its seed, the treatment, and the fixed list of
+figures that would be reported --- was registered on 2026-09-22, before its
+run. E2 is the one experiment here that could be re-run on demand, which is
+exactly why its choices are dated earlier than its numbers.
+
+\textbf{What the protocol cannot do.} Scoring the correction pass against
+correction off as a change in error rate needs a reference transcription. The
+gold set does not exist, so E2 reports what the accept rule did and makes no
+claim that the edits it kept are improvements. That limit was registered in
+advance, not discovered afterwards.

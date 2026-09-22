@@ -1,79 +1,46 @@
-% Status: drafted 2026-09-22, once refs.bib existed. Every DOI or stable URL in
+% Status: drafted 2026-09-22, cut 2026-09-22. Every DOI or stable URL in
 % refs.bib was fetched and checked before it was written there; nothing here is
-% cited from memory. The novelty search is recorded in
-% docs/notes/2026-09-22-novelty-search.md rather than asserted.
+% cited from memory.
 \section{Related work}
 \label{sec:related}
 
-\subsection{Early-modern print recognition and CATMuS}
+\textbf{CATMuS and the engine.} CATMuS is a shared transcription standard
+before it is a model: its medieval release fixed the annotation guidelines and
+the cross-century protocol that make one fine-tune comparable to another at
+all~\cite{clerice2024catmusmedieval}, and CATMuS-Print carries the approach
+into printed material~\cite{gabay2024catmusprint}. CATMuS-Print~[Large] is the
+checkpoint this work fine-tunes from~\cite{gabay2024catmusprintlarge}.
+Recognition runs on kraken~7.0.2; the engine paper describes
+version~5~\cite{kiessling2025kraken} and the Zenodo record pins
+3.0b20~\cite{kiessling2021krakensoftware}, so 7.0.2 is identified by number.
+kraken ships no reference model for early-modern French print, which is why
+E1's comparator must be a chosen published model rather than a default.
+Transkribus supplied the annotation environment~\cite{kahle2017transkribus,
+muehlberger2019transkribus}; its models are opaque and it segments
+independently, so it enters this evaluation as a confounded baseline.
 
-CATMuS is a shared transcription standard before it is a model. Its medieval
-release established the annotation guidelines and the cross-century evaluation
-protocol that make one fine-tune comparable to another at
-all~\cite{clerice2024catmusmedieval}. CATMuS-Print carries the same approach
-into printed material, aiming at a single generic model across languages and
-centuries rather than one model per
-period~\cite{gabay2024catmusprint}. CATMuS-Print~[Large] is the checkpoint
-this work fine-tunes from~\cite{gabay2024catmusprintlarge}.
-
-The closest published relative is CATMuS Gothic Print, which adapts a CATMuS
-model to sixteenth-century French Gothic-type imprints from the SETAF
-corpus~\cite{solfrini2024catmusgothic}. It differs from this work in three
-ways: it is fine-tuned from CATMuS \emph{Medieval} rather than from
-CATMuS-Print, its material is religious and polemical rather than romance, and
-its record publishes no error rate.
-
-\subsection{kraken as the engine}
-
-Recognition runs on kraken, version~7.0.2. The engine paper describes
-version~5 \cite{kiessling2025kraken} and the Zenodo software record pins
-3.0b20 \cite{kiessling2021krakensoftware}; 7.0.2 has no citable record of its
-own, so it is identified by number. kraken ships segmentation and
-recognition, and no reference model for early-modern French print --- which is
-why E1's comparator must be a chosen published model, not a default.
-
-\subsection{Transkribus as platform and as baseline}
-
-Transkribus supplied the annotation environment for the training
-data~\cite{kahle2017transkribus} and reports its adoption across
-humanities projects~\cite{muehlberger2019transkribus}. Its models are
-opaque and it segments independently, so it enters this evaluation as a
-confounded baseline: a difference against it mixes recognition with
-segmentation, and section~\ref{sec:limitations} says so.
-
-\subsection{LLM post-correction, and its characteristic failure}
-
-The literature on generative post-correction of OCR converges on one warning.
-Kanerva et al.\ title it directly --- there are no free lunches: an LLM
-corrector can degrade already-good OCR rather than improve
+\textbf{LLM post-correction, and its characteristic failure.} The literature
+converges on one warning. Kanerva et al.\ title it directly --- there are no
+free lunches: an LLM corrector can degrade already-good OCR rather than improve
 it~\cite{kanerva2025nofreelunches}. Boros et al.\ find the same across
 prompting regimes on historical transcripts~\cite{boros2024postcorrection}, and
 the HIPE-OCRepair competition reports over-correction on low-noise inputs as
 its consistent problem, adding that character-level metrics alone do not
 capture it~\cite{ehrmann2026hipeocrepair}. A modular ByT5 stage behind kraken
-reports a CER reduction on fifteenth-century incunabula~\cite{momtaz2025modular};
-that record was read at its abstract only, its publisher refusing the full
-text. Thomas et al.\ reach the opposite design point, applying LLMs to
-historical newspapers~\cite{thomas2024leveraging}.
+reports a CER reduction on fifteenth-century
+incunabula~\cite{momtaz2025modular}, read at its abstract only; Thomas et al.\
+reach the opposite design point on historical
+newspapers~\cite{thomas2024leveraging}. A model asked to fix a misread \qtr{ſ}
+will, given the opportunity, also modernise the spelling around it. The marker
+anchor removes the opportunity.
 
-A model asked to fix a misread \qtr{ſ} on sixteenth-century French will, given
-the opportunity, also modernise the spelling around it. The marker anchor
-removes the opportunity: everything outside the markers must return byte
-identical or the whole line reverts.
-
-\subsection{The gap}
-
-To our knowledge no character error rate has been published for a CATMuS-Print
-fine-tune on a sixteenth-century French romance corpus. The nearest published
-work is CATMuS Gothic Print, which is a different base model on different
-material and reports no error rate~\cite{solfrini2024catmusgothic}, and
-Tiger~\cite{tiger2026overfit}, which evaluates HTR fine-tuning on French of the
-seventeenth and eighteenth centuries.
-
-The claim is held to \emph{to our knowledge} and no further. Negative results
-from a literature search cannot rule out an unindexed thesis, a project
-deliverable or a non-anglophone venue. The thirteen queries behind it are
-recorded in \file{docs/notes/2026-09-22-novelty-search.md}.
-
-Confidence intervals throughout follow the percentile
+\textbf{The gap.} To our knowledge no character error rate has been published
+for a CATMuS-Print fine-tune on a sixteenth-century French romance corpus. The
+nearest published work is CATMuS Gothic Print, a different base model on
+religious and polemical material, reporting no error
+rate~\cite{solfrini2024catmusgothic}, and Tiger~\cite{tiger2026overfit}, which
+evaluates HTR fine-tuning on French of the seventeenth and eighteenth
+centuries. The claim is held to \emph{to our knowledge} and no further: a
+literature search cannot rule out an unindexed thesis or a non-anglophone
+venue. Confidence intervals throughout follow the percentile
 bootstrap~\cite{efron1994bootstrap}.
