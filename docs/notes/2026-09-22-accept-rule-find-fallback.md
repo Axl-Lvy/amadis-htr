@@ -110,13 +110,21 @@ pipeline as it stood, the figures here are that measurement, and they change
 only when E2 is rerun, which is a new pre-registered entry rather than a silent
 re-measure.
 
-The same logic exists a second time, in the n8n `amadis-ocr` workflow's "Prep
+The same logic existed a second time, in the n8n `amadis-ocr` workflow's "Prep
 correction" and "Apply corrections" nodes, written as `text.indexOf(w.word)`.
-That copy is **not** fixed, and it is the path the web application triggers.
+That copy is the path the web application triggers, and it was fixed the same
+way later on 2026-09-22. It had to be changed in n8n itself: the workflow files
+in `home-lab` are exported from the running instance and never pushed back to
+it, so editing them in git would have changed nothing live. The mirror then
+carried the change into git on save.
+
+That fix was checked against the published workflow rather than against the
+report of it. Each node's code grew by exactly the 40 characters the three
+edits add, and the diff is those edits and nothing else, with no node or
+connection otherwise touched.
+
 E2 ran against the Python copy, which `eval/run_correction.py` loads directly,
-so the measurement describes that one. The workflow files in `home-lab` are
-exported from the running n8n instance and never pushed back to it, so fixing
-that copy means changing it in n8n itself.
+so the measurement describes that one.
 
 ## What this does to the report
 
