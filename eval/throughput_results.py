@@ -10,6 +10,7 @@ from amadis_htr.throughput import (
     read_structures,
     summarise_structure,
     summarise_throughput,
+    write_runs,
     write_structure,
     write_throughput,
 )
@@ -20,10 +21,12 @@ RESULTS = REPO / "eval/results"
 
 
 def main() -> None:
-    throughput = summarise_throughput(read_runs(RUNS))
+    runs = read_runs(RUNS)
+    throughput = summarise_throughput(runs)
     structure = summarise_structure(read_structures(RUNS))
     write_throughput(throughput, RESULTS / "throughput.csv")
     write_structure(structure, RESULTS / "structure.csv")
+    write_runs(runs, RESULTS / "throughput-by-book.csv")
 
     whole = next(r for r in throughput if r.cohort == "all")
     print(

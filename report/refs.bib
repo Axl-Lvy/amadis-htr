@@ -1,23 +1,223 @@
-% The related-work section cites these. Entries are added as they are read,
-% never ahead of reading them.
+% Every entry's DOI or stable URL was fetched and checked on 2026-09-22 before
+% it was written here. Nothing is cited from memory. Where a record could not be
+% read directly, the note says how it was verified instead.
 
-@inproceedings{kiessling2019kraken,
-  author    = {Kiessling, Benjamin},
-  title     = {Kraken: a Universal Text Recognizer for the Humanities},
-  booktitle = {Digital Humanities Conference},
-  year      = {2019},
+% --- Early-modern print recognition and the CATMuS family ---------------------
+
+@inproceedings{gabay2024catmusprint,
+  author       = {Gabay, Simon and Cl{\'e}rice, Thibault and Jacsont, Pauline and
+                  Leblanc, Elina and Jeannot-Tirole, Marie and Solfrini, Sonia and
+                  Dolto, Sophie and Goy, Floriane and Janes, Juliette and
+                  Sagot, Beno{\^i}t and Bawden, Rachel and Chagu{\'e}, Alix},
+  title        = {Reconnaissance des {\'e}critures dans les imprim{\'e}s:
+                  {CATMuS} print, un mod{\`e}le g{\'e}n{\'e}rique, multilingue
+                  et diachronique},
+  booktitle    = {Humanistica 2024},
+  address      = {Mekn{\`e}s, Morocco},
+  organization = {Association francophone des humanit{\'e}s num{\'e}riques},
+  month        = may,
+  year         = {2024},
+  url          = {https://hal.science/hal-04557457},
+  note         = {HAL deposit; no DOI minted}
 }
 
-@misc{catmus2024,
-  author       = {Clérice, Thibault and Pinche, Ariane and Chagué, Alix and
-                  Camps, Jean-Baptiste and Vlachou-Efstathiou, Malamatenia and
-                  Gille Levenson, Matthias and Brisville-Fertin, Olivier and
-                  Boschetti, Federico and Fischer, Franz and Gervers, Michael and
-                  Boutreux, Agnès and Manton, Avery and Gabay, Simon and
-                  O'Connor, Patricia and Haverals, Wouter and Kestemont, Mike and
-                  Vandyck, Caroline and Kiessling, Benjamin},
-  title        = {{CATMuS-Print} [Large]},
-  year         = {2024},
-  publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.10592716},
+@misc{gabay2024catmusprintlarge,
+  author    = {Gabay, Simon and Cl{\'e}rice, Thibault},
+  title     = {{CATMuS-Print} [Large]},
+  year      = {2024},
+  month     = jan,
+  publisher = {Zenodo},
+  version   = {2024-01-30},
+  doi       = {10.5281/zenodo.10592716},
+  url       = {https://doi.org/10.5281/zenodo.10592716},
+  note      = {kraken ATR model for diachronic French prints}
+}
+
+@inproceedings{clerice2024catmusmedieval,
+  author    = {Cl{\'e}rice, Thibault and Pinche, Ariane and
+               Vlachou-Efstathiou, Malamatenia and Chagu{\'e}, Alix and
+               Camps, Jean-Baptiste and Gille Levenson, Matthias and
+               Kiessling, Benjamin},
+  title     = {{CATMuS} Medieval: A Multilingual Large-Scale Cross-Century
+               Dataset in Latin Script for Handwritten Text Recognition and Beyond},
+  booktitle = {Document Analysis and Recognition -- {ICDAR} 2024},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer Nature Switzerland},
+  year      = {2024},
+  pages     = {174--194},
+  doi       = {10.1007/978-3-031-70543-4_11}
+}
+
+@misc{solfrini2024catmusgothic,
+  author    = {Solfrini, Sonia and Gabay, Simon},
+  title     = {{CATMuS} Gothic Print},
+  year      = {2024},
+  month     = jan,
+  publisher = {Zenodo},
+  version   = {1.0.0},
+  doi       = {10.5281/zenodo.10599911},
+  url       = {https://doi.org/10.5281/zenodo.10599911},
+  note      = {Fine-tuned from CATMuS Medieval on 16th-century French Gothic-type
+               prints; the record publishes no error rate}
+}
+
+@inproceedings{tiger2026overfit,
+  author    = {Tiger, Marine},
+  title     = {To Overfit or Not to Overfit? An Evaluation of {HTR} Workflow on
+               17th--18th Century {F}rench Corpus},
+  booktitle = {Proceedings of the Fifteenth Language Resources and Evaluation
+               Conference},
+  address   = {Palma de Mallorca, Spain},
+  publisher = {ELRA Language Resource Association},
+  month     = may,
+  year      = {2026},
+  pages     = {1009--1016},
+  doi       = {10.63317/23hc8mveght2}
+}
+
+% --- The engine ---------------------------------------------------------------
+
+@inproceedings{kiessling2025kraken,
+  author    = {Kiessling, Benjamin},
+  title     = {Version 5 of the Kraken {ATR} Engine for the Humanities},
+  booktitle = {Document Analysis and Recognition -- {ICDAR} 2025},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer Nature Switzerland},
+  month     = sep,
+  year      = {2025},
+  pages     = {443--458},
+  doi       = {10.1007/978-3-032-04624-6_26}
+}
+
+@software{kiessling2021krakensoftware,
+  author    = {Kiessling, Benjamin},
+  title     = {Kraken {OCR} engine},
+  year      = {2021},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.4498925},
+  url       = {https://doi.org/10.5281/zenodo.4498925},
+  note      = {This DOI pins version 3.0b20. No Zenodo record exists for 7.0.2,
+               the version this work runs; see \url{https://kraken.re}}
+}
+
+% --- Transkribus --------------------------------------------------------------
+
+@inproceedings{kahle2017transkribus,
+  author    = {Kahle, Philip and Colutto, Sebastian and Hackl, Gunter and
+               M{\"u}hlberger, Gunter},
+  title     = {Transkribus -- A Service Platform for Transcription, Recognition
+               and Retrieval of Historical Documents},
+  booktitle = {2017 14th {IAPR} International Conference on Document Analysis
+               and Recognition ({ICDAR})},
+  publisher = {IEEE},
+  month     = nov,
+  year      = {2017},
+  pages     = {19--24},
+  doi       = {10.1109/ICDAR.2017.307}
+}
+
+@article{muehlberger2019transkribus,
+  author  = {Muehlberger, Guenter and Seaward, Louise and Terras, Melissa and
+             Ares Oliveira, Sofia and Bosch, Vicente and Bryan, Maximilian and
+             Colutto, Sebastian and D{\'e}jean, Herv{\'e} and Diem, Markus and
+             Fiel, Stefan},
+  title   = {Transforming scholarship in the archives through handwritten text
+             recognition: {Transkribus} as a case study},
+  journal = {Journal of Documentation},
+  volume  = {75},
+  number  = {5},
+  pages   = {954--976},
+  year    = {2019},
+  month   = sep,
+  doi     = {10.1108/JD-07-2018-0114}
+}
+
+% --- LLM and neural post-correction of OCR ------------------------------------
+
+@inproceedings{kanerva2025nofreelunches,
+  author    = {Kanerva, Jenna and Ledins, Cassandra and K{\"a}pyaho, Siiri and
+               Ginter, Filip},
+  title     = {{OCR} Error Post-Correction with {LLM}s in Historical Documents:
+               No Free Lunches},
+  booktitle = {Proceedings of the Third Workshop on Resources and Representations
+               for Under-Resourced Languages and Domains ({RESOURCEFUL}-2025)},
+  address   = {Tallinn, Estonia},
+  publisher = {University of Tartu Library},
+  month     = mar,
+  year      = {2025},
+  pages     = {38--47},
+  url       = {https://aclanthology.org/2025.resourceful-1.8/},
+  note      = {ACL Anthology minted no DOI for this volume}
+}
+
+@inproceedings{boros2024postcorrection,
+  author    = {Boros, Emanuela and Ehrmann, Maud and Romanello, Matteo and
+               Najem-Meyer, Sven and Kaplan, Fr{\'e}d{\'e}ric},
+  title     = {Post-Correction of Historical Text Transcripts with Large Language
+               Models: An Exploratory Study},
+  booktitle = {Proceedings of the 8th Joint {SIGHUM} Workshop on Computational
+               Linguistics for Cultural Heritage, Social Sciences, Humanities
+               and Literature},
+  address   = {St. Julians, Malta},
+  publisher = {Association for Computational Linguistics},
+  month     = mar,
+  year      = {2024},
+  pages     = {133--159},
+  doi       = {10.18653/v1/2024.latechclfl-1.14}
+}
+
+@inproceedings{thomas2024leveraging,
+  author    = {Thomas, Alan and Gaizauskas, Robert and Lu, Haiping},
+  title     = {Leveraging {LLM}s for Post-{OCR} Correction of Historical Newspapers},
+  booktitle = {Proceedings of the Third Workshop on Language Technologies for
+               Historical and Ancient Languages ({LT4HALA})},
+  address   = {Torino, Italia},
+  publisher = {ELRA and ICCL},
+  month     = may,
+  year      = {2024},
+  pages     = {116--121},
+  url       = {https://aclanthology.org/2024.lt4hala-1.14/},
+  note      = {ACL Anthology minted no DOI for this volume}
+}
+
+@inproceedings{ehrmann2026hipeocrepair,
+  author    = {Ehrmann, Maud and Boros, Emanuela and Opitz, Juri and
+               Michail, Andrianos and Wagner, Florian and Clematide, Simon},
+  title     = {{ICDAR} 2026 {HIPE-OCRepair} Competition on {LLM}-Assisted
+               {OCR} Post-correction for Historical Documents},
+  booktitle = {Document Analysis and Recognition -- {ICDAR} 2026},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer Nature Switzerland},
+  month     = aug,
+  year      = {2026},
+  pages     = {405--422},
+  doi       = {10.1007/978-3-032-36042-7_24}
+}
+
+@article{momtaz2025modular,
+  author  = {Momtaz, Yahya and Laccetti, Lorenza and Russo, Guido},
+  title   = {Modular Pipeline for Text Recognition in Early Printed Books Using
+             {Kraken} and {ByT5}},
+  journal = {Electronics},
+  volume  = {14},
+  number  = {15},
+  pages   = {3083},
+  year    = {2025},
+  month   = aug,
+  doi     = {10.3390/electronics14153083},
+  note    = {Publisher returns 403; metadata from Crossref and the abstract from
+             the Semantic Scholar API, not from the full text}
+}
+
+% --- Method -------------------------------------------------------------------
+
+@book{efron1994bootstrap,
+  author    = {Efron, Bradley and Tibshirani, Robert J.},
+  title     = {An Introduction to the Bootstrap},
+  publisher = {Chapman and Hall/CRC},
+  address   = {New York},
+  year      = {1994},
+  doi       = {10.1201/9780429246593},
+  note      = {Conventionally cited as 1993; the DOI is attached to the CRC
+               printing, which Crossref dates 1994}
 }

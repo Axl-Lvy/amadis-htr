@@ -1,13 +1,16 @@
 \documentclass[aspectratio=169]{beamer}
 
 % The deck reads the report's preamble and its generated macros, so one
-% evaluation rerun updates both and neither can drift from the other. It has no
-% bibliography of its own.
+% evaluation rerun updates both and neither can drift from the other. Nothing
+% here is a number that is not in the report.
 \input{../report/preamble.tex}
 \input{../report/generated/macros.tex}
 
 \usetheme{default}
+\usecolortheme{seagull}
 \setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}[default][left]
+\setbeamerfont{frametitle}{series=\bfseries}
 
 \title{Fine-tuning and post-correcting an HTR pipeline for
   16th-century French print}
@@ -18,13 +21,100 @@
 
 \frame{\titlepage}
 
-% The deck leads with the two findings a jury will not have expected: the
-% out-of-domain result and the marker-anchor rejection rate.
-
-\begin{frame}{Out of domain}
+\begin{frame}{The problem}
+  \begin{itemize}
+    \item \ocrBooks{} books, \ocrPages{} pages of 16th-century French romance
+    \item One year of pipeline, one recognition figure: a validation CER on a
+      10\% split of one volume
+    \item No figure for \emph{Amadis de Gaule}, no WER, no baseline, no
+      evaluation of either LLM pass
+  \end{itemize}
+  \vfill
+  This is the measurement.
 \end{frame}
 
-\begin{frame}{What the accept rule rejects}
+\begin{frame}{What got measured, and what did not}
+  \begin{itemize}
+    \item \textbf{E2} correction --- the accept rule, on \corrOffered{} lines
+      from a seeded \corrPages{}-page sample
+    \item \textbf{E5} localisation --- \locPiecesWorkbook{} pieces under the
+      pre-registered gate, plus \locPiecesCatalogue{} imported later and
+      reported beside them, never pooled
+    \item \textbf{E6} throughput and structure --- \ocrPages{} pages
+    \item \textbf{E1, E3, E4} --- blocked on a 20-page annotation pass
+  \end{itemize}
+  \vfill
+  Of the five experiments that test a claim, three are unmeasured.
+\end{frame}
+
+\begin{frame}{What the accept rule refused}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \begin{itemize}
+        \item \corrOffered{} lines offered
+        \item accepted \corrAcceptRate{} frame-weighted\\
+          {\footnotesize 95\% CI \corrAcceptLow{}--\corrAcceptHigh{}}
+        \item \textbf{\corrRewritesCaught{} refused} for changing text
+          outside the markers, \corrRewritesSubstantial{} of them by more
+          than two characters
+        \item \corrProtocolFailures{} protocol failures, kept apart
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=\linewidth]{../report/generated/figures/e2-reasons.pdf}
+    \end{column}
+  \end{columns}
+  \vfill
+  {\footnotesize The branch fires on any byte difference outside the markers,
+  so it bounds fluent rewriting from above rather than counting it.}
+\end{frame}
+
+\begin{frame}{Localisation: the right book, the wrong chapter}
+  \begin{columns}[T]
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item Livre \locLivreAccuracyWorkbook{}
+        \item Chapter \locChapterAccuracyWorkbook{}
+        \item Gate asked for above 90\%
+      \end{itemize}
+      \vspace{1em}
+      {\footnotesize Search is not the problem. Span selection is.}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \includegraphics[width=\linewidth]{../report/generated/figures/e5-sweep.pdf}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Throughput}
+  \begin{center}
+    \includegraphics[width=0.82\linewidth]{../report/generated/figures/e6-throughput.pdf}
+  \end{center}
+  \ocrPages{} pages, \ocrPagesFailed{} failures, \ocrHours{} hours,
+  \ocrSecondsPerPage{}~s per page.
+\end{frame}
+
+\begin{frame}{Limitations}
+  \begin{itemize}
+    \item \textbf{C1 is unevaluated.} No gold set, so no recognition figure.
+    \item The structural rates are hand-checked, and named for it.
+    \item Five of six thresholds have never been swept.
+    \item E2 measures refusal, not improvement.
+    \item \textbf{The accept rule has a hole}, and
+      \corrFindFallbackShare{} of E2's lines sat on it --- a span-locating
+      fallback that can mark one word twice, which the rule cannot detect. C2
+      rests on under a third of its own evidence.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What a successor does first}
+  \begin{enumerate}
+    \item Annotate the 20-page gold set. Ten hours, not a research problem.
+    \item Add a second annotator, for a real inter-annotator floor.
+    \item Fix the span-locating fallback in the pipeline.
+  \end{enumerate}
+  \vfill
+  Everything blocked in this report is blocked behind the first line.
 \end{frame}
 
 \end{document}

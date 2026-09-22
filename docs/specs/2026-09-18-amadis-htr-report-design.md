@@ -277,6 +277,24 @@ comes out.
 
 ### 6.2 E2, low-confidence correction
 
+> **Revised 2026-09-22, after E2 ran.** What was actually measured is narrower
+> than this section plans, and the narrowing is recorded in
+> `docs/pre-registration/2026-09-22-e2-correction-design.md`, written before the
+> run. In short: everything below that needs a gold transcription was dropped,
+> because there is no gold set. That removes span-level precision, recall and
+> F1, and the net CER delta. What survives is the marker-anchor rejection rate
+> and its breakdown by which branch of the rule fired, over a seeded sample of
+> 400 pages from the frozen 24-book recognition output. The two-model ablation
+> was not run either: only `gpt-oss:20b`, the pipeline's own default, on the
+> RTX 4080. `val48` is not used, because it is the validation split that chose
+> the shipped checkpoint and this report never scores on it.
+>
+> Measuring the rule also found a hole in it, which this section did not
+> anticipate: `suspect_spans` falls back to `text.find` when its offset check
+> fails, and that branch can mark one word twice and produce a line the accept
+> rule then compares against its own corruption. See section 7 of the report.
+
+
 **The grid.** Pipeline B accepts `--model` and `--llm` as flags, so four cells come free
 on any page set: `{stock, ft} × {correction off, correction on}`.
 

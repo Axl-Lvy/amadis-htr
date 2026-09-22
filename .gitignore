@@ -33,3 +33,7 @@ slides/*-blx.bib
 
 # git worktrees created for parallel work
 .worktrees/
+
+# Inspection renders of the generated figures. The PDF is the artefact; a PNG
+# beside it is something someone made to look at and forgot to delete.
+report/generated/figures/*.png

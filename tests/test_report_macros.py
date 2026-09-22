@@ -69,6 +69,8 @@ def test_rounding_lives_in_one_place():
     assert format_value("0.0049812", "pct2") == "0.50\\%"
     assert format_value("0.9504", "num3") == "0.950"
     assert format_value("380", "int") == "380"
+    # Grouped above a thousand: 14111 on the page is a string of digits.
+    assert format_value("14111", "int") == "14,111"
     assert format_value("0.5", "pct1") == "50.0\\%"
 
 

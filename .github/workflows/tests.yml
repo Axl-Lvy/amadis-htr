@@ -58,8 +58,12 @@ jobs:
           set -euo pipefail
           sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
           text=$(pdftotext report/main.pdf -)
+          # A here-string, not a pipe: `grep -q` exits on the first match, which
+          # sends SIGPIPE to a still-writing `printf`, and `pipefail` then reads
+          # that 141 as the character being absent. It only shows up once the
+          # document is long enough for the match to land before printf is done.
           for char in $'ſ' $'⟦' $'⟧'; do
-            printf '%s' "$text" | grep -q "$char" \
+            grep -q "$char" <<<"$text" \
               || { echo "missing $char in report/main.pdf"; exit 1; }
           done
           echo "long s, U+27E6 and U+27E7 all present"

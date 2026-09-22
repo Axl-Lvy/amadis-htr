@@ -100,11 +100,23 @@
 }
 \makeatother
 
-% A file name in this repository. \texttt and not url's \path: \path also
-% breaks a line after a hyphen, which opens a gap inside ground-truth.csv and
-% reads as though the name were being hyphenated. The names cited are short
-% enough to set unbroken.
-\newcommand{\file}[1]{\texttt{#1}}
+% A file name in this repository.
+%
+% \detokenize because a path carries underscores, and an underscore reaching
+% \texttt at its usual catcode is a subscript: src/amadis_htr/ fails the build
+% with "Missing $ inserted". Detokenising sets every character to catcode 12,
+% so the path prints as written.
+%
+% url's \path was tried twice and reverted both times. Narrowing \UrlBreaks
+% does not stop TeX breaking after an explicit hyphen, and widening it to every
+% letter makes url insert a penalty at each one, which renders the path
+% letter-spaced: "d a t a / l o c a l i s a t i o n". A path that runs long is
+% fixed by rewording the sentence around it.
+\newcommand{\file}[1]{\texttt{\detokenize{#1}}}
+
+% A long path or DOI in a narrow measure would otherwise reach the margin.
+% Stretching the line a little is the cheaper of the two.
+\setlength{\emergencystretch}{1.5em}
 
 % 16th-century quotation. Set in the source language and left unnormalised,
 % because the orthography is the object of study.

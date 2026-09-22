@@ -1,0 +1,4 @@
+cohort,pages,offered,spans_offered,accepted,rejected,rewrites_caught,protocol_failures,accepted_unchanged,changed_spans,changed_chars,on_find_fallback,rewrite_edits,rewrite_segments,rewrites_substantial
+A,200,450,495,414,36,16,20,86,350,711,325,29,16,4
+B,200,500,548,478,22,10,12,148,353,691,324,51,10,2
+all,400,950,1043,892,58,26,32,234,703,1402,649,80,26,6
