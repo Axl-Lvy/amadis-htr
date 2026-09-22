@@ -41,9 +41,10 @@ The fix belongs in the pipeline: search forward from the previous span's end,
 and refuse to mark a line whose spans overlap.
 
 \textbf{And E2 measures refusal, not improvement.} Whether the edits it
-accepted made the text better needs the gold set. Its sample is also
-\corrPages{} of the \corrReachPagesWithSpan{} pages carrying a suspect span: a
-sample of the corpus, not the corpus.
+accepted made the text better needs a reference for the pages it sampled, and
+the gold set covers none of them. Its sample is also \corrPages{} of the
+\corrReachPagesWithSpan{} pages carrying a suspect span: a sample of the
+corpus, not the corpus.
 
 \subsection{Localisation, and structure}
 
@@ -68,21 +69,24 @@ bounding it puts unaided recall as low as 77.0\% against the
 
 \subsection{What is not here}
 
-\textbf{Three of five experiments are unmeasured.} E1, E3 and E4 need an
-annotated gold set: twenty pages, roughly ten hours of one person's work, not
-done. The consequence is specific and large --- \textbf{claim~C1 is
-unevaluated}. This report shows that the pipeline runs, how fast, what its
-accept rule refuses and how well it locates a passage. It does not show that
-the fine-tune reads better than the models it replaced. Nor is the confusion
-table the project has asserted for a year --- long~\qtr{ſ} against \qtr{f},
-\qtr{u} against \qtr{n}, \qtr{c} against \qtr{e} --- quantifiable without a
-reference transcription.
+\textbf{Three of five experiments are unmeasured.} E1, E3 and E4 are no
+longer blocked --- the gold set exists, \goldPages{} pages --- but they were not
+run before this report closed. The consequence is unchanged and large ---
+\textbf{claim~C1 is unevaluated}. This report shows that the pipeline runs, how
+fast, what its accept rule refuses and how well it locates a passage. It does
+not show that the fine-tune reads better than the models it replaced. The
+confusion table the project has asserted for a year --- long~\qtr{ſ} against
+\qtr{f}, \qtr{u} against \qtr{n}, \qtr{c} against \qtr{e} --- is now
+computable and still uncomputed.
 
-\textbf{The gold set will be small and single-annotator.} A difference smaller
-than one person's disagreement with themselves is not a finding, and a second
-annotator is the first thing a successor should add. Below 30 instances in a
-cell, E3 and E4 degrade to a descriptive breakdown, and some cells will fall
-below it.
+\textbf{The gold set is post-edited and single-annotator.} Its pages were
+corrected on top of a model's own output rather than transcribed blind, so it
+leans towards the fine-tune, which is the direction that would flatter C1; and
+no page was done twice, so there is no floor below which a difference is
+refused. Section~\ref{sec:protocol} states both. A second annotator and a blind
+pass are the first two things a successor should add, in that order. Below 30
+instances in a cell, E3 and E4 degrade to a descriptive breakdown, and some
+cells will fall below it.
 
 \textbf{Validation is not test.} The \trainPagesVal{} held-out pages selected
 the shipped checkpoint, and they were split page-wise from a single volume, so

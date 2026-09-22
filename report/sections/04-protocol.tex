@@ -1,5 +1,6 @@
 % Status: drafted 2026-09-22, cut twice the same day to the ten-page budget.
-% The gold set's realised counts need the annotation pass.
+% The gold set is the corrected Transkribus pages, not the sampled set this
+% section first specified. Its cost is stated here, not deferred to section 6.
 \section{Evaluation protocol}
 \label{sec:protocol}
 
@@ -7,20 +8,31 @@ E1, E3 and E4 have not been run. What follows is the protocol they will run
 under, fixed before the numbers exist; E2's and E5's, which have run, are
 marked where they differ.
 
-\textbf{The gold set.} The frame is every page of all \ocrBooks{} books of
-\emph{Amadis de Gaule} minus any page in the training split. That list holds
-\trainPages{} pages, all of them \emph{Trésor}~T.1, so the subtraction
-currently removes nothing: page-level contamination is zero by construction,
-not by luck. Strata are type family, scan provenance, and page kind restricted
-to ordinary body pages --- front matter, tables of contents and woodcut pages
-are layout problems, not recognition problems. The draw is seeded per stratum,
-target 20 pages, which at 20 to 40 minutes a dense page is roughly ten hours of
-annotation and is the binding constraint on this report. There is one
-annotator; three pages are re-annotated blind after at least a week, and the
-error rate between the two passes is the gold set's noise floor. \textbf{No
-system difference smaller than that floor is claimed.} The transcription
-convention is fixed in \file{data/gold/GUIDELINES.md}, committed before
-annotation begins.
+\textbf{The gold set.} \goldPages{} pages carrying a corrected transcription:
+\goldPagesTresor{} of \emph{Trésor}~T.1 and \goldPagesAmadis{} of \emph{Amadis
+de Gaule} livre~13, \goldLines{} lines and \goldChars{} characters. They were
+not annotated for this report; they were corrected in Transkribus in the course
+of the edition. \file{eval/build\_gold\_set.py} selects them from
+\goldCandidates{} candidates: a page qualifies only if a human marked it
+finished and it is absent from the training split. That removes
+\goldRefusedTrained{} pages, \goldRefusedUncorrected{} carry no correction at
+all, and \goldRefusedExcluded{} is front matter. \file{data/gold/MANIFEST.csv}
+gives a row per candidate with its reason, so the set is checkable rather than
+asserted. The convention is \file{data/gold/GUIDELINES.md}, committed first.
+
+This replaces the twenty pages drawn seeded per stratum and annotated blind
+that this section first specified: ten hours of annotation was the binding
+constraint, and \goldPages{} already-corrected pages cost none of it. Four
+things were traded for that. The reference is \emph{post-edited, not blind} ---
+each page was corrected over a model's own output, which the manifest records
+per page --- so an error that reads plausibly survives, and the set leans
+towards the fine-tune, the system E1 exists to test. Its segmentation is
+\emph{Transkribus's own}, which makes that comparison worse than the confounded
+one below. Its frame is \emph{one work and one copy}, so the family and
+provenance strata collapse to a single cell. And \emph{no page was transcribed
+twice}, so there is no noise floor and \textbf{no difference is yet small
+enough to refuse.} Three pages transcribed blind under the same convention
+would settle the floor and size the lean at once.
 
 \textbf{Metrics.} Character and word error rate, defined in code rather than
 prose: whitespace counts as a character, runs of whitespace collapse to one
@@ -50,7 +62,9 @@ run. E2 is the one experiment here that could be re-run on demand, which is
 exactly why its choices are dated earlier than its numbers.
 
 \textbf{What the protocol cannot do.} Scoring the correction pass against
-correction off as a change in error rate needs a reference transcription. The
-gold set does not exist, so E2 reports what the accept rule did and makes no
-claim that the edits it kept are improvements. That limit was registered in
-advance, not discovered afterwards.
+correction off as a change in error rate needs a reference transcription for
+the pages E2 sampled. The gold set does not cover them --- it is \emph{Trésor}
+and one \emph{Amadis} extract, while E2's frame is the \ocrBooks{} books' own
+OCR run --- so E2 reports what the accept rule did and makes no claim that the
+edits it kept are improvements. That limit was registered in advance, not
+discovered afterwards.

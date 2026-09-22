@@ -45,7 +45,7 @@ Their outputs are committed so that everything above reruns without any of it.
 | --- | --- |
 | `src/amadis_htr/` | the scoring code |
 | `tests/` | one test module per source module |
-| `data/gold/` | the annotated *Amadis de Gaule* gold set and its guidelines |
+| `data/gold/` | the gold set: 118 corrected pages, their manifest and the guidelines |
 | `data/localisation/` | the human-assigned reference for passage localisation, and the map between the two piece catalogues |
 | `eval/` | the scripts that derive a committed artefact from a source file held elsewhere |
 | `data/runs/` | every system's frozen output: the OCR run records, the matcher export, and E2's frame and verdicts |

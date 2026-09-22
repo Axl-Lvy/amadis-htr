@@ -3,9 +3,11 @@
 \section{Conclusion and released artefacts}
 \label{sec:conclusion}
 
-\claim{C1}{is unevaluated.} The gold set does not exist, so the fine-tune's
-advantage over the published models remains the untested premise it was at the
-start of this work.
+\claim{C1}{is unevaluated.} The gold set now exists --- \goldPages{}
+corrected pages, section~\ref{sec:protocol} --- but E1 was not run against it,
+so the fine-tune's advantage over the published models remains the untested
+premise it was at the start of this work. What changed is the reason: it is no
+longer missing evidence, only unused evidence, and a leaning one at that.
 
 \claim{C2}{is supported on part of its evidence.} The rule behaves as specified
 on the lines where the span-locating offset path held. On the
@@ -13,7 +15,8 @@ on the lines where the span-locating offset path held. On the
 was comparing against a line the pipeline had already corrupted, so those
 acceptances carry no weight, and the claim rests on under a third of the
 evidence gathered for it. Whether the accepted edits improve the text is a
-further question, and needs C1's gold set.
+further question, and needs a reference for E2's own sampled pages, which
+C1's gold set does not cover.
 
 \claim{C3}{is supported.} Livre accuracy is \locLivreAccuracyWorkbook{} on the
 pre-registered cohort and \locLivreAccuracyCatalogue{} on the second, against a
@@ -43,18 +46,25 @@ This repository holds the scoring code, the frozen run records and every result
 CSV, so each figure reruns from committed inputs with no GPU, no model and no
 network: \file{data/runs/ocr/} for the \ocrBooks{} books' run and calibration
 records, \file{data/runs/correction/} for E2's frame and its frozen verdicts,
-\file{data/runs/matcher/} for the alignment export, and
-\file{data/gold/GUIDELINES.md}, written before annotation. The Hugging Face
+\file{data/runs/matcher/} for the alignment export, and \file{data/gold/} for
+the \goldPages{}-page gold set, its manifest and the convention written before
+annotation. The Hugging Face
 model card for \file{amadis-ft.mlmodel} is now writable, because the shipped
 file is tied to its training checkpoint by weight comparison.
 
-Beyond the illustrative plates in section~\ref{sec:corpus}, no page image and
-no transcribed text is released. Reuse terms differ per holding institution and
-are unsettled for at least one, so what is published is counts, timings,
-offsets and code.
+No page image is released beyond the illustrative plates in
+section~\ref{sec:corpus}: reuse terms differ per holding institution and are
+unsettled for at least one, and \file{data/gold/MANIFEST.csv} records the
+holder per page so that each can be settled separately. The gold
+transcriptions are released, under CC-BY-4.0 with the rest of \file{data/}.
+They are new editorial work rather than a reproduction of the print, which is
+itself long out of copyright.
 
 \subsection{What a successor should do first}
 
-Annotate the gold set. Everything blocked in this report is blocked behind it,
-and it is ten hours of work rather than a research problem. Then fix the
-span-locating fallback, which currently costs C2 two thirds of its evidence.
+Run E1. The gold set is built and nothing else stands in front of it. Carry
+with it the three pages transcribed blind that section~\ref{sec:protocol} asks
+for: an hour of work, and it converts the set's two open weaknesses --- no noise
+floor, and an unmeasured lean towards the fine-tune --- into figures that can be
+reported beside the error rates. Then fix the span-locating fallback, which
+currently costs C2 two thirds of its evidence.

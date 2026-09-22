@@ -99,6 +99,38 @@ as `derived/prep/train.lst`
 `derived/prep/val.lst`
 (`fdb736f4e1eddb172bf4de38fb5f6a58d7f7fc516cd5312fa78a14b0a5d0e4e5`).
 
+## Transkribus exports, 2026-09-22
+
+The gold set is not annotated in this repository. It is exported from
+Transkribus, PAGE XML 2013 schema, uploader e-mail stripped at export, and
+`eval/build_gold_set.py` selects from it. The zips are not committed: they hold
+every page of each document including the uncorrected ones and the 487 the model
+trained on, and re-exporting the same documents reproduces them. They are
+mirrored to `~/amadis-artefacts/transkribus/`.
+
+| export job | Transkribus document | pages | bytes | sha256 |
+|---|---|---|---|---|
+| `31210038` | `10925942` *Trésor des Amadis* T. 1 | 934 | 5,704,175 | `a21e106f36f231a1906318e4b86a3c74a32d0eb31da83bf13d30fabc7a872216` |
+| `31210409` | `10926025` *Trésor des Amadis* T. 2 | 564 | 454,431 | `9bd3e8cefbd004d014cc7c488ada625a3a0fe60f2d1cac20ccaf0eb2f771bc01` |
+| `31210430` | `16583795` *Amadis de Gaule* livre 13, extrait | 4 | 27,388 | `bb81cee34d47ce8263d1e7bae02525107fa98b17f77e9aecda3ebaef1a15ece1` |
+
+T. 2 carries no transcription at all: 564 pages, every one at status `NEW`. It is
+exported and hashed anyway, so that "there is no more corrected text" is a
+recorded measurement rather than a memory.
+
+What the three exports contain, by Transkribus page status:
+
+| | T. 1 | T. 2 | livre 13 |
+|---|---|---|---|
+| corrected, trained on | 487 | — | — |
+| corrected, not trained on | 115 | — | 4 |
+| not corrected | 332 | 564 | — |
+
+`data/gold/MANIFEST.csv` carries one row per page of all three, kept or refused,
+with the reason. 118 are kept: the 119 corrected pages the model never read,
+less the T. 1 title page, which `data/gold/splits/excluded-pages.csv` holds out
+as front matter.
+
 ## Quoted, not copied wholesale
 
 | source | destination | mtime | sha256 of the source | tracked at source |

@@ -530,12 +530,37 @@ CORRECTION_MACROS: tuple[Macro, ...] = (
 )
 
 
+#: The gold set as built, not as planned.
+#:
+#: Every count here is a property of `data/gold/MANIFEST.csv`, which records one
+#: row per candidate page and the reason each refused one is out. `goldRefused*`
+#: reaches the page as well as `goldPages`, because a set defined by subtraction
+#: is only checkable if the subtraction is reported with it.
+GOLD_MACROS: tuple[Macro, ...] = (
+    Macro("goldCandidates", "gold.csv", {"cohort": "all"}, "candidates", "int"),
+    Macro("goldPages", "gold.csv", {"cohort": "all"}, "pages", "int"),
+    Macro("goldLines", "gold.csv", {"cohort": "all"}, "lines", "int"),
+    Macro("goldChars", "gold.csv", {"cohort": "all"}, "chars", "int"),
+    Macro("goldWords", "gold.csv", {"cohort": "all"}, "words", "int"),
+    Macro("goldRefusedTrained", "gold.csv", {"cohort": "all"}, "trained_on", "int"),
+    Macro(
+        "goldRefusedUncorrected", "gold.csv", {"cohort": "all"}, "not_corrected", "int"
+    ),
+    Macro("goldRefusedExcluded", "gold.csv", {"cohort": "all"}, "excluded", "int"),
+    Macro("goldPagesTresor", "gold.csv", {"cohort": "tresor1"}, "pages", "int"),
+    Macro("goldPagesAmadis", "gold.csv", {"cohort": "amadis13"}, "pages", "int"),
+    Macro("goldCharsTresor", "gold.csv", {"cohort": "tresor1"}, "chars", "int"),
+    Macro("goldCharsAmadis", "gold.csv", {"cohort": "amadis13"}, "chars", "int"),
+)
+
+
 #: Every registry with a measured CSV behind it, in the order they reach the
 #: page. `eval/render_macros.py` renders exactly this and the suite asserts the
 #: committed `macros.tex` matches, so a registry added here without rerunning
 #: the pipeline fails the suite rather than going unnoticed.
 REGISTRIES: tuple[tuple[Macro, ...], ...] = (
     CORPUS_MACROS,
+    GOLD_MACROS,
     LOCALISATION_MACROS,
     THROUGHPUT_MACROS,
     CORRECTION_MACROS,
