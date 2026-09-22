@@ -44,6 +44,13 @@ class Summary:
     chapter_scoreable: int
     chapter_correct: int
     chapter_unavailable: int
+    #: The editor catalogued the piece to a Livre and named no chapter, so
+    #: there is no reference to score against. Distinct from
+    #: `chapter_unavailable`, where the reference has a chapter and the
+    #: printed label the matcher landed on could not be decoded. Without this
+    #: column the three do not sum to `total` and the missing piece looks like
+    #: a scorer fault.
+    chapter_unreferenced: int
 
 
 @dataclass(frozen=True)
@@ -134,7 +141,7 @@ def summarise(
     for confidence in CONFIDENCES:
         group = [r for r in references.values() if r.confidence == confidence]
         located = livre_correct = chapter_scoreable = chapter_correct = 0
-        chapter_unavailable = 0
+        chapter_unavailable = chapter_unreferenced = 0
         for ref in group:
             pred = predictions.get(ref.piece)
             if pred is None or pred.livre is None:
@@ -145,6 +152,7 @@ def summarise(
             if pred.livre == ref.livre:
                 livre_correct += 1
             if ref.chapter is None:
+                chapter_unreferenced += 1
                 continue
             if pred.chapter is None:
                 # `decodeChapterLabel` recovers a printed number from 61% of the
@@ -165,6 +173,7 @@ def summarise(
                 chapter_scoreable=chapter_scoreable,
                 chapter_correct=chapter_correct,
                 chapter_unavailable=chapter_unavailable,
+                chapter_unreferenced=chapter_unreferenced,
             )
         )
     return rows
@@ -220,6 +229,7 @@ def write_summary(rows: Iterable[Summary], path: str | Path) -> None:
                 "chapter_scoreable",
                 "chapter_correct",
                 "chapter_unavailable",
+                "chapter_unreferenced",
             ]
         )
         for row in rows:
@@ -232,6 +242,7 @@ def write_summary(rows: Iterable[Summary], path: str | Path) -> None:
                     row.chapter_scoreable,
                     row.chapter_correct,
                     row.chapter_unavailable,
+                    row.chapter_unreferenced,
                 ]
             )
 

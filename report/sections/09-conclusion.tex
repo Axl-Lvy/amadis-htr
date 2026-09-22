@@ -1,3 +1,67 @@
-% Status: blocked on section 6, except the released-artefacts paragraph.
+% Status: the artefacts subsection is drafted; the claims subsection is filled
+% from section 6 and is partly blocked on E1, E3 and E4.
 \section{Conclusion and released artefacts}
 \label{sec:conclusion}
+
+\subsection{Where the three claims stand}
+
+\textbf{C1 is unevaluated.} The gold set does not exist, so the fine-tune's
+advantage over the published models remains the untested premise it was at the
+start of this work.
+
+\textbf{C2 is supported on part of its evidence.} The rule behaves as specified
+on the lines where the span-locating offset path held. On the
+\corrOnFindFallback{} of \corrOffered{} lines that took the search fallback ---
+\corrFindFallbackShare{} of them --- it was comparing against a line the
+pipeline had already corrupted, so those acceptances carry no weight. The claim
+therefore rests on under a third of the evidence gathered for it. Whether the accepted edits improve the text is a
+further question, and needs C1's gold set.
+
+\textbf{C3 is supported.} Livre accuracy is \locLivreAccuracyWorkbook{} on the
+pre-registered cohort and \locLivreAccuracyCatalogue{} on the second, against a
+gate that asked for above 90\%. Chapter accuracy is materially lower ---
+\locChapterAccuracyWorkbook{} and \locChapterAccuracyCatalogue{}. The
+pre-registration read that gap as span selection, not search, and named two
+parameters to tune before concluding it; neither was tuned, so the reading
+stands as an expectation confirmed in direction.
+
+\subsection{What the evaluation changed}
+
+\texttt{MIN\_SCORE} was checked rather than chosen. Precision is near 100\%
+across the whole sweep, so the curve does not locate a threshold; what
+figure~\ref{fig:e5-sweep} shows is that 0.808 sits at the top of the coverage
+plateau, where nothing is lost. That is weaker than \emph{calibrated} and
+stronger than \emph{inherited}. The other five constants in
+table~\ref{tab:thresholds} are unswept and are now at least enumerated.
+
+The evaluation also corrected the record. Four figures the project stated in
+prose --- including a CER for the fine-tune with no test set, no log and no
+code behind it --- were searched for, not substantiated, and dropped. They are
+listed in \file{PROVENANCE.md}.
+
+\subsection{Released artefacts}
+
+\begin{itemize}
+  \item this repository, holding the scoring code, the frozen run records and
+    every result CSV, so each figure reruns from committed inputs with no GPU,
+    no model and no network;
+  \item \file{data/runs/ocr/}, the 24 books' run and calibration records;
+  \item \file{data/runs/correction/}, E2's frame and its frozen verdicts;
+  \item \file{data/runs/matcher/}, the frozen alignment export;
+  \item the gold set and \file{data/gold/GUIDELINES.md}, written before
+    annotation;
+  \item the Hugging Face model card for \file{amadis-ft.mlmodel}, now writable
+    because the shipped file is tied to its training checkpoint by weight
+    comparison.
+\end{itemize}
+
+No page image and no transcribed text is released. Reuse terms differ per
+holding institution and are unsettled for at least one, so what is published is
+counts, timings, offsets and code.
+
+\subsection{What a successor should do first}
+
+Annotate the gold set. Everything blocked in this report is blocked behind it,
+and it is ten hours of work rather than a research problem. Then add a second
+annotator, so that the noise floor is a real inter-annotator figure instead of
+one person's agreement with themselves.

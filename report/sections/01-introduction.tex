@@ -1,5 +1,67 @@
-% Status: outlined, not drafted.
-% docs/specs/2026-09-20-report-outline.md marks this section writable now. It
-% depends on no measurement, so nothing here is blocked on E1 to E4.
+% Status: drafted 2026-09-22. Citations are added once section 2's bibliography
+% is acquired; nothing here is cited from memory in the meantime.
 \section{Introduction}
 \label{sec:introduction}
+
+A digitisation pipeline has been reading sixteenth-century French romance for
+this project for a year. It has one recognition figure to its name: a
+validation character error rate, measured on a 10\% page-level split of a
+single volume, on the material the model was fine-tuned on. That number
+selected a checkpoint. It cannot tell anyone how the system reads the corpus it
+was built for.
+
+This report is the measurement.
+
+\subsection{Why the material is hard}
+
+Sixteenth-century print defeats off-the-shelf OCR for reasons that compound.
+The long \qtr{ſ} is a distinct character that modern models map onto
+\qtr{f}. The earlier volumes are set in \emph{bâtarde}, a type family with
+little modern training data. Chapters open with drop caps spanning several
+lines, which segmenters read as illustrations or as noise. Running heads,
+catchwords and signatures sit in the text block. Folio numbering runs in roman
+in one half of the corpus and arabic in the other. And the scans come from
+three institutions at three qualities, one of them stamped across the page.
+
+Section~\ref{sec:corpus} describes the corpus; the short version is
+\ocrBooks{} books, \ocrPages{} pages, in two type families that share almost
+nothing typographically.
+
+\subsection{The gap}
+
+What the project could state before this report, and what it could not:
+
+\begin{itemize}
+  \item no recognition figure of any kind for \emph{Amadis de Gaule}, the
+    work the system exists to read;
+  \item no word error rate anywhere;
+  \item no measured baseline --- the published models the fine-tune improves
+    on were never run on this material;
+  \item no evaluation of either LLM pass, including the accept rule that is
+    the pipeline's most distinctive component;
+  \item structural figures computed on every run and discarded.
+\end{itemize}
+
+\subsection{Three claims}
+
+\textbf{C1. The fine-tune reads this corpus better than the published models
+do.} Evaluated on annotated pages of each work, one error rate per work,
+against published models run under held-constant segmentation.
+Section~\ref{sec:results} reports it when the gold set exists.
+
+\textbf{C2. A conservative accept rule keeps a generative pass from rewriting
+the text.} Words carrying a low-confidence character are wrapped in
+\lmark~\rmark{} and re-read; the reply is accepted only when everything outside
+the markers returns byte identical. The failure mode being defended against is
+the one a generative model actually has on this material --- fluent
+modernisation of archaic spelling. Section~\ref{sec:e2} reports what the rule
+did.
+
+\textbf{C3. A \emph{Trésor} extract can be located in the baseline text.}
+A retrieval task over the full transcription of all \ocrBooks{} books, scored
+against the editor's own catalogue under a gate written before the numbers
+were known. Section~\ref{sec:e5} reports \locLivreAccuracyWorkbook{} Livre
+accuracy on the pre-registered cohort.
+
+Of the five experiments that test a claim, three are unmeasured. They are named
+as unmeasured, and section~\ref{sec:limitations} says what that costs.

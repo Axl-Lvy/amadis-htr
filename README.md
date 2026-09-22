@@ -14,15 +14,30 @@ with no GPU, no model server and no network:
 
 ```sh
 uv run --extra dev pytest        # the harness's own tests
+./eval/run_all.sh                # every result CSV, macro, table and figure
 make all                         # the report and the defence deck
 ```
 
+`eval/run_all.sh` rewrites every generated file from the frozen inputs. On
+unchanged inputs it rewrites them **identically**, so `git diff` after a run is
+the check that nothing drifted, and the suite asserts the same thing file by
+file.
+
 ## What does not rerun here
 
-Regenerating `data/runs/` means re-running recognition over the gold pages.
-That needs the hardware described in the report: a machine with a CUDA GPU for
-recognition and a local Ollama instance for the two LLM passes. The stored
-outputs exist so that the evaluation is reproducible without it.
+Regenerating `data/runs/` means re-running the pipeline itself. That needs the
+hardware described in the report --- a CUDA GPU for recognition, a local Ollama
+instance for the LLM passes --- and the private pipeline checkout. The scripts
+that do it are here and are named for it:
+
+| script | what it freezes | needs |
+| --- | --- | --- |
+| `eval/freeze_ocr_runs.py` | the 24 books' run and calibration records | the run outputs |
+| `eval/freeze_correction_reach.py` | E2's suspect-span census and sampling frame | the run outputs, the pipeline |
+| `eval/run_correction.py` | E2's verdicts | the above, plus a GPU and Ollama |
+| `eval/check_correction_determinism.py` | whether concurrency changes a verdict | the same |
+
+Their outputs are committed so that everything above reruns without any of it.
 
 ## Layout
 
@@ -33,9 +48,11 @@ outputs exist so that the evaluation is reproducible without it.
 | `data/gold/` | the annotated *Amadis de Gaule* gold set and its guidelines |
 | `data/localisation/` | the human-assigned reference for passage localisation, and the map between the two piece catalogues |
 | `eval/` | the scripts that derive a committed artefact from a source file held elsewhere |
-| `data/runs/` | every system's frozen output, one file per system per page |
+| `data/runs/` | every system's frozen output: the OCR run records, the matcher export, and E2's frame and verdicts |
+| `docs/pre-registration/` | decisions committed before the numbers that test them |
 | `eval/results/` | the CSVs every figure and every reported number reads |
-| `report/generated/` | LaTeX macros and tables written from those CSVs |
+| `report/generated/` | LaTeX macros, tables and figures written from those CSVs |
+| `figures/` | the matplotlib scripts that draw every figure in the report |
 | `report/sections/` | one file per section of the report, each carrying its own drafting status |
 | `report/`, `slides/` | the report and the defence deck, sharing one preamble |
 | `pipeline/` | the sanitised pipeline snapshot |

@@ -1,13 +1,89 @@
-% Status: outlined, not drafted. Writable now except the gold set's final
-% counts, which need the annotation pass.
+% Status: drafted 2026-09-22, except the gold set's realised counts, which need
+% the annotation pass. Protocol justifications belong here even when they are
+% uncomfortable; they are not softened into section 8 instead.
 \section{Evaluation protocol}
 \label{sec:protocol}
 
-% This paragraph is written now rather than left blank, because it is what
-% forces the engine choice. It carries the two characters pdfLaTeX cannot set,
-% so a build that renders this page proves the toolchain before any result
-% depends on it.
-The correction pass marks the words it rewrote, so a line comes back as
-\qtr{et ſi \lmark cognoiſſoit \rmark le cheualier}. A line is accepted only
-when the text outside the markers is unchanged, which makes an unmarked
-rewrite a rejection rather than a silent edit.
+E1, E3 and E4 have not been run. What follows is the protocol they will run
+under, fixed before the numbers exist; E2's and E5's, which have run, are
+marked where they differ.
+
+\subsection{The gold set}
+
+\textbf{Frame.} Every page of all \ocrBooks{} books of \emph{Amadis de Gaule},
+minus any page in \file{data/gold/splits/training-pages.csv}. That list holds
+\trainPages{} pages, all of them \emph{Trésor}~T.1, so the subtraction
+currently removes nothing --- which is a fact worth stating rather than a
+technicality, because it means page-level contamination is zero by
+construction and not by luck.
+
+\textbf{Strata.} Type family (section~\ref{sec:corpus}); scan provenance,
+with the stamped Biblioteca Valenciana copy as its own stratum; and page kind,
+restricted to ordinary body pages. Front matter, tables of contents, privilege
+leaves and pages dominated by a woodcut are excluded: those are layout
+problems, not recognition problems.
+
+\textbf{Draw.} Seeded, per stratum, by \file{src/amadis_htr/sampling.py}; a
+manifest records why each page is in the set. Target 20 pages. At 20 to 40
+minutes a dense page that is roughly ten hours of annotation, which is the
+binding constraint on this report.
+
+\textbf{Annotator.} One. Three pages are re-annotated blind after at least a
+week, and the error rate between the two passes is the gold set's own noise
+floor. \textbf{No system difference smaller than that floor is claimed.}
+
+\textbf{Convention.} \file{data/gold/GUIDELINES.md}, written and committed
+before annotation begins. It fixes a normalised transcription matching the
+convention the model was trained to emit --- modern \emph{j} and \emph{v},
+long~\qtr{ſ} transcribed \emph{s}, abbreviations resolved, drop caps spelled
+out, accents as the compositor set them, and spelling never modernised.
+
+\subsection{Metrics}
+
+Character and word error rate, with the definition pinned in code rather than
+described in prose: whitespace counts as a character, runs of whitespace
+collapse to one space before comparison, and aggregation is character-weighted
+across pages.
+
+Every figure is reported twice, raw and folded. The fold is declared once, in
+\file{src/amadis_htr/fold.py}, and applied identically to hypothesis and
+reference: NFC, long~\qtr{ſ} to \emph{s}, case folding, \emph{u}/\emph{v}
+collapsed, \emph{i}/\emph{j} collapsed. It is deliberately narrower than the
+matcher's own normaliser, because anything it removed beyond a transcription
+convention would hide a real recognition error.
+
+\subsection{Uncertainty}
+
+Percentile bootstrap over pages, 10,000 resamples, 95\%~\cite{efron1994bootstrap}.
+Pages and not characters: a badly inked or badly segmented page fails as a
+whole, so its errors are correlated and resampling characters would report an
+interval narrower than the evidence supports.
+
+\subsection{Baselines, and one that is confounded}
+
+E1 will run the fine-tune against \texttt{stock} CATMuS-Print, a chosen
+published early-modern model, and Transkribus --- four systems. Segmentation is
+held constant across the first three. It cannot be for Transkribus, which
+segments independently, so that comparison mixes recognition with layout and is
+reported as confounded.
+
+\subsection{Two pre-registrations}
+
+E5's gate was written in the private repository on 2026-09-15, before the
+matcher was scored, and is quoted verbatim in
+\file{docs/pre-registration/2026-09-15-e5-alignment-gate.md}. Its source file
+is untracked, and the only timestamp it carried before this repository was a
+filesystem mtime.
+
+E2's design was registered on 2026-09-22, before its run, in
+\file{docs/pre-registration/2026-09-22-e2-correction-design.md}: the frame, the
+sample and its seed, the treatment, and the fixed list of figures that would be
+reported. E2 is the one experiment here that could be re-run on demand, which
+is exactly why its choices are dated earlier than its numbers.
+
+\subsection{What the protocol cannot do}
+
+Scoring the correction pass against correction off as a change in error rate
+needs a reference transcription. The gold set does not exist yet, so E2 reports
+what the accept rule did and makes no claim that the edits it kept are
+improvements. That limit was registered in advance, not discovered afterwards.

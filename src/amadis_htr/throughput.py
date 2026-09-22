@@ -250,3 +250,22 @@ def write_structure(rows: Iterable[StructureRow], path: str | Path) -> None:
                  row.matched, row.missing, row.spurious,
                  f"{row.recall:.6f}", f"{row.precision:.6f}"]
             )
+
+
+def write_runs(runs: Iterable[Run], path: str | Path) -> None:
+    """One row per book, which is what a per-book figure needs.
+
+    The pooled rows answer "how fast is the pipeline"; this one answers "how
+    evenly", and the spread across 24 books is the part a single mean hides.
+    """
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(
+            ["book", "family", "pages", "failed", "seconds", "seconds_per_page"]
+        )
+        for run in sorted(runs, key=lambda r: r.book):
+            writer.writerow(
+                [run.book, run.family, run.pages, run.failed, f"{run.seconds:.1f}",
+                 f"{run.seconds / run.pages:.6f}" if run.pages else "0.000000"]
+            )

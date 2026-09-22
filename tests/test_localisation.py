@@ -194,3 +194,44 @@ def test_the_committed_results_regenerate_from_the_committed_inputs(tmp_path):
             assert produced.read_bytes() == committed.read_bytes(), (
                 f"{produced.name} does not match the committed copy"
             )
+
+
+def test_every_located_piece_lands_in_exactly_one_chapter_state():
+    # scoreable + undecodable + unreferenced must equal the pieces the editor
+    # placed in a Livre. Before the third state existed one workbook piece --
+    # catalogued "Livre 8" with no chapter -- fell through both counters, and
+    # the report's sentence "125 of 317, because 191 print no chapter number"
+    # accounted for 316.
+    #
+    # The `none` band is the fourth state and is excluded deliberately: a
+    # piece the editor never located has no Livre to score and therefore no
+    # chapter either, which is why its three chapter counts are zero.
+    from amadis_htr.localisation import (
+        read_ground_truth,
+        read_predictions_by_cohort,
+        references_for,
+        summarise,
+    )
+
+    repo = Path(__file__).resolve().parent.parent
+    truth = read_ground_truth(repo / "data/localisation/ground-truth.csv")
+    cohorts = read_predictions_by_cohort(repo / "data/runs/matcher/alignments.csv")
+    for cohort, predictions in cohorts.items():
+        references = references_for(truth, predictions)
+        for row in summarise(references, predictions):
+            states = (
+                row.chapter_scoreable
+                + row.chapter_unavailable
+                + row.chapter_unreferenced
+            )
+            placed = sum(
+                1
+                for r in references.values()
+                if r.confidence == row.confidence and r.livre is not None
+            )
+            assert states == placed, (
+                f"{cohort}/{row.confidence}: {states} chapter states against "
+                f"{placed} pieces the editor placed in a Livre"
+            )
+            if row.confidence == "none":
+                assert states == 0

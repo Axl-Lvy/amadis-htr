@@ -27,8 +27,8 @@ than only writable, and the report is split one file per section under
 |---|---|---|
 | language | English | fixed by the design spec's deliverable line |
 | length | 25 to 26 pages of body, references and appendices on top | no page limit is recorded anywhere. A data science project report of this scope sits between 20 and 30 |
-| document class | `scrartcl` with `fontspec`, LuaLaTeX | the spec fixes the engine and the Unicode requirement, not the class |
-| citation style | `biblatex` numeric with `biber` | the spec fixes the tooling. Numeric keeps a 25-page report's citations out of the way |
+| document class | `article` with `fontspec`, XeTeX via Tectonic | resolved: Tectonic 0.17.0, `article`, and the École Polytechnique template's visual identity |
+| citation style | `biblatex` numeric with `bibtex` | resolved: `biber` needs root and a 163-package dependency closure, so the backend is `bibtex`. One word changes it back |
 | anonymity | none, the repository is public under the user's name | the spec plans a public repository and a Hugging Face card |
 
 ## IMRaD, mapped onto the nine sections
@@ -64,7 +64,8 @@ sentence on the released artefacts.
 
 **Inputs.** `report/generated/macros.tex` only. Written last.
 
-**Status.** Blocked on section 6.
+**Status.** *Drafted 2026-09-22*, in `report/main.tex`. Every number in it also
+appears in section 6.
 
 **Not here.** Method detail, related work, any number that is not also in section 6.
 
@@ -88,7 +89,9 @@ to the section that evaluates each.
 **Inputs.** Design spec sections 1 and 2. Corpus counts from section 3's sources. No
 `eval/results/` dependency.
 
-**Status.** Writable now.
+**Status.** *Drafted 2026-09-22*, `report/sections/01-introduction.tex`. The
+1,770-chapter figure this section planned is not in the draft, for the reason
+section 3's status records.
 
 **Not here.** Results. System mechanics. Anything that reads as a defence of the
 engineering.
@@ -111,7 +114,12 @@ recorded.
 
 **Inputs.** `report/refs.bib`, to be acquired. Nothing generated.
 
-**Status.** Writable now, once the bibliography exists.
+**Status.** *Drafted 2026-09-22*, `report/sections/02-related-work.tex`. The
+bibliography exists: 15 entries in `report/refs.bib`, every DOI or stable URL
+fetched and checked before it was written there. The novelty search came back
+empty and is recorded query by query in
+`docs/notes/2026-09-22-novelty-search.md`, so the claim is checkable rather than
+asserted. It is held to *to our knowledge* and no further.
 
 **Not here.** A survey. Four threads, roughly two paragraphs each.
 
@@ -174,7 +182,9 @@ calibrates it: `LOWCONF_THRESHOLD` 0.6, `OCR_DROPCAP_MIN_PROB` 0.6, `MIN_SCORE` 
 **Inputs.** `pipeline/` snapshot, `PROVENANCE.md`, the design spec sections 2 and 3.
 One figure: the pipeline as a data-flow diagram, hand-specified in TikZ, no screenshot.
 
-**Status.** Writable now.
+**Status.** *Drafted 2026-09-22*, `report/sections/04-system.tex`, including the
+threshold table. Five of the six constants turn out to be uncalibrated, which the
+table states rather than hides.
 
 **Not here.** The non-goals of spec section 3 expanded into a manual. Every subsection
 here is capped, and the cap is the page budget below.
@@ -206,7 +216,9 @@ was a filesystem mtime.
 `docs/notes/2026-09-20-artefact-recovery.md`,
 `docs/pre-registration/2026-09-15-e5-alignment-gate.md`.
 
-**Status.** Writable now, except the gold-set paragraph's final counts.
+**Status.** *Drafted 2026-09-22*, `report/sections/05-protocol.tex`, except the
+gold-set paragraph's final counts. It now records two pre-registrations rather
+than one: E5's gate, and E2's design, registered 2026-09-22 before its run.
 
 **Not here.** Results. Protocol justifications belong here even when they are
 uncomfortable, and the discomfort is not softened in section 8 instead.
@@ -280,7 +292,9 @@ and what the difference says about span selection rather than search.
 **Inputs.** `eval/results/*.csv`, the rejected-reply sample committed under
 `data/runs/`, section 2's bibliography.
 
-**Status.** Blocked on section 6.
+**Status.** *Drafted 2026-09-22*, `report/sections/07-error-analysis.tex`, for
+E2, E5 and E6. The confusion table and the comparison of measured CERs to the
+literature both need E1 and are absent, with the absence stated.
 
 **Not here.** Any finding not already stated in section 6.
 
@@ -302,7 +316,8 @@ not found, so E1's fourth system may be absent.
 **Inputs.** The design spec's risk table, the recovery note, section 6's realised cell
 counts.
 
-**Status.** Writable now in outline, final counts blocked.
+**Status.** *Drafted 2026-09-22*, `report/sections/08-limitations.tex`. Final
+cell counts still wait on the annotation pass.
 
 **Not here.** Apology. Each limitation states its consequence for a specific claim.
 
@@ -320,7 +335,8 @@ which is a second annotator and an inter-annotator figure.
 
 **Inputs.** `report/generated/macros.tex`, `PROVENANCE.md`.
 
-**Status.** Blocked on section 6, except the artefacts paragraph.
+**Status.** *Drafted 2026-09-22*, `report/sections/09-conclusion.tex`. C1's
+paragraph says the claim is unevaluated, which is the honest close.
 
 **Not here.** New results, new comparisons.
 

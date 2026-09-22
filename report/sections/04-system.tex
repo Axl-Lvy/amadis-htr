@@ -1,5 +1,105 @@
-% Status: outlined, not drafted. Writable now from pipeline/, PROVENANCE.md and
-% sections 2 and 3 of the design spec. Capped at four pages, and the threshold
-% table is what earns them.
+% Status: drafted 2026-09-22. Capped at four pages by the outline's page budget,
+% and the threshold table is what earns them. Described only as far as a result
+% is uninterpretable without it -- this section is not a manual.
 \section{System}
 \label{sec:system}
+
+The pipeline reads a volume of scans and emits structured text: per page a set
+of lines, each with a role, a reading order and per-character confidences; per
+volume a chapter structure calibrated against the printed table of contents
+where one exists. Two optional LLM passes sit behind the recogniser. What
+follows describes each stage only as far as its result is uninterpretable
+without it.
+
+\subsection{Recognition}
+
+kraken~7.0.2~\cite{kiessling2025kraken} with a model fine-tuned from
+CATMuS-Print~[Large]~\cite{gabay2024catmusprintlarge} on \trainPages{}
+Transkribus pages of \emph{Trésor des Amadis}~T.1. The shipped artefact is
+\file{amadis-ft.mlmodel}, identified by SHA-256 in \file{PROVENANCE.md} and
+tied by weight comparison to the training checkpoint that produced it.
+
+Two fine-tuning configurations were run. The shipped one uses a reduce-on-
+plateau schedule at learning rate $3\times10^{-4}$ with augmentation; an
+earlier constant-rate run at $10^{-3}$ was not shipped. Checkpoint selection
+used the held-out \trainPagesVal{} pages, which is why
+section~\ref{sec:limitations} calls them validation and never test.
+
+\subsection{Layout}
+
+Roles are assigned geometrically: baseline bands give reading order, oversize
+or italic-slanted lines become titles, and lines in the top and bottom margins
+become headers and footers. Illustration regions and library stamps are
+suppressed rather than read. The stage is deterministic and carries no learned
+component.
+
+What it cannot settle is the ambiguous case: a single line at the top or foot
+of a page that may be a running head, a catchword, or the first or last line of
+the body. That residue is what experiment~E3 would score.
+
+\subsection{The two LLM passes}
+
+Both are opt-in, both run after recognition rather than beside it, and both
+degrade to \emph{change nothing} when the model is absent or fails.
+
+The \textbf{coherence pass} resolves an ambiguous head or foot line by asking
+whether removing it lets the neighbouring lines read continuously.
+
+The \textbf{low-confidence pass} is the one claim~C2 is about. Every word
+containing a character scored below \texttt{LOWCONF\_THRESHOLD} is wrapped in
+\lmark~\rmark{}, and the line is sent with its two neighbours for context. The
+prompt forbids modernising the spelling. The reply is then split on the markers
+and accepted only if two conditions hold: the marker count matches, and every
+segment \emph{outside} the markers is byte identical to the original.
+Otherwise the entire line reverts --- there is no partial acceptance.
+
+That rule is the substance of the contribution: it makes a rewrite structurally
+detectable instead of plausible, so it can be refused. Section~\ref{sec:e2}
+reports how often it was, and section~\ref{sec:errors} a case it cannot
+detect.
+
+\subsection{Localisation}
+
+Locating a \emph{Trésor} piece in the baseline text is a retrieval problem over
+the full transcription of all \ocrBooks{} books. A period-aware normaliser
+folds the orthographic variation that would otherwise defeat exact matching.
+A rare-word seed index --- words of at least \texttt{MIN\_SEED\_LENGTH}
+characters with document frequency at most \texttt{MAX\_SEED\_DF} --- proposes
+candidate positions, and per-book anchor chaining assembles them into a span.
+A candidate is accepted above \texttt{MIN\_SCORE}.
+
+\subsection{Orchestration}
+
+A batch runner drives the volumes; recognition runs on GPU and the LLM passes
+run afterwards on the same card, never concurrently. The measured reason is
+capacity: eight recognition workers sit near 5~GB and the correction model is
+13~GB, which does not fit together on a 16~GB card.
+
+\subsection{Every threshold the system contains}
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{llll}
+    \toprule
+    Constant & Value & Where it came from & Swept here \\
+    \midrule
+    \texttt{LOWCONF\_THRESHOLD}    & 0.6   & raised from 0.5 by hand & no \\
+    \texttt{OCR\_DROPCAP\_MIN\_PROB} & 0.6   & default, never swept  & no \\
+    \texttt{MIN\_SCORE}            & 0.808 & observed floor          & checked, \S\ref{sec:e5} \\
+    \texttt{MIN\_SEED\_LENGTH}     & 6     & default                 & no \\
+    \texttt{MAX\_SEED\_DF}         & 200   & default                 & no \\
+    \texttt{UNCERTAIN}             & 0.85  & review-queue cutoff     & no \\
+    \bottomrule
+  \end{tabular}
+  \caption{The six constants the system's behaviour depends on. One is
+    calibrated by this report; the rest are inherited and are named so that
+    nothing rests on them silently.}
+  \label{tab:thresholds}
+\end{table}
+
+Five of the six constants were chosen by hand or left at a default and have
+never been swept. E5 sweeps \texttt{MIN\_SCORE}
+(figure~\ref{fig:e5-sweep}); \texttt{CHAIN\_GAP\_PENALTY} and
+\texttt{WINDOW\_SLACK}, which the pre-registration names as the two to tune
+before reading the chapter result, are not in this table because they were
+never touched either.

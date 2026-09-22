@@ -89,7 +89,10 @@ def format_value(raw: str, fmt: str) -> str:
     if fmt == "text":
         return escape(raw)
     if fmt == "int":
-        return f"{int(float(raw)):d}"
+        # Grouped, because a page count reaches five digits and 14111 on the
+        # page is a string of digits rather than a number a reader can take in.
+        # Grouping is presentation, so it lives here with the rounding.
+        return f"{int(float(raw)):,d}"
     if fmt.startswith("num"):
         return f"{float(raw):.{int(fmt[3:])}f}"
     if fmt.startswith("hours"):
@@ -265,6 +268,15 @@ def _localisation_macros(cohort: str) -> tuple[Macro, ...]:
             f"locChapterUnavailable{suffix}", summary, certain,
             "chapter_unavailable", "int",
         ),
+        # The third state, and the reason the other two do not sum to the
+        # cohort: the editor catalogued the piece to a Livre and named no
+        # chapter, so there is no reference to score against. Without it the
+        # report says "125 of 317 because 191 print no number", which accounts
+        # for 316.
+        Macro(
+            f"locChapterUnreferenced{suffix}", summary, certain,
+            "chapter_unreferenced", "int",
+        ),
     )
 
 
@@ -377,6 +389,136 @@ CORPUS_MACROS: tuple[Macro, ...] = (
 )
 
 
+#: E2, the marker-anchor accept rule.
+#:
+#: Two denominators that may not be swapped. The `corrReach*` macros count what
+#: the pass would look at over all 24 books, a deterministic property of the
+#: recognition output with no model in it. The rest count what happened on the
+#: 400 sampled pages that were offered to the model. A rate over one may not be
+#: printed against the other, which is why the prefixes differ.
+#:
+#: `corrRewritesCaught` is the one figure that speaks to C2: the rule refusing
+#: a reply that edited text outside the markers. The protocol failures beside
+#: it are replies that never became candidate edits, and pooling the two would
+#: let a flaky JSON parser inflate the headline.
+CORRECTION_MACROS: tuple[Macro, ...] = (
+    Macro("corrReachPages", "correction-reach.csv", {"cohort": "all"}, "pages", "int"),
+    Macro(
+        "corrReachPagesWithSpan", "correction-reach.csv", {"cohort": "all"},
+        "pages_with_span", "int",
+    ),
+    Macro(
+        "corrReachPageShare", "correction-reach.csv", {"cohort": "all"},
+        "pages_with_span", "pct1", over="pages",
+    ),
+    Macro(
+        "corrReachCorrectable", "correction-reach.csv", {"cohort": "all"},
+        "correctable", "int",
+    ),
+    Macro(
+        "corrReachLinesWithSpan", "correction-reach.csv", {"cohort": "all"},
+        "lines_with_span", "int",
+    ),
+    Macro(
+        "corrReachLineShare", "correction-reach.csv", {"cohort": "all"},
+        "lines_with_span", "pct1", over="correctable",
+    ),
+    Macro("corrReachSpans", "correction-reach.csv", {"cohort": "all"}, "spans", "int"),
+    Macro(
+        "corrPages", "correction-verdicts.csv", {"cohort": "all"}, "pages", "int"
+    ),
+    Macro(
+        "corrOffered", "correction-verdicts.csv", {"cohort": "all"}, "offered", "int"
+    ),
+    Macro(
+        "corrSpansOffered", "correction-verdicts.csv", {"cohort": "all"},
+        "spans_offered", "int",
+    ),
+    Macro(
+        "corrAccepted", "correction-verdicts.csv", {"cohort": "all"}, "accepted", "int"
+    ),
+    # Read from the interval file, never from the pooled counts: the draw is
+    # equal per family and the frame is not, so accepted/offered over the
+    # sample would weight family A at more than twice its share of the corpus.
+    Macro(
+        "corrAcceptRate", "correction-interval.csv",
+        {"cohort": "corpus", "measure": "accept"}, "point", "pct1",
+    ),
+    Macro(
+        "corrRejected", "correction-verdicts.csv", {"cohort": "all"}, "rejected", "int"
+    ),
+
+    Macro(
+        "corrRewritesCaught", "correction-verdicts.csv", {"cohort": "all"},
+        "rewrites_caught", "int",
+    ),
+    Macro(
+        "corrRewriteRate", "correction-interval.csv",
+        {"cohort": "corpus", "measure": "rewrite"}, "point", "pct1",
+    ),
+    Macro(
+        "corrProtocolFailures", "correction-verdicts.csv", {"cohort": "all"},
+        "protocol_failures", "int",
+    ),
+    Macro(
+        "corrChangedSpans", "correction-verdicts.csv", {"cohort": "all"},
+        "changed_spans", "int",
+    ),
+    Macro(
+        "corrAcceptedUnchanged", "correction-verdicts.csv", {"cohort": "all"},
+        "accepted_unchanged", "int",
+    ),
+    # The size of what was refused, so "rewrites caught" is a defensible
+    # number rather than a bucket that a moved space also falls into.
+    Macro(
+        "corrRewriteEdits", "correction-verdicts.csv", {"cohort": "all"},
+        "rewrite_edits", "int",
+    ),
+    Macro(
+        "corrRewriteSegments", "correction-verdicts.csv", {"cohort": "all"},
+        "rewrite_segments", "int",
+    ),
+    Macro(
+        "corrRewritesSubstantial", "correction-verdicts.csv", {"cohort": "all"},
+        "rewrites_substantial", "int",
+    ),
+    # How much of the sample sat on the span-locating fallback that can mark
+    # one word twice. E2 cannot fix that hole; it can bound it.
+    Macro(
+        "corrOnFindFallback", "correction-verdicts.csv", {"cohort": "all"},
+        "on_find_fallback", "int",
+    ),
+    Macro(
+        "corrFindFallbackShare", "correction-verdicts.csv", {"cohort": "all"},
+        "on_find_fallback", "pct1", over="offered",
+    ),
+    Macro(
+        "corrAcceptLow", "correction-interval.csv",
+        {"cohort": "corpus", "measure": "accept"}, "low", "pct1",
+    ),
+    Macro(
+        "corrAcceptHigh", "correction-interval.csv",
+        {"cohort": "corpus", "measure": "accept"}, "high", "pct1",
+    ),
+    Macro(
+        "corrOfferedFamilyA", "correction-verdicts.csv", {"cohort": "A"},
+        "offered", "int",
+    ),
+    Macro(
+        "corrOfferedFamilyB", "correction-verdicts.csv", {"cohort": "B"},
+        "offered", "int",
+    ),
+    Macro(
+        "corrAcceptRateFamilyA", "correction-interval.csv",
+        {"cohort": "A", "measure": "accept"}, "point", "pct1",
+    ),
+    Macro(
+        "corrAcceptRateFamilyB", "correction-interval.csv",
+        {"cohort": "B", "measure": "accept"}, "point", "pct1",
+    ),
+)
+
+
 #: Every registry with a measured CSV behind it, in the order they reach the
 #: page. `eval/render_macros.py` renders exactly this and the suite asserts the
 #: committed `macros.tex` matches, so a registry added here without rerunning
@@ -385,6 +527,7 @@ REGISTRIES: tuple[tuple[Macro, ...], ...] = (
     CORPUS_MACROS,
     LOCALISATION_MACROS,
     THROUGHPUT_MACROS,
+    CORRECTION_MACROS,
 )
 
 #: Flattened, which is what a renderer wants.

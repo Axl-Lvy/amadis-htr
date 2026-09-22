@@ -1,5 +1,172 @@
-% Status: E5 and E6 are measured; E1 to E4 are not. Drafting the measured
-% subsections is the next unit of work after this section's prose has somewhere
-% to sit.
+% Status: E5 and E6 drafted 2026-09-22. E2 lands when its run is scored. E1, E3
+% and E4 are blocked on the annotation pass and have no subsection here: an
+% empty subsection would suggest a measurement that does not exist.
+%
+% Findings only. No interpretation, no comparison to the literature, no
+% speculation about cause -- all of that is section 7.
 \section{Results}
 \label{sec:results}
+
+Each subsection opens with its claim, its unit of analysis, its baseline and
+its uncertainty method, then reports. Experiments E1, E3 and E4 are not here:
+they need an annotated gold set, which does not exist, and
+section~\ref{sec:limitations} states what that costs.
+
+\subsection{E5: locating a \emph{Trésor} extract}
+\label{sec:e5}
+
+\textbf{Claim.} A \emph{Trésor} extract can be located in the baseline text.
+\textbf{Unit.} The piece, within a cohort. \textbf{Baseline.} None published;
+the pre-registered gate stands in. \textbf{Uncertainty.} Bootstrap over pieces.
+
+\begin{table}[t]
+  \centering
+  \input{generated/tables/e5-localisation.tex}
+  \caption{E5, certain band only. The two cohorts are never pooled: the gate
+    was pre-registered on the workbook batch when it was all that existed.}
+  \label{tab:e5}
+\end{table}
+
+Three denominators, and they are different. Pieces in the cohort; certain
+pieces, for a Livre figure; and pieces whose printed chapter number is
+recoverable, for a chapter figure --- \locChapterScoreableWorkbook{} of \locPiecesWorkbook{} on the gated cohort.
+The remainder splits two ways: \locChapterUnavailableWorkbook{} pieces landed
+on a printed label no chapter number could be decoded from, and
+\locChapterUnreferencedWorkbook{} was catalogued to a Livre with no chapter
+named, so it has no reference to score against.
+
+Table~\ref{tab:e5} gives the result. Livre accuracy is
+\locLivreAccuracyWorkbook{} on the workbook cohort and
+\locLivreAccuracyCatalogue{} on the catalogue. Chapter accuracy is
+\locChapterAccuracyWorkbook{} and \locChapterAccuracyCatalogue{}. The gate, written before
+the matcher was scored, reads \qtr{Correct LIVRE well above 90\% means the
+all-24-Livres search holds \dots{} Proceed to phase B}. The gated cohort is
+\locLivreAccuracyWorkbook{}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e5-sweep.pdf}
+  \caption{E5 accept threshold against precision (top) and coverage (bottom).
+    Thresholds accepting nothing are omitted, precision over an empty accept
+    set being undefined.}
+  \label{fig:e5-sweep}
+\end{figure}
+
+Figure~\ref{fig:e5-sweep} sweeps the accept threshold. Precision sits near
+100\% at every threshold in both cohorts, so the curve does not locate an
+operating point; coverage does. Coverage holds above 98\% to 0.86 on the
+workbook cohort and to 0.85 on the catalogue, then falls away: by 0.90 it is
+73\% and 53\%. The largest effect in E5 is the gap between Livre and chapter
+accuracy.
+
+\subsection{E2: the marker-anchor accept rule}
+\label{sec:e2}
+
+\textbf{Claim.} The accept rule keeps a generative pass from rewriting the
+text. \textbf{Unit.} The line offered, clustered by page. \textbf{Baseline.}
+Correction off, which is the frozen recognition output itself --- all
+\ocrBooks{} books recorded zero words corrected. \textbf{Uncertainty.}
+Stratified bootstrap over pages, 10,000 resamples, 95\%.
+
+\textbf{Reach.} Over the whole corpus the pass would look at
+\corrReachLinesWithSpan{} of \corrReachCorrectable{} correctable lines
+(\corrReachLineShare{}), carrying \corrReachSpans{} suspect spans, on
+\corrReachPagesWithSpan{} of \corrReachPages{} pages
+(\corrReachPageShare{}). That count is deterministic: it is the recogniser's
+own confidences, with no model involved.
+
+\textbf{Sample.} \corrOffered{} lines on \corrPages{} pages, drawn 200 per type
+family under a committed seed from the pages carrying at least one span.
+
+\begin{table}[t]
+  \centering
+  \input{generated/tables/e2-correction.tex}
+  \caption{E2 by type family. The sample row carries counts only: the draw is
+    equal per family and the frame is not, so a rate over it would weight
+    family~A at more than twice its share. The corpus rate is frame-weighted.}
+  \label{tab:e2}
+\end{table}
+
+In the sample, \corrAccepted{} of \corrOffered{} offered lines were accepted.
+Weighted to the corpus's suspect lines, the acceptance rate is
+\corrAcceptRate{} (95\%~CI \corrAcceptLow{} to \corrAcceptHigh{}, stratified
+bootstrap over pages).
+
+Of the refusals, \corrRewritesCaught{} were for changing text outside the
+markers --- \corrRewriteRate{} of offered lines, frame-weighted, spanning
+\corrRewriteSegments{} segments and \corrRewriteEdits{} characters, of which
+\corrRewritesSubstantial{} moved more than two characters --- and
+\corrProtocolFailures{} were replies that never became candidate edits at all.
+Figure~\ref{fig:e2-reasons} gives the breakdown by branch, and
+figure~\ref{fig:e2-confidence} the recogniser's confidence on accepted against
+refused lines.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e2-reasons.pdf}
+  \caption{Why the accept rule refused. Only \texttt{outside-changed} bears on
+    the claim; the rest are replies that never became candidate edits.}
+  \label{fig:e2-reasons}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e2-confidence.pdf}
+  \caption{Lowest character confidence on a line, accepted against refused.}
+  \label{fig:e2-confidence}
+\end{figure}
+
+\corrOnFindFallback{} of the offered lines (\corrFindFallbackShare{}) took the
+span-locating fallback described in section~\ref{sec:errors}, on which an
+acceptance is not evidence that the rule held.
+
+Acceptance is not an edit rate. Of the accepted lines,
+\corrAcceptedUnchanged{} came back with every span untouched, and \corrChangedSpans{} spans were actually
+altered.
+
+\textbf{This is not an accuracy.} Scoring correction on against correction off
+needs a reference transcription, which is the gold set, which does not exist.
+E2 reports what the rule did and says nothing about whether the edits it kept
+improve the text. The limit was registered before the run.
+
+\subsection{E6: throughput and structure}
+\label{sec:e6}
+
+\textbf{Claim.} Descriptive only. \textbf{Unit.} Book and page.
+\textbf{Baseline.} None. \textbf{Uncertainty.} None --- these are counts.
+
+\begin{table}[t]
+  \centering
+  \input{generated/tables/e6-throughput.tex}
+  \caption{E6 throughput. One model, one device, one working width across all
+    \ocrBooks{} books, which is what makes pooling legitimate.}
+  \label{tab:e6}
+\end{table}
+
+\ocrBooks{} books, \ocrPages{} pages, \ocrPagesFailed{} failures, in
+\ocrHours{} hours at \ocrSecondsPerPage{}~s per page.
+Figure~\ref{fig:e6-throughput} gives the per-book spread; the families differ
+little, \ocrSecondsPerPageFamilyA{}~s against
+\ocrSecondsPerPageFamilyB{}~s per page.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e6-throughput.pdf}
+  \caption{Seconds per page by book.}
+  \label{fig:e6-throughput}
+\end{figure}
+
+\textbf{Structure is family~A alone, and hand-checked.} Books~13 to~24 print no
+table of contents, so their calibration carries no match block and there is no
+corpus-wide structural figure to report. On family~A the run recalls
+\structMatchedA{} of \structChaptersA{} printed chapters
+(\structRecallHandCheckedA{}) at a precision of
+\structPrecisionHandCheckedA{}, missing \structMissingA{} and proposing
+\structSpuriousA{} openings the printed contents do not carry.
+
+Those two rates are not the detector unaided. Each book's corrections file
+holds chapter decisions a reader made by hand, and calibration ran after them,
+so what is reported is the corrected detector.
+\file{docs/notes/2026-09-22-structural-figures-are-hand-checked.md} bounds the
+difference. The counts beside them --- \structChaptersA{} printed chapters,
+\structMatchedA{} matched --- are what they say they are.

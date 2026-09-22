@@ -1,5 +1,5 @@
-confidence,total,located,livre_correct,chapter_scoreable,chapter_correct,chapter_unavailable
-certain,317,317,315,125,96,191
-conjecture,0,0,0,0,0,0
-uncertain,6,6,5,1,0,2
-none,18,18,0,0,0,0
+confidence,total,located,livre_correct,chapter_scoreable,chapter_correct,chapter_unavailable,chapter_unreferenced
+certain,317,317,315,125,96,191,1
+conjecture,0,0,0,0,0,0,0
+uncertain,6,6,5,1,0,2,3
+none,18,18,0,0,0,0,0

@@ -69,7 +69,7 @@ The draw was made before this sentence was written and lands on 950 suspect
 lines carrying 1,043 spans, which is the number of calls the run will make.
 The size is set by what can be run and frozen in one sitting, not by a power
 calculation: measured throughput is 18.7 s per call sequentially and 11.1 s at
-four concurrent workers, so 920 calls is about three hours. Eight workers was
+four concurrent workers, so 950 calls is about three hours. Eight workers was
 measured as *slower* than four, the GPU being saturated, so four is what the
 run uses.
 
@@ -133,3 +133,88 @@ The consequence is recorded rather than worked around: section 7 of the report
 wants a qualitative sample of rejected replies, and this repository will not
 hold one. If that sample is wanted it has to be quoted in the report from a
 copy held outside the repository, with the same care the corpus itself gets.
+
+---
+
+## Amendment, 2026-09-22, before any verdict was scored
+
+**What "pooled" means is fixed here, because the original wording was
+ambiguous and the ambiguity hides a bias.**
+
+The draw is 200 pages per type family. The frame is not balanced that way: by
+suspect lines it is 6,317 in family~A against 15,003 in family~B, so family~A
+is 29.6% of the corpus's suspect lines and family~B is 70.4%. Summing the two
+sampled families and dividing gives a rate weighted roughly 50/50 by *sampled*
+pages, which over-weights family~A by more than a factor of two against the
+corpus it claims to describe. If the two families accept at different rates,
+that pooled number is not an estimate of anything.
+
+So the pooled figure is the **frame-weighted** estimate
+
+$$r = w_A r_A + w_B r_B, \qquad w_f = \frac{\text{suspect lines in } f}{\text{suspect lines in the corpus}}$$
+
+with the weights read from `REACH.csv`, which is deterministic and committed.
+Its interval is a **stratified** bootstrap: pages are resampled within each
+family, each family's rate is recomputed, and the two are recombined with the
+same fixed weights. Resampling across the pooled sample would carry the same
+50/50 error into the interval.
+
+The per-family rates are unaffected. Within a family the draw is uniform over
+the frame, so $r_A$ and $r_B$ are unbiased for their own families and are the
+figures the report leads with.
+
+`correction-verdicts.csv` still carries an `all` row, and it still holds
+**counts**: how many lines were offered, accepted and refused in the sample.
+Those are facts about the sample and are reported as such. No rate is computed
+from that row, and no macro reads one from it.
+
+This amendment adds no figure to the registered list and removes none. It fixes
+which of two arithmetics the word "pooled" meant. It is written before the run
+was scored: at the time of writing, `VERDICTS.csv` holds a seven-line smoke
+test and nothing else.
+
+---
+
+## What happened between registration and the scored run, 2026-09-22
+
+Two runs were started and discarded before the one that was scored. Neither
+was scored, and neither changed anything above. Recording them here because a
+pre-registration is worth less if the runs between it and the result are
+invisible.
+
+**Run 1, discarded after 15 minutes.** The harness built every prompt before
+making any call. The pipeline's `correct_page` writes an accepted correction
+back onto the line as it walks a page, so line *i+1* is sent with line *i*
+already corrected in its `PREV` slot. Building up front sends uncorrected
+context everywhere, which is a different system from the one that ships. The
+harness now parallelises across pages and walks each page's lines in order,
+which costs no wall clock.
+
+**Run 2, discarded after 3 minutes**, to add instrumentation an adversarial
+review asked for. Two columns, both counts and neither text:
+
+- `outside_edits` and `outside_segments`. `outside-changed` is the one
+  rejection reason that is evidence for C2, but it fires on any byte
+  difference outside the markers --- a rewritten clause and a moved space
+  alike. Without a distance beside the count the headline cannot be defended,
+  and the record holds no text to recover it from later.
+- `clean`. The pipeline's `suspect_spans` locates each suspect word by offset
+  when it can and by `text.find` when it cannot. The fallback returns the
+  first occurrence, so two low-confidence occurrences of one word resolve to
+  the same index; the line is marked with two markers around one word, and the
+  accept rule compares the reply against that same corrupted construction and
+  accepts it. That is a hole in the property C2 claims. E2 cannot fix it, and
+  this column bounds how much of the sample sits on that branch.
+
+The same review found the pooled-weighting problem independently of the
+amendment above, and confirmed its arithmetic: family A is 29.63% of the
+frame's suspect lines and the equal draw weights it at 47.37%, a bias of
+0.1774 times the gap between the two families' rates.
+
+**One assertion in the registered design is downgraded.** The sentence saying
+four workers change throughput and not the verdict argues prompt independence,
+which is not decode determinism: `Ollama` sends `temperature: 0` and no seed,
+and a server batching concurrent requests may reduce in a different order.
+`eval/check_correction_determinism.py` replays a seeded sample of the run's
+own lines sequentially and reports the agreement rate, so the report quotes a
+measurement rather than the assumption.
