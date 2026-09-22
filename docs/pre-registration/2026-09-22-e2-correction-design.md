@@ -217,4 +217,6 @@ which is not decode determinism: `Ollama` sends `temperature: 0` and no seed,
 and a server batching concurrent requests may reduce in a different order.
 `eval/check_correction_determinism.py` replays a seeded sample of the run's
 own lines sequentially and reports the agreement rate, so the report quotes a
-measurement rather than the assumption.
+measurement rather than the assumption. **Result: 53 of 53 verdicts identical
+over 25 pages.** A small sample, and not a proof of decode determinism, but the
+assertion is no longer bare.

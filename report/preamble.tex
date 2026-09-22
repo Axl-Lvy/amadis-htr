@@ -107,10 +107,11 @@
 % with "Missing $ inserted". Detokenising sets every character to catcode 12,
 % so the path prints as written.
 %
-% Not url's \path, which was tried and reverted: its break set includes the
-% hyphen, and narrowing \UrlBreaks does not help because TeX permits a break
-% after an explicit hyphen in any font. The paths cited here are short enough
-% to set without url's machinery.
+% url's \path was tried twice and reverted both times. Narrowing \UrlBreaks
+% does not stop TeX breaking after an explicit hyphen, and widening it to every
+% letter makes url insert a penalty at each one, which renders the path
+% letter-spaced: "d a t a / l o c a l i s a t i o n". A path that runs long is
+% fixed by rewording the sentence around it.
 \newcommand{\file}[1]{\texttt{\detokenize{#1}}}
 
 % A long path or DOI in a narrow measure would otherwise reach the margin.

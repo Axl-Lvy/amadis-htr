@@ -508,6 +508,17 @@ CORRECTION_MACROS: tuple[Macro, ...] = (
         "corrOfferedFamilyB", "correction-verdicts.csv", {"cohort": "B"},
         "offered", "int",
     ),
+    # Concurrency was asserted not to change a verdict; this measures it. A
+    # seeded sample of the run's own lines, replayed with one worker.
+    Macro(
+        "corrReplayLines", "correction-determinism.csv", {}, "compared", "int",
+    ),
+    Macro(
+        "corrReplayAgree", "correction-determinism.csv", {}, "agree", "int",
+    ),
+    Macro(
+        "corrReplayPages", "correction-determinism.csv", {}, "pages", "int",
+    ),
     Macro(
         "corrAcceptRateFamilyA", "correction-interval.csv",
         {"cohort": "A", "measure": "accept"}, "point", "pct1",

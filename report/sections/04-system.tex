@@ -13,15 +13,16 @@ without it.
 
 \subsection{Recognition}
 
-kraken~7.0.2~\cite{kiessling2025kraken} with a model fine-tuned from
-CATMuS-Print~[Large]~\cite{gabay2024catmusprintlarge} on \trainPages{}
+kraken~7.0.2 \cite{kiessling2025kraken}, with a model fine-tuned from
+CATMuS-Print [Large] \cite{gabay2024catmusprintlarge} on \trainPages{}
 Transkribus pages of \emph{Trésor des Amadis}~T.1. The shipped artefact is
-\file{amadis-ft.mlmodel}, identified by SHA-256 in \file{PROVENANCE.md} and
-tied by weight comparison to the training checkpoint that produced it.
+\file{amadis-ft.mlmodel}. Its SHA-256 is recorded in
+\file{PROVENANCE.md}, and weight comparison ties it to the training
+checkpoint that produced it.
 
-Two fine-tuning configurations were run. The shipped one uses a reduce-on-
-plateau schedule at learning rate $3\times10^{-4}$ with augmentation; an
-earlier constant-rate run at $10^{-3}$ was not shipped. Checkpoint selection
+Two fine-tuning configurations were run. The shipped one uses a
+reduce-on-plateau schedule at learning rate $3\times10^{-4}$ with
+augmentation; an earlier constant-rate run at $10^{-3}$ was not shipped. Checkpoint selection
 used the held-out \trainPagesVal{} pages, which is why
 section~\ref{sec:limitations} calls them validation and never test.
 

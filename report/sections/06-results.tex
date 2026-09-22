@@ -120,6 +120,13 @@ refused lines.
 span-locating fallback described in section~\ref{sec:errors}, on which an
 acceptance is not evidence that the rule held.
 
+The run used four concurrent workers, which the registered design assumed would
+change throughput and not the verdict. Assumed is weaker than measured, so
+\corrReplayLines{} lines on a seeded \corrReplayPages{}-page subsample were
+replayed with one worker: \corrReplayAgree{} of \corrReplayLines{} verdicts
+were identical. That is a small sample and not a proof of decode determinism,
+but it is evidence where there was an assumption.
+
 Acceptance is not an edit rate. Of the accepted lines,
 \corrAcceptedUnchanged{} came back with every span untouched, and \corrChangedSpans{} spans were actually
 altered.
