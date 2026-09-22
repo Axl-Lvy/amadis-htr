@@ -55,7 +55,8 @@
         \item accepted \corrAcceptRate{} frame-weighted\\
           {\footnotesize 95\% CI \corrAcceptLow{}--\corrAcceptHigh{}}
         \item \textbf{\corrRewritesCaught{} refused} for changing text
-          outside the markers
+          outside the markers, \corrRewritesSubstantial{} of them by more
+          than two characters
         \item \corrProtocolFailures{} protocol failures, kept apart
       \end{itemize}
     \end{column}
@@ -99,9 +100,10 @@
     \item The structural rates are hand-checked, and named for it.
     \item Five of six thresholds have never been swept.
     \item E2 measures refusal, not improvement.
-    \item The accept rule has a hole: \corrOnFindFallback{} of
-      \corrOffered{} lines sat on a span-locating fallback that can mark one
-      word twice.
+    \item \textbf{The accept rule has a hole}, and
+      \corrFindFallbackShare{} of E2's lines sat on it --- a span-locating
+      fallback that can mark one word twice, which the rule cannot detect. C2
+      rests on under a third of its own evidence.
   \end{itemize}
 \end{frame}
 
