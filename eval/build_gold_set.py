@@ -5,9 +5,10 @@ This keeps the pages a human corrected and the model never read, copies their
 PAGE XML into `data/gold/transcriptions/`, and writes `data/gold/MANIFEST.csv`
 with one row per candidate page — kept or refused, and for the refused ones, why.
 
-`data/gold/pages/` is left alone: `.gitignore` reserves it for page images, which
-wait on the holding institutions' reuse terms. The transcriptions are editorial
-work and are committed under LICENSE-DATA.
+No page image is copied. Reuse terms differ per holding institution and are
+unsettled for at least one, so the manifest records the holder per page and the
+images stay where they are. The transcriptions are editorial work and are
+committed under LICENSE-DATA.
 
 The exports are not committed. They are Transkribus's own artefact, they carry
 the uncorrected pages too, and re-exporting the same documents reproduces them.

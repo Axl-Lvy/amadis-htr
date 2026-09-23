@@ -1,10 +1,10 @@
 % Status: drafted 2026-09-22, merged from the former sections 3 and 4 and cut
 % to the ten-page budget.
 %
-% Every count is a macro from eval/results/. Three figures the outline planned
-% -- the baseline text's chapters and word tokens, and the seed index's size --
-% are properties of a production database this repository does not hold, and
-% are listed in PROVENANCE.md rather than stated here.
+% Every count is a macro from eval/results/. Three figures this section would
+% otherwise carry -- the baseline text's chapters and word tokens, and the seed
+% index's size -- are properties of a production database this repository does
+% not hold, and are listed in PROVENANCE.md rather than stated here.
 %
 % The plates are illustrative, not measured: they show the material and what a
 % stage looks at, never a scored output. Rule 1 governs reported figures, and
@@ -16,9 +16,8 @@ Two bodies of sixteenth-century French print, not independent of one another.
 \emph{Amadis de Gaule} is a chivalric romance cycle of \ocrBooks{} books,
 \ocrPages{} scanned pages. The \emph{Trésor} anthologies reprint extracts from
 that cycle under thematic headings, so locating a \emph{Trésor} piece is a
-retrieval task with a checkable answer. The design specification treats both
-works as one target domain; nothing below is framed as in-domain against
-out-of-domain.
+retrieval task with a checkable answer. Both works are one target domain here;
+nothing below is framed as in-domain against out-of-domain.
 
 \begin{figure}[t]
   \centering
@@ -40,17 +39,18 @@ The \ocrBooks{} books are not one edition. The first \ocrBooksFamilyA{}
 numbers, each volume opening with a printed table of contents; the remaining
 \ocrBooksFamilyB{} (family~B) are later and smaller, in clean roman type with
 italic rubrics and arabic page numbers and no table of contents. Family~A is
-\ocrPagesFamilyA{} pages, family~B \ocrPagesFamilyB{}. Recognition is therefore
-reported per family, structural calibration covers family~A alone --- it needs
-a printed table of contents to score against --- and throughput pools both,
-because every book was run by one model on one device at one working width.
+\ocrPagesFamilyA{} pages, family~B \ocrPagesFamilyB{}. The correction pass is
+therefore reported per family, structural calibration covers family~A alone ---
+it needs a printed table of contents to score against --- and throughput pools
+both, because every book was run by one model on one device at one working
+width.
 
 Three holding institutions, three conditions: book~1 is bitonal 600~dpi TIFFs
 from the Bibliothèque municipale de Lyon, books~3 and~4 greyscale Gallica PDFs,
 and book~18 a Biblioteca Valenciana copy carrying that library's stamp. The
 provenance of the other volumes is recorded nowhere and is not claimed here.
-Provenance is variation unrelated to the century, so
-section~\ref{sec:protocol} stratifies on it.
+Provenance is variation unrelated to the century, and no figure below is
+stratified on it: the volumes it is known for are too few to form a cell.
 
 \subsection{The \emph{Trésor} pieces, and the training corpus}
 
@@ -109,7 +109,8 @@ italic-slanted lines become titles, lines in the top and bottom margins become
 headers and footers, and illustration regions and library stamps are suppressed
 rather than read. What it cannot settle is the ambiguous case --- a single line
 at the top or foot of a page that may be a running head, a catchword, or the
-first or last line of the body. That residue is what E3 would score.
+first or last line of the body. That residue is what the first LLM pass below
+is for.
 
 Two LLM passes sit behind the recogniser. Both are opt-in, both run after
 recognition, and both degrade to \emph{change nothing} when the model is absent

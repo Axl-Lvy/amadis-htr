@@ -1,11 +1,10 @@
-"""Seeded stratified sampling of the gold pages.
+"""Seeded stratified sampling of pages, and the training split it subtracts.
 
-The frame is every page of both works, because both are the target domain: the
-model exists to read *Amadis de Gaule* and the *Trésor des Amadis*, and pages of
-either are fair to sample. The one thing a scored page may not be is a page the
-model trained on, so the sampler takes the pages it saw and drops them.
-`data/gold/splits/training-pages.csv` lists those 487 pages, all of them
-*Trésor* T.1.
+E2 draws its 400 pages with `sample`, 200 per type family under a seed fixed in
+the pre-registration. `pages_the_model_saw` reads the other half of the job:
+`data/gold/splits/training-pages.csv` lists the 487 pages the recogniser trained
+on, all of them *Trésor* T.1, and `eval/build_gold_set.py` subtracts them so
+that no page the model read can enter the released set.
 """
 
 import csv

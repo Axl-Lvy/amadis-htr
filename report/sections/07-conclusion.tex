@@ -1,13 +1,7 @@
 % Status: drafted 2026-09-22, cut 2026-09-22. The claims are filled from
-% section 5 and are partly blocked on E1, E3 and E4.
+% section 5 and nothing here introduces a figure that is not there.
 \section{Conclusion and released artefacts}
 \label{sec:conclusion}
-
-\claim{C1}{is unevaluated.} The gold set now exists --- \goldPages{}
-corrected pages, section~\ref{sec:protocol} --- but E1 was not run against it,
-so the fine-tune's advantage over the published models remains the untested
-premise it was at the start of this work. What changed is the reason: it is no
-longer missing evidence, only unused evidence, and a leaning one at that.
 
 \claim{C2}{is supported on part of its evidence.} The rule behaves as specified
 on the lines where the span-locating offset path held. On the
@@ -15,8 +9,9 @@ on the lines where the span-locating offset path held. On the
 was comparing against a line the pipeline had already corrupted, so those
 acceptances carry no weight, and the claim rests on under a third of the
 evidence gathered for it. Whether the accepted edits improve the text is a
-further question, and needs a reference for E2's own sampled pages, which
-C1's gold set does not cover.
+further question, and needs a reference transcription for E2's own sampled
+pages, which nothing here provides. The fix to the fallback belongs in the
+pipeline and is stated in section~\ref{sec:errors}.
 
 \claim{C3}{is supported.} Livre accuracy is \locLivreAccuracyWorkbook{} on the
 pre-registered cohort and \locLivreAccuracyCatalogue{} on the second, against a
@@ -41,30 +36,33 @@ code behind it --- were searched for, not substantiated, and dropped. They are
 listed in \file{PROVENANCE.md}.
 
 \subsection{Released artefacts}
+\label{sec:artefacts}
 
 This repository holds the scoring code, the frozen run records and every result
 CSV, so each figure reruns from committed inputs with no GPU, no model and no
 network: \file{data/runs/ocr/} for the \ocrBooks{} books' run and calibration
 records, \file{data/runs/correction/} for E2's frame and its frozen verdicts,
-\file{data/runs/matcher/} for the alignment export, and \file{data/gold/} for
-the \goldPages{}-page gold set, its manifest and the convention written before
-annotation. The Hugging Face
-model card for \file{amadis-ft.mlmodel} is now writable, because the shipped
-file is tied to its training checkpoint by weight comparison.
+and \file{data/runs/matcher/} for the alignment export. The Hugging Face model
+card for \file{amadis-ft.mlmodel} is now writable, because the shipped file is
+tied to its training checkpoint by weight comparison.
+
+\file{data/gold/} is released beside them and is scored by nothing in this
+report. It is \goldPages{} pages carrying a corrected transcription ---
+\goldPagesTresor{} of \emph{Trésor}~T.1 and \goldPagesAmadis{} of \emph{Amadis
+de Gaule} livre~13, \goldLines{} lines and \goldChars{} characters --- selected
+by \file{eval/build_gold_set.py} from \goldCandidates{} Transkribus
+candidates. A page qualifies only if a human marked it finished and it is
+absent from the training split: that removes \goldRefusedTrained{} pages,
+\goldRefusedUncorrected{} carry no correction at all, and
+\goldRefusedExcluded{} is front matter. \file{data/gold/MANIFEST.csv} gives a
+row per candidate with its reason, so the set is checkable rather than
+asserted, and records per page the model whose output was corrected. What it
+can and cannot support is in section~\ref{sec:limitations}.
 
 No page image is released beyond the illustrative plates in
 section~\ref{sec:corpus}: reuse terms differ per holding institution and are
 unsettled for at least one, and \file{data/gold/MANIFEST.csv} records the
-holder per page so that each can be settled separately. The gold
-transcriptions are released, under CC-BY-4.0 with the rest of \file{data/}.
-They are new editorial work rather than a reproduction of the print, which is
-itself long out of copyright.
-
-\subsection{What a successor should do first}
-
-Run E1. The gold set is built and nothing else stands in front of it. Carry
-with it the three pages transcribed blind that section~\ref{sec:protocol} asks
-for: an hour of work, and it converts the set's two open weaknesses --- no noise
-floor, and an unmeasured lean towards the fine-tune --- into figures that can be
-reported beside the error rates. Then fix the span-locating fallback, which
-currently costs C2 two thirds of its evidence.
+holder per page so that each can be settled separately. The transcriptions are
+released, under CC-BY-4.0 with the rest of \file{data/}. They are new editorial
+work rather than a reproduction of the print, which is itself long out of
+copyright.

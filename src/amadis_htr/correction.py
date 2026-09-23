@@ -7,9 +7,10 @@ a generative model from rewriting text it was not asked to touch. On
 to modernise the spelling and the accept rule is what stops it.
 
 **This is not an accuracy.** Scoring correction on against correction off needs
-a reference transcription, and the gold set does not exist yet, so E2 reports
-what the rule did and says nothing about whether the edits it kept are
-improvements. `docs/pre-registration/2026-09-22-e2-correction-design.md` fixed
+a reference transcription for the pages E2 sampled, and there is none: the
+corrected pages under `data/gold/` are *Trésor* and one *Amadis* extract, while
+E2's frame is the 24 books' own OCR run. E2 reports what the rule did and says
+nothing about whether the edits it kept are improvements. `docs/pre-registration/2026-09-22-e2-correction-design.md` fixed
 that limit before the run rather than leaving it to be found afterwards.
 
 **Two denominators, and they are not interchangeable.** `reach` counts what the

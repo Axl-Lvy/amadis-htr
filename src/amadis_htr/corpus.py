@@ -6,14 +6,14 @@ measured one, so every figure in that section is rendered from `corpus.csv`
 and `training.csv`, and a figure this repository cannot derive does not reach
 the page at all.
 
-**Three of section 3's planned numbers are deliberately absent.** The baseline
-text's 1,770 chapters and 3,646,003 word tokens, and the seed index's 518,743
-seeds over 76,548 word types, are properties of a production database that is
-not in scope here: `PROVENANCE.md` records that the only read taken from it was
-the alignment export, and a census was not part of that read. Those three
-numbers appear in the design spec's prose with nothing behind them, which is
-the condition under which `PROVENANCE.md` already drops a figure. They have no
-macro, so a draft that cites one fails the build. What replaces them is the
+**Three numbers section 3 would otherwise state are deliberately absent.** The
+baseline text's 1,770 chapters and 3,646,003 word tokens, and the seed index's
+518,743 seeds over 76,548 word types, are properties of a production database
+that is not in scope here: `PROVENANCE.md` records that the only read taken
+from it was the alignment export, and a census was not part of that read. Those
+three numbers appear in the source repositories' prose with nothing behind
+them, which is the condition under which `PROVENANCE.md` already drops a
+figure. They have no macro, so a draft that cites one fails the build. What replaces them is the
 extract length the alignment export does support: a Trésor piece is a span in
 the baseline text, and its two offsets are committed.
 

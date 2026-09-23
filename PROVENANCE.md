@@ -155,5 +155,5 @@ separately and are not what any figure scores against.
 | `npm run harness:alignment` output, same directory | `5b8ac576cc68aa1ac069cea99c1779cb91b888d80602bd890e59231eae218b05` |
 
 The raw export carries passage titles and is mirrored rather than committed,
-because section 5 of the design spec keeps the corpus out of this repository.
+because the corpus text stays out of this repository under `LICENSE-DATA`.
 What is committed is keyed by piece and records the title agreement as a number.

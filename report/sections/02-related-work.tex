@@ -13,11 +13,9 @@ checkpoint this work fine-tunes from~\cite{gabay2024catmusprintlarge}.
 Recognition runs on kraken~7.0.2; the engine paper describes
 version~5~\cite{kiessling2025kraken} and the Zenodo record pins
 3.0b20~\cite{kiessling2021krakensoftware}, so 7.0.2 is identified by number.
-kraken ships no reference model for early-modern French print, which is why
-E1's comparator must be a chosen published model rather than a default.
 Transkribus supplied the annotation environment~\cite{kahle2017transkribus,
-muehlberger2019transkribus}; its models are opaque and it segments
-independently, so it enters this evaluation as a confounded baseline.
+muehlberger2019transkribus}, and its corrections are what the released gold set
+holds.
 
 \textbf{LLM post-correction, and its characteristic failure.} The literature
 converges on one warning. Kanerva et al.\ title it directly --- there are no
@@ -34,13 +32,15 @@ newspapers~\cite{thomas2024leveraging}. A model asked to fix a misread \qtr{ſ}
 will, given the opportunity, also modernise the spelling around it. The marker
 anchor removes the opportunity.
 
-\textbf{The gap.} To our knowledge no character error rate has been published
-for a CATMuS-Print fine-tune on a sixteenth-century French romance corpus. The
-nearest published work is CATMuS Gothic Print, a different base model on
-religious and polemical material, reporting no error
-rate~\cite{solfrini2024catmusgothic}, and Tiger~\cite{tiger2026overfit}, which
-evaluates HTR fine-tuning on French of the seventeenth and eighteenth
-centuries. The claim is held to \emph{to our knowledge} and no further: a
-literature search cannot rule out an unindexed thesis or a non-anglophone
-venue. Confidence intervals throughout follow the percentile
-bootstrap~\cite{efron1994bootstrap}.
+\textbf{The gap.} The literature above evaluates post-correction as a change
+in error rate, which measures the corrector's output and not the rule that
+decides whether to keep it. To our knowledge no published work reports what a
+marker-anchored accept rule refuses, on any material: the rejection is the
+contribution here, and it is a different quantity from a CER delta. The claim
+is held to \emph{to our knowledge} and no further --- a literature search cannot
+rule out an unindexed thesis or a non-anglophone venue. On this corpus in
+particular the nearest published work is CATMuS Gothic Print, a different base
+model on religious and polemical material~\cite{solfrini2024catmusgothic}, and
+Tiger~\cite{tiger2026overfit}, which evaluates HTR fine-tuning on French of the
+seventeenth and eighteenth centuries. Confidence intervals throughout follow
+the percentile bootstrap~\cite{efron1994bootstrap}.

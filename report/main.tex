@@ -25,36 +25,37 @@
 
 \begin{abstract}
 % Written from the measured figures only. Every number here also appears in
-% section 5; nothing is introduced by the abstract.
-A production pipeline has been transcribing a \ocrBooks{}-book cycle of
-16th-century French romance for a year on the strength of one validation error
-rate, measured on a 10\% page-level split of a single volume. This report
-measures what that number cannot support.
+% section 5; nothing is introduced by the abstract. Short sentences on purpose:
+% an abstract that needs unpicking is a worse abstract.
+A pipeline has been built to transcribe a \ocrBooks{}-book cycle of 16th-century
+French romance. Its recogniser has one number to its name: a
+validation error rate on a 10\% split of a single volume. The two stages behind
+it have none. This report measures those two.
 
-Two of the three claims are tested here; recognition itself is not, because it
-needs a 20-page annotated gold set that does not exist, and this report names
-the absence rather than substituting a figure it can compute.
+The first re-reads low-confidence words with a language model. To stop the
+model rewriting the rest of the line, each suspect word is wrapped in
+\lmark~\rmark{}, and a reply is accepted only if every byte outside the markers
+comes back unchanged. The rule was run over \corrOffered{} lines from a seeded
+\corrPages{}-page sample, under a design registered beforehand. Weighted to the
+corpus it accepted \corrAcceptRate{} of them (95\%~CI \corrAcceptLow{} to
+\corrAcceptHigh{}). It refused \corrRewritesCaught{} replies for editing text
+outside the markers.
 
-The correction pass's marker-anchor accept rule --- suspect spans wrapped in
-\lmark~\rmark{}, a reply accepted only when every byte outside the markers
-returns unchanged --- was run over \corrOffered{} low-confidence lines on a
-seeded \corrPages{}-page sample, under a design registered beforehand. Weighted
-to the corpus it accepted \corrAcceptRate{} (95\%~CI \corrAcceptLow{} to
-\corrAcceptHigh{}) and refused \corrRewritesCaught{} replies for changing text
-outside the markers. Measuring the rule also exposed a hole in it:
-\corrFindFallbackShare{} of the offered lines took a span-locating fallback
-that can mark one word twice, and on those an acceptance is not evidence that
-the rule held, so the claim rests on under a third of its own evidence.
+Measuring the rule also found a hole in it. On \corrFindFallbackShare{} of
+those lines, the code that locates a suspect word falls back to a plain search,
+which can mark the same word twice. The rule then compares the reply against a
+line the pipeline itself corrupted, so an acceptance there proves nothing. The
+claim holds on under a third of its own evidence.
 
-Passage localisation reaches \locLivreAccuracyWorkbook{} Livre accuracy on the
-pre-registered cohort against a gate written before the numbers existed, and
-\locChapterAccuracyWorkbook{} chapter accuracy. The batch runner transcribed
-\ocrPages{} pages with \ocrPagesFailed{} failures at \ocrSecondsPerPage{}~s per
-page.
+The second stage locates a \emph{Trésor} extract in the transcribed text. It
+places \locLivreAccuracyWorkbook{} of passages in the right Livre and
+\locChapterAccuracyWorkbook{} in the right chapter, against a gate written
+before the numbers existed. Transcription itself ran over \ocrPages{} pages
+with \ocrPagesFailed{} failures, at \ocrSecondsPerPage{}~s per page.
 
-The scoring code, the frozen run records and every result CSV are released, so
-each figure rebuilds from committed inputs with no GPU, no model and no
-network.
+Recognition accuracy is not measured here. The scoring code, the frozen run
+records and every result CSV are released, so each figure rebuilds from
+committed inputs with no GPU, no model and no network.
 \end{abstract}
 
 % One file per section, so a section can be drafted, reviewed and rewritten

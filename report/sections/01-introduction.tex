@@ -6,8 +6,8 @@ A digitisation pipeline has been reading sixteenth-century French romance for
 this project for a year. It has one recognition figure to its name: a
 validation character error rate, measured on a 10\% page-level split of a
 single volume, on the material the model was fine-tuned on. That number
-selected a checkpoint. It cannot tell anyone how the system reads the corpus it
-was built for. This report is the measurement.
+selected a checkpoint, and nothing else about the system has ever been
+measured. This report is the measurement.
 
 Sixteenth-century print defeats off-the-shelf OCR for reasons that compound.
 The long \qtr{ſ} is a distinct character that modern models map onto \qtr{f}.
@@ -19,17 +19,17 @@ corpus and arabic in the other, and the scans come from three institutions at
 three qualities, one of them stamped across the page.
 Figure~\ref{fig:plate} is one such page.
 
-What the project could state before this report: nothing. No recognition figure
-of any kind for \emph{Amadis de Gaule}, the work the system exists to read; no
-word error rate anywhere; no measured baseline; no evaluation of either LLM
-pass, including the accept rule that is the pipeline's most distinctive
-component; and structural figures computed on every run and discarded.
+The answer to that has been a pipeline of three parts: a fine-tuned recogniser,
+two opt-in LLM passes behind it, and a retrieval stage that locates an
+anthology extract in the resulting text. Of the three, the two that were never
+evaluated at all are the ones this report takes: the accept rule that governs
+the generative pass, and the retrieval stage. Both ran in production for a year
+on no evidence. What the project could state about either before this report is
+nothing --- not a rate, not a failure mode, not a threshold anyone had swept ---
+and the structural figures the pipeline computed on every run were discarded
+unread.
 
-\subsection{Three claims}
-
-\claim{C1.}{The fine-tune reads this corpus better than the published models
-do.} Evaluated on annotated pages of each work, one error rate per work,
-against published models run under held-constant segmentation.
+\subsection{Two claims}
 
 \claim{C2.}{A conservative accept rule keeps a generative pass from rewriting
 the text.} Words carrying a low-confidence character are wrapped in
@@ -46,5 +46,7 @@ known. Section~\ref{sec:e5} reports \locLivreAccuracyWorkbook{} Livre accuracy
 on the pre-registered cohort.
 
 \medskip\noindent
-Of the five experiments that test a claim, three are unmeasured. They are named
-as unmeasured, and section~\ref{sec:limitations} says what that costs.
+The claims and the experiments keep the numbering of the design they were
+registered under, so C2 and C3 are answered by E2 and E5, and E6 is descriptive
+throughput and structure. Recognition accuracy is outside the scope of this
+report; section~\ref{sec:limitations} says what that leaves open.

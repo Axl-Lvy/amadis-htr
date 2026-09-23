@@ -13,10 +13,10 @@ blind, and it is biased towards whichever system produced the seed: an error
 that reads plausibly survives correction. Recording the seed per page is what
 turns that bias from an admission into something a later pass can measure.
 
-The line segmentation is Transkribus's too, not this harness's. Section 5 holds
-segmentation constant across the systems it compares; here the reference itself
-carries Transkribus's line boxes, which is a second thing the seed column exists
-to make visible.
+The line segmentation is Transkribus's too, not this harness's, so any later
+comparison against Transkribus inherits its line boxes. That is the second thing
+the seed column exists to make visible. `data/gold/GUIDELINES.md` states both
+beside the transcription convention the pages follow.
 """
 
 import csv

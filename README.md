@@ -7,6 +7,15 @@ This repository holds the evaluation, not the pipeline. The pipeline itself is
 described in `pipeline/` as a sanitised snapshot, with its provenance recorded
 in `PROVENANCE.md`.
 
+## What is not here
+
+The report measures two stages: the correction pass's accept rule and passage
+localisation, with throughput and structure described beside them. **It reports
+no recognition accuracy** — no character error rate for the fine-tune, and no
+comparison against the models it replaced. `data/gold/` is released and nothing
+in the report is scored against it; `data/gold/GUIDELINES.md` states what that
+set could and could not support if it were.
+
 ## What reruns here
 
 Everything under `src/amadis_htr/` runs on the frozen artefacts in `data/`,
@@ -45,7 +54,7 @@ Their outputs are committed so that everything above reruns without any of it.
 | --- | --- |
 | `src/amadis_htr/` | the scoring code |
 | `tests/` | one test module per source module |
-| `data/gold/` | the gold set: 118 corrected pages, their manifest and the guidelines |
+| `data/gold/` | 118 corrected pages, their manifest and what they can and cannot support |
 | `data/localisation/` | the human-assigned reference for passage localisation, and the map between the two piece catalogues |
 | `eval/` | the scripts that derive a committed artefact from a source file held elsewhere |
 | `data/runs/` | every system's frozen output: the OCR run records, the matcher export, and E2's frame and verdicts |
@@ -94,7 +103,9 @@ canonical: a change lands in `report/sections/` first and is carried to
 The design notes, specifications and working notes this repository used to
 carry were removed on 2026-09-22: the report states its own protocol, and the
 history holds the rest. What survives is `docs/pre-registration/`, because a
-gate written before the numbers is evidence rather than commentary.
+gate written before the numbers is evidence rather than commentary. Those two
+files are dated records and are left exactly as they were written, so they
+still name experiments this project did not go on to run.
 
 ## Licence
 

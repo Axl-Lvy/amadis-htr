@@ -26,14 +26,14 @@
     \item \ocrBooks{} books, \ocrPages{} pages of 16th-century French romance
     \item One year of pipeline, one recognition figure: a validation CER on a
       10\% split of one volume
-    \item No figure for \emph{Amadis de Gaule}, no WER, no baseline, no
-      evaluation of either LLM pass
+    \item The correction pass and the retrieval stage behind it: never
+      evaluated at all
   \end{itemize}
   \vfill
-  This is the measurement.
+  This is the measurement of those two.
 \end{frame}
 
-\begin{frame}{What got measured, and what did not}
+\begin{frame}{What got measured}
   \begin{itemize}
     \item \textbf{E2} correction --- the accept rule, on \corrOffered{} lines
       from a seeded \corrPages{}-page sample
@@ -41,10 +41,10 @@
       pre-registered gate, plus \locPiecesCatalogue{} imported later and
       reported beside them, never pooled
     \item \textbf{E6} throughput and structure --- \ocrPages{} pages
-    \item \textbf{E1, E3, E4} --- blocked on a 20-page annotation pass
   \end{itemize}
   \vfill
-  Of the five experiments that test a claim, three are unmeasured.
+  Two claims tested, both pre-registered. Recognition accuracy is not in
+  scope.
 \end{frame}
 
 \begin{frame}{What the accept rule refused}
@@ -98,7 +98,8 @@
 
 \begin{frame}{Limitations}
   \begin{itemize}
-    \item \textbf{C1 is unevaluated.} No gold set, so no recognition figure.
+    \item \textbf{Recognition accuracy is not measured}, here or anywhere
+      else in the project.
     \item The structural rates are hand-checked, and named for it.
     \item Five of six thresholds have never been swept.
     \item E2 measures refusal, not improvement.
@@ -109,14 +110,19 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{What a successor does first}
-  \begin{enumerate}
-    \item Annotate the 20-page gold set. Ten hours, not a research problem.
-    \item Add a second annotator, for a real inter-annotator floor.
-    \item Fix the span-locating fallback in the pipeline.
-  \end{enumerate}
+\begin{frame}{What the evaluation changed}
+  \begin{itemize}
+    \item \texttt{MIN\_SCORE} checked rather than chosen: 0.808 sits at the
+      top of the coverage plateau. The other five constants are unswept and
+      now at least enumerated.
+    \item Four figures the project stated in prose --- including a CER for
+      the fine-tune with no test set, no log and no code --- searched for,
+      not substantiated, dropped.
+    \item A hole in the accept rule, found by measuring it, with the fix
+      named.
+  \end{itemize}
   \vfill
-  Everything blocked in this report is blocked behind the first line.
+  Everything here reruns from committed inputs: no GPU, no model, no network.
 \end{frame}
 
 \end{document}

@@ -1,8 +1,8 @@
 """E2's page set, drawn from the frozen frame and committed before the run.
 
 The frame is `data/runs/correction/REACH.csv` restricted to pages carrying at
-least one suspect span, and the draw is the same seeded stratified sampler the
-gold set uses. Both the seed and the per-stratum size are fixed in
+least one suspect span, and the draw is `src/amadis_htr/sampling.py`'s seeded
+stratified sampler. Both the seed and the per-stratum size are fixed in
 `docs/pre-registration/2026-09-22-e2-correction-design.md`, which was committed
 before this ran.
 

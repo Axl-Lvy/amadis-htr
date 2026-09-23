@@ -355,7 +355,7 @@ THROUGHPUT_MACROS: tuple[Macro, ...] = (
 #: Section 3, the corpus. Descriptive, and counted from the repository's own
 #: files rather than from the production database, so what has no macro here is
 #: what this repository cannot derive: `src/amadis_htr/corpus.py` names the
-#: three figures the design spec states in prose and this registry drops.
+#: three figures the source repositories state in prose and this registry drops.
 #:
 #: The cohorts partition the aligned pieces and not the reference, so
 #: `\corpusPieces` is larger than the two cohort counts together and
@@ -373,7 +373,7 @@ CORPUS_MACROS: tuple[Macro, ...] = (
     Macro("corpusConjecture", "corpus.csv", {"cohort": "all"}, "conjecture", "int"),
     Macro("corpusUncertain", "corpus.csv", {"cohort": "all"}, "uncertain", "int"),
     Macro("corpusUnassigned", "corpus.csv", {"cohort": "all"}, "none", "int"),
-    # The extract length is what survives of the design spec's "1411 code
+    # The extract length is what survives of the source prose's "1411 code
     # points on average": the alignment export carries both offsets, so the
     # span a piece occupies in the baseline text is derivable even though the
     # baseline text itself is not in this repository.
@@ -440,6 +440,17 @@ CORRECTION_MACROS: tuple[Macro, ...] = (
         "lines_with_span", "pct1", over="correctable",
     ),
     Macro("corrReachSpans", "correction-reach.csv", {"cohort": "all"}, "spans", "int"),
+    # The two numbers the frame weighting is read from. Stated as counts and
+    # never as a share of the corpus: `over` divides within one row, and the
+    # denominator here lives in the `all` row.
+    Macro(
+        "corrReachLinesWithSpanFamilyA", "correction-reach.csv", {"cohort": "A"},
+        "lines_with_span", "int",
+    ),
+    Macro(
+        "corrReachLinesWithSpanFamilyB", "correction-reach.csv", {"cohort": "B"},
+        "lines_with_span", "int",
+    ),
     Macro(
         "corrPages", "correction-verdicts.csv", {"cohort": "all"}, "pages", "int"
     ),

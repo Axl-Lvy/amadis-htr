@@ -8,33 +8,6 @@ from typing import Mapping, Sequence
 
 import numpy as np
 
-from amadis_htr.cer import PageScore
-
-
-def bootstrap_cer(
-    scores: Sequence[PageScore],
-    *,
-    resamples: int = 10_000,
-    seed: int = 0,
-    alpha: float = 0.05,
-) -> tuple[float, float, float]:
-    """Return (point estimate, lower bound, upper bound) for the CER."""
-    if not scores:
-        return (0.0, 0.0, 0.0)
-
-    edits = np.array([s.char_edits for s in scores], dtype=float)
-    chars = np.array([s.ref_chars for s in scores], dtype=float)
-    point = float(edits.sum() / chars.sum()) if chars.sum() else 0.0
-
-    rng = np.random.default_rng(seed)
-    draws = rng.integers(0, len(scores), size=(resamples, len(scores)))
-    totals = chars[draws].sum(axis=1)
-    with np.errstate(invalid="ignore", divide="ignore"):
-        stats = np.where(totals > 0, edits[draws].sum(axis=1) / totals, 0.0)
-
-    low, high = np.quantile(stats, [alpha / 2, 1 - alpha / 2])
-    return (point, float(low), float(high))
-
 
 def bootstrap_stratified_rate(
     strata: Mapping[str, tuple[Sequence[tuple[str, int, int]], float]],
@@ -102,7 +75,7 @@ def bootstrap_rate(
 ) -> tuple[float, float, float]:
     """Interval for a ratio of two per-page totals, `(id, numerator, denominator)`.
 
-    The same percentile bootstrap as `bootstrap_cer` and for the same reason:
+    A percentile bootstrap whose unit is the page:
     E2's acceptance rate is a ratio of counts whose unit is the page, because
     the lines on one page share a scan and a stretch of type wear and their
     verdicts are correlated. Resampling lines would report an interval narrower
