@@ -15,7 +15,7 @@ with no GPU, no model server and no network:
 ```sh
 uv run --extra dev pytest        # the harness's own tests
 ./eval/run_all.sh                # every result CSV, macro, table and figure
-make all                         # the report and the defence deck
+make all                         # the report, its French edition and the deck
 ```
 
 `eval/run_all.sh` rewrites every generated file from the frozen inputs. On
@@ -55,6 +55,7 @@ Their outputs are committed so that everything above reruns without any of it.
 | `figures/` | the matplotlib scripts that draw every figure in the report |
 | `report/plates/` | the illustrative plates: a page of the source print, and the line crops the layout stage keys on |
 | `report/sections/` | one file per section of the report, each carrying its own drafting status |
+| `report/sections-fr/` | the French edition's sections, translated from `report/sections/`, which stays canonical |
 | `report/`, `slides/` | the report and the defence deck, sharing one preamble |
 | `pipeline/` | the sanitised pipeline snapshot |
 
@@ -83,6 +84,12 @@ never edited by hand. A number the evaluation has not produced has no macro,
 and citing it is an undefined control sequence, which stops the build rather
 than reaching the page. The same breakage is caught in the fast test suite, so
 a section citing an unmeasured figure fails without a LaTeX toolchain present.
+
+The French edition (`make report-fr`, `report/main-fr.pdf`) reads
+`report/generated/fr/`, which the same scripts write from the same CSVs with
+French number typography and translated labels. The English report is
+canonical: a change lands in `report/sections/` first and is carried to
+`report/sections-fr/` after.
 
 The design notes, specifications and working notes this repository used to
 carry were removed on 2026-09-22: the report states its own protocol, and the

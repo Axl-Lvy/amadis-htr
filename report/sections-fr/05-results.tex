@@ -1,0 +1,181 @@
+% Translated from sections/05-results.tex on 2026-09-23. The English file is
+% canonical. Change it first, then carry the change here.
+%
+% Findings only, as in the English file. Interpretation is section 6.
+\section{Résultats}
+\label{sec:results}
+
+Chaque partie s'ouvre sur son affirmation, son unité d'analyse, son
+système de comparaison et sa méthode d'incertitude, puis rapporte les
+résultats. E1, E3 et E4 n'y figurent pas. Le jeu de référence qu'elles
+exigent existe désormais (\goldPages{}~pages, section~\ref{sec:protocol}), mais
+aucune des trois n'a été exécutée.
+
+\subsection{E5: localiser un extrait du \emph{Trésor}}
+\label{sec:e5}
+
+\textbf{Affirmation.} Un extrait du \emph{Trésor} peut être localisé dans le
+texte de base. \textbf{Unité.} La pièce, au sein d'une cohorte.
+\textbf{Comparaison.} Aucune n'est publiée. Le critère préenregistré en tient
+lieu. \textbf{Incertitude.} Bootstrap sur les pièces.
+
+\begin{table}[t]
+  \centering
+  \input{generated/fr/tables/e5-localisation.tex}
+  \caption{E5, attributions certaines seulement. Les deux cohortes ne sont
+    jamais regroupées, car le critère a été préenregistré sur le lot du
+    classeur quand il était le seul à exister.}
+  \label{tab:e5}
+\end{table}
+
+Il y a trois dénominateurs, et ils diffèrent. Les pièces de la cohorte, les
+pièces certaines pour un chiffre au niveau du Livre, et les pièces dont le
+numéro de chapitre imprimé est récupérable pour un chiffre au niveau du
+chapitre. Ces dernières sont \locChapterScoreableWorkbook{} sur
+\locPiecesWorkbook{} dans la cohorte soumise au critère. Parmi les autres,
+\locChapterUnavailableWorkbook{}~pièces sont tombées sur un intitulé imprimé
+dont aucun numéro de chapitre n'a pu être tiré, et
+\locChapterUnreferencedWorkbook{} a été cataloguée dans un Livre sans chapitre
+nommé.
+
+Le tableau~\ref{tab:e5} donne le résultat. L'exactitude au niveau du Livre est
+de \locLivreAccuracyWorkbook{} sur la cohorte classeur et de
+\locLivreAccuracyCatalogue{} sur la cohorte catalogue. L'exactitude au niveau
+du chapitre est de \locChapterAccuracyWorkbook{} et de
+\locChapterAccuracyCatalogue{}. Le critère, écrit avant l'évaluation de
+l'apparieur, se lit ainsi: «\textenglish{\emph{Correct LIVRE well above 90\%
+means the all-24-Livres search holds \dots{} Proceed to phase B}}».\footnote{Un
+taux de Livre exact nettement supérieur à 90\,\% signifie que la recherche sur
+les 24~Livres tient \dots{} Passer à la phase~B.}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/fr/figures/e5-sweep.pdf}
+  \caption{E5, seuil d'acceptation contre précision (en haut) et couverture
+    (en bas). Les seuils qui n'acceptent rien sont omis, la précision sur un
+    ensemble accepté vide n'étant pas définie.}
+  \label{fig:e5-sweep}
+\end{figure}
+
+La figure~\ref{fig:e5-sweep} fait varier le seuil d'acceptation. La précision
+reste proche de 100\,\% à tous les seuils dans les deux cohortes. La courbe ne
+désigne donc pas de point de fonctionnement, et c'est la couverture qui le
+fait. Elle reste supérieure à 98\,\% jusqu'à 0,86 dans la cohorte classeur et
+jusqu'à 0,85 dans la cohorte catalogue, puis décroche. À 0,90 elle n'est plus
+que de 73\,\% et 53\,\%. L'effet le plus important de E5 est l'écart entre
+l'exactitude au niveau du Livre et celle au niveau du chapitre.
+
+\subsection{E2: la règle d'acceptation par ancrage}
+\label{sec:e2}
+
+\textbf{Affirmation.} La règle d'acceptation empêche une passe générative de
+réécrire le texte. \textbf{Unité.} La ligne soumise, regroupée par page.
+\textbf{Comparaison.} La correction désactivée, qui n'est autre que la sortie
+de reconnaissance figée. Les \ocrBooks{}~livres ont tous enregistré zéro
+mot corrigé. \textbf{Incertitude.} Bootstrap stratifié sur les pages,
+10\,000~tirages, à 95\,\%.
+
+Sur l'ensemble du corpus, la passe examinerait \corrReachLinesWithSpan{} des
+\corrReachCorrectable{}~lignes corrigeables (\corrReachLineShare{}), portant
+\corrReachSpans{}~segments suspects, sur \corrReachPagesWithSpan{} des
+\corrReachPages{}~pages (\corrReachPageShare{}). Ce décompte est déterministe.
+Il ne dépend que des confiances du reconnaisseur, sans aucun modèle.
+L'échantillon compte \corrOffered{}~lignes sur \corrPages{}~pages, tirées à
+raison de 200 par famille typographique avec une graine versionnée.
+
+\begin{table}[t]
+  \centering
+  \input{generated/fr/tables/e2-correction.tex}
+  \caption{E2 par famille typographique. \emph{Lignes} compte les lignes
+    soumises à la passe, \emph{Réécritures} les
+    réponses refusées pour avoir modifié le texte hors des marqueurs. La ligne
+    de l'échantillon ne porte que des effectifs. Le tirage est égal par
+    famille alors que la base de sondage ne l'est pas, si bien qu'un taux
+    calculé sur cette ligne donnerait à la famille~A plus du double de son
+    poids. Le taux du corpus est pondéré par la base de sondage.}
+  \label{tab:e2}
+\end{table}
+
+Sur les \corrOffered{}~lignes soumises, \corrAccepted{} ont été acceptées. Pondéré
+aux lignes suspectes du corpus, le taux d'acceptation est de \corrAcceptRate{}
+(IC à 95\,\% de \corrAcceptLow{} à \corrAcceptHigh{}). Parmi les refus,
+\corrRewritesCaught{} tenaient à une modification du texte hors des marqueurs.
+Cela représente \corrRewriteRate{} des lignes soumises après pondération, sur
+\corrRewriteSegments{}~segments et \corrRewriteEdits{}~caractères, dont
+\corrRewritesSubstantial{} déplaçaient plus de deux caractères. Les
+\corrProtocolFailures{} autres refus sont des réponses qui ne sont jamais
+devenues des modifications candidates, et ils ne pèsent en rien sur
+l'affirmation. La figure~\ref{fig:e2-confidence} compare la confiance du
+reconnaisseur sur les lignes acceptées et refusées.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/fr/figures/e2-confidence.pdf}
+  \caption{Confiance minimale d'un caractère sur une ligne, lignes acceptées
+    contre lignes refusées.}
+  \label{fig:e2-confidence}
+\end{figure}
+
+Parmi les lignes soumises, \corrOnFindFallback{} (\corrFindFallbackShare{}) ont
+emprunté le repli de localisation des segments décrit en
+section~\ref{sec:errors}. Sur ces lignes, une acceptation ne prouve pas que la
+règle a tenu.
+
+L'exécution a utilisé quatre processus concurrents. Le protocole enregistré
+supposait que cela changerait le débit et non le verdict. Un rejeu de
+\corrReplayLines{}~lignes tirées d'un échantillon réduit de
+\corrReplayPages{}~pages, avec graine et un seul processus, a reproduit
+\corrReplayAgree{} des \corrReplayLines{}~verdicts. C'est une donnée là où il
+n'y avait qu'une hypothèse, et non une preuve que le décodage est
+déterministe.
+
+L'acceptation n'est pas un taux de modification. Parmi les lignes acceptées,
+\corrAcceptedUnchanged{} sont revenues avec tous leurs segments intacts, et
+\corrChangedSpans{}~segments ont réellement été modifiés. \textbf{Ce n'est pas
+non plus une exactitude.} Comparer la correction activée à la correction
+désactivée exige une référence pour les pages tirées par E2, et le jeu de
+référence n'en couvre aucune. E2 rapporte ce qu'a fait la règle, et ne dit
+rien de l'effet des modifications retenues sur la qualité du texte.
+
+\subsection{E6: débit et structure}
+\label{sec:e6}
+
+\textbf{Affirmation.} Descriptive seulement. \textbf{Unité.} Le livre et la
+page. \textbf{Comparaison.} Aucune. \textbf{Incertitude.} Aucune, car ce sont
+des décomptes.
+
+\begin{table}[t]
+  \centering
+  \input{generated/fr/tables/e6-throughput.tex}
+  \caption{Débit de E6. Un même modèle, un même matériel et une même largeur
+    de travail pour les \ocrBooks{}~livres, ce qui rend le regroupement
+    légitime.}
+  \label{tab:e6}
+\end{table}
+
+Les \ocrBooks{}~livres, soit \ocrPages{}~pages, ont été traités avec
+\ocrPagesFailed{}~échec en \ocrHours{}~heures, à \ocrSecondsPerPage{}~s par page. La
+figure~\ref{fig:e6-throughput} montre la dispersion par livre. Les familles
+diffèrent peu, avec \ocrSecondsPerPageFamilyA{}~s contre
+\ocrSecondsPerPageFamilyB{}~s.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/fr/figures/e6-throughput.pdf}
+  \caption{Secondes par page, par livre.}
+  \label{fig:e6-throughput}
+\end{figure}
+
+\textbf{La structure ne porte que sur la famille~A, et elle a été vérifiée à la
+main.} Les livres~13 à~24 n'impriment pas de table des matières. Leur
+calibration ne comporte donc pas de bloc de correspondance, et il n'existe pas
+de chiffre structurel pour tout le corpus. Sur la famille~A, l'exécution
+retrouve \structMatchedA{} des \structChaptersA{}~chapitres imprimés
+(\structRecallHandCheckedA{}) avec une précision de
+\structPrecisionHandCheckedA{}. Elle en manque \structMissingA{} et propose
+\structSpuriousA{}~débuts de chapitre que la table imprimée ne porte pas. Ces
+deux taux ne décrivent pas le détecteur seul. Le fichier de corrections de
+chaque livre contient des décisions de chapitre prises à la main par un
+lecteur, et la calibration a été exécutée après elles. Ce qui est rapporté est
+donc le détecteur corrigé. Les décomptes qui les accompagnent sont exactement
+ce qu'ils disent être.

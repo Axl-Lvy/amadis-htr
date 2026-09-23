@@ -1,0 +1,49 @@
+% Translated from sections/02-related-work.tex on 2026-09-23. The English file
+% is canonical. Change it first, then carry the change here.
+\section{Travaux connexes}
+\label{sec:related}
+
+\textbf{CATMuS et le moteur.} CATMuS est un standard de transcription partagé
+avant d'être un modèle. Sa version médiévale a fixé les règles d'annotation et
+le protocole transséculaire qui rendent deux modèles affinés
+comparables~\cite{clerice2024catmusmedieval}, et CATMuS-Print étend la démarche
+à l'imprimé~\cite{gabay2024catmusprint}. CATMuS-Print~[Large] est le point de
+contrôle dont ce travail part pour l'affinage~\cite{gabay2024catmusprintlarge}.
+La reconnaissance tourne sous kraken~7.0.2. L'article sur le moteur décrit la
+version~5~\cite{kiessling2025kraken} et la notice Zenodo fixe la
+3.0b20~\cite{kiessling2021krakensoftware}, si bien que la 7.0.2 n'est
+identifiée que par son numéro. kraken ne fournit aucun modèle de référence pour
+l'imprimé français de la première modernité. C'est pourquoi le système de
+comparaison de E1 doit être un modèle publié choisi, et non un modèle par
+défaut. Transkribus a fourni l'environnement
+d'annotation~\cite{kahle2017transkribus, muehlberger2019transkribus}. Ses
+modèles sont opaques et il segmente de son côté, si bien qu'il entre dans
+cette évaluation comme un système de comparaison confondu.
+
+\textbf{La correction par LLM, et son défaut caractéristique.} La littérature
+converge vers un même avertissement. Kanerva et al.\ l'énoncent dès leur titre:
+il n'y a pas de repas gratuit. Un correcteur LLM peut dégrader une
+reconnaissance déjà bonne au lieu de l'améliorer~\cite{kanerva2025nofreelunches}.
+Boros et al.\ font le même constat pour plusieurs modes de requête sur des
+transcriptions historiques~\cite{boros2024postcorrection}. La compétition
+HIPE-OCRepair signale la surcorrection des entrées peu bruitées comme son
+problème récurrent, et ajoute que les métriques au niveau du caractère ne
+suffisent pas à la saisir~\cite{ehrmann2026hipeocrepair}. Une étape ByT5
+modulaire placée après kraken rapporte une baisse du CER sur des incunables du
+XV\textsuperscript{e}~siècle~\cite{momtaz2025modular}, lue ici dans son seul
+résumé. Thomas et al.\ aboutissent au choix de conception inverse sur des
+journaux anciens~\cite{thomas2024leveraging}. Un modèle chargé de corriger un
+\qtr{ſ} mal lu modernisera aussi, si l'occasion lui en est donnée,
+l'orthographe qui l'entoure. L'ancrage par marqueurs supprime l'occasion.
+
+\textbf{La lacune.} À notre connaissance, aucun taux d'erreur caractère n'a été
+publié pour un affinage de CATMuS-Print sur un corpus de romans français du
+\sxvi. Les travaux publiés les plus proches sont CATMuS Gothic Print, un autre
+modèle de base appliqué à des textes religieux et polémiques, sans taux
+d'erreur publié~\cite{solfrini2024catmusgothic}, et Tiger~\cite{tiger2026overfit},
+qui évalue l'affinage HTR sur le français des XVII\textsuperscript{e} et
+XVIII\textsuperscript{e}~siècles. L'affirmation s'en tient à \emph{à notre
+connaissance}. Une recherche bibliographique ne peut exclure une thèse non
+indexée ou une publication hors du monde anglophone. Les intervalles de
+confiance suivent partout le bootstrap par
+percentiles~\cite{efron1994bootstrap}.

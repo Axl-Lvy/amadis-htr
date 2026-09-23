@@ -18,7 +18,54 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
-from figures.style import BLUE, FAMILY, GREY, LIGHT, RED, RESULTS, TEAL, save, setup
+from figures.style import (
+    BLUE,
+    FAMILY,
+    GREY,
+    LIGHT,
+    RED,
+    RESULTS,
+    TEAL,
+    localise_ticks,
+    save,
+    setup,
+)
+
+#: Every word a figure prints, per report language.
+LABELS = {
+    "en": {
+        "workbook": "workbook",
+        "catalogue": "catalogue",
+        "operating point": "operating point",
+        "precision": "precision (%)",
+        "coverage": "coverage (%)",
+        "threshold": "accept threshold",
+        "corpus mean": "corpus mean",
+        "family": "family {}",
+        "seconds per page": "seconds per page",
+        "book": "book",
+        "accepted": "accepted ({})",
+        "rejected": "rejected ({})",
+        "confidence": "lowest character confidence on the line",
+        "density": "density",
+    },
+    "fr": {
+        "workbook": "classeur",
+        "catalogue": "catalogue",
+        "operating point": "seuil retenu",
+        "precision": "précision (%)",
+        "coverage": "couverture (%)",
+        "threshold": "seuil d'acceptation",
+        "corpus mean": "moyenne",
+        "family": "famille {}",
+        "seconds per page": "secondes par page",
+        "book": "livre",
+        "accepted": "acceptées ({})",
+        "rejected": "refusées ({})",
+        "confidence": "confiance minimale d'un caractère de la ligne",
+        "density": "densité",
+    },
+}
 
 
 def rows(name: str) -> list[dict[str, str]]:
@@ -30,7 +77,7 @@ def have(*names: str) -> bool:
     return all((RESULTS / name).exists() for name in names)
 
 
-def localisation_sweep() -> None:
+def localisation_sweep(locale: str) -> None:
     """E5: precision and coverage against the accept threshold, per cohort.
 
     The sweep is E5's real result. A single threshold observed once is not a
@@ -41,6 +88,7 @@ def localisation_sweep() -> None:
     that would show the precision collapsing at a high threshold when what
     collapsed is the denominator.
     """
+    words = LABELS[locale]
     fig, (top, bottom) = plt.subplots(
         2, 1, figsize=(5.2, 2.5), sharex=True, height_ratios=[1, 1]
     )
@@ -49,31 +97,34 @@ def localisation_sweep() -> None:
                 if int(r["accepted"]) > 0]
         x = [float(r["threshold"]) for r in data]
         top.plot(x, [float(r["precision"]) * 100 for r in data], color=colour,
-                 label=cohort)
+                 label=words[cohort])
         bottom.plot(x, [float(r["coverage"]) * 100 for r in data], color=colour)
 
     # MIN_SCORE, the threshold the system actually runs at.
     for axis in (top, bottom):
         axis.axvline(0.808, color=GREY, lw=0.8, ls=":", zorder=0)
-    top.text(0.812, 98.35, "operating point", color=GREY, fontsize=7, va="bottom")
+    top.text(0.812, 98.35, words["operating point"], color=GREY, fontsize=7,
+             va="bottom")
 
-    top.set_ylabel("precision (%)")
+    top.set_ylabel(words["precision"])
     top.set_ylim(98.2, 100.3)
     top.legend(loc="lower left")
-    bottom.set_ylabel("coverage (%)")
-    bottom.set_xlabel("accept threshold")
+    bottom.set_ylabel(words["coverage"])
+    bottom.set_xlabel(words["threshold"])
     bottom.set_ylim(-3, 105)
     for axis in (top, bottom):
         axis.margins(x=0.01)
-    save(fig, "e5-sweep")
+    localise_ticks(fig, locale)
+    save(fig, "e5-sweep", locale)
 
 
-def throughput_by_book() -> None:
+def throughput_by_book(locale: str) -> None:
     """E6: seconds per page, one bar per book, coloured by type family.
 
     The pooled mean answers how fast; this answers how evenly, and the spread
     across 24 books is what a single mean hides.
     """
+    words = LABELS[locale]
     data = rows("throughput-by-book.csv")
     pooled = {r["cohort"]: r for r in rows("throughput.csv")}
     fig, axis = plt.subplots(figsize=(5.2, 1.8))
@@ -87,23 +138,24 @@ def throughput_by_book() -> None:
         float(pooled["all"]["seconds_per_page"]), color=RED, lw=0.9, ls="--", zorder=3
     )
     axis.text(
-        24.6, float(pooled["all"]["seconds_per_page"]), "corpus mean",
+        24.6, float(pooled["all"]["seconds_per_page"]), words["corpus mean"],
         color=RED, fontsize=7, va="bottom",
     )
     handles = [
-        plt.Rectangle((0, 0), 1, 1, color=FAMILY[f], label=f"family {f}")
+        plt.Rectangle((0, 0), 1, 1, color=FAMILY[f], label=words["family"].format(f))
         for f in ("A", "B")
     ]
     axis.legend(handles=handles, loc="upper left", ncols=2)
-    axis.set_ylabel("seconds per page")
-    axis.set_xlabel("book")
+    axis.set_ylabel(words["seconds per page"])
+    axis.set_xlabel(words["book"])
     axis.set_xticks([1, 6, 12, 18, 24])
     axis.set_xlim(0.2, 28.5)
     axis.set_ylim(0, 2.45)
-    save(fig, "e6-throughput")
+    localise_ticks(fig, locale)
+    save(fig, "e6-throughput", locale)
 
 
-def correction_confidence() -> None:
+def correction_confidence(locale: str) -> None:
     """E2: the recogniser's confidence on accepted against rejected lines."""
     import csv as _csv
 
@@ -116,16 +168,19 @@ def correction_confidence() -> None:
     rejected = [float(v["min_conf"]) for v in verdicts if v["accepted"] != "1"]
     if not rejected:
         return
+    words = LABELS[locale]
     fig, axis = plt.subplots(figsize=(5.2, 1.7))
     bins = [i / 20 for i in range(0, 13)]
     axis.hist(
         [accepted, rejected], bins=bins, color=[BLUE, RED], density=True,
-        label=[f"accepted ({len(accepted)})", f"rejected ({len(rejected)})"],
+        label=[words["accepted"].format(len(accepted)),
+               words["rejected"].format(len(rejected))],
     )
-    axis.set_xlabel("lowest character confidence on the line")
-    axis.set_ylabel("density")
+    axis.set_xlabel(words["confidence"])
+    axis.set_ylabel(words["density"])
     axis.legend()
-    save(fig, "e2-confidence")
+    localise_ticks(fig, locale)
+    save(fig, "e2-confidence", locale)
 
 
 FIGURES = (
@@ -143,7 +198,8 @@ def main() -> None:
         if not have(*needs):
             print(f"  skipped {label}: {', '.join(needs)} not measured yet")
             continue
-        draw()
+        for locale in LABELS:
+            draw(locale)
 
 
 if __name__ == "__main__":

@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/tectonic
-          key: tectonic-${{ env.TECTONIC_VERSION }}-${{ hashFiles('report/preamble.tex', 'report/main.tex', 'slides/main.tex') }}
+          key: tectonic-${{ env.TECTONIC_VERSION }}-${{ hashFiles('report/preamble.tex', 'report/main.tex', 'report/main-fr.tex', 'slides/main.tex') }}
           restore-keys: tectonic-${{ env.TECTONIC_VERSION }}-
 
       - name: Install Tectonic
@@ -47,7 +47,7 @@ jobs:
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           "$HOME/.local/bin/tectonic" --version
 
-      - name: Build the report and the deck
+      - name: Build both reports and the deck
         run: make all
 
       - name: The engine must set long s and both correction markers
@@ -57,16 +57,18 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
-          text=$(pdftotext report/main.pdf -)
-          # A here-string, not a pipe: `grep -q` exits on the first match, which
-          # sends SIGPIPE to a still-writing `printf`, and `pipefail` then reads
-          # that 141 as the character being absent. It only shows up once the
-          # document is long enough for the match to land before printf is done.
-          for char in $'ſ' $'⟦' $'⟧'; do
-            grep -q "$char" <<<"$text" \
-              || { echo "missing $char in report/main.pdf"; exit 1; }
+          for pdf in report/main.pdf report/main-fr.pdf; do
+            text=$(pdftotext "$pdf" -)
+            # A here-string, not a pipe: `grep -q` exits on the first match, which
+            # sends SIGPIPE to a still-writing `printf`, and `pipefail` then reads
+            # that 141 as the character being absent. It only shows up once the
+            # document is long enough for the match to land before printf is done.
+            for char in $'ſ' $'⟦' $'⟧'; do
+              grep -q "$char" <<<"$text" \
+                || { echo "missing $char in $pdf"; exit 1; }
+            done
           done
-          echo "long s, U+27E6 and U+27E7 all present"
+          echo "long s, U+27E6 and U+27E7 all present in both reports"
 
       - name: A build must leave the working tree clean
         # Every intermediate is gitignored. A new build product that is not

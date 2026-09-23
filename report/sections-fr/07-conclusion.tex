@@ -1,0 +1,78 @@
+% Translated from sections/07-conclusion.tex on 2026-09-23. The English file is
+% canonical. Change it first, then carry the change here.
+\section{Conclusion et artefacts publiés}
+\label{sec:conclusion}
+
+\claim{C1}{n'est pas évaluée.} Le jeu de référence existe désormais, avec
+\goldPages{}~pages corrigées (section~\ref{sec:protocol}). Mais E1 n'a pas été
+exécutée sur ce jeu. L'avantage du modèle affiné sur les modèles publiés reste
+donc la prémisse non vérifiée qu'il était au début de ce travail. Ce qui a
+changé, c'est la raison. Les données ne manquent plus. Elles restent
+seulement inutilisées, et elles penchent.
+
+\claim{C2}{est étayée sur une partie de ses données.} La règle se comporte
+comme spécifié sur les lignes où le chemin par décalage a tenu. Sur les
+\corrOnFindFallback{} des \corrOffered{}~lignes qui ont emprunté le repli par
+recherche, elle comparait la réponse à une ligne que la chaîne avait déjà
+corrompue. Ces acceptations ne pèsent donc rien, et l'affirmation repose sur
+moins d'un tiers des données recueillies pour elle. Savoir si les
+modifications acceptées améliorent le texte est une autre question. Il y faut
+une référence pour les pages tirées par E2, que le jeu de référence de C1 ne
+couvre pas.
+
+\claim{C3}{est étayée.} L'exactitude au niveau du Livre est de
+\locLivreAccuracyWorkbook{} sur la cohorte préenregistrée et de
+\locLivreAccuracyCatalogue{} sur la seconde, contre un critère qui demandait
+plus de 90\,\%. L'exactitude au niveau du chapitre est nettement plus basse,
+à \locChapterAccuracyWorkbook{} et \locChapterAccuracyCatalogue{}. Le
+préenregistrement attribuait cet écart au choix de l'étendue, et nommait deux
+paramètres à régler avant de conclure. Aucun des deux n'a été réglé. Cette
+lecture reste donc une attente confirmée dans son sens.
+
+\subsection{Ce que l'évaluation a changé}
+
+\texttt{MIN\_SCORE} a été vérifié plutôt que choisi. La précision est proche de
+100\,\% sur tout le balayage, si bien que la courbe ne désigne pas de seuil. La
+figure~\ref{fig:e5-sweep} montre que 0,808 se situe en haut du plateau de
+couverture, là où rien n'est perdu. C'est moins que \emph{calibré}, et plus
+qu'\emph{hérité}. Les cinq autres constantes du tableau~\ref{tab:thresholds}
+n'ont pas été balayées, mais elles sont au moins recensées.
+
+L'évaluation a aussi rectifié le dossier. Quatre chiffres que le projet
+avançait en prose ont été recherchés, n'ont pas pu être justifiés, et ont été
+retirés. L'un d'eux était un CER du modèle affiné sans jeu de test, sans
+journal et sans code derrière lui. Ils sont recensés dans
+\file{PROVENANCE.md}.
+
+\subsection{Artefacts publiés}
+
+Ce dépôt contient le code d'évaluation, les enregistrements figés des
+exécutions et chaque CSV de résultats. Chaque chiffre se recalcule donc à
+partir des entrées versionnées, sans GPU, sans modèle et sans réseau.
+\file{data/runs/ocr/} contient les enregistrements d'exécution et de
+calibration des \ocrBooks{}~livres, \file{data/runs/correction/} la base de
+sondage de E2 et ses verdicts figés, \file{data/runs/matcher/} l'export des
+alignements, et \file{data/gold/} le jeu de référence de \goldPages{}~pages,
+son manifeste et la convention écrite avant l'annotation. La fiche Hugging
+Face de \file{amadis-ft.mlmodel} peut désormais être rédigée, parce que la
+comparaison des poids rattache le fichier livré à son point de contrôle
+d'entraînement.
+
+Aucune image de page n'est publiée en dehors des planches d'illustration de la
+section~\ref{sec:corpus}. Les conditions de réutilisation diffèrent selon
+l'institution de conservation et ne sont pas réglées pour l'une d'elles au
+moins. \file{data/gold/MANIFEST.csv} consigne le détenteur de chaque page,
+afin que chaque cas puisse être réglé séparément. Les transcriptions de
+référence sont publiées sous CC-BY-4.0 avec le reste de \file{data/}. Elles
+constituent un travail éditorial nouveau et non une reproduction de
+l'imprimé, lequel est de toute façon dans le domaine public depuis longtemps.
+
+\subsection{Ce qu'un successeur devrait faire en premier}
+
+Exécuter E1. Le jeu de référence est construit, et plus rien ne s'y oppose.
+Y joindre les trois pages transcrites à l'aveugle que demande la
+section~\ref{sec:protocol}. Elles coûtent une heure de travail, et elles
+transforment les deux faiblesses du jeu en chiffres publiables à côté des taux
+d'erreur. Ces faiblesses sont l'absence de plancher de bruit et un biais non
+mesuré en faveur du modèle affiné. Corriger ensuite le repli de localisation
+des segments, qui coûte aujourd'hui à C2 les deux tiers de ses données.

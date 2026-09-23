@@ -5,7 +5,9 @@ row of them, and both are generated so neither can be typed. Each table is a
 bare `tabular`, so the report wraps it in whatever float and caption it wants
 and the deck can reuse the same body on a slide.
 
-A table whose CSV the evaluation has not produced is skipped and named.
+Each table is written once per report language, from the same rows, with its
+labels from `LABELS`. A table whose CSV the evaluation has not produced is
+skipped and named.
 
     uv run python eval/render_tables.py
 """
@@ -13,13 +15,40 @@ A table whose CSV the evaluation has not produced is skipped and named.
 import csv
 from pathlib import Path
 
-from amadis_htr.report_macros import format_value, render_table, write_generated
+from amadis_htr.report_macros import LOCALES, format_value, render_table, write_generated
 
 REPO = Path(__file__).resolve().parent.parent
 RESULTS = REPO / "eval/results"
-OUT = REPO / "report/generated/tables"
+OUT = {
+    "en": REPO / "report/generated/tables",
+    "fr": REPO / "report/generated/fr/tables",
+}
 
 COHORTS = ("workbook", "catalogue")
+
+#: Every word a table prints, per language. Numbers are never here: they come
+#: out of `format_value`.
+LABELS = {
+    "en": {
+        "workbook": "workbook", "catalogue": "catalogue",
+        "A": "family A", "B": "family B", "all": "corpus", "sample": "sample",
+        "e5": ["Cohort", "Pieces", "Livre correct", "Chapter scoreable",
+               "Chapter correct"],
+        "e6": ["Cohort", "Books", "Pages", "Failed", "Hours", "s/page"],
+        "e2": ["Cohort", "Lines offered", "Accepted", "Rewrites caught",
+               "Protocol failures", "On find fallback"],
+    },
+    "fr": {
+        "workbook": "classeur", "catalogue": "catalogue",
+        "A": "famille A", "B": "famille B", "all": "corpus",
+        "sample": "échantillon",
+        "e5": ["Cohorte", "Pièces", "Livre exact", "Chapitre évaluable",
+               "Chapitre exact"],
+        "e6": ["Cohorte", "Livres", "Pages", "Échecs", "Heures", "s/page"],
+        "e2": ["Cohorte", "Lignes", "Acceptées", "Réécritures",
+               "Échecs de protocole", "Repli par recherche"],
+    },
+}
 
 
 def rows(name: str) -> list[dict[str, str]]:
@@ -27,7 +56,7 @@ def rows(name: str) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
-def pct(numerator: str, denominator: str) -> str:
+def pct(numerator: str, denominator: str, locale: str) -> str:
     """A rate, or an em dash where the denominator is empty.
 
     0/0 is not 0%. A cohort with no scoreable chapter has no chapter accuracy,
@@ -36,53 +65,46 @@ def pct(numerator: str, denominator: str) -> str:
     bottom = float(denominator)
     if not bottom:
         return "---"
-    return format_value(str(float(numerator) / bottom), "pct1")
+    return format_value(str(float(numerator) / bottom), "pct1", locale)
 
 
-def localisation() -> str:
+def localisation(locale: str) -> str:
     """E5, one row per cohort, certain band only. Never a pooled row."""
+    words = LABELS[locale]
     body = []
     for cohort in COHORTS:
         row = next(r for r in rows(f"localisation-summary-{cohort}.csv")
                    if r["confidence"] == "certain")
         body.append([
-            cohort,
-            format_value(row["total"], "int"),
-            f'{format_value(row["livre_correct"], "int")} '
-            f'({pct(row["livre_correct"], row["total"])})',
-            format_value(row["chapter_scoreable"], "int"),
-            f'{format_value(row["chapter_correct"], "int")} '
-            f'({pct(row["chapter_correct"], row["chapter_scoreable"])})',
+            words[cohort],
+            format_value(row["total"], "int", locale),
+            f'{format_value(row["livre_correct"], "int", locale)} '
+            f'({pct(row["livre_correct"], row["total"], locale)})',
+            format_value(row["chapter_scoreable"], "int", locale),
+            f'{format_value(row["chapter_correct"], "int", locale)} '
+            f'({pct(row["chapter_correct"], row["chapter_scoreable"], locale)})',
         ])
-    return render_table(
-        headers=["Cohort", "Pieces", "Livre correct", "Chapter scoreable",
-                 "Chapter correct"],
-        aligns="lrrrr",
-        rows=body,
-    )
+    return render_table(headers=words["e5"], aligns="lrrrr", rows=body)
 
 
-def throughput() -> str:
+def throughput(locale: str) -> str:
     """E6, per family and pooled."""
+    words = LABELS[locale]
     body = [
         [
-            {"A": "family A", "B": "family B", "all": "corpus"}[r["cohort"]],
-            format_value(r["books"], "int"),
-            format_value(r["pages"], "int"),
-            format_value(r["failed"], "int"),
-            format_value(r["seconds"], "hours2"),
-            format_value(r["seconds_per_page"], "num3"),
+            words[r["cohort"]],
+            format_value(r["books"], "int", locale),
+            format_value(r["pages"], "int", locale),
+            format_value(r["failed"], "int", locale),
+            format_value(r["seconds"], "hours2", locale),
+            format_value(r["seconds_per_page"], "num3", locale),
         ]
         for r in rows("throughput.csv")
     ]
-    return render_table(
-        headers=["Cohort", "Books", "Pages", "Failed", "Hours", "s/page"],
-        aligns="lrrrrr",
-        rows=body,
-    )
+    return render_table(headers=words["e6"], aligns="lrrrrr", rows=body)
 
 
-def correction() -> str:
+def correction(locale: str) -> str:
     """E2, per family and the sample total.
 
     The total row carries **counts only**. The draw is equal per family and the
@@ -93,27 +115,23 @@ def correction() -> str:
     points, so the naive pooled rate and the frame-weighted one are not the
     same number. The weighted estimate is a macro, read from the interval file.
     """
+    words = LABELS[locale]
     rows_ = {r["cohort"]: r for r in rows("correction-verdicts.csv")}
     body = []
-    for cohort, label in (("A", "family A"), ("B", "family B"), ("all", "sample")):
+    for cohort, label in (("A", "A"), ("B", "B"), ("all", "sample")):
         r = rows_[cohort]
-        accepted = format_value(r["accepted"], "int")
+        accepted = format_value(r["accepted"], "int", locale)
         if cohort != "all":
-            accepted += f' ({pct(r["accepted"], r["offered"])})'
+            accepted += f' ({pct(r["accepted"], r["offered"], locale)})'
         body.append([
-            label,
-            format_value(r["offered"], "int"),
+            words[label],
+            format_value(r["offered"], "int", locale),
             accepted,
-            format_value(r["rewrites_caught"], "int"),
-            format_value(r["protocol_failures"], "int"),
-            format_value(r["on_find_fallback"], "int"),
+            format_value(r["rewrites_caught"], "int", locale),
+            format_value(r["protocol_failures"], "int", locale),
+            format_value(r["on_find_fallback"], "int", locale),
         ])
-    return render_table(
-        headers=["Cohort", "Lines offered", "Accepted", "Rewrites caught",
-                 "Protocol failures", "On find fallback"],
-        aligns="lrrrrr",
-        rows=body,
-    )
+    return render_table(headers=words["e2"], aligns="lrrrrr", rows=body)
 
 
 TABLES = (
@@ -129,8 +147,10 @@ def main() -> None:
         if not all((RESULTS / n).exists() for n in needs):
             print(f"  skipped {name}: {', '.join(needs)} not measured yet")
             continue
-        write_generated(build(), OUT / f"{name}.tex")
-        print(f"  {(OUT / f'{name}.tex').relative_to(REPO)}")
+        for locale in LOCALES:
+            path = OUT[locale] / f"{name}.tex"
+            write_generated(build(locale), path)
+            print(f"  {path.relative_to(REPO)}")
 
 
 if __name__ == "__main__":

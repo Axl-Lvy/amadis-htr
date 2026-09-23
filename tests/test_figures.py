@@ -6,6 +6,8 @@ import pytest
 
 REPO = Path(__file__).resolve().parent.parent
 FIGURES = REPO / "report/generated/figures"
+#: The French report's copies, same data and translated labels.
+FIGURES_FR = REPO / "report/generated/fr/figures"
 
 
 def _regenerate():
@@ -26,6 +28,7 @@ def test_a_figure_is_committed_for_every_measured_result():
     # report cut to ten pages. Their CSVs are still written and still checked.
     for name in ("e5-sweep", "e6-throughput", "e2-confidence"):
         assert (FIGURES / f"{name}.pdf").exists(), name
+        assert (FIGURES_FR / f"{name}.pdf").exists(), name
 
 
 def test_the_committed_figures_redraw_byte_for_byte():
@@ -34,14 +37,21 @@ def test_the_committed_figures_redraw_byte_for_byte():
     # committed copy on every run, so `git diff` after eval/run_all.sh -- the
     # repository's own drift check -- reports a change every time and
     # therefore reports nothing.
-    before = {p.name: p.read_bytes() for p in sorted(FIGURES.glob("*.pdf"))}
+    def committed():
+        return {
+            p.relative_to(REPO): p.read_bytes()
+            for folder in (FIGURES, FIGURES_FR)
+            for p in sorted(folder.glob("*.pdf"))
+        }
+
+    before = committed()
     if not before:
         pytest.skip("no figures committed yet")
 
     result = _regenerate()
     assert result.returncode == 0, result.stderr
 
-    after = {p.name: p.read_bytes() for p in sorted(FIGURES.glob("*.pdf"))}
+    after = committed()
     assert set(after) == set(before)
     drifted = [name for name in before if before[name] != after[name]]
     assert not drifted, (

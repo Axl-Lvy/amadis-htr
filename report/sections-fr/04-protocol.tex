@@ -1,0 +1,79 @@
+% Translated from sections/04-protocol.tex on 2026-09-23. The English file is
+% canonical. Change it first, then carry the change here.
+\section{Protocole d'évaluation}
+\label{sec:protocol}
+
+E1, E3 et E4 n'ont pas été exécutées. Ce qui suit est le protocole sous lequel
+elles le seront, fixé avant que les chiffres n'existent. Ceux de E2 et de E5,
+qui ont été exécutées, sont signalés là où ils diffèrent.
+
+\textbf{Le jeu de référence.} \goldPages{}~pages portent une transcription
+corrigée. \goldPagesTresor{} viennent du \emph{Trésor}~T.1 et
+\goldPagesAmadis{} du livre~13 d'\emph{Amadis de Gaule}, soit
+\goldLines{}~lignes et \goldChars{}~caractères. Elles n'ont pas été annotées
+pour ce rapport. Elles ont été corrigées dans Transkribus au fil de l'édition.
+\file{eval/build\_gold\_set.py} les choisit parmi \goldCandidates{}~candidates.
+Une page n'est retenue que si une personne l'a marquée comme terminée et
+qu'elle est absente du découpage d'entraînement. Cette règle écarte
+\goldRefusedTrained{}~pages. \goldRefusedUncorrected{} ne portent aucune
+correction, et \goldRefusedExcluded{} relève des pièces liminaires.
+\file{data/gold/MANIFEST.csv} donne une ligne par candidate avec son motif, si
+bien que le jeu est vérifiable au lieu d'être affirmé. La convention de
+transcription est \file{data/gold/GUIDELINES.md}, versionnée en premier.
+
+Ce jeu remplace les vingt pages que cette section prévoyait d'abord, tirées
+avec graine par strate et annotées à l'aveugle. Dix heures d'annotation étaient
+la contrainte décisive, et \goldPages{}~pages déjà corrigées n'en coûtent
+aucune. Quatre choses ont été cédées en échange. La référence est
+\emph{postéditée et non aveugle}. Chaque page a été corrigée sur la sortie d'un
+modèle, ce que le manifeste consigne page par page. Une erreur plausible y
+survit donc, et le jeu penche vers le modèle affiné, le système même que E1
+doit éprouver. Sa segmentation est \emph{celle de Transkribus}, ce qui rend
+cette comparaison pire encore que la comparaison confondue décrite plus bas.
+Son champ se limite à \emph{une œuvre et un exemplaire}, si bien que les
+strates de famille et de provenance se réduisent à une seule case. Enfin,
+\emph{aucune page n'a été transcrite deux fois}. Il n'y a donc pas de plancher
+de bruit, et \textbf{aucune différence n'est encore assez petite pour être
+écartée.} Trois pages transcrites à l'aveugle selon la même convention
+fixeraient ce plancher et mesureraient le biais du même coup.
+
+\textbf{Métriques.} Taux d'erreur caractère et taux d'erreur mot, définis dans
+le code plutôt qu'en prose. L'espace compte comme un caractère, les suites
+d'espaces sont réduites à une seule avant comparaison, et l'agrégation est
+pondérée par caractère sur l'ensemble des pages. Chaque chiffre est donné deux
+fois, brut et replié. Le repliement applique NFC, remplace le \qtr{ſ} long par
+\emph{s}, ignore la casse et confond \emph{u}/\emph{v} et \emph{i}/\emph{j}. Il
+est déclaré une seule fois et appliqué à l'identique à l'hypothèse et à la
+référence. Il est volontairement plus étroit que le normaliseur de
+l'apparieur, car tout ce qu'il effacerait en plus d'une convention de
+transcription masquerait une vraie erreur de reconnaissance. L'incertitude est
+estimée par bootstrap par percentiles sur les pages, avec 10\,000~tirages, à
+95\,\%~\cite{efron1994bootstrap}. Sur les pages et non sur les caractères, car
+une page mal encrée ou mal segmentée échoue en bloc. Rééchantillonner les
+caractères donnerait un intervalle plus étroit que ce que les données
+permettent.
+
+\textbf{Systèmes de comparaison.} E1 opposera le modèle affiné à CATMuS-Print
+sans affinage, à un modèle publié choisi pour la première modernité et à
+Transkribus. La segmentation sera la même pour les trois premiers. Elle ne peut
+pas l'être pour Transkribus, qui segmente de son côté. Cette comparaison mêle
+donc reconnaissance et mise en page, et elle est rapportée comme confondue.
+
+\textbf{Deux préenregistrements.} Le critère de E5 a été écrit le 15~septembre
+2026, avant l'évaluation de l'apparieur, et il est cité mot pour mot dans
+\file{docs/pre-registration/2026-09-15-e5-alignment-gate.md}. Le protocole de
+E2 a été enregistré le 22~septembre 2026, avant son exécution. Il fixe la base
+de sondage, l'échantillon et sa graine, le traitement, et la liste figée des
+chiffres à rapporter. E2 est la seule expérience de ce rapport qui pouvait être
+relancée à volonté. C'est précisément pourquoi ses choix sont datés avant ses
+chiffres.
+
+\textbf{Ce que le protocole ne peut pas faire.} Mesurer la passe de correction
+contre l'absence de correction, en variation du taux d'erreur, exige une
+transcription de référence pour les pages que E2 a tirées. Le jeu de référence
+ne les couvre pas. Il porte sur le \emph{Trésor} et sur un extrait
+d'\emph{Amadis}, alors que la base de sondage de E2 est la sortie de
+reconnaissance propre aux \ocrBooks{}~livres. E2 rapporte donc ce qu'a
+fait la règle d'acceptation, sans prétendre que les modifications retenues
+sont des améliorations. Cette limite a été enregistrée à l'avance, et non
+découverte après coup.

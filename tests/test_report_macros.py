@@ -74,6 +74,17 @@ def test_rounding_lives_in_one_place():
     assert format_value("0.5", "pct1") == "50.0\\%"
 
 
+def test_the_french_report_gets_french_number_typography():
+    # A French reader parses 14,111 as fourteen and a bit, so grouping is a
+    # thin space and the decimal mark is a comma. The percent sign takes a
+    # thin space too, as French typography sets it.
+    assert format_value("14111", "int", "fr") == "14\\,111"
+    assert format_value("0.9504", "num3", "fr") == "0,950"
+    assert format_value("20340", "hours2", "fr") == "5,65"
+    assert format_value("0.5", "pct1", "fr") == "50,0\\,\\%"
+    assert format_value("0.00004", "pct2", "fr") == "<0,01\\,\\%"
+
+
 def test_a_fraction_that_rounds_to_zero_percent_is_not_claimed_as_zero():
     # A CER of 0.00004 is not "0.00%". Reporting it as zero would claim a
     # perfect transcription the measurement does not support.
@@ -130,6 +141,17 @@ def test_the_committed_macros_file_is_what_the_writer_emits(tmp_path):
     reference = tmp_path / "macros.tex"
     write_generated(render_macros(ALL_MACROS, REPO / "eval/results"), reference)
     committed = REPO / "report" / "generated" / "macros.tex"
+    assert committed.read_text(encoding="utf-8") == reference.read_text(
+        encoding="utf-8"
+    )
+
+
+def test_the_committed_french_macros_file_is_what_the_writer_emits(tmp_path):
+    reference = tmp_path / "macros.tex"
+    write_generated(
+        render_macros(ALL_MACROS, REPO / "eval/results", "fr"), reference
+    )
+    committed = REPO / "report" / "generated" / "fr" / "macros.tex"
     assert committed.read_text(encoding="utf-8") == reference.read_text(
         encoding="utf-8"
     )
@@ -194,7 +216,11 @@ def test_every_figure_the_report_cites_is_a_macro_the_registry_defines():
     )
     assert generated == {macro.name for macro in ALL_MACROS}
 
-    for section in sorted((REPO / "report/sections").glob("*.tex")):
+    sections = [
+        *sorted((REPO / "report/sections").glob("*.tex")),
+        *sorted((REPO / "report/sections-fr").glob("*.tex")),
+    ]
+    for section in sections:
         body = "\n".join(
             line for line in section.read_text(encoding="utf-8").splitlines()
             if not line.lstrip().startswith("%")

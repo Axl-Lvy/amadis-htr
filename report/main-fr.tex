@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper]{article}
+
+% The French edition of main.tex. The English report is canonical: a change
+% lands there first and is carried here after. Every choice below that is not
+% about language is explained in main.tex and not repeated.
+\input{preamble.tex}
+% The preamble sets English for the report and the deck. This document swaps
+% the two languages, so polyglossia hyphenates and names things in French and
+% biblatex prints its bibliography strings in French.
+\setmainlanguage{french}
+\setotherlanguage{english}
+\usepackage[backend=bibtex,style=numeric,sorting=nyt]{biblatex}
+\addbibresource{refs.bib}
+
+% The same figures as the English report, set in French typography by the
+% same generator.
+\input{generated/fr/macros.tex}
+
+% The century, as French typography sets it. \lowercase undoes the title
+% page's \MakeUppercase on the superscript e, and \upshape keeps it out of that
+% page's small capitals. \NoCaseChange would say this better, but Tectonic's
+% kernel predates it.
+\newcommand{\sxvi}{XVI\textsuperscript{\upshape\lowercase{e}}~siècle}
+
+\title{Affiner et corriger une chaîne de reconnaissance
+  pour l'imprimé français du \sxvi}
+\author{Axel Levy}
+\date{\today}
+
+\begin{document}
+\reportmaketitle
+
+\begin{abstract}
+% Written from the measured figures only. Every number here also appears in
+% section 5, and nothing is introduced by the abstract.
+Une chaîne de production transcrit depuis un an un cycle romanesque français du
+\sxvi{} en \ocrBooks{}~livres. Elle ne repose que sur un
+seul taux d'erreur de validation, mesuré sur 10\,\% des pages d'un unique
+volume. Ce rapport mesure ce que ce chiffre ne peut pas établir.
+
+Deux des trois affirmations sont éprouvées ici. La reconnaissance ne l'est pas,
+faute d'un jeu annoté de 20~pages qui n'existe pas, et ce rapport
+nomme ce manque au lieu de lui substituer un chiffre qu'il saurait calculer.
+
+La règle d'acceptation par ancrage de la passe de correction entoure les
+segments suspects de \lmark~\rmark{} et n'accepte une réponse que si chaque
+octet hors des marqueurs revient inchangé. Elle a été appliquée à
+\corrOffered{}~lignes de faible confiance, sur un échantillon tiré avec graine
+de \corrPages{}~pages, selon un protocole enregistré au préalable. Pondérée au
+corpus, elle a accepté \corrAcceptRate{} des lignes (IC à 95\,\% de
+\corrAcceptLow{} à \corrAcceptHigh{}) et refusé \corrRewritesCaught{}~réponses
+qui modifiaient le texte hors des marqueurs. Sa mesure a aussi révélé une
+faille. Parmi les lignes soumises, \corrFindFallbackShare{} ont emprunté un repli de
+localisation des segments qui peut marquer deux fois le même mot. Sur ces
+lignes, une acceptation ne prouve pas que la règle a tenu, si bien que
+l'affirmation ne repose que sur moins d'un tiers de ses propres éléments.
+
+La localisation des extraits atteint \locLivreAccuracyWorkbook{} d'exactitude
+au niveau du Livre sur la cohorte préenregistrée, contre un seuil fixé avant
+que les chiffres n'existent, et \locChapterAccuracyWorkbook{} au niveau du
+chapitre. Le traitement par lots a transcrit \ocrPages{}~pages, avec
+\ocrPagesFailed{}~échec, à \ocrSecondsPerPage{}~s par page.
+
+Le code d'évaluation, les enregistrements figés des exécutions et chaque CSV
+de résultats sont publiés. Chaque chiffre se reconstruit ainsi à partir des
+entrées versionnées, sans GPU, sans modèle et sans réseau.
+\end{abstract}
+
+\input{sections-fr/01-introduction.tex}
+\input{sections-fr/02-related-work.tex}
+\input{sections-fr/03-corpus-and-system.tex}
+\input{sections-fr/04-protocol.tex}
+\input{sections-fr/05-results.tex}
+\input{sections-fr/06-discussion.tex}
+\input{sections-fr/07-conclusion.tex}
+
+% French strings (In, mars, p.) without French autospacing, because fourteen of
+% the fifteen titles are English and would otherwise take a space before every
+% colon and question mark.
+\begin{otherlanguage}[autospacing=false]{french}
+{\footnotesize\printbibliography}
+\end{otherlanguage}
+
+\end{document}

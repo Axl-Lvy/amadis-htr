@@ -16,10 +16,14 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+from matplotlib.ticker import ScalarFormatter  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 RESULTS = REPO / "eval/results"
-OUT = REPO / "report/generated/figures"
+OUT = {
+    "en": REPO / "report/generated/figures",
+    "fr": REPO / "report/generated/fr/figures",
+}
 
 #: report/preamble.tex, definecolor reportblue / reportred / reportteal.
 BLUE = "#003E5C"
@@ -58,7 +62,27 @@ def setup() -> None:
     )
 
 
-def save(fig, name: str) -> Path:
+class DecimalComma(ScalarFormatter):
+    """Tick labels with a decimal comma, for the French report.
+
+    Not matplotlib's `useLocale`, which reads the machine's locale and so would
+    draw a different figure on a different machine.
+    """
+
+    def __call__(self, x, pos=None):
+        return super().__call__(x, pos).replace(".", ",")
+
+
+def localise_ticks(fig, locale: str) -> None:
+    """Give every axis of a figure the decimal mark of `locale`."""
+    if locale == "en":
+        return
+    for axis in fig.axes:
+        axis.xaxis.set_major_formatter(DecimalComma())
+        axis.yaxis.set_major_formatter(DecimalComma())
+
+
+def save(fig, name: str, locale: str = "en") -> Path:
     """Write one figure, and say where it went.
 
     `CreationDate: None` drops the timestamp matplotlib would otherwise stamp
@@ -67,8 +91,8 @@ def save(fig, name: str) -> Path:
     `eval/run_all.sh` -- the repository's own check that nothing drifted --
     would report a change on every figure, every time, and so report nothing.
     """
-    OUT.mkdir(parents=True, exist_ok=True)
-    path = OUT / f"{name}.pdf"
+    OUT[locale].mkdir(parents=True, exist_ok=True)
+    path = OUT[locale] / f"{name}.pdf"
     fig.savefig(path, metadata={"CreationDate": None})
     plt.close(fig)
     print(f"  {path.relative_to(REPO)}")

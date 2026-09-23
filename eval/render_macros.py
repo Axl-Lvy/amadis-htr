@@ -1,4 +1,5 @@
-"""`eval/results/*.csv` into `report/generated/macros.tex`.
+"""`eval/results/*.csv` into `report/generated/macros.tex`, and its French
+twin `report/generated/fr/macros.tex`.
 
 Rule 1 of the repository architecture, made runnable: no number in the report
 is typed by hand. Every registry that has a schema is rendered here, and a
@@ -10,16 +11,27 @@ emitting a macro with nothing behind it.
 
 from pathlib import Path
 
-from amadis_htr.report_macros import ALL_MACROS, render_macros, write_generated
+from amadis_htr.report_macros import (
+    ALL_MACROS,
+    LOCALES,
+    render_macros,
+    write_generated,
+)
 
 REPO = Path(__file__).resolve().parent.parent
 RESULTS = REPO / "eval/results"
-MACROS = REPO / "report/generated/macros.tex"
+MACROS = {
+    "en": REPO / "report/generated/macros.tex",
+    "fr": REPO / "report/generated/fr/macros.tex",
+}
+
 
 def main() -> None:
-    body = render_macros(ALL_MACROS, RESULTS) if ALL_MACROS else ""
-    write_generated(body, MACROS)
-    print(f"{len(ALL_MACROS)} macros written to {MACROS.relative_to(REPO)}")
+    for locale in LOCALES:
+        body = render_macros(ALL_MACROS, RESULTS, locale) if ALL_MACROS else ""
+        write_generated(body, MACROS[locale])
+        print(f"{len(ALL_MACROS)} macros written to "
+              f"{MACROS[locale].relative_to(REPO)}")
 
 
 if __name__ == "__main__":

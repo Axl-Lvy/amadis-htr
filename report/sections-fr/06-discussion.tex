@@ -1,0 +1,119 @@
+% Translated from sections/06-discussion.tex on 2026-09-23. The English file is
+% canonical. Change it first, then carry the change here.
+\section{Discussion et limites}
+\label{sec:errors}
+% Both labels point here, as in the English file.
+\label{sec:limitations}
+
+\subsection{La règle d'acceptation, face à la littérature et à ses propres failles}
+
+La littérature sur la correction a posteriori converge vers un même
+avertissement. Un correcteur LLM dégrade une reconnaissance déjà
+bonne~\cite{kanerva2025nofreelunches}, et la surcorrection des entrées peu
+bruitées est le problème récurrent de HIPE-OCRepair~\cite{ehrmann2026hipeocrepair}.
+Les deux décrivent un correcteur qui réécrit quand il devrait s'abstenir.
+L'ancrage par marqueurs transforme ce problème de qualité en problème
+détectable. Les \corrRewritesCaught{}~refus sont des réponses qui ont modifié
+le texte hors des marqueurs, et qu'une règle sans ancrage aurait acceptées sans
+bruit. Mais cette branche se déclenche sur la moindre différence d'octet. Elle
+majore donc la réécriture fluide sans la compter. Une espace déplacée et une
+proposition réécrite tombent dans le même panier, et seuls
+\corrRewritesSubstantial{} des \corrRewritesCaught{}~refus déplaçaient plus de
+deux caractères.
+
+\textbf{Une faille dans la règle.} Elle n'est pas aussi étanche que la
+section~\ref{sec:system} le décrit. \texttt{suspect\_spans} situe chaque mot
+suspect par son décalage en caractères quand le texte brut du reconnaisseur et
+celui de la page s'alignent. Sinon, elle cherche le mot et retient sa
+\emph{première} occurrence. Deux occurrences de faible confiance d'un même mot
+se ramènent alors au même indice. La ligne reçoit deux paires de marqueurs
+autour d'un seul mot, le modèle voit une ligne corrompue, et la règle compare
+la réponse à cette même construction corrompue, puis l'accepte. La règle ne
+peut pas détecter ce cas, parce que la corruption a lieu avant son exécution.
+Et cette branche n'a rien de marginal, puisque \corrOnFindFallback{} des
+\corrOffered{}~lignes soumises l'ont empruntée. C'est la limite la plus grave
+de ce rapport. Le taux d'acceptation mesuré majore le comportement sain de la
+règle, et \textbf{C2 n'est étayée que sur moins d'un tiers des lignes soumises
+par E2}. Une réserve sur ce chiffre s'impose. L'échec du contrôle par décalage
+est nécessaire au défaut mais pas suffisant, car il faut aussi deux
+occurrences de faible confiance d'un même mot sur une même ligne.
+Le taux de \corrFindFallbackShare{} borne donc l'exposition au lieu d'estimer le dommage.
+La correction relève de la chaîne de traitement. Il faut chercher à partir de
+la fin du segment précédent, et refuser de marquer une ligne dont les segments
+se chevauchent.
+
+\textbf{Et E2 mesure le refus, non l'amélioration.} Savoir si les
+modifications acceptées ont amélioré le texte exige une référence pour les
+pages tirées, et le jeu de référence n'en couvre aucune. Son échantillon
+compte en outre \corrPages{} des \corrReachPagesWithSpan{}~pages qui portent un
+segment suspect. C'est un échantillon du corpus, et non le corpus.
+
+\subsection{La localisation, et la structure}
+
+L'exactitude est de \locLivreAccuracyWorkbook{} au niveau du Livre et de
+\locChapterAccuracyWorkbook{} au niveau du chapitre, sur les mêmes pièces. Le
+préenregistrement avait prévu ce cas en ces termes: «\textenglish{\emph{Correct
+CHAPTER far below correct LIVRE points at the span, not the search}}».\footnote{Un
+taux de chapitre exact très inférieur au taux de Livre exact met en cause
+l'étendue retenue, et non la recherche.} Il prescrivait du même souffle de
+régler \texttt{CHAIN\_GAP\_PENALTY} et \texttt{WINDOW\_SLACK} avant de
+conclure. Ce
+réglage n'a pas été fait. La lecture par l'étendue est donc l'attente
+préenregistrée confirmée dans son sens, et non une cause éprouvée. Les
+dénominateurs disent ce que les taux ne disent pas. Seules
+\locChapterScoreableWorkbook{} des \locPiecesWorkbook{}~pièces certaines portent
+un numéro de chapitre imprimé déchiffrable. L'exactitude au niveau du chapitre
+est donc le plus faible des deux chiffres, par les données comme par la
+valeur.
+
+Sur la structure de la famille~A, \structSpuriousA{}~débuts de chapitre
+proposés à tort subsistent contre \structMissingA{}~manques, après qu'un
+lecteur a fait 128~promotions et 217~rétrogradations à la main. Ce résidu est
+une surproposition, et il ne renseigne pas sur le détecteur seul. La passe
+manuelle a supprimé une part inconnue des manques, et en borner l'effet place
+le rappel du détecteur seul à 77,0\,\% au plus bas, contre les
+\structRecallHandCheckedA{} rapportés.
+
+\subsection{Ce qui manque}
+
+\textbf{Trois des cinq expériences ne sont pas mesurées.} E1, E3 et E4 ne sont
+plus bloquées, puisque le jeu de référence existe avec \goldPages{}~pages. Mais
+elles n'ont pas été exécutées avant la clôture de ce rapport. La conséquence
+reste la même, et elle est lourde. \textbf{L'affirmation~C1 n'est pas évaluée.}
+Ce rapport montre que la chaîne fonctionne, à quelle vitesse, ce que sa règle
+d'acceptation refuse et avec quelle justesse elle localise un passage. Il ne
+montre pas que le modèle affiné lit mieux que les modèles qu'il a remplacés.
+Le projet affirme depuis un an une table de confusion où le \qtr{ſ} long se
+confond avec \qtr{f}, \qtr{u} avec \qtr{n} et \qtr{c} avec \qtr{e}. Elle est
+désormais calculable, et toujours pas calculée.
+
+\textbf{Le jeu de référence est postédité et n'a qu'un annotateur.} Ses pages
+ont été corrigées sur la sortie d'un modèle au lieu d'être transcrites à
+l'aveugle. Il penche donc vers le modèle affiné, dans le sens qui
+flatterait C1. Et aucune page n'a été faite deux fois, si bien qu'il n'existe
+pas de plancher en dessous duquel une différence serait écartée. La
+section~\ref{sec:protocol} énonce ces deux points. Un second annotateur et une
+passe à l'aveugle sont les deux premières choses qu'un successeur devrait
+ajouter, dans cet ordre. En dessous de 30~cas dans une case, E3 et E4 se
+réduisent à une ventilation descriptive, et certaines cases tomberont sous ce
+seuil.
+
+\textbf{La validation n'est pas un test.} Les \trainPagesVal{}~pages réservées
+ont servi à choisir le point de contrôle livré. Elles ont été séparées page par
+page à partir d'un seul volume, si bien que les mêmes formes et la même usure
+des caractères apparaissent des deux côtés. Le modèle a aussi lu une partie du
+texte sur lequel il est évalué. Aucune page d'\emph{Amadis de Gaule} ne figure
+dans la liste d'entraînement, mais le \emph{Trésor} reprend des extraits
+d'\emph{Amadis}. L'ampleur de cet effet ne peut être estimée sans savoir quels
+passages T.1 reprend.
+
+\textbf{Transkribus est un système de comparaison confondu.} Il est rapporté
+comme tel au lieu d'être écarté, car l'écarter masquerait la comparaison qu'un
+lecteur souhaite le plus. Sa propre sortie a été cherchée sans être trouvée,
+si bien que le quatrième système de E1 pourrait manquer entièrement.
+\textbf{Cinq des six seuils ne sont pas calibrés} (tableau~\ref{tab:thresholds}),
+pas plus que les deux que le préenregistrement pose comme conditions à la
+lecture du résultat par chapitre. \textbf{Enfin, les durées ne couvrent que le
+traitement par lots.} Le chiffre de \ocrSecondsPerPage{}~s par page vaut
+pour ce programme sur ce GPU. Ce n'est pas une affirmation sur le système déployé,
+dont la base d'exécution n'a pas été lue.

@@ -1,0 +1,59 @@
+% Translated from sections/01-introduction.tex on 2026-09-23. The English file
+% is canonical. Change it first, then carry the change here.
+\section{Introduction}
+\label{sec:introduction}
+
+Depuis un an, une chaîne de numérisation lit pour ce projet des romans
+français du \sxvi. Elle n'a qu'un seul chiffre de reconnaissance à son actif,
+un taux d'erreur caractère de validation. Il a été mesuré sur 10\,\% des pages
+d'un unique volume, sur le matériau même qui a servi à affiner le modèle. Ce
+chiffre a permis de choisir un point de contrôle. Il ne dit rien de la façon
+dont le système lit le corpus pour lequel il a été construit. Ce rapport en est
+la mesure.
+
+L'imprimé du \sxvi{} met en échec la reconnaissance optique générique pour des
+raisons qui se cumulent. Le \qtr{ſ} long est un caractère distinct, que les
+modèles modernes confondent avec \qtr{f}. Les premiers volumes sont composés en
+\emph{bâtarde}, une famille de caractères pour laquelle il existe peu de
+données d'entraînement modernes. Les chapitres s'ouvrent sur des lettrines de
+plusieurs lignes de haut, que les segmenteurs prennent pour des illustrations
+ou pour du bruit. Les titres courants, les réclames et les signatures se
+trouvent dans le bloc de texte. La foliotation est en chiffres romains dans une
+moitié du corpus et en chiffres arabes dans l'autre. Les numérisations
+proviennent enfin de trois institutions, à trois niveaux de qualité, et l'une
+d'elles appose son tampon en travers de la page.
+La figure~\ref{fig:plate} montre une telle page.
+
+Ce que le projet pouvait affirmer avant ce rapport tient en un mot: rien.
+Aucun chiffre de reconnaissance d'aucune sorte pour \emph{Amadis de Gaule},
+l'œuvre que le système doit lire. Aucun taux d'erreur mot nulle part. Aucun
+système de comparaison mesuré. Aucune évaluation de l'une ou l'autre des passes par LLM, y
+compris de la règle d'acceptation qui fait l'originalité de la chaîne. Et des
+chiffres structurels calculés à chaque exécution, puis jetés.
+
+\subsection{Trois affirmations}
+
+\claim{C1.}{Le modèle affiné lit ce corpus mieux que les modèles publiés.}
+L'évaluation porte sur des pages annotées de chaque œuvre, avec un taux
+d'erreur par œuvre, contre des modèles publiés exécutés à segmentation
+constante.
+
+\claim{C2.}{Une règle d'acceptation prudente empêche une passe générative de
+réécrire le texte.} Les mots qui portent un caractère de faible confiance sont
+entourés de \lmark~\rmark{} et relus. La réponse n'est acceptée que si tout ce
+qui se trouve hors des marqueurs revient identique à l'octet près. Le défaut
+visé est celui qu'un modèle génératif présente réellement sur ce matériau, la
+modernisation fluide de l'orthographe ancienne. La section~\ref{sec:e2} rend
+compte de ce qu'a fait la règle.
+
+\claim{C3.}{Un extrait du \emph{Trésor} peut être localisé dans le texte de
+base.} Il s'agit d'une tâche de recherche sur la transcription complète des
+\ocrBooks{}~livres, évaluée d'après le propre catalogue de l'éditeur, selon un
+critère écrit avant que les chiffres ne soient connus. La
+section~\ref{sec:e5} rapporte une exactitude de \locLivreAccuracyWorkbook{} au
+niveau du Livre sur la cohorte préenregistrée.
+
+\medskip\noindent
+Des cinq expériences qui éprouvent une affirmation, trois ne sont pas
+mesurées. Elles sont désignées comme telles, et la
+section~\ref{sec:limitations} dit ce que cela coûte.

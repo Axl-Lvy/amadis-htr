@@ -79,35 +79,49 @@ def escape(text: str) -> str:
     return "".join(_ESCAPES.get(c, c) for c in text)
 
 
-def format_value(raw: str, fmt: str) -> str:
+#: The report's languages. French groups digits with a thin space, marks the
+#: decimal with a comma and sets a thin space before the percent sign.
+LOCALES: tuple[str, ...] = ("en", "fr")
+
+
+def _localise(number: str, locale: str) -> str:
+    if locale == "en":
+        return number
+    if locale == "fr":
+        return number.replace(",", "\\,").replace(".", ",")
+    raise ValueError(f"unknown locale {locale!r}")
+
+
+def format_value(raw: str, fmt: str, locale: str = "en") -> str:
     """Render one CSV cell. Every rounding decision in the report is here.
 
     A percentage that rounds to zero is written `<0.01\\%` rather than
     `0.00\\%`, because a measured non-zero error rate is not a perfect result
     and the report must not claim one.
     """
+    percent = "\\%" if locale == "en" else "\\,\\%"
     if fmt == "text":
         return escape(raw)
     if fmt == "int":
         # Grouped, because a page count reaches five digits and 14111 on the
         # page is a string of digits rather than a number a reader can take in.
         # Grouping is presentation, so it lives here with the rounding.
-        return f"{int(float(raw)):,d}"
+        return _localise(f"{int(float(raw)):,d}", locale)
     if fmt.startswith("num"):
-        return f"{float(raw):.{int(fmt[3:])}f}"
+        return _localise(f"{float(raw):.{int(fmt[3:])}f}", locale)
     if fmt.startswith("hours"):
         # The CSV records elapsed seconds, because that is what the harness
         # timed. Hours are the unit a reader thinks in, and the conversion is
         # presentation, so it lives here with the rounding rather than as a
         # second column restating the first.
-        return f"{float(raw) / 3600:.{int(fmt[5:])}f}"
+        return _localise(f"{float(raw) / 3600:.{int(fmt[5:])}f}", locale)
     if fmt.startswith("pct"):
         places = int(fmt[3:])
         value = float(raw) * 100
         floor = 10.0**-places
         if 0 < value < floor:
-            return f"<{floor:.{places}f}\\%"
-        return f"{value:.{places}f}\\%"
+            return f"<{_localise(f'{floor:.{places}f}', locale)}{percent}"
+        return _localise(f"{value:.{places}f}", locale) + percent
     raise ValueError(f"unknown format {fmt!r}")
 
 
@@ -140,7 +154,9 @@ def _select(path: Path, criteria: Mapping[str, str]) -> dict[str, str]:
     return rows[0]
 
 
-def render_macros(macros: Iterable[Macro], results: str | Path) -> str:
+def render_macros(
+    macros: Iterable[Macro], results: str | Path, locale: str = "en"
+) -> str:
     """Render one `\\newcommand` per reported figure."""
     results = Path(results)
     lines: list[str] = []
@@ -162,7 +178,7 @@ def render_macros(macros: Iterable[Macro], results: str | Path) -> str:
             raw = str(float(row[macro.column]) / denominator)
         else:
             raw = row[macro.column]
-        value = format_value(raw, macro.fmt)
+        value = format_value(raw, macro.fmt, locale)
         lines.append(f"\\newcommand{{\\{macro.name}}}{{{value}}}")
     return "\n".join(lines) + "\n"
 
