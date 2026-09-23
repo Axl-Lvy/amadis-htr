@@ -1,0 +1,52 @@
+% Status: drafted 2026-09-22, cut 2026-09-22 to the ten-page budget.
+\section{Introduction}
+\label{sec:introduction}
+
+A digitisation pipeline has been reading sixteenth-century French romance for
+this project for a year. It has one recognition figure to its name: a
+validation character error rate, measured on a 10\% page-level split of a
+single volume, on the material the model was fine-tuned on. That number
+selected a checkpoint, and nothing else about the system has ever been
+measured. This report is the measurement.
+
+Sixteenth-century print defeats off-the-shelf OCR for reasons that compound.
+The long \qtr{ſ} is a distinct character that modern models map onto \qtr{f}.
+The earlier volumes are set in \emph{bâtarde}, a type family with little modern
+training data. Chapters open with drop caps spanning several lines, which
+segmenters read as illustrations or as noise. Running heads, catchwords and
+signatures sit in the text block, folio numbering runs roman in one half of the
+corpus and arabic in the other, and the scans come from three institutions at
+three qualities, one of them stamped across the page.
+Figure~\ref{fig:plate} is one such page.
+
+The answer to that has been a pipeline of three parts: a fine-tuned recogniser,
+two opt-in LLM passes behind it, and a retrieval stage that locates an
+anthology extract in the resulting text. Of the three, the two that were never
+evaluated at all are the ones this report takes: the accept rule that governs
+the generative pass, and the retrieval stage. Both ran in production for a year
+on no evidence. What the project could state about either before this report is
+nothing --- not a rate, not a failure mode, not a threshold anyone had swept ---
+and the structural figures the pipeline computed on every run were discarded
+unread.
+
+\subsection{Two claims}
+
+\claim{C2.}{A conservative accept rule keeps a generative pass from rewriting
+the text.} Words carrying a low-confidence character are wrapped in
+\lmark~\rmark{} and re-read; the reply is accepted only when everything outside
+the markers returns byte identical. The failure mode being defended against is
+the one a generative model actually has on this material --- fluent
+modernisation of archaic spelling. Section~\ref{sec:e2} reports what the rule
+did.
+
+\claim{C3.}{A \emph{Trésor} extract can be located in the baseline text.}
+A retrieval task over the full transcription of all \ocrBooks{} books, scored
+against the editor's own catalogue under a gate written before the numbers were
+known. Section~\ref{sec:e5} reports \locLivreAccuracyWorkbook{} Livre accuracy
+on the pre-registered cohort.
+
+\medskip\noindent
+The claims and the experiments keep the numbering of the design they were
+registered under, so C2 and C3 are answered by E2 and E5, and E6 is descriptive
+throughput and structure. Recognition accuracy is outside the scope of this
+report; section~\ref{sec:limitations} says what that leaves open.
