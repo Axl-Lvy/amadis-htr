@@ -1,4 +1,4 @@
-"""One look for every figure in the report and the deck.
+"""One look for every figure in the report.
 
 The palette is the report's own (`report/preamble.tex`), so a figure does not
 arrive on the page as a foreign object. Everything else here is subtraction:

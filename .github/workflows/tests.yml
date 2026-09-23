@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/tectonic
-          key: tectonic-${{ env.TECTONIC_VERSION }}-${{ hashFiles('report/preamble.tex', 'report/main.tex', 'report/main-fr.tex', 'slides/main.tex') }}
+          key: tectonic-${{ env.TECTONIC_VERSION }}-${{ hashFiles('report/preamble.tex', 'report/main.tex', 'report/main-fr.tex') }}
           restore-keys: tectonic-${{ env.TECTONIC_VERSION }}-
 
       - name: Install Tectonic
@@ -47,7 +47,7 @@ jobs:
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           "$HOME/.local/bin/tectonic" --version
 
-      - name: Build both reports and the deck
+      - name: Build both editions of the report
         run: make all
 
       - name: The engine must set long s and both correction markers

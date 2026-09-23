@@ -2,8 +2,7 @@
 
 Rule 1's other half. A macro carries a figure in a sentence; a table carries a
 row of them, and both are generated so neither can be typed. Each table is a
-bare `tabular`, so the report wraps it in whatever float and caption it wants
-and the deck can reuse the same body on a slide.
+bare `tabular`, so the report wraps it in whatever float and caption it wants.
 
 Each table is written once per report language, from the same rows, with its
 labels from `LABELS`. A table whose CSV the evaluation has not produced is

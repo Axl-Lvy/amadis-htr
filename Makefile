@@ -4,13 +4,12 @@
 TECTONIC ?= tectonic
 FLAGS = --keep-intermediates --synctex
 
-.PHONY: all report report-fr slides clean
+.PHONY: all report report-fr clean
 
-all: report report-fr slides
+all: report report-fr
 
 report: report/main.pdf
 report-fr: report/main-fr.pdf
-slides: slides/main.pdf
 
 SECTIONS = $(wildcard report/sections/*.tex)
 SECTIONS_FR = $(wildcard report/sections-fr/*.tex)
@@ -23,12 +22,7 @@ report/main-fr.pdf: report/main-fr.tex report/preamble.tex report/refs.bib \
                     report/generated/fr/macros.tex $(SECTIONS_FR)
 	cd report && $(TECTONIC) $(FLAGS) main-fr.tex
 
-slides/main.pdf: slides/main.tex report/preamble.tex report/generated/macros.tex
-	cd slides && $(TECTONIC) $(FLAGS) main.tex
-
 clean:
-	rm -f report/main.pdf report/main-fr.pdf slides/main.pdf report/*-blx.bib slides/*-blx.bib \
+	rm -f report/main.pdf report/main-fr.pdf report/*-blx.bib \
 	      report/*.aux report/*.bbl report/*.bcf report/*.blg report/*.log \
-	      report/*.run.xml report/*.synctex.gz \
-	      slides/*.aux slides/*.log slides/*.nav slides/*.out slides/*.snm \
-	      slides/*.toc slides/*.synctex.gz
+	      report/*.run.xml report/*.synctex.gz

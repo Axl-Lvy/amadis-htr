@@ -1,5 +1,5 @@
-% Shared by report/main.tex and slides/main.tex, so one evaluation rerun
-% updates the report and the defence deck together.
+% Shared by report/main.tex and report/main-fr.tex, so one evaluation rerun
+% updates both editions together.
 %
 % Paths stay out of this file. Each main document declares its own bibliography
 % resource and reads its own copy of the generated macros, because a path built
@@ -19,19 +19,6 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{microtype}
-% Everything from here to the quotation macros styles an `article`, and
-% beamer already owns all of it: it loads geometry with its own options, so
-% loading it again with ours is an option clash that stops the deck's build
-% outright, and titlesec has no meaning for a frame. The deck still shares
-% the font, the language setup and the macros below the guard, which is the
-% point of one preamble.
-%
-% \makeatletter sits outside the guard on purpose. TeX tokenises the whole
-% branch as it reads it, so `@` has to be a letter before the argument is
-% read, not once the branch is taken; otherwise \@title inside tokenises as
-% \@ followed by `title' and crashes exactly as the note below describes.
-\makeatletter
-\@ifclassloaded{beamer}{}{%
 \usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
 
 % Float placement. At LaTeX's defaults this report deferred every figure and
@@ -124,14 +111,6 @@
   \end{quotation}\clearpage
 }
 
-% A claim in section 1. \noindent on every one of them, because the three were
-% ordinary paragraphs and only the first sat flush left: the other two took the
-% paragraph indent and the labels did not line up.
-\newcommand{\claim}[2]{%
-  \par\medskip\noindent\textbf{#1}\ \textbf{#2}\ \ignorespaces
-}
-}
-\makeatother
 
 % A file name in this repository.
 %

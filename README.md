@@ -24,7 +24,7 @@ with no GPU, no model server and no network:
 ```sh
 uv run --extra dev pytest        # the harness's own tests
 ./eval/run_all.sh                # every result CSV, macro, table and figure
-make all                         # the report, its French edition and the deck
+make all                         # the report and its French edition
 ```
 
 `eval/run_all.sh` rewrites every generated file from the frozen inputs. On
@@ -65,7 +65,7 @@ Their outputs are committed so that everything above reruns without any of it.
 | `report/plates/` | the illustrative plates: a page of the source print, and the line crops the layout stage keys on |
 | `report/sections/` | one file per section of the report, each carrying its own drafting status |
 | `report/sections-fr/` | the French edition's sections, translated from `report/sections/`, which stays canonical |
-| `report/`, `slides/` | the report and the defence deck, sharing one preamble |
+| `report/` | the report and its French edition, sharing one preamble |
 | `pipeline/` | the sanitised pipeline snapshot |
 
 ## Building the report

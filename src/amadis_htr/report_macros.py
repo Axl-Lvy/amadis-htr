@@ -187,8 +187,7 @@ def render_table(
     """Render a `booktabs` tabular body, cells already formatted.
 
     No vertical rules and no `\\hline`, which is what `booktabs` is for. The
-    caller wraps this in whatever float and caption the report wants, so the
-    same table can be a figure in the report and a slide in the deck.
+    caller wraps this in whatever float and caption the report wants.
     """
     if len(aligns) != len(headers):
         raise ValueError(
