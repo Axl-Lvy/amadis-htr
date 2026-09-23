@@ -1,0 +1,46 @@
+% Status: drafted 2026-09-22, cut 2026-09-22. Every DOI or stable URL in
+% refs.bib was fetched and checked before it was written there; nothing here is
+% cited from memory.
+\section{Related work}
+\label{sec:related}
+
+\textbf{CATMuS and the engine.} CATMuS is a shared transcription standard
+before it is a model: its medieval release fixed the annotation guidelines and
+the cross-century protocol that make one fine-tune comparable to another at
+all~\cite{clerice2024catmusmedieval}, and CATMuS-Print carries the approach
+into printed material~\cite{gabay2024catmusprint}. CATMuS-Print~[Large] is the
+checkpoint this work fine-tunes from~\cite{gabay2024catmusprintlarge}.
+Recognition runs on kraken~7.0.2; the engine paper describes
+version~5~\cite{kiessling2025kraken} and the Zenodo record pins
+3.0b20~\cite{kiessling2021krakensoftware}, so 7.0.2 is identified by number.
+Transkribus supplied the annotation environment~\cite{kahle2017transkribus,
+muehlberger2019transkribus}, and its corrections are what the released gold set
+holds.
+
+\textbf{LLM post-correction, and its characteristic failure.} The literature
+converges on one warning. Kanerva et al.\ title it directly --- there are no
+free lunches: an LLM corrector can degrade already-good OCR rather than improve
+it~\cite{kanerva2025nofreelunches}. Boros et al.\ find the same across
+prompting regimes on historical transcripts~\cite{boros2024postcorrection}, and
+the HIPE-OCRepair competition reports over-correction on low-noise inputs as
+its consistent problem, adding that character-level metrics alone do not
+capture it~\cite{ehrmann2026hipeocrepair}. A modular ByT5 stage behind kraken
+reports a CER reduction on fifteenth-century
+incunabula~\cite{momtaz2025modular}, read at its abstract only; Thomas et al.\
+reach the opposite design point on historical
+newspapers~\cite{thomas2024leveraging}. A model asked to fix a misread \qtr{ſ}
+will, given the opportunity, also modernise the spelling around it. The marker
+anchor removes the opportunity.
+
+\textbf{The gap.} The literature above evaluates post-correction as a change
+in error rate, which measures the corrector's output and not the rule that
+decides whether to keep it. To our knowledge no published work reports what a
+marker-anchored accept rule refuses, on any material: the rejection is the
+contribution here, and it is a different quantity from a CER delta. The claim
+is held to \emph{to our knowledge} and no further --- a literature search cannot
+rule out an unindexed thesis or a non-anglophone venue. On this corpus in
+particular the nearest published work is CATMuS Gothic Print, a different base
+model on religious and polemical material~\cite{solfrini2024catmusgothic}, and
+Tiger~\cite{tiger2026overfit}, which evaluates HTR fine-tuning on French of the
+seventeenth and eighteenth centuries. Confidence intervals throughout follow
+the percentile bootstrap~\cite{efron1994bootstrap}.

@@ -1,0 +1,153 @@
+% Status: drafted 2026-09-22, cut 2026-09-22.
+%
+% Findings only. No interpretation and no comparison to the literature -- that
+% is section 6.
+\section{Results}
+\label{sec:results}
+
+Each subsection opens with its claim, unit of analysis, baseline and
+uncertainty method, then reports.
+
+\subsection{E5: locating a \emph{Trésor} extract}
+\label{sec:e5}
+
+\textbf{Claim.} A \emph{Trésor} extract can be located in the baseline text.
+\textbf{Unit.} The piece, within a cohort. \textbf{Baseline.} None published;
+the pre-registered gate stands in. \textbf{Uncertainty.} Bootstrap over pieces.
+
+\begin{table}[t]
+  \centering
+  \input{generated/tables/e5-localisation.tex}
+  \caption{E5, certain band only. The two cohorts are never pooled: the gate
+    was pre-registered on the workbook batch when it was all that existed.}
+  \label{tab:e5}
+\end{table}
+
+Three denominators, and they differ: pieces in the cohort, certain pieces for a
+Livre figure, and pieces whose printed chapter number is recoverable for a
+chapter figure --- \locChapterScoreableWorkbook{} of \locPiecesWorkbook{} on
+the gated cohort. Of the remainder, \locChapterUnavailableWorkbook{} pieces
+landed on a printed label no chapter number could be decoded from and
+\locChapterUnreferencedWorkbook{} was catalogued to a Livre with no chapter
+named.
+
+Table~\ref{tab:e5} gives the result: Livre accuracy \locLivreAccuracyWorkbook{}
+on the workbook cohort and \locLivreAccuracyCatalogue{} on the catalogue,
+chapter accuracy \locChapterAccuracyWorkbook{} and
+\locChapterAccuracyCatalogue{}. The gate, written before the matcher was
+scored, reads \qtr{Correct LIVRE well above 90\% means the all-24-Livres search
+holds}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e5-sweep.pdf}
+  \caption{E5 accept threshold against precision (top) and coverage (bottom).
+    Thresholds accepting nothing are omitted, precision over an empty accept
+    set being undefined.}
+  \label{fig:e5-sweep}
+\end{figure}
+
+Figure~\ref{fig:e5-sweep} sweeps the accept threshold. Precision sits near
+100\% at every threshold in both cohorts, so the curve does not locate an
+operating point; coverage does. Coverage holds above 98\% to 0.86 on the
+workbook cohort and to 0.85 on the catalogue, then falls away: by 0.90 it is
+73\% and 53\%. The largest effect in E5 is the gap between Livre and chapter
+accuracy.
+
+\subsection{E2: the marker-anchor accept rule}
+\label{sec:e2}
+
+\textbf{Claim.} The accept rule keeps a generative pass from rewriting the
+text. \textbf{Unit.} The line offered, clustered by page. \textbf{Baseline.}
+Correction off, which is the frozen recognition output itself --- all
+\ocrBooks{} books recorded zero words corrected. \textbf{Uncertainty.}
+Stratified bootstrap over pages, 10{,}000 resamples, 95\%.
+
+Over the whole corpus the pass would look at \corrReachLinesWithSpan{} of
+\corrReachCorrectable{} correctable lines (\corrReachLineShare{}), carrying
+\corrReachSpans{} suspect spans, on \corrReachPagesWithSpan{} of
+\corrReachPages{} pages (\corrReachPageShare{}). That count is deterministic:
+it is the recogniser's own confidences, with no model involved. The sample is
+\corrOffered{} lines on \corrPages{} pages, drawn 200 per type family under a
+committed seed.
+
+\begin{table}[t]
+  \centering
+  \input{generated/tables/e2-correction.tex}
+  \caption{E2 by type family. The sample row carries counts only: the draw is
+    equal per family and the frame is not, so a rate over it would weight
+    family~A at more than twice its share. The corpus rate is frame-weighted.}
+  \label{tab:e2}
+\end{table}
+
+\corrAccepted{} of \corrOffered{} offered lines were accepted; weighted to the
+corpus's suspect lines the acceptance rate is \corrAcceptRate{} (95\%~CI
+\corrAcceptLow{} to \corrAcceptHigh{}). Of the refusals, \corrRewritesCaught{}
+were for changing text outside the markers --- \corrRewriteRate{} of offered
+lines, frame-weighted, spanning \corrRewriteSegments{} segments and
+\corrRewriteEdits{} characters, of which \corrRewritesSubstantial{} moved more
+than two characters. The other \corrProtocolFailures{} refusals were replies
+that never became candidate edits at all, and bear on the claim not at all.
+Figure~\ref{fig:e2-confidence} gives the recogniser's confidence on accepted
+against refused lines.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e2-confidence.pdf}
+  \caption{Lowest character confidence on a line, accepted against refused.}
+  \label{fig:e2-confidence}
+\end{figure}
+
+\corrOnFindFallback{} of the offered lines (\corrFindFallbackShare{}) took the
+span-locating fallback described in section~\ref{sec:errors}, on which an
+acceptance is not evidence that the rule held.
+
+The run used four concurrent workers, which the registered design assumed would
+change throughput and not the verdict; replaying \corrReplayLines{} lines from a
+seeded \corrReplayPages{}-page subsample with one worker reproduced
+\corrReplayAgree{} of \corrReplayLines{} verdicts. That is evidence where there
+was an assumption, not a proof of decode determinism.
+
+Acceptance is not an edit rate: of the accepted lines,
+\corrAcceptedUnchanged{} came back with every span untouched, and
+\corrChangedSpans{} spans were actually altered. \textbf{And this is not an
+accuracy.} Scoring correction on against correction off needs a reference
+transcription for the pages E2 sampled, and none exists. E2 reports what the rule
+did and says nothing about whether the edits it kept improve the text.
+
+\subsection{E6: throughput and structure}
+\label{sec:e6}
+
+\textbf{Claim.} Descriptive only. \textbf{Unit.} Book and page.
+\textbf{Baseline.} None. \textbf{Uncertainty.} None --- these are counts.
+
+\begin{table}[t]
+  \centering
+  \input{generated/tables/e6-throughput.tex}
+  \caption{E6 throughput. One model, one device, one working width across all
+    \ocrBooks{} books, which is what makes pooling legitimate.}
+  \label{tab:e6}
+\end{table}
+
+\ocrBooks{} books, \ocrPages{} pages, \ocrPagesFailed{} failures, in
+\ocrHours{} hours at \ocrSecondsPerPage{}~s per page.
+Figure~\ref{fig:e6-throughput} gives the per-book spread; the families differ
+little, \ocrSecondsPerPageFamilyA{}~s against \ocrSecondsPerPageFamilyB{}~s.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{generated/figures/e6-throughput.pdf}
+  \caption{Seconds per page by book.}
+  \label{fig:e6-throughput}
+\end{figure}
+
+\textbf{Structure is family~A alone, and hand-checked.} Books~13 to~24 print no
+table of contents, so their calibration carries no match block and there is no
+corpus-wide structural figure. On family~A the run recalls \structMatchedA{} of
+\structChaptersA{} printed chapters (\structRecallHandCheckedA{}) at a precision
+of \structPrecisionHandCheckedA{}, missing \structMissingA{} and proposing
+\structSpuriousA{} openings the printed contents do not carry. Those two rates
+are not the detector unaided: each book's corrections file holds chapter
+decisions a reader made by hand, and calibration ran after them, so what is
+reported is the corrected detector. The counts beside them are what they say
+they are.

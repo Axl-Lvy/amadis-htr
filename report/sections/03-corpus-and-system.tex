@@ -1,0 +1,158 @@
+% Status: drafted 2026-09-22, merged from the former sections 3 and 4 and cut
+% to the ten-page budget.
+%
+% Every count is a macro from eval/results/. Three figures this section would
+% otherwise carry -- the baseline text's chapters and word tokens, and the seed
+% index's size -- are properties of a production database this repository does
+% not hold, and are listed in PROVENANCE.md rather than stated here.
+%
+% The plates are illustrative, not measured: they show the material and what a
+% stage looks at, never a scored output. Rule 1 governs reported figures, and
+% no number is read off them.
+\section{Corpus and system}
+\label{sec:corpus}
+
+Two bodies of sixteenth-century French print, not independent of one another.
+\emph{Amadis de Gaule} is a chivalric romance cycle of \ocrBooks{} books,
+\ocrPages{} scanned pages. The \emph{Trésor} anthologies reprint extracts from
+that cycle under thematic headings, so locating a \emph{Trésor} piece is a
+retrieval task with a checkable answer. Both works are one target domain here;
+nothing below is framed as in-domain against out-of-domain.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.62\linewidth]{plates/page-thresor.png}
+  \caption{A page of \emph{Le Thresor des douze livres d'Amadis de Gaule}
+    (1559), the volume the shipped model was fine-tuned on. \textbf{1} running
+    head, \qtr{DV PREMIER LIVRE}. \textbf{2} italic rubrics, promoted to titles
+    by slant rather than by wording. \textbf{3} the drop-cap \qtr{M} of
+    \qtr{MES amys}, which line segmentation does not see. \textbf{4} the
+    digitiser's watermark, caught as a footer candidate and left out of the
+    transcript. Long \qtr{ſ} throughout. Overlay added for this figure.}
+  \label{fig:plate}
+\end{figure}
+
+\subsection{Two editions, three provenances}
+
+The \ocrBooks{} books are not one edition. The first \ocrBooksFamilyA{}
+(family~A) are a large folio setting in \emph{bâtarde} type with roman folio
+numbers, each volume opening with a printed table of contents; the remaining
+\ocrBooksFamilyB{} (family~B) are later and smaller, in clean roman type with
+italic rubrics and arabic page numbers and no table of contents. Family~A is
+\ocrPagesFamilyA{} pages, family~B \ocrPagesFamilyB{}. The correction pass is
+therefore reported per family, structural calibration covers family~A alone ---
+it needs a printed table of contents to score against --- and throughput pools
+both, because every book was run by one model on one device at one working
+width.
+
+Three holding institutions, three conditions: book~1 is bitonal 600~dpi TIFFs
+from the Bibliothèque municipale de Lyon, books~3 and~4 greyscale Gallica PDFs,
+and book~18 a Biblioteca Valenciana copy carrying that library's stamp. The
+provenance of the other volumes is recorded nowhere and is not claimed here.
+Provenance is variation unrelated to the century, and no figure below is
+stratified on it: the volumes it is known for are too few to form a cell.
+
+\subsection{The \emph{Trésor} pieces, and the training corpus}
+
+The reference is the editor's own catalogue,
+\file{data/localisation/ground-truth.csv}: \corpusPieces{} pieces, each with a
+Livre and, where the print gives one, a chapter. It is prose written by a
+scholar, so the transcription keeps the hedging. \corpusCertain{} pieces
+(\corpusCertainShare{}) carry an unqualified assignment; \corpusUncertain{} are
+marked with a question mark, \corpusConjecture{} are bracketed conjectures,
+\corpusUnassigned{} name no location. Only the certain band is scored. The
+matcher placed \corpusAligned{} pieces drawing on \corpusLivres{} of the
+\ocrBooks{} books, median \corpusCharsMedian{} code points and longest
+\corpusCharsMax{}.
+
+Two batches, kept apart everywhere: the workbook cohort is
+\corpusPiecesWorkbook{} pieces, the batch that existed when E5's rule was
+pre-registered, and the catalogue cohort \corpusPiecesCatalogue{} pieces
+imported four days later. Pooling them would enlarge a test set after seeing
+its numbers.
+
+The training corpus is \trainPages{} annotated pages, all from one Transkribus
+collection, \emph{Trésor des Amadis}~T.1: \trainPagesTrain{} for training,
+\trainPagesVal{} held out. The held-out pages are validation, not test --- they
+selected the shipped checkpoint --- and both families of \emph{Amadis de Gaule}
+are therefore largely unseen by the model that transcribed them.
+Section~\ref{sec:limitations} states what that split costs.
+
+\subsection{The pipeline}
+\label{sec:system}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.86\linewidth]{plates/spec-rubric.png}\\[0.35em]
+  \includegraphics[width=0.33\linewidth]{plates/spec-dropcap.png}\hfill
+  \includegraphics[width=0.60\linewidth]{plates/spec-header.png}
+  \caption{What the layout stage looks at, all of it geometry. Top: body sits
+    near $0^\circ$ and this rubric runs 12--18$^\circ$, measured against the
+    page's own median body slant, so slant marks a title and wording never
+    does. Bottom left: an ink blob 1.6--9$\times$ the line height, aspect ratio
+    0.4--1.8, in the column's left 20\% is a drop cap. Bottom right: a short
+    centred line with a folio number is a running head.}
+  \label{fig:layout}
+\end{figure}
+
+Recognition is kraken~7.0.2 \cite{kiessling2025kraken} with a model fine-tuned
+from CATMuS-Print [Large] \cite{gabay2024catmusprintlarge} on the \trainPages{}
+pages above. The shipped artefact is \file{amadis-ft.mlmodel}; its SHA-256 is
+in \file{PROVENANCE.md}, and weight comparison ties it to the training
+checkpoint that produced it. Two configurations were run: the shipped one uses
+a reduce-on-plateau schedule at learning rate $3\times10^{-4}$ with
+augmentation, and an earlier constant-rate run at $10^{-3}$ was not shipped.
+
+Layout is deterministic and carries no learned component
+(figure~\ref{fig:layout}): baseline bands give reading order, oversize or
+italic-slanted lines become titles, lines in the top and bottom margins become
+headers and footers, and illustration regions and library stamps are suppressed
+rather than read. What it cannot settle is the ambiguous case --- a single line
+at the top or foot of a page that may be a running head, a catchword, or the
+first or last line of the body. That residue is what the first LLM pass below
+is for.
+
+Two LLM passes sit behind the recogniser. Both are opt-in, both run after
+recognition, and both degrade to \emph{change nothing} when the model is absent
+or fails. The \textbf{coherence pass} resolves an ambiguous head or foot line
+by asking whether removing it lets the neighbouring lines read continuously.
+The \textbf{low-confidence pass} is what claim~C2 is about: every word
+containing a character scored below \texttt{LOWCONF\_THRESHOLD} is wrapped in
+\lmark~\rmark{} and the line is sent with its two neighbours for context, the
+prompt forbidding modernised spelling. The reply is split on the markers and
+accepted only if the marker count matches and every segment \emph{outside} the
+markers is byte identical to the original. Otherwise the entire line reverts;
+there is no partial acceptance. That rule is the substance of the contribution:
+it makes a rewrite structurally detectable instead of plausible, so it can be
+refused.
+
+Localisation is retrieval over the full transcription of all \ocrBooks{} books:
+a period-aware normaliser folds the orthographic variation that would defeat
+exact matching, a rare-word seed index --- words of at least
+\texttt{MIN\_SEED\_LENGTH} characters with document frequency at most
+\texttt{MAX\_SEED\_DF} --- proposes candidate positions, and per-book anchor
+chaining assembles them into a span accepted above \texttt{MIN\_SCORE}.
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{llll}
+    \toprule
+    Constant & Value & Where it came from & Swept here \\
+    \midrule
+    \texttt{LOWCONF\_THRESHOLD}    & 0.6   & raised from 0.5 by hand & no \\
+    \texttt{OCR\_DROPCAP\_MIN\_PROB} & 0.6   & default, never swept  & no \\
+    \texttt{MIN\_SCORE}            & 0.808 & observed floor          & checked, \S\ref{sec:e5} \\
+    \texttt{MIN\_SEED\_LENGTH}     & 6     & default                 & no \\
+    \texttt{MAX\_SEED\_DF}         & 200   & default                 & no \\
+    \texttt{UNCERTAIN}             & 0.85  & review-queue cutoff     & no \\
+    \bottomrule
+  \end{tabular}
+  \caption{The six constants the system's behaviour depends on. One is
+    calibrated by this report; the rest are inherited and are named so that
+    nothing rests on them silently. \texttt{CHAIN\_GAP\_PENALTY} and
+    \texttt{WINDOW\_SLACK} are absent because they were never touched either.}
+  \label{tab:thresholds}
+\end{table}
+
+Table~\ref{tab:thresholds} lists every threshold the system contains. Five of
+the six were chosen by hand or left at a default and have never been swept.
