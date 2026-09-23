@@ -30,23 +30,23 @@ COHORTS = ("workbook", "catalogue")
 #: out of `format_value`.
 LABELS = {
     "en": {
-        "workbook": "workbook", "catalogue": "catalogue",
+        "workbook": "batch 1", "catalogue": "batch 2",
         "A": "family A", "B": "family B", "all": "corpus", "sample": "sample",
-        "e5": ["Cohort", "Pieces", "Livre correct", "Chapter scoreable",
-               "Chapter correct"],
-        "e6": ["Cohort", "Books", "Pages", "Failed", "Hours", "s/page"],
-        "e2": ["Cohort", "Lines offered", "Accepted", "Rewrites caught",
-               "Protocol failures", "On find fallback"],
+        "e5": ["Batch", "Extracts", "Right Livre", "Chapter checkable",
+               "Right chapter"],
+        "e6": ["Family", "Books", "Pages", "Failed", "Hours", "s/page"],
+        "e2": ["Family", "Lines tested", "Kept", "Refused: rewrite",
+               "Refused: bad reply"],
     },
     "fr": {
-        "workbook": "classeur", "catalogue": "catalogue",
+        "workbook": "lot 1", "catalogue": "lot 2",
         "A": "famille A", "B": "famille B", "all": "corpus",
         "sample": "échantillon",
-        "e5": ["Cohorte", "Pièces", "Livre exact", "Chapitre évaluable",
-               "Chapitre exact"],
-        "e6": ["Cohorte", "Livres", "Pages", "Échecs", "Heures", "s/page"],
-        "e2": ["Cohorte", "Lignes", "Acceptées", "Réécritures",
-               "Échecs de protocole", "Repli par recherche"],
+        "e5": ["Lot", "Extraits", "Bon Livre", "Chapitre vérifiable",
+               "Bon chapitre"],
+        "e6": ["Famille", "Livres", "Pages", "Échecs", "Heures", "s/page"],
+        "e2": ["Famille", "Lignes testées", "Gardées", "Refus : réécriture",
+               "Refus : réponse illisible"],
     },
 }
 
@@ -129,9 +129,8 @@ def correction(locale: str) -> str:
             accepted,
             format_value(r["rewrites_caught"], "int", locale),
             format_value(r["protocol_failures"], "int", locale),
-            format_value(r["on_find_fallback"], "int", locale),
         ])
-    return render_table(headers=words["e2"], aligns="lrrrrr", rows=body)
+    return render_table(headers=words["e2"], aligns="lrrrr", rows=body)
 
 
 TABLES = (

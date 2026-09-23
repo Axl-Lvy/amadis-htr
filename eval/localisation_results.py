@@ -12,11 +12,13 @@ from pathlib import Path
 
 from amadis_htr.localisation import (
     SWEEP_THRESHOLDS,
+    chapter_errors,
     read_ground_truth,
     read_predictions_by_cohort,
     references_for,
     summarise,
     sweep,
+    write_chapter_errors,
     write_summary,
     write_sweep,
 )
@@ -31,8 +33,10 @@ def main() -> None:
     references = read_ground_truth(GROUND_TRUTH)
     by_cohort = read_predictions_by_cohort(ALIGNMENTS)
 
+    errors = []
     for cohort, predictions in sorted(by_cohort.items()):
         scoped = references_for(references, predictions)
+        errors.append(chapter_errors(cohort, scoped, predictions))
         rows = summarise(scoped, predictions)
         write_summary(rows, RESULTS / f"localisation-summary-{cohort}.csv")
         write_sweep(
@@ -46,6 +50,19 @@ def main() -> None:
             f"{certain.chapter_correct} of {certain.chapter_scoreable} chapter "
             f"correct, {certain.chapter_unavailable} with no printed number"
         )
+
+    # Pooled only here, and only to describe the misses: no rate in the report
+    # is computed over both batches.
+    everything = {p: pred for preds in by_cohort.values() for p, pred in preds.items()}
+    errors.append(
+        chapter_errors("all", references_for(references, everything), everything)
+    )
+    write_chapter_errors(errors, RESULTS / "localisation-chapter-errors.csv")
+    pooled = errors[-1]
+    print(
+        f"chapter misses in the right Livre: {pooled.numeral_close + pooled.other}, "
+        f"of which {pooled.numeral_close} are within {2} roman letters"
+    )
 
 
 if __name__ == "__main__":

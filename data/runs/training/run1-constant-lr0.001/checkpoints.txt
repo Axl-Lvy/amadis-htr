@@ -1,0 +1,11 @@
+checkpoint_00-0.9880.ckpt
+checkpoint_00-0.9883.ckpt
+checkpoint_01-0.9888.ckpt
+checkpoint_01-0.9894.ckpt
+checkpoint_02-0.9904.ckpt
+checkpoint_03-0.9913.ckpt
+checkpoint_04-0.9910.ckpt
+checkpoint_05-0.9910.ckpt
+checkpoint_06-0.9910.ckpt
+checkpoint_07-0.9914.ckpt
+checkpoint_08-0.9910.ckpt

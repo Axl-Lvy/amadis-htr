@@ -31,39 +31,69 @@
 \reportmaketitle
 
 \begin{abstract}
-% Written from the measured figures only. Every number here also appears in
+% Translated from main.tex on 2026-09-23. Every number here also appears in
 % section 5, and nothing is introduced by the abstract.
-Une chaîne de production transcrit depuis un an un cycle romanesque français du
-\sxvi{} en \ocrBooks{}~livres. Elle ne repose que sur un
-seul taux d'erreur de validation, mesuré sur 10\,\% des pages d'un unique
-volume. Ce rapport mesure ce que ce chiffre ne peut pas établir.
+Ce rapport évalue une chaîne de traitement construite pour deux œuvres liées
+de l'imprimé français du \sxvi: \emph{Amadis de Gaule}, un cycle romanesque en
+\ocrBooks{}~livres, et le \emph{Trésor des Amadis}, des anthologies qui en
+reproduisent des extraits. L'objectif est une transcription au taux d'erreur le
+plus bas possible. La chaîne comporte trois étapes: un modèle de
+reconnaissance kraken affiné pour cet imprimé, une passe de correction qui fait
+relire les mots douteux par un modèle de langue, et un localisateur qui
+retrouve les extraits du \emph{Trésor} dans le texte transcrit.
 
-Deux des trois affirmations sont éprouvées ici. La reconnaissance ne l'est pas,
-faute d'un jeu annoté de 20~pages qui n'existe pas, et ce rapport
-nomme ce manque au lieu de lui substituer un chiffre qu'il saurait calculer.
+Le modèle de reconnaissance a été affiné à partir de CATMuS-Print sur
+\trainPages{}~pages du \emph{Trésor des Amadis}. Au fil de l'entraînement, son
+taux d'erreur caractère sur les pages de validation est passé de
+\trainCerFirstEpoch{} à \trainCer{}.
 
-La règle d'acceptation par ancrage de la passe de correction entoure les
-segments suspects de \lmark~\rmark{} et n'accepte une réponse que si chaque
-octet hors des marqueurs revient inchangé. Elle a été appliquée à
-\corrOffered{}~lignes de faible confiance, sur un échantillon tiré avec graine
-de \corrPages{}~pages, selon un protocole enregistré au préalable. Pondérée au
-corpus, elle a accepté \corrAcceptRate{} des lignes (IC à 95\,\% de
-\corrAcceptLow{} à \corrAcceptHigh{}) et refusé \corrRewritesCaught{}~réponses
-qui modifiaient le texte hors des marqueurs. Sa mesure a aussi révélé une
-faille. Parmi les lignes soumises, \corrFindFallbackShare{} ont emprunté un repli de
-localisation des segments qui peut marquer deux fois le même mot. Sur ces
-lignes, une acceptation ne prouve pas que la règle a tenu, si bien que
-l'affirmation ne repose que sur moins d'un tiers de ses propres éléments.
+La passe de correction marque les groupes de mots de faible confiance et
+demande à un modèle de langue local de les corriger. Une correction n'est
+gardée que si le reste de la ligne revient inchangé. Testée sur
+\corrOffered{}~lignes issues d'un échantillon de \corrPages{}~pages, elle
+garderait environ \corrAcceptRate{} des corrections sur l'ensemble du corpus,
+vraisemblablement entre \corrAcceptLow{} et \corrAcceptHigh{}. Elle
+a refusé \corrRewritesCaught{}~corrections qui modifiaient le texte hors des
+mots marqués.
 
-La localisation des extraits atteint \locLivreAccuracyWorkbook{} d'exactitude
-au niveau du Livre sur la cohorte préenregistrée, contre un seuil fixé avant
-que les chiffres n'existent, et \locChapterAccuracyWorkbook{} au niveau du
-chapitre. Le traitement par lots a transcrit \ocrPages{}~pages, avec
-\ocrPagesFailed{}~échec, à \ocrSecondsPerPage{}~s par page.
+Le localisateur place \locLivreAccuracyWorkbook{} des extraits dans le bon
+Livre. Les \ocrPages{}~pages ont toutes été transcrites, à
+\ocrSecondsPerPage{}~s par page. Le code d'évaluation, les enregistrements des
+exécutions et les CSV de résultats sont publiés, et chaque chiffre se
+reconstruit à partir d'eux sans GPU ni réseau. Ils se trouvent à l'adresse
+\url{https://github.com/Axl-Lvy/amadis-htr}.
 
-Le code d'évaluation, les enregistrements figés des exécutions et chaque CSV
-de résultats sont publiés. Chaque chiffre se reconstruit ainsi à partir des
-entrées versionnées, sans GPU, sans modèle et sans réseau.
+\vspace{1.2cm}
+% The same schema as main.tex, with French labels and the same macros.
+\begin{center}
+\begin{tikzpicture}[
+    node distance=0.65cm,
+    stage/.style={draw=reportblue, line width=0.6pt, rounded corners=2pt,
+      align=center, text width=2.5cm, minimum height=1.3cm, inner sep=3pt,
+      font=\footnotesize},
+    io/.style={align=center, font=\footnotesize\itshape, text=black!70},
+    figure/.style={font=\footnotesize\bfseries, text=reportred},
+    flow/.style={-{Stealth[length=4pt]}, draw=reportteal, line width=0.7pt},
+  ]
+  \node[io] (scans) {pages\\numérisées};
+  \node[stage, right=of scans] (ocr)
+    {\textbf{Reconnaissance}\\modèle kraken\\affiné};
+  \node[stage, right=of ocr] (corr)
+    {\textbf{Correction}\\LLM local sur les\\mots douteux};
+  \node[stage, right=of corr] (loc)
+    {\textbf{Localisateur}\\retrouve chaque\\extrait du \emph{Trésor}};
+  \node[io, above=0.45cm of loc] (tresor) {extrait du Trésor};
+  \node[io, right=of loc] (out) {Livre};
+  \draw[flow] (scans) -- (ocr);
+  \draw[flow] (ocr) -- (corr);
+  \draw[flow] (corr) -- node[io, above=1pt, font=\scriptsize\itshape] {texte} (loc);
+  \draw[flow] (tresor) -- (loc);
+  \draw[flow] (loc) -- (out);
+  \node[figure, below=0.2cm of ocr] {CER \trainCer{}};
+  \node[figure, below=0.2cm of corr] {\corrAcceptRate{} gardées};
+  \node[figure, below=0.2cm of loc] {\locLivreAccuracyWorkbook{} bon Livre};
+\end{tikzpicture}
+\end{center}
 \end{abstract}
 
 \input{sections-fr/01-introduction.tex}
@@ -80,5 +110,7 @@ entrées versionnées, sans GPU, sans modèle et sans réseau.
 \begin{otherlanguage}[autospacing=false]{french}
 {\footnotesize\printbibliography}
 \end{otherlanguage}
+
+\input{sections-fr/08-appendix.tex}
 
 \end{document}

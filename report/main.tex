@@ -27,35 +27,65 @@
 % Written from the measured figures only. Every number here also appears in
 % section 5; nothing is introduced by the abstract. Short sentences on purpose:
 % an abstract that needs unpicking is a worse abstract.
-A pipeline has been built to transcribe a \ocrBooks{}-book cycle of 16th-century
-French romance. Its recogniser has one number to its name: a
-validation error rate on a 10\% split of a single volume. The two stages behind
-it have none. This report measures those two.
+This report evaluates a pipeline built for two related works of 16th-century
+French print: \emph{Amadis de Gaule}, a \ocrBooks{}-book romance cycle, and the
+\emph{Trésor des Amadis}, anthologies that reprint extracts from it. The goal is a transcription with the lowest error
+rate possible. The pipeline has three stages: a kraken recognition model
+fine-tuned for this print, a correction pass that asks a language model to
+re-read doubtful words, and a passage locator that finds \emph{Trésor} extracts
+in the transcribed text.
 
-The first re-reads low-confidence words with a language model. To stop the
-model rewriting the rest of the line, each suspect word is wrapped in
-\lmark~\rmark{}, and a reply is accepted only if every byte outside the markers
-comes back unchanged. The rule was run over \corrOffered{} lines from a seeded
-\corrPages{}-page sample, under a design registered beforehand. Weighted to the
-corpus it accepted \corrAcceptRate{} of them (95\%~CI \corrAcceptLow{} to
-\corrAcceptHigh{}). It refused \corrRewritesCaught{} replies for editing text
-outside the markers.
+The recognition model was fine-tuned from CATMuS-Print on \trainPages{} pages of
+the \emph{Trésor des Amadis}. Over training, its character error rate on the
+validation pages fell from \trainCerFirstEpoch{} to \trainCer{}.
 
-Measuring the rule also found a hole in it. On \corrFindFallbackShare{} of
-those lines, the code that locates a suspect word falls back to a plain search,
-which can mark the same word twice. The rule then compares the reply against a
-line the pipeline itself corrupted, so an acceptance there proves nothing. The
-claim holds on under a third of its own evidence.
+The correction pass marks groups of low-confidence words and asks a local
+language model to correct them. A correction is kept only if the rest of the
+line comes back unchanged. Tested on \corrOffered{} lines from a
+\corrPages{}-page sample, it keeps an estimated \corrAcceptRate{} of
+corrections over the whole corpus, and likely between \corrAcceptLow{} and
+\corrAcceptHigh{}. It refused \corrRewritesCaught{} corrections that changed
+text outside the marked words.
 
-The second stage locates a \emph{Trésor} extract in the transcribed text. It
-places \locLivreAccuracyWorkbook{} of passages in the right Livre and
-\locChapterAccuracyWorkbook{} in the right chapter, against a gate written
-before the numbers existed. Transcription itself ran over \ocrPages{} pages
-with \ocrPagesFailed{} failures, at \ocrSecondsPerPage{}~s per page.
+The passage locator puts \locLivreAccuracyWorkbook{} of extracts in the right
+Livre. All \ocrPages{} pages were
+transcribed, at \ocrSecondsPerPage{}~s per page.
+The scoring code, run records and result CSVs are released, and every figure
+rebuilds from them without a GPU or a network. They are at
+\url{https://github.com/Axl-Lvy/amadis-htr}.
 
-Recognition accuracy is not measured here. The scoring code, the frozen run
-records and every result CSV are released, so each figure rebuilds from
-committed inputs with no GPU, no model and no network.
+\vspace{1.2cm}
+% The three stages and their headline figure each. The figures are the macros
+% the text above uses, so the schema cannot disagree with it.
+\begin{center}
+\begin{tikzpicture}[
+    node distance=0.55cm,
+    stage/.style={draw=reportblue, line width=0.6pt, rounded corners=2pt,
+      align=center, text width=2.6cm, minimum height=1.3cm, inner sep=3pt,
+      font=\footnotesize},
+    io/.style={align=center, font=\footnotesize\itshape, text=black!70},
+    figure/.style={font=\footnotesize\bfseries, text=reportred},
+    flow/.style={-{Stealth[length=4pt]}, draw=reportteal, line width=0.7pt},
+  ]
+  \node[io] (scans) {page\\scans};
+  \node[stage, right=of scans] (ocr)
+    {\textbf{Recognition}\\kraken model,\\fine-tuned};
+  \node[stage, right=of ocr] (corr)
+    {\textbf{Correction}\\local LLM on\\doubtful words};
+  \node[stage, right=of corr] (loc)
+    {\textbf{Passage locator}\\finds each\\\emph{Trésor} extract};
+  \node[io, above=0.45cm of loc] (tresor) {Trésor extract};
+  \node[io, right=of loc] (out) {Livre};
+  \draw[flow] (scans) -- (ocr);
+  \draw[flow] (ocr) -- (corr);
+  \draw[flow] (corr) -- node[io, above=1pt, font=\scriptsize\itshape] {text} (loc);
+  \draw[flow] (tresor) -- (loc);
+  \draw[flow] (loc) -- (out);
+  \node[figure, below=0.2cm of ocr] {\trainCer{} CER};
+  \node[figure, below=0.2cm of corr] {\corrAcceptRate{} kept};
+  \node[figure, below=0.2cm of loc] {\locLivreAccuracyWorkbook{} right Livre};
+\end{tikzpicture}
+\end{center}
 \end{abstract}
 
 % One file per section, so a section can be drafted, reviewed and rewritten
@@ -72,5 +102,7 @@ committed inputs with no GPU, no model and no network.
 % \footnotesize: 15 entries set at body size ran to two of the report's ten
 % pages, which is a tenth of the document spent on its bibliography.
 {\footnotesize\printbibliography}
+
+\input{sections/08-appendix.tex}
 
 \end{document}

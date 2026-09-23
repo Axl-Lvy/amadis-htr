@@ -3,57 +3,50 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Depuis un an, une chaîne de numérisation lit pour ce projet des romans
-français du \sxvi. Elle n'a qu'un seul chiffre de reconnaissance à son actif,
-un taux d'erreur caractère de validation. Il a été mesuré sur 10\,\% des pages
-d'un unique volume, sur le matériau même qui a servi à affiner le modèle. Ce
-chiffre a permis de choisir un point de contrôle. Il ne dit rien de la façon
-dont le système lit le corpus pour lequel il a été construit. Ce rapport en est
-la mesure.
+Depuis un an, je construis une chaîne de traitement pour deux œuvres liées de
+l'imprimé français du \sxvi. \emph{Amadis de Gaule} est un roman de
+chevalerie écrit d'abord en espagnol par Garci Rodríguez de Montalvo. Sa
+version française commence en 1540 avec la traduction de Nicolas Herberay des
+Essarts et connaît tout de suite un grand succès. Des traducteurs, à Paris puis
+à Lyon, y ajoutent sans cesse de nouveaux livres, et en 1615 le cycle français
+en compte \ocrBooks{}~\cite{debuzon2011chappuys}. Le \emph{Trésor des Amadis},
+imprimé pour la première fois en 1559, rassemble les harangues, lettres,
+complaintes et défis du roman jugés les plus éloquents. Il devait servir de
+modèle aux lecteurs désireux d'apprendre à écrire des lettres et à bien parler,
+et il a été réimprimé et augmenté jusqu'en 1606~\cite{eman2026tresor}. La
+chaîne vise une transcription fidèle du cycle, et un moyen de retrouver d'où
+vient chaque extrait du \emph{Trésor}.
 
-L'imprimé du \sxvi{} met en échec la reconnaissance optique générique pour des
-raisons qui se cumulent. Le \qtr{ſ} long est un caractère distinct, que les
-modèles modernes confondent avec \qtr{f}. Les premiers volumes sont composés en
-\emph{bâtarde}, une famille de caractères pour laquelle il existe peu de
-données d'entraînement modernes. Les chapitres s'ouvrent sur des lettrines de
-plusieurs lignes de haut, que les segmenteurs prennent pour des illustrations
-ou pour du bruit. Les titres courants, les réclames et les signatures se
-trouvent dans le bloc de texte. La foliotation est en chiffres romains dans une
-moitié du corpus et en chiffres arabes dans l'autre. Les numérisations
-proviennent enfin de trois institutions, à trois niveaux de qualité, et l'une
-d'elles appose son tampon en travers de la page.
-La figure~\ref{fig:plate} montre une telle page.
+Cet imprimé résiste à la reconnaissance optique courante. Le \qtr{ſ} long est
+un caractère distinct, que les modèles modernes lisent comme un \qtr{f}. Les
+premiers volumes sont composés en \emph{bâtarde}, un caractère pour lequel il
+existe peu de données d'entraînement modernes. Les chapitres s'ouvrent sur des
+lettrines de plusieurs lignes de haut, que les segmenteurs prennent pour des
+images ou du bruit. Titres courants, réclames et signatures se trouvent dans le
+bloc de texte. La foliotation est en chiffres romains dans une moitié du cycle
+et en chiffres arabes dans l'autre, et les numérisations viennent de plusieurs
+bibliothèques, de qualité inégale, dont l'une appose son tampon sur chaque
+page. La figure~\ref{fig:plate} montre une page typique.
 
-Ce que le projet pouvait affirmer avant ce rapport tient en un mot: rien.
-Aucun chiffre de reconnaissance d'aucune sorte pour \emph{Amadis de Gaule},
-l'œuvre que le système doit lire. Aucun taux d'erreur mot nulle part. Aucun
-système de comparaison mesuré. Aucune évaluation de l'une ou l'autre des passes par LLM, y
-compris de la règle d'acceptation qui fait l'originalité de la chaîne. Et des
-chiffres structurels calculés à chaque exécution, puis jetés.
+La chaîne comporte trois étapes:
+\begin{enumerate}
+  \item \textbf{Reconnaissance.} Un modèle kraken, affiné à partir de
+    CATMuS-Print sur des pages du \emph{Trésor}, lit chaque page.
+  \item \textbf{Correction.} Les mots dont le modèle n'était pas sûr sont
+    marqués, et un modèle de langue local est chargé de les corriger. Une
+    correction n'est gardée que si le reste de la ligne revient inchangé.
+  \item \textbf{Localisation des passages.} Chaque extrait du \emph{Trésor} est
+    recherché dans le cycle transcrit, et le localisateur renvoie le passage
+    correspondant et le Livre auquel il appartient.
+\end{enumerate}
 
-\subsection{Trois affirmations}
-
-\claim{C1.}{Le modèle affiné lit ce corpus mieux que les modèles publiés.}
-L'évaluation porte sur des pages annotées de chaque œuvre, avec un taux
-d'erreur par œuvre, contre des modèles publiés exécutés à segmentation
-constante.
-
-\claim{C2.}{Une règle d'acceptation prudente empêche une passe générative de
-réécrire le texte.} Les mots qui portent un caractère de faible confiance sont
-entourés de \lmark~\rmark{} et relus. La réponse n'est acceptée que si tout ce
-qui se trouve hors des marqueurs revient identique à l'octet près. Le défaut
-visé est celui qu'un modèle génératif présente réellement sur ce matériau, la
-modernisation fluide de l'orthographe ancienne. La section~\ref{sec:e2} rend
-compte de ce qu'a fait la règle.
-
-\claim{C3.}{Un extrait du \emph{Trésor} peut être localisé dans le texte de
-base.} Il s'agit d'une tâche de recherche sur la transcription complète des
-\ocrBooks{}~livres, évaluée d'après le propre catalogue de l'éditeur, selon un
-critère écrit avant que les chiffres ne soient connus. La
-section~\ref{sec:e5} rapporte une exactitude de \locLivreAccuracyWorkbook{} au
-niveau du Livre sur la cohorte préenregistrée.
-
-\medskip\noindent
-Des cinq expériences qui éprouvent une affirmation, trois ne sont pas
-mesurées. Elles sont désignées comme telles, et la
-section~\ref{sec:limitations} dit ce que cela coûte.
+Ce rapport mesure chaque étape à son tour. Pour la reconnaissance, je donne la
+courbe de validation de l'affinage et compare deux entraînements
+(section~\ref{sec:training}); aucun jeu de test distinct n'a été évalué. Pour
+la correction, je donne ce que la règle d'acceptation garde et ce qu'elle
+refuse sur un échantillon de \corrPages{}~pages (section~\ref{sec:e2}). Pour la
+localisation, je donne la fréquence à laquelle le localisateur trouve le bon
+Livre, vérifiée d'après le catalogue de l'éditeur (section~\ref{sec:e5}). La
+section~\ref{sec:e6} ajoute le débit et la détection des chapitres. Les
+expériences de correction et de localisation ont été conçues par écrit avant
+d'être menées.

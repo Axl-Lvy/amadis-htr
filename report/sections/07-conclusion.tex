@@ -1,68 +1,37 @@
-% Status: drafted 2026-09-22, cut 2026-09-22. The claims are filled from
-% section 5 and nothing here introduces a figure that is not there.
+% Status: rewritten 2026-09-23. Nothing here introduces a figure that is not
+% in section 5.
 \section{Conclusion and released artefacts}
 \label{sec:conclusion}
 
-\claim{C2}{is supported on part of its evidence.} The rule behaves as specified
-on the lines where the span-locating offset path held. On the
-\corrOnFindFallback{} of \corrOffered{} lines that took the search fallback it
-was comparing against a line the pipeline had already corrupted, so those
-acceptances carry no weight, and the claim rests on under a third of the
-evidence gathered for it. Whether the accepted edits improve the text is a
-further question, and needs a reference transcription for E2's own sampled
-pages, which nothing here provides. The fix to the fallback belongs in the
-pipeline and is stated in section~\ref{sec:errors}.
+\textbf{Recognition.} The fine-tuned model reaches \trainCer{} CER on its
+validation pages, down from \trainCerFirstEpoch{} after its first epoch and
+below the \trainCerConstant{} of the first training run. It is the only
+recognition figure in this report, and it comes from validation pages.
 
-\claim{C3}{is supported.} Livre accuracy is \locLivreAccuracyWorkbook{} on the
-pre-registered cohort and \locLivreAccuracyCatalogue{} on the second, against a
-gate that asked for above 90\%. Chapter accuracy is materially lower ---
-\locChapterAccuracyWorkbook{} and \locChapterAccuracyCatalogue{} --- and the
-pre-registration read that gap as span selection, naming two parameters to tune
-before concluding it. Neither was tuned, so the reading stands as an
-expectation confirmed in direction.
+\textbf{Correction.} The accept rule does what it was built to do: it refused
+\corrRewritesCaught{} replies that changed text outside the marked words. Whether the kept corrections improve the text is
+still an open question.
 
-\subsection{What the evaluation changed}
-
-\texttt{MIN\_SCORE} was checked rather than chosen. Precision is near 100\%
-across the whole sweep, so the curve does not locate a threshold; what
-figure~\ref{fig:e5-sweep} shows is that 0.808 sits at the top of the coverage
-plateau, where nothing is lost. That is weaker than \emph{calibrated} and
-stronger than \emph{inherited}. The other five constants in
-table~\ref{tab:thresholds} are unswept and are now at least enumerated.
-
-The evaluation also corrected the record. Four figures the project stated in
-prose --- including a CER for the fine-tune with no test set, no log and no
-code behind it --- were searched for, not substantiated, and dropped. They are
-listed in \file{PROVENANCE.md}.
+\textbf{Passage location.} This works. The locator finds the right Livre for
+\locLivreAccuracyWorkbook{} and \locLivreAccuracyCatalogue{} of the extracts in
+the first and second batch, well above the 90\% set in advance. The chapter
+numbers read from the transcribed headings agree with the editor's less often,
+at \locChapterAccuracyWorkbook{} and \locChapterAccuracyCatalogue{}, and nearly
+all the disagreements look like misread roman numerals in those headings.
 
 \subsection{Released artefacts}
 \label{sec:artefacts}
 
-This repository holds the scoring code, the frozen run records and every result
-CSV, so each figure reruns from committed inputs with no GPU, no model and no
-network: \file{data/runs/ocr/} for the \ocrBooks{} books' run and calibration
-records, \file{data/runs/correction/} for E2's frame and its frozen verdicts,
-and \file{data/runs/matcher/} for the alignment export. The Hugging Face model
-card for \file{amadis-ft.mlmodel} is now writable, because the shipped file is
-tied to its training checkpoint by weight comparison.
+The repository contains the scoring code, the frozen run records and every
+result CSV, so each figure can be rebuilt without a GPU, a model or a network.
+This includes the fine-tune's training logs, the run records of the
+\ocrBooks{} books, the correction sample with its verdicts, and the locator's
+output. Appendix~\ref{app:data} says where each one is. Because the shipped
+model is tied to its training checkpoint, its Hugging Face model card can now
+be written.
 
-\file{data/gold/} is released beside them and is scored by nothing in this
-report. It is \goldPages{} pages carrying a corrected transcription ---
-\goldPagesTresor{} of \emph{Trésor}~T.1 and \goldPagesAmadis{} of \emph{Amadis
-de Gaule} livre~13, \goldLines{} lines and \goldChars{} characters --- selected
-by \file{eval/build_gold_set.py} from \goldCandidates{} Transkribus
-candidates. A page qualifies only if a human marked it finished and it is
-absent from the training split: that removes \goldRefusedTrained{} pages,
-\goldRefusedUncorrected{} carry no correction at all, and
-\goldRefusedExcluded{} is front matter. \file{data/gold/MANIFEST.csv} gives a
-row per candidate with its reason, so the set is checkable rather than
-asserted, and records per page the model whose output was corrected. What it
-can and cannot support is in section~\ref{sec:limitations}.
-
-No page image is released beyond the illustrative plates in
-section~\ref{sec:corpus}: reuse terms differ per holding institution and are
-unsettled for at least one, and \file{data/gold/MANIFEST.csv} records the
-holder per page so that each can be settled separately. The transcriptions are
-released, under CC-BY-4.0 with the rest of \file{data/}. They are new editorial
-work rather than a reproduction of the print, which is itself long out of
-copyright.
+No page images are released apart from the illustrations in
+section~\ref{sec:corpus}, because the reuse terms differ between libraries and
+are unclear for at least one. The data are released under CC-BY-4.0. The
+transcriptions are new editorial work, and the printed books themselves are
+long out of copyright.

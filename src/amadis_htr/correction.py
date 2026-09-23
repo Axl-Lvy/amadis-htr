@@ -142,6 +142,28 @@ class VerdictRow:
 
 
 @dataclass(frozen=True)
+class ConfidenceRow:
+    """Refusals among the lines whose least confident character falls in a band.
+
+    `band` is `b1`, `b2`, ... in order, plus `above`, which pools every band
+    after the first so the report can set the lowest band against the rest.
+    """
+
+    band: str
+    low: float
+    high: float
+    lines: int
+    refused: int
+    rewrites: int
+
+
+#: Band edges on the line's lowest character confidence. Every offered line
+#: is below the correction threshold, 0.6, so the last band ends there. The
+#: first edge is where the refusal rate visibly changes in the verdicts.
+CONFIDENCE_EDGES: tuple[float, ...] = (0.0, 0.3, 0.45, 0.55, 0.6)
+
+
+@dataclass(frozen=True)
 class ReasonRow:
     reason: str
     lines: int
@@ -268,6 +290,37 @@ def summarise_reasons(verdicts: Iterable[Verdict]) -> list[ReasonRow]:
     ]
 
 
+def summarise_confidence(
+    verdicts: Iterable[Verdict], edges: Sequence[float] = CONFIDENCE_EDGES
+) -> list[ConfidenceRow]:
+    """Refusal counts per confidence band, and the bands after the first pooled.
+
+    Counts, not rates: the figure and the macros divide, as everywhere else.
+    A line exactly on an edge goes to the upper band; the last band is closed
+    so that nothing at the top edge falls out.
+    """
+    verdicts = list(verdicts)
+
+    def row(band: str, low: float, high: float, last: bool) -> ConfidenceRow:
+        inside = [
+            v for v in verdicts
+            if low <= v.min_conf < high or (last and v.min_conf == high)
+        ]
+        return ConfidenceRow(
+            band=band, low=low, high=high, lines=len(inside),
+            refused=sum(1 for v in inside if not v.accepted),
+            rewrites=sum(1 for v in inside if v.reason == REWRITE_REASON),
+        )
+
+    pairs = list(zip(edges, edges[1:]))
+    rows = [
+        row(f"b{i + 1}", low, high, i == len(pairs) - 1)
+        for i, (low, high) in enumerate(pairs)
+    ]
+    rows.append(row("above", edges[1], edges[-1], True))
+    return rows
+
+
 def accept_rate_by_page(
     verdicts: Iterable[Verdict],
     *,
@@ -323,6 +376,18 @@ def write_verdicts(rows: Iterable[VerdictRow], path: str | Path) -> None:
                  row.accepted_unchanged, row.changed_spans, row.changed_chars,
                  row.on_find_fallback, row.rewrite_edits, row.rewrite_segments,
                  row.rewrites_substantial]
+            )
+
+
+def write_confidence(rows: Iterable[ConfidenceRow], path: str | Path) -> None:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["band", "low", "high", "lines", "refused", "rewrites"])
+        for row in rows:
+            writer.writerow(
+                [row.band, f"{row.low:.2f}", f"{row.high:.2f}", row.lines,
+                 row.refused, row.rewrites]
             )
 
 

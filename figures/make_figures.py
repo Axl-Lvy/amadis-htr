@@ -1,6 +1,6 @@
 """Every figure in the report, from `eval/results/*.csv`.
 
-Three figures and no more. A bar chart of two bars says what a sentence says,
+Four figures and no more. A bar chart of two bars says what a sentence says,
 and the report is ten pages: `corpus-extracts` and `e2-reasons` were dropped on
 2026-09-22 because their numbers are already in the prose beside them. The
 CSVs they read are still written and still checked.
@@ -34,8 +34,8 @@ from figures.style import (
 #: Every word a figure prints, per report language.
 LABELS = {
     "en": {
-        "workbook": "workbook",
-        "catalogue": "catalogue",
+        "workbook": "batch 1",
+        "catalogue": "batch 2",
         "operating point": "operating point",
         "precision": "precision (%)",
         "coverage": "coverage (%)",
@@ -48,10 +48,17 @@ LABELS = {
         "rejected": "rejected ({})",
         "confidence": "lowest character confidence on the line",
         "density": "density",
+        "refused": "replies refused (%)",
+        "lines": "{} lines",
+        "epoch": "epoch",
+        "validation cer": "validation CER (%)",
+        "shipped": "reduce on plateau, $3\\times10^{-4}$",
+        "constant": "constant, $10^{-3}$",
+        "selected": "shipped checkpoint",
     },
     "fr": {
-        "workbook": "classeur",
-        "catalogue": "catalogue",
+        "workbook": "lot 1",
+        "catalogue": "lot 2",
         "operating point": "seuil retenu",
         "precision": "précision (%)",
         "coverage": "couverture (%)",
@@ -64,6 +71,13 @@ LABELS = {
         "rejected": "refusées ({})",
         "confidence": "confiance minimale d'un caractère de la ligne",
         "density": "densité",
+        "refused": "réponses refusées (%)",
+        "lines": "{} lignes",
+        "epoch": "époque",
+        "validation cer": "CER de validation (%)",
+        "shipped": "réduction sur plateau, $3\\times10^{-4}$",
+        "constant": "constant, $10^{-3}$",
+        "selected": "modèle livré",
     },
 }
 
@@ -156,39 +170,72 @@ def throughput_by_book(locale: str) -> None:
 
 
 def correction_confidence(locale: str) -> None:
-    """E2: the recogniser's confidence on accepted against rejected lines."""
-    import csv as _csv
+    """Correction: the share of replies refused, by the line's lowest confidence.
 
-    path = Path(RESULTS).parent.parent / "data/runs/correction/VERDICTS.csv"
-    if not path.exists():
-        return
-    with open(path, encoding="utf-8", newline="") as handle:
-        verdicts = list(_csv.DictReader(handle))
-    accepted = [float(v["min_conf"]) for v in verdicts if v["accepted"] == "1"]
-    rejected = [float(v["min_conf"]) for v in verdicts if v["accepted"] != "1"]
-    if not rejected:
-        return
+    One scale for every bar, and the number of lines written on each, so a
+    small band cannot pass for a strong result.
+    """
     words = LABELS[locale]
-    fig, axis = plt.subplots(figsize=(5.2, 1.7))
-    bins = [i / 20 for i in range(0, 13)]
-    axis.hist(
-        [accepted, rejected], bins=bins, color=[BLUE, RED], density=True,
-        label=[words["accepted"].format(len(accepted)),
-               words["rejected"].format(len(rejected))],
-    )
+    bands = [r for r in rows("correction-confidence.csv") if r["band"] != "above"]
+    fig, axis = plt.subplots(figsize=(5.2, 1.8))
+    x = list(range(len(bands)))
+    share = [100 * int(r["refused"]) / int(r["lines"]) for r in bands]
+    axis.bar(x, share, color=BLUE, width=0.6)
+    for i, (r, h) in enumerate(zip(bands, share)):
+        axis.text(i, h + 0.6, words["lines"].format(int(r["lines"])),
+                  ha="center", va="bottom", fontsize=7, color=GREY)
+    tick = "{:.2f}–{:.2f}"
+    axis.set_xticks(x, [tick.format(float(r["low"]), float(r["high"]))
+                        for r in bands])
     axis.set_xlabel(words["confidence"])
-    axis.set_ylabel(words["density"])
-    axis.legend()
+    axis.set_ylabel(words["refused"])
+    axis.set_ylim(0, max(share) * 1.3)
     localise_ticks(fig, locale)
+    if locale == "fr":
+        axis.set_xticklabels([t.get_text().replace(".", ",")
+                              for t in axis.get_xticklabels()])
     save(fig, "e2-confidence", locale)
 
 
+def training_curve(locale: str) -> None:
+    """The fine-tune: validation CER per epoch, for both training runs.
+
+    The y axis starts at zero so the gap between the runs is not exaggerated.
+    """
+    words = LABELS[locale]
+    data = rows("training-curve.csv")
+    best = {r["run"]: r for r in rows("training-runs.csv")}
+    fig, axis = plt.subplots(figsize=(5.2, 1.8))
+    for run, colour, label in (
+        ("rop0.5-lr3e-4-augment", BLUE, words["shipped"]),
+        ("run1-constant-lr0.001", RED, words["constant"]),
+    ):
+        curve = [r for r in data if r["run"] == run]
+        axis.plot([int(r["epoch"]) for r in curve],
+                  [float(r["cer"]) * 100 for r in curve],
+                  color=colour, label=label, marker="." if len(curve) < 20 else None)
+    chosen = best["rop0.5-lr3e-4-augment"]
+    x, y = int(chosen["best_epoch"]), float(chosen["cer"]) * 100
+    axis.plot([x], [y], "o", color=BLUE, ms=4, zorder=3)
+    axis.annotate(words["selected"], (x, y), xytext=(x - 2, y + 0.45),
+                  fontsize=7, color=GREY, ha="right",
+                  arrowprops={"arrowstyle": "-", "color": GREY, "lw": 0.6})
+    axis.set_xlabel(words["epoch"])
+    axis.set_ylabel(words["validation cer"])
+    axis.set_ylim(0, 1.75)
+    axis.legend(loc="upper right")
+    localise_ticks(fig, locale)
+    save(fig, "training-curve", locale)
+
+
 FIGURES = (
+    ("Fine-tune curve", training_curve,
+     ("training-curve.csv", "training-runs.csv")),
     ("E5 sweep", localisation_sweep,
      ("localisation-sweep-workbook.csv", "localisation-sweep-catalogue.csv")),
     ("E6 throughput", throughput_by_book,
      ("throughput.csv", "throughput-by-book.csv")),
-    ("E2 confidence", correction_confidence, ("correction-verdicts.csv",)),
+    ("E2 confidence", correction_confidence, ("correction-confidence.csv",)),
 )
 
 

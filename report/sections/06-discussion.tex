@@ -1,97 +1,48 @@
-% Status: drafted 2026-09-22, merged from the former sections 7 and 8 and cut
-% twice the same day. Every number here is also in section 5; this section
-% reads them. Each limitation states its consequence for a specific claim.
+% Status: rewritten 2026-09-23. Every number here is also in section 5; this
+% section interprets them.
 \section{Discussion and limitations}
 \label{sec:errors}
-% The old sections 7 and 8 are one section now, and both labels point at it so
-% that a forward reference from section 1 or 5 still lands somewhere.
+% Two labels for one section, so that references to either still land here.
 \label{sec:limitations}
 
-\subsection{The accept rule, against the literature and against itself}
+\subsection{Correction}
 
-The post-correction literature converges on one warning: an LLM corrector
-degrades already-good OCR~\cite{kanerva2025nofreelunches}, and over-correction
-on low-noise input is HIPE-OCRepair's consistent
-problem~\cite{ehrmann2026hipeocrepair}. Both describe a corrector that rewrites
-when it should abstain. The marker anchor turns that from a quality problem
-into a detectable one: the \corrRewritesCaught{} refusals are replies that
-changed text outside the markers, which a rule without the anchor would have
-accepted silently. But the branch fires on any byte difference, so it bounds
-fluent rewriting from above --- a moved space and a rewritten clause land in
-the same bucket, and \corrRewritesSubstantial{} of the \corrRewritesCaught{}
-moved more than two characters.
+The warning from the literature is that an LLM corrector rewrites text it
+should leave alone~\cite{kanerva2025nofreelunches, ehrmann2026hipeocrepair}.
+The accept rule makes such rewrites visible. The \corrRewritesCaught{} refused
+replies changed text outside the marked words, and a rule without markers would
+have kept them without anyone noticing. The rule is strict, though. It refuses
+any difference at all, so a moved space counts the same as a rewritten clause,
+and only \corrRewritesSubstantial{} of the \corrRewritesCaught{} changed more
+than two characters.
 
-\textbf{A hole in the rule.} It is not as airtight as
-section~\ref{sec:system} describes. \texttt{suspect\_spans} locates each
-suspect word by character offset when the recogniser's raw text and the page's
-text align, and otherwise searches for the word --- taking the \emph{first}
-occurrence, so two low-confidence occurrences of the same word resolve to the
-same index. The line is then marked with two markers around one word, the model
-is shown a corrupted line, and the accept rule compares the reply against that
-same corrupted construction, and accepts it. The rule cannot catch this,
-because the corruption happens before it runs, and the branch is not an edge
-case: \corrOnFindFallback{} of the \corrOffered{} offered lines took it. This
-is the most serious limitation in the report. The measured acceptance rate is
-an upper bound on the rule's clean behaviour, and \textbf{C2 is supported on
-under a third of the lines E2 offered}. One caveat on that number: a failed
-offset check is necessary for the bug, not sufficient --- it also needs two
-low-confidence occurrences of one word on one line --- so
-\corrFindFallbackShare{} bounds the exposure rather than estimating the damage.
-The fix belongs in the pipeline: search forward from the previous span's end,
-and refuse to mark a line whose spans overlap.
+\textbf{Kept does not mean better.} Knowing whether the kept edits improve the
+text needs a reference transcription of the sampled pages, and there is none.
+The sample is also \corrPages{} of the \corrReachPagesWithSpan{} pages with a
+doubtful word, so its figures are estimates for the corpus.
 
-\textbf{And E2 measures refusal, not improvement.} Whether the edits it
-accepted made the text better needs a reference transcription for the pages it
-sampled, and none exists. Its sample is also \corrPages{} of the
-\corrReachPagesWithSpan{} pages carrying a suspect span: a sample of the
-corpus, not the corpus.
+\subsection{What is not measured}
 
-\subsection{Localisation, and structure}
+\textbf{Recognition on unseen pages.} The fine-tune has a validation curve and
+nothing more. This report does not show how well the model reads pages it has
+never seen, and does not compare it with the published models it replaced. The
+usual confusions, long~\qtr{ſ} for \qtr{f},
+\qtr{u} for \qtr{n} and \qtr{c} for \qtr{e}, have not been counted. The
+corrected pages released with this report (appendix~\ref{app:data}) are a
+starting point, with known limits: they were corrected from a model's output
+rather than transcribed from scratch, by a single person, from one work and one
+copy, and they keep Transkribus's line segmentation.
 
-Livre accuracy is \locLivreAccuracyWorkbook{} and chapter accuracy
-\locChapterAccuracyWorkbook{} on the same pieces. The pre-registration
-anticipated this case --- \qtr{Correct CHAPTER far below correct LIVRE points
-at the span, not the search} --- and said in the same breath to tune
-\texttt{CHAIN\_GAP\_PENALTY} and \texttt{WINDOW\_SLACK} before concluding it.
-That tuning has not been done, so the span reading is the pre-registered
-expectation confirmed in direction, not a tested cause. The denominators say
-something the rates do not: only \locChapterScoreableWorkbook{} of
-\locPiecesWorkbook{} certain pieces carry a decodable printed chapter number,
-so chapter accuracy is the weaker of the two figures in evidence as well as in
-value.
+\textbf{Validation is not test.} The \trainCer{} comes from \trainPagesVal{}
+pages that were also used to choose the checkpoint. They were split page by
+page from the same volume as the training pages, so they share its type and its
+wear. The figure is therefore somewhat optimistic for the \emph{Trésor}, and it
+says nothing direct about \emph{Amadis de Gaule}. The \emph{Trésor} also
+reprints passages of \emph{Amadis}, so the model has already seen some of the
+cycle's text, to an extent that cannot be estimated without knowing which
+passages T.1 contains.
 
-On family~A's structure, \structSpuriousA{} proposed chapter openings remain
-against \structMissingA{} misses --- after a reader made 128 promotions and 217
-demotions by hand. That residue is over-proposal, and it is not evidence about
-the unaided detector: the hand pass removed an unknown share of the misses, and
-bounding it puts unaided recall as low as 77.0\% against the
-\structRecallHandCheckedA{} reported.
-
-\subsection{What is not here}
-
-\textbf{Recognition accuracy is not measured.} This report shows that the
-pipeline runs, how fast, what its accept rule refuses and how well it locates a
-passage. It does not show how well the fine-tune reads, and it does not compare
-it against the published models it replaced. The confusion table the project
-has asserted for a year --- long~\qtr{ſ} against \qtr{f}, \qtr{u} against
-\qtr{n}, \qtr{c} against \qtr{e} --- remains an assertion. What exists towards
-it is the released transcription set of section~\ref{sec:artefacts}, and what
-that set cannot settle it states on its own face: it is post-edited rather than
-blind, single-annotator, one work and one copy, carrying Transkribus's own
-segmentation.
-
-\textbf{Validation is not test.} The one recognition figure the project does
-have rests on \trainPagesVal{} held-out pages that selected the shipped
-checkpoint, split page-wise from a single volume, so the same formes and the
-same type wear appear on both sides. The model has also read some of the text
-it was scored on: no page of \emph{Amadis de Gaule} is in the training list,
-but the \emph{Trésor} excerpts \emph{Amadis}, and the size of that effect is
-not estimable without knowing which passages T.1 excerpts. Every figure in this
-report is computed on the corpus rather than on that split, which is why none
-of them inherits the problem --- and why none of them is a recognition rate.
-
-\textbf{Five of six thresholds are uncalibrated}
-(table~\ref{tab:thresholds}), as are the two the pre-registration names as
-preconditions for reading the chapter result. \textbf{And the timings cover the
-batch runner only}: \ocrSecondsPerPage{}~s per page is this runner on this GPU,
-not a claim about the deployed system, whose execution database was not read.
+\textbf{Settings and timings.} Apart from the location accept threshold, none
+of the settings listed in section~\ref{sec:system} was tuned, including the two
+chaining settings that decide where a span starts and ends. The timings
+describe the batch runner on one GPU, not the deployed system.

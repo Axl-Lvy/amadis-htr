@@ -1,52 +1,49 @@
-% Status: drafted 2026-09-22, cut 2026-09-22 to the ten-page budget.
+% Status: rewritten 2026-09-23 to follow the abstract: three stages, in the
+% order recognition, correction, passage location.
 \section{Introduction}
 \label{sec:introduction}
 
-A digitisation pipeline has been reading sixteenth-century French romance for
-this project for a year. It has one recognition figure to its name: a
-validation character error rate, measured on a 10\% page-level split of a
-single volume, on the material the model was fine-tuned on. That number
-selected a checkpoint, and nothing else about the system has ever been
-measured. This report is the measurement.
+For the past year I have been building a pipeline for two related works of
+sixteenth-century French print. \emph{Amadis de Gaule} is a chivalric romance
+first written in Spanish by Garci Rodríguez de Montalvo. Its French version
+began in 1540 with the translation by Nicolas Herberay des Essarts and was very
+popular from the start. Translators in Paris and then Lyon kept adding new
+books, and by 1615 the French cycle had \ocrBooks{} of
+them~\cite{debuzon2011chappuys}. The \emph{Trésor des Amadis}, first printed in
+1559, collects the speeches, letters, complaints and challenges of the romance
+that were judged the most eloquent. It was meant as a model for readers who
+wanted to learn to write letters and speak well, and it was reprinted and
+enlarged until 1606~\cite{eman2026tresor}. The aim of the pipeline is an
+accurate transcription of the cycle, and a way to find where each
+\emph{Trésor} extract comes from in it.
 
-Sixteenth-century print defeats off-the-shelf OCR for reasons that compound.
-The long \qtr{ſ} is a distinct character that modern models map onto \qtr{f}.
-The earlier volumes are set in \emph{bâtarde}, a type family with little modern
-training data. Chapters open with drop caps spanning several lines, which
-segmenters read as illustrations or as noise. Running heads, catchwords and
-signatures sit in the text block, folio numbering runs roman in one half of the
-corpus and arabic in the other, and the scans come from three institutions at
-three qualities, one of them stamped across the page.
-Figure~\ref{fig:plate} is one such page.
+This print is hard for standard OCR. The long \qtr{ſ} is a separate character
+that modern models read as \qtr{f}. The early volumes are set in
+\emph{bâtarde}, a typeface with little modern training data. Chapters open with
+drop caps several lines tall, which segmenters take for pictures or noise.
+Running heads, catchwords and signatures sit inside the text block. Folio
+numbers are roman in half the cycle and arabic in the other half, and the scans
+come from several libraries at different levels of quality, one with a stamp
+across every page. Figure~\ref{fig:plate} shows a typical page.
 
-The answer to that has been a pipeline of three parts: a fine-tuned recogniser,
-two opt-in LLM passes behind it, and a retrieval stage that locates an
-anthology extract in the resulting text. Of the three, the two that were never
-evaluated at all are the ones this report takes: the accept rule that governs
-the generative pass, and the retrieval stage. Both ran in production for a year
-on no evidence. What the project could state about either before this report is
-nothing --- not a rate, not a failure mode, not a threshold anyone had swept ---
-and the structural figures the pipeline computed on every run were discarded
-unread.
+The pipeline has three stages:
+\begin{enumerate}
+  \item \textbf{Recognition.} A kraken model, fine-tuned from CATMuS-Print on
+    pages of the \emph{Trésor}, reads each page.
+  \item \textbf{Correction.} The words the model was unsure of are marked, and a
+    local language model is asked to correct them. A correction is kept only if
+    the rest of the line comes back unchanged.
+  \item \textbf{Passage location.} Each \emph{Trésor} extract is searched for in
+    the transcribed cycle, and the locator returns the passage it matches and
+    the Livre it belongs to.
+\end{enumerate}
 
-\subsection{Two claims}
-
-\claim{C2.}{A conservative accept rule keeps a generative pass from rewriting
-the text.} Words carrying a low-confidence character are wrapped in
-\lmark~\rmark{} and re-read; the reply is accepted only when everything outside
-the markers returns byte identical. The failure mode being defended against is
-the one a generative model actually has on this material --- fluent
-modernisation of archaic spelling. Section~\ref{sec:e2} reports what the rule
-did.
-
-\claim{C3.}{A \emph{Trésor} extract can be located in the baseline text.}
-A retrieval task over the full transcription of all \ocrBooks{} books, scored
-against the editor's own catalogue under a gate written before the numbers were
-known. Section~\ref{sec:e5} reports \locLivreAccuracyWorkbook{} Livre accuracy
-on the pre-registered cohort.
-
-\medskip\noindent
-The claims and the experiments keep the numbering of the design they were
-registered under, so C2 and C3 are answered by E2 and E5, and E6 is descriptive
-throughput and structure. Recognition accuracy is outside the scope of this
-report; section~\ref{sec:limitations} says what that leaves open.
+This report measures each stage in turn. For recognition, I report the validation
+curve of the fine-tune and compare two training runs
+(section~\ref{sec:training}); no separate test set was scored. For correction,
+I report what the accept rule keeps and what it refuses on a sample of
+\corrPages{} pages (section~\ref{sec:e2}). For passage location, I report how
+often the locator finds the right Livre, checked against the editor's own
+catalogue (section~\ref{sec:e5}). Section~\ref{sec:e6} adds
+throughput and chapter detection. The correction and location experiments were
+designed in writing before they were run.

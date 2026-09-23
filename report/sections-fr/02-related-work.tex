@@ -3,47 +3,54 @@
 \section{Travaux connexes}
 \label{sec:related}
 
-\textbf{CATMuS et le moteur.} CATMuS est un standard de transcription partagé
-avant d'être un modèle. Sa version médiévale a fixé les règles d'annotation et
-le protocole transséculaire qui rendent deux modèles affinés
-comparables~\cite{clerice2024catmusmedieval}, et CATMuS-Print étend la démarche
-à l'imprimé~\cite{gabay2024catmusprint}. CATMuS-Print~[Large] est le point de
-contrôle dont ce travail part pour l'affinage~\cite{gabay2024catmusprintlarge}.
-La reconnaissance tourne sous kraken~7.0.2. L'article sur le moteur décrit la
-version~5~\cite{kiessling2025kraken} et la notice Zenodo fixe la
-3.0b20~\cite{kiessling2021krakensoftware}, si bien que la 7.0.2 n'est
-identifiée que par son numéro. kraken ne fournit aucun modèle de référence pour
-l'imprimé français de la première modernité. C'est pourquoi le système de
-comparaison de E1 doit être un modèle publié choisi, et non un modèle par
-défaut. Transkribus a fourni l'environnement
-d'annotation~\cite{kahle2017transkribus, muehlberger2019transkribus}. Ses
-modèles sont opaques et il segmente de son côté, si bien qu'il entre dans
-cette évaluation comme un système de comparaison confondu.
+\textbf{Reconnaissance.} CATMuS est une famille de jeux de données et de
+modèles dont les transcriptions suivent toutes les mêmes règles, si bien que
+les modèles entraînés dessus produisent des sorties comparables. Elle est née
+avec les manuscrits médiévaux~\cite{clerice2024catmusmedieval}, et CATMuS-Print
+applique la même démarche aux livres imprimés~\cite{gabay2024catmusprint}. J'ai
+affiné le modèle CATMuS-Print [Large]~\cite{gabay2024catmusprintlarge} avec
+kraken~7.0.2. L'article de kraken décrit la version~5~\cite{kiessling2025kraken}
+et la notice Zenodo fixe la version 3.0b20~\cite{kiessling2021krakensoftware};
+la version utilisée est donc donnée par son numéro. Les pages d'entraînement
+ont été transcrites dans Transkribus~\cite{kahle2017transkribus,
+muehlberger2019transkribus}. Les travaux publiés les plus proches sur un
+matériau semblable sont CATMuS Gothic Print, un autre modèle de base entraîné
+sur des textes religieux et polémiques~\cite{solfrini2024catmusgothic}, et
+l'évaluation par Tiger de l'affinage de modèles HTR sur le français des
+\textsc{xvii}\textsuperscript{e} et \textsc{xviii}\textsuperscript{e}~siècles~\cite{tiger2026overfit}.
 
-\textbf{La correction par LLM, et son défaut caractéristique.} La littérature
-converge vers un même avertissement. Kanerva et al.\ l'énoncent dès leur titre:
-il n'y a pas de repas gratuit. Un correcteur LLM peut dégrader une
-reconnaissance déjà bonne au lieu de l'améliorer~\cite{kanerva2025nofreelunches}.
-Boros et al.\ font le même constat pour plusieurs modes de requête sur des
-transcriptions historiques~\cite{boros2024postcorrection}. La compétition
-HIPE-OCRepair signale la surcorrection des entrées peu bruitées comme son
-problème récurrent, et ajoute que les métriques au niveau du caractère ne
-suffisent pas à la saisir~\cite{ehrmann2026hipeocrepair}. Une étape ByT5
-modulaire placée après kraken rapporte une baisse du CER sur des incunables du
-XV\textsuperscript{e}~siècle~\cite{momtaz2025modular}, lue ici dans son seul
-résumé. Thomas et al.\ aboutissent au choix de conception inverse sur des
-journaux anciens~\cite{thomas2024leveraging}. Un modèle chargé de corriger un
-\qtr{ſ} mal lu modernisera aussi, si l'occasion lui en est donnée,
-l'orthographe qui l'entoure. L'ancrage par marqueurs supprime l'occasion.
+\textbf{Correction par modèles de langue.} L'étape de correction a été conçue
+autour d'une mise en garde qui revient sans cesse dans la littérature. Kanerva
+et al.\ montrent qu'un correcteur à base de LLM peut dégrader une bonne
+reconnaissance~\cite{kanerva2025nofreelunches}, et Boros et al.\ constatent la
+même chose sur des documents historiques, avec plusieurs manières de formuler
+la requête~\cite{boros2024postcorrection}. Cela compte ici parce que le modèle
+de reconnaissance est déjà précis: avec un CER de \trainCer{} sur ses pages de
+validation, presque chaque caractère qu'il produit est juste, et un modèle qui
+relit des lignes entières a plus d'occasions d'abîmer le texte que de le
+réparer. Ma passe n'envoie donc que les mots dont le modèle n'était pas sûr, et
+ne garde une réponse que si le reste de la ligne revient inchangé. Sur ce
+matériau, la surcorrection typique est la modernisation: un modèle à qui l'on
+demande de corriger un \qtr{ſ} mal lu met souvent aussi à jour l'orthographe
+autour, et la règle d'acceptation refuse ces réponses. La compétition
+HIPE-OCRepair décrit la surcorrection d'un texte propre comme son problème le
+plus persistant, et note que les taux d'erreur caractère ne la montrent pas
+entièrement~\cite{ehrmann2026hipeocrepair}. C'est pourquoi la
+section~\ref{sec:e2} rapporte ce que la règle refuse autant que ce qu'elle
+garde.
 
-\textbf{La lacune.} À notre connaissance, aucun taux d'erreur caractère n'a été
-publié pour un affinage de CATMuS-Print sur un corpus de romans français du
-\sxvi. Les travaux publiés les plus proches sont CATMuS Gothic Print, un autre
-modèle de base appliqué à des textes religieux et polémiques, sans taux
-d'erreur publié~\cite{solfrini2024catmusgothic}, et Tiger~\cite{tiger2026overfit},
-qui évalue l'affinage HTR sur le français des XVII\textsuperscript{e} et
-XVIII\textsuperscript{e}~siècles. L'affirmation s'en tient à \emph{à notre
-connaissance}. Une recherche bibliographique ne peut exclure une thèse non
-indexée ou une publication hors du monde anglophone. Les intervalles de
-confiance suivent partout le bootstrap par
+D'autres travaux placent après la reconnaissance un modèle de correction
+entraîné pour cette tâche. Un module ByT5 placé après kraken réduit le CER sur
+des incunables du \textsc{xv}\textsuperscript{e}~siècle~\cite{momtaz2025modular},
+et Thomas et al.\ étudient la correction par LLM de journaux
+anciens~\cite{thomas2024leveraging}. Ma passe utilise au contraire un modèle
+ouvert généraliste, gpt-oss 20B, exécuté en local sans entraînement pour la
+tâche, et s'en remet à la règle d'acceptation pour le tenir.
+
+Ces études mesurent la correction comme une variation du taux d'erreur. Cela
+décrit la sortie du correcteur, mais pas la règle qui décide de la garder. Je
+n'ai trouvé aucun travail publié qui rapporte ce qu'une telle règle refuse,
+même si une recherche bibliographique ne peut exclure une thèse ou une
+publication non anglophone qui m'aurait échappé. Les intervalles de confiance
+de ce rapport suivent la méthode du bootstrap par
 percentiles~\cite{efron1994bootstrap}.

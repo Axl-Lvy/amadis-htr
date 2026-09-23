@@ -12,9 +12,11 @@ from amadis_htr.correction import (
     accept_rate_by_page,
     read_reach,
     read_verdicts,
+    summarise_confidence,
     summarise_reach,
     summarise_reasons,
     summarise_verdicts,
+    write_confidence,
     write_reach,
     write_reasons,
     write_verdicts,
@@ -66,6 +68,9 @@ def main() -> None:
     rows = summarise_verdicts(verdicts)
     write_verdicts(rows, RESULTS / "correction-verdicts.csv")
     write_reasons(summarise_reasons(verdicts), RESULTS / "correction-reasons.csv")
+    write_confidence(
+        summarise_confidence(verdicts), RESULTS / "correction-confidence.csv"
+    )
 
     # The interval file, and the only place a RATE is computed.
     #

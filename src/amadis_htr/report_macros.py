@@ -13,10 +13,8 @@ than silently keeping one of the two definitions.
 Rounding lives in `format_value` and nowhere else, so a number cannot be
 reported to three decimals in the text and two in a table.
 
-The corpus census, localisation (E5) and throughput (E6) have schemas and
-registries. Recognition and correction do not, and theirs are added when those
-evaluations produce their first CSV, because a registry written ahead of the
-data is a guess about the data.
+Each registry is added when its evaluation produces its first CSV, because a
+registry written ahead of the data is a guess about the data.
 """
 
 import csv
@@ -398,6 +396,14 @@ CORPUS_MACROS: tuple[Macro, ...] = (
         "corpusCharsMeanWorkbook", "corpus.csv", {"cohort": "workbook"},
         "chars_mean", "num0",
     ),
+    Macro(
+        "locChapterNumeralClose", "localisation-chapter-errors.csv",
+        {"cohort": "all"}, "numeral_close", "int",
+    ),
+    Macro(
+        "locChapterOtherMiss", "localisation-chapter-errors.csv",
+        {"cohort": "all"}, "other", "int",
+    ),
     Macro("trainPages", "training.csv", {"split": "all"}, "pages", "int"),
     Macro("trainPagesTrain", "training.csv", {"split": "train"}, "pages", "int"),
     Macro("trainPagesVal", "training.csv", {"split": "val"}, "pages", "int"),
@@ -418,6 +424,16 @@ CORPUS_MACROS: tuple[Macro, ...] = (
 #: it are replies that never became candidate edits, and pooling the two would
 #: let a flaky JSON parser inflate the headline.
 CORRECTION_MACROS: tuple[Macro, ...] = (
+    Macro(
+        "corrRefusedLowConf", "correction-confidence.csv", {"band": "b1"},
+        "refused", "pct0", over="lines",
+    ),
+    Macro(
+        "corrRefusedOtherConf", "correction-confidence.csv", {"band": "above"},
+        "refused", "pct0", over="lines",
+    ),
+    Macro("corrLowConfEdge", "correction-confidence.csv", {"band": "b1"}, "high", "num1"),
+    Macro("corrLowConfLines", "correction-confidence.csv", {"band": "b1"}, "lines", "int"),
     Macro("corrReachPages", "correction-reach.csv", {"cohort": "all"}, "pages", "int"),
     Macro(
         "corrReachPagesWithSpan", "correction-reach.csv", {"cohort": "all"},
@@ -581,12 +597,34 @@ GOLD_MACROS: tuple[Macro, ...] = (
 )
 
 
+#: The fine-tune, on its own validation pages.
+#:
+#: These are validation figures and never test figures: the same 48 pages chose
+#: the checkpoint. The report says so wherever it prints one.
+_SHIPPED = {"run": "rop0.5-lr3e-4-augment"}
+TRAINING_MACROS: tuple[Macro, ...] = (
+    Macro("trainCer", "training-runs.csv", _SHIPPED, "cer", "pct2"),
+    Macro("trainWer", "training-runs.csv", _SHIPPED, "wer", "pct1"),
+    Macro(
+        "trainCerFirstEpoch", "training-curve.csv", {**_SHIPPED, "epoch": "0"},
+        "cer", "pct2",
+    ),
+    Macro("trainBestEpoch", "training-runs.csv", _SHIPPED, "best_epoch", "int"),
+    Macro("trainEpochs", "training-runs.csv", _SHIPPED, "epochs", "int"),
+    Macro(
+        "trainCerConstant", "training-runs.csv", {"run": "run1-constant-lr0.001"},
+        "cer", "pct2",
+    ),
+)
+
+
 #: Every registry with a measured CSV behind it, in the order they reach the
 #: page. `eval/render_macros.py` renders exactly this and the suite asserts the
 #: committed `macros.tex` matches, so a registry added here without rerunning
 #: the pipeline fails the suite rather than going unnoticed.
 REGISTRIES: tuple[tuple[Macro, ...], ...] = (
     CORPUS_MACROS,
+    TRAINING_MACROS,
     GOLD_MACROS,
     LOCALISATION_MACROS,
     THROUGHPUT_MACROS,

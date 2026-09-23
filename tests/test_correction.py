@@ -15,6 +15,7 @@ from amadis_htr.correction import (
     accept_rate_by_page,
     read_reach,
     read_verdicts,
+    summarise_confidence,
     summarise_reach,
     summarise_reasons,
     summarise_verdicts,
@@ -328,3 +329,19 @@ def test_a_reply_that_edits_outside_the_markers_is_refused_and_sized():
     assert reason == "outside-changed"
     assert outside["outside_segments"] == 1
     assert outside["outside_edits"] > 0
+
+
+def test_confidence_bands_count_refusals_and_pool_the_upper_bands():
+    from dataclasses import replace
+
+    lines = [
+        replace(_verdict("p1", accepted=False, reason=REWRITE_REASON), min_conf=0.1),
+        replace(_verdict("p1"), min_conf=0.2),
+        replace(_verdict("p2", accepted=False, reason="parse"), min_conf=0.5),
+        replace(_verdict("p2"), min_conf=0.6),
+    ]
+    rows = {r.band: r for r in summarise_confidence(lines, (0.0, 0.3, 0.6))}
+    assert (rows["b1"].lines, rows["b1"].refused, rows["b1"].rewrites) == (2, 1, 1)
+    # 0.6 sits on the top edge and must not fall out of the last band.
+    assert (rows["b2"].lines, rows["b2"].refused) == (2, 1)
+    assert rows["above"].lines == 2

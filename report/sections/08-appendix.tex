@@ -1,0 +1,54 @@
+% Status: added 2026-09-23. The report names data by what it is; this appendix
+% is the one place that says where each item lives in the repository.
+\clearpage
+\appendix
+\section{Data and code}
+\label{app:data}
+
+Everything the report relies on is in the public repository at
+\url{https://github.com/Axl-Lvy/amadis-htr}. Table~\ref{tab:data} gives the
+location of each item.
+
+\begin{table}[!h]
+  \centering
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    Item & Location in the repository \\
+    \midrule
+    Editor's catalogue of \emph{Trésor} extracts (ground truth) & \file{data/localisation/ground-truth.csv} \\
+    Passage locator output                            & \file{data/runs/matcher/} \\
+    Fine-tune training logs                           & \file{data/runs/training/} \\
+    Recognition run and calibration records           & \file{data/runs/ocr/} \\
+    Correction sample and verdicts                    & \file{data/runs/correction/} \\
+    Evaluation plans written before scoring           & \file{docs/pre-registration/} \\
+    Corrected transcriptions (gold set)               & \file{data/gold/transcriptions/} \\
+    Gold set manifest, one row per candidate page     & \file{data/gold/MANIFEST.csv} \\
+    Gold set selection script                         & \file{eval/build_gold_set.py} \\
+    Result CSVs behind every figure and table         & \file{eval/results/} \\
+    Script that rebuilds every result                 & \file{eval/run_all.sh} \\
+    Provenance record: hashes, sources, dropped figures & \file{PROVENANCE.md} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Where each item lives. The shipped recognition model,
+    \file{amadis-ft.mlmodel}, is not in the repository; its SHA-256 is in the
+    provenance record.}
+  \label{tab:data}
+
+  \bigskip
+  \begin{tabular}{ll}
+    \toprule
+    Setting (section~\ref{sec:system}) & Name in the code \\
+    \midrule
+    Correction confidence threshold   & \file{LOWCONF_THRESHOLD} \\
+    Drop-cap probability threshold    & \file{OCR_DROPCAP_MIN_PROB} \\
+    Location accept threshold         & \file{MIN_SCORE} \\
+    Minimum seed length               & \file{MIN_SEED_LENGTH} \\
+    Maximum seed occurrences          & \file{MAX_SEED_DF} \\
+    Chaining gap penalty              & \file{CHAIN_GAP_PENALTY} \\
+    Chaining window margin            & \file{WINDOW_SLACK} \\
+    \bottomrule
+  \end{tabular}
+  \caption{The pipeline's settings and the constants that hold them.}
+  \label{tab:settings}
+\end{table}

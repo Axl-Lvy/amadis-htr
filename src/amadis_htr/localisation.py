@@ -262,3 +262,87 @@ def write_sweep(rows: Iterable[SweepRow], path: str | Path) -> None:
                     f"{row.coverage:.6f}",
                 ]
             )
+
+
+#: Roman numeral values, largest first, for `roman`.
+_ROMAN = ((100, "C"), (90, "XC"), (50, "L"), (40, "XL"), (10, "X"), (9, "IX"),
+          (5, "V"), (4, "IV"), (1, "I"))
+
+
+def roman(number: int) -> str:
+    """The number as the print writes it: 72 is LXXII."""
+    out = []
+    for value, letters in _ROMAN:
+        while number >= value:
+            out.append(letters)
+            number -= value
+    return "".join(out)
+
+
+def _edit_distance(a: str, b: str) -> int:
+    row = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        previous, row[0] = row[:], i
+        for j, cb in enumerate(b, 1):
+            row[j] = min(previous[j] + 1, row[j - 1] + 1, previous[j - 1] + (ca != cb))
+    return row[-1]
+
+
+#: Two chapter numbers whose roman forms differ by at most this many letters
+#: are what a misread heading produces: VI read as I, LXXII as LXII.
+NUMERAL_CLOSE = 2
+
+
+@dataclass(frozen=True)
+class ChapterErrors:
+    """Why the chapter figure misses, over the scoreable certain pieces.
+
+    The chapter a prediction carries is the number decoded from the printed
+    heading its span falls under, as the pipeline transcribed it. A miss can
+    therefore come from the heading rather than the placement, and
+    `numeral_close` counts the misses that look like that.
+    """
+
+    cohort: str
+    scoreable: int
+    correct: int
+    wrong_livre: int
+    numeral_close: int
+    other: int
+
+
+def chapter_errors(
+    cohort: str,
+    references: Mapping[int, Reference],
+    predictions: Mapping[int, Prediction],
+) -> ChapterErrors:
+    scoreable = correct = wrong_livre = close = other = 0
+    for piece, ref in references.items():
+        pred = predictions.get(piece)
+        if (ref.confidence != "certain" or pred is None or ref.livre is None
+                or ref.chapter is None or pred.chapter is None):
+            continue
+        scoreable += 1
+        if pred.livre != ref.livre:
+            wrong_livre += 1
+        elif pred.chapter == ref.chapter:
+            correct += 1
+        elif _edit_distance(roman(pred.chapter), roman(ref.chapter)) <= NUMERAL_CLOSE:
+            close += 1
+        else:
+            other += 1
+    return ChapterErrors(cohort, scoreable, correct, wrong_livre, close, other)
+
+
+def write_chapter_errors(rows: Iterable[ChapterErrors], path: str | Path) -> None:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(
+            ["cohort", "scoreable", "correct", "wrong_livre", "numeral_close", "other"]
+        )
+        for r in rows:
+            writer.writerow(
+                [r.cohort, r.scoreable, r.correct, r.wrong_livre, r.numeral_close,
+                 r.other]
+            )

@@ -3,6 +3,8 @@ from pathlib import Path
 
 from amadis_htr.ground_truth import Reference
 from amadis_htr.localisation import (
+    chapter_errors,
+    roman,
     SWEEP_THRESHOLDS,
     Prediction,
     read_ground_truth,
@@ -235,3 +237,27 @@ def test_every_located_piece_lands_in_exactly_one_chapter_state():
             )
             if row.confidence == "none":
                 assert states == 0
+
+
+def test_roman_numerals_are_written_as_the_print_writes_them():
+    assert [roman(n) for n in (1, 6, 17, 72, 91)] == ["I", "VI", "XVII", "LXXII", "XCI"]
+
+
+def test_a_chapter_miss_close_in_roman_numerals_is_counted_apart():
+    refs = {
+        1: Reference(1, 3, 6, "certain", ""),
+        2: Reference(2, 3, 72, "certain", ""),
+        3: Reference(3, 3, 2, "certain", ""),
+        4: Reference(4, 3, 9, "certain", ""),
+        5: Reference(5, 3, 9, "certain", ""),
+    }
+    preds = {
+        1: Prediction(1, 3, 1, 0.9),    # VI read as I
+        2: Prediction(2, 3, 62, 0.9),   # LXXII read as LXII
+        3: Prediction(3, 3, 18, 0.9),   # II against XVIII: not a misread
+        4: Prediction(4, 3, 9, 0.9),
+        5: Prediction(5, 4, 9, 0.9),    # right number, wrong Livre
+    }
+    row = chapter_errors("x", refs, preds)
+    assert (row.scoreable, row.correct, row.wrong_livre, row.numeral_close,
+            row.other) == (5, 1, 1, 2, 1)

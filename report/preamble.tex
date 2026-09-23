@@ -57,6 +57,10 @@
 \definecolor{reportred}{RGB}{213,43,30}
 \definecolor{reportteal}{RGB}{0,104,128}
 
+% The pipeline schema under the abstract.
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+
 \usepackage{titlesec}
 \titleformat{\section}
   {\color{reportblue}\Large\bfseries\sffamily\filcenter}
@@ -93,7 +97,10 @@
     \vspace*{4cm}
     \begin{center}
       {\color{reportblue}\rule{\textwidth}{1pt}}\\[0.4cm]
-      {\color{reportblue}\Huge\scshape \MakeUppercase{\@title}}\\[0.4cm]
+      % \par inside the group, so the lines are spaced for \Huge and not for
+      % the body size; a little tracking, because capitals set solid crowd.
+      {\color{reportblue}\Huge\addfontfeatures{LetterSpace=4}%
+        \linespread{1.2}\selectfont\MakeUppercase{\@title}\par}\vspace{0.4cm}
       {\color{reportblue}\rule{\textwidth}{1pt}}\\[3cm]
       {\Large \@author}\\[0.5cm]
       {\large \@date}

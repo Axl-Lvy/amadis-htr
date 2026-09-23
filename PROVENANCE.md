@@ -86,6 +86,19 @@ The rest of `artifacts/` (run 1's eleven checkpoints, the base model, the
 drop-cap crops and candidates, the training logs) is mirrored and hashed in the
 same manifest.
 
+## Vendored from the training runs, 2026-09-23
+
+Two small records of the fine-tune are committed under `data/runs/training/`,
+so the validation curve in section 5 rebuilds from the repository:
+
+- `rop0.5-lr3e-4-augment/events.out.tfevents.1783448827.AXL.98710.0`, the
+  shipped run's TensorBoard log, byte-identical to the file hashed in the table
+  above (`eff84772…`). It holds scalars only, and no path.
+- `run1-constant-lr0.001/checkpoints.txt`, the file names of the first run's
+  checkpoints. That run logged no validation scalars, and kraken writes the
+  validation accuracy into each checkpoint's name, so the names are its only
+  per-epoch record. The checkpoints themselves stay in the mirror.
+
 ## Derived here, not copied
 
 `data/gold/splits/training-pages.csv` is derived, because `train.lst` and

@@ -22,11 +22,11 @@ def _regenerate():
 
 def test_a_figure_is_committed_for_every_measured_result():
     # A figure is a reported figure, so Rule 1 covers it: it is drawn from the
-    # committed CSVs and never pasted in. These three have their measurements.
+    # committed CSVs and never pasted in. These four have their measurements.
     # corpus-extracts and e2-reasons were drawn and then dropped on 2026-09-22:
     # two bars each, saying what the sentence beside them already said, in a
     # report cut to ten pages. Their CSVs are still written and still checked.
-    for name in ("e5-sweep", "e6-throughput", "e2-confidence"):
+    for name in ("training-curve", "e5-sweep", "e6-throughput", "e2-confidence"):
         assert (FIGURES / f"{name}.pdf").exists(), name
         assert (FIGURES_FR / f"{name}.pdf").exists(), name
 
